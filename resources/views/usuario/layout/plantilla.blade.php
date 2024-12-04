@@ -10,6 +10,9 @@
     <link href="/user/template/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+  
+    @vite(['resources/css/app.css', 'resources/css/about.css','resources/js/app.js'])
+    @stack('styles') 
 </head>
 
 <body x-data="{ page: 'signup', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
