@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 
+  
+    @vite(['resources/css/app.css', 'resources/css/about.css','resources/js/app.js'])
+    @stack('styles') 
+
 </head>
 
 <body x-data="{ page: 'signup', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
