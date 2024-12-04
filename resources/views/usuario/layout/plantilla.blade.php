@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up | Base - Tailwind CSS Startup Template</title>
+
     <link rel="icon" href="favicon.ico">
     <link href="/user/template/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
 </head>
 
 <body x-data="{ page: 'signup', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
@@ -148,9 +151,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                     </div> --}}
 
 
-                <a href="signup.html"
+                    <a href="{{ route('contacto') }}"
                     :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white">Contacto</a>
+                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
             </div>
         </div>
         </div>
@@ -159,8 +162,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     <!-- ===== Header End ===== -->
 
     <main>
-        @yield('contenido')
+       @yield('contenido')
     </main>
+
 
     <!-- ===== Footer Start ===== -->
     <footer class="bg-[#1E5397]">
@@ -394,6 +398,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     </script>
     <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+@stack('scripts')
 </body>
 
 </html>
