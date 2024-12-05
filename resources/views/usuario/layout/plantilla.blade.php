@@ -19,7 +19,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
         @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
         <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
             <div class="vd to/2 tc wf yf">
-                <a href="index.html">
+                <a href="{{route('home')}}">
                     <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
                 </a>
 
@@ -48,7 +48,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
             <div class="vd wo/4 sd qo f ho oo wf yf ml-44" :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen }">
                 <nav>
                     <ul class="tc _o sf yo cg ep">
-                        <li><a href="index.html" class="xl text-white" :class="{ 'mk': page === 'home' }">Home</a>
+                        <li><a href="{{route('home')}}" class="xl text-white" :class="{ 'mk': page === 'home' }">Home</a>
                         </li>
                         <li class="c i" x-data="{ dropdown: false }">
                             <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
@@ -152,7 +152,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 <div class="tc uf ap gg fp">
                     {{-- primera columna --}}
                     <div class="animate_top zd/2 to/4">
-                        <a href="">
+                        <a href="https://www.unitru.edu.pe/">
                             <img src="/user/template/images/logo_unt.png" alt="Logo" class="w-60" />
                         </a>
 
@@ -228,7 +228,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                         {{-- tercera columna --}}
                         <div class="animate_top zd/2 to/3">
-                            <a href="">
+                            <a href="{{route('home')}}">
                                 <img src="/user/template/images/logoLabCam.png" alt="Logo" class="w-96" />
                             </a>
 
