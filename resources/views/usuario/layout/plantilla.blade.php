@@ -94,9 +94,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                             <!-- Dropdown Start -->
                             <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl"
+                                <li><a href="{{route('direccion')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-grid' }">Dirección</a></li>
-                                <li><a href="blog-single.html" class="xl"
+                                <li><a href="{{route('capital')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-single' }">Capital Humano</a></li>
                             </ul>
                             <!-- Dropdown End -->
