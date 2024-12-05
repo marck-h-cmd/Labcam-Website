@@ -69,6 +69,7 @@
     font-weight: 300;
     color: black;
     word-wrap: break-word;
+    margin-top: 5px;
 }
 
 .separator {
@@ -129,8 +130,8 @@ slider
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     background-color: #fff;
-    min-height: 325px;
-    width: 522px;
+    min-height: 375px;
+    width: 622px;
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
@@ -173,7 +174,7 @@ slider
 
 .slider input[type=radio]:before {
     content: '';
-    background-color: #000;
+   
     float: left;
     height: 100%;
     width: 100%;
@@ -184,9 +185,6 @@ slider
     visibility: hidden;
 }
 
-.slider input[type=radio]:checked:before {
-    background-color: red;
-}
 
 .slider input[type=radio]:nth-of-type(1):checked~.slider-item:nth-of-type(1),
 .slider input[type=radio]:nth-of-type(2):checked~.slider-item:nth-of-type(2),
@@ -205,6 +203,7 @@ slider
 @media (max-width: 968px) {
    .slider{
     width: 422px;
+    min-height: 325px;
    }
 }
 
@@ -257,19 +256,19 @@ slider
             <input type="radio" name="nav" value="4">
     
               <div class="slider-item">
-                  <img src="https://placehold.co/620x250" alt="Sport" />
+                  <img src="https://placehold.co/650x250" alt="Sport" />
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore a neque perspiciatis facere labore consequuntur.</p>
               </div>
               <div class="slider-item">
-                  <img src="https://placehold.co/620x250/000000/FFFFFF/png" alt="Sport" />
+                  <img src="https://placehold.co/650x250/000000/FFFFFF/png" alt="Sport" />
                   <p>Cum, delectus, possimus facilis impedit blanditiis ullam distinctio. Hic, provident, magnam fuga non modi eos!</p>
               </div>
               <div class="slider-item">
-                  <img src="https://placehold.co/620x250" alt="Sport" />
+                  <img src="https://placehold.co/650x250" alt="Sport" />
                   <p>A, asperiores facere laudantium voluptates eveniet eligendi non reprehenderit quae eum dolores sequi iste laborum.</p>
               </div>
               <div class="slider-item">
-                  <img src="https://placehold.co/620x250/000000/FFFFFF/png" alt="Sport" />
+                  <img src="https://placehold.co/650x250/000000/FFFFFF/png" alt="Sport" />
                   <p>Ducimus, alias, aspernatur voluptatum facilis velit porro nesciunt error eos dicta doloribus perspiciatis odio itaque?</p>
               </div>
     

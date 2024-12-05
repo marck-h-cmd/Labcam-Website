@@ -7,228 +7,104 @@
 
 @section('contenido')
 
-<style>
-.Nosotros {
-    width: 100%;
-    padding: 20px;
-    margin-top: 150px
-}
+<header class="home bg-cover mb-4 bg-center text-white" style="background-image: url('https://fondosmil.co/fondo/110721.jpg');">
+  <div class="header-mask bg-[rgba(3,91,136,0.8)]">
+    <div class="container mx-auto px-4">
+      <div class="jumbo text-center py-40">
+   <!--     <div class="logo text-2xl font-sans mb-12">
+          <i class="fa fa-globe"></i> <b>Some</b>Logo
+        </div>  -->
+        <h1 class="text-6xl text-left">Biblioteca</h1>
+      </div>
+    </div>
 
-.main-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    gap: 10px;
-    margin: 20px;
-}
-
-.main-title .blue-line{
-   width: 20%;
-   height: 2px;
-    background: #2371d4;
-}
-
-.title {
-    font-size: 30px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    color: #2e5382;
-}
-
-.container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-
-.Group31 {
-    text-align: center;
-}
-
-.btn-publicaciones {
-    background: #98c560;
-    color: white;
-    font-size: 21px;
-    font-weight: 700;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-}
-
-
-.card {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 380px;
-    background: white;
-    box-shadow: 3px 3px 20px rgba(0, 0, 0, 0.25);
-    border-radius: 6px;
-}
-
-.image {
-    height: 200px;
-    background: #d9d9d9;
-    border-radius: 6px 6px 0 0;
-}
-
-.content {
-    padding: 15px;
-}
-
-.titulo {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.doi {
-    font-size: 15px;
-    margin-bottom: 10px;
-}
-
-.doi-link {
-    text-decoration: underline;
-    color: black;
-}
-
-.autores {
-    font-style: italic;
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.descripcion {
-    font-size: 17px;
-    margin-bottom: 15px;
-    text-align: justify;
-}
-
-.detalles {
-    font-size: 20px;
-    color: #f4f5f4;
-    font-style: italic;
-    font-weight: 700;
-    background-color: #98c560;
-    padding: 20px;
-    display: block;
-
-}
-
-.detalles:hover{
-    background-color: #66b308;
-    cursor: pointer;
-    transition: all 0.4s ease-out allow-discrete;
-}
-
-
-@media (max-width: 768px) {
-    .cards {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .card {
-       max-width: 80%; 
-    }
-
-    .doi-link{
-        font-size: 12px;
-    }
-}
-
-</style>
-<div class="Nosotros">
- 
-        
-    <div class="main-title">
+    <div class="nav">
+      <div class="container mx-auto px-4 flex items-center justify-between">
        
-        <div class="title">Publicaciones-papers</div>
-        <div class="blue-line"></div>
-    </div>
-  
-    <div class="container cards">
-      
-      <div class="card">
-        <img class="image">
-        <div class="content">
-          <h3 class="titulo">Titulo:</h3>
-          
-          <p class="autores">AUTORES: autor 1, autor 2</p>
-          <p class="descripcion">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          </p>
-          <p class="doi">
-            DOI: <span class="doi-link">10.1109/INTERCON52678.2021.9532881</span>
-          </p>
-         
-        </div>
-        <a class="detalles">
-          Más detalles ->
 
-        </a>
-      </div>
-  
-    
-      <div class="card">
-        <img class="image">
-        <div class="content">
-          <h3 class="titulo">Titulo:</h3>
-         
-          <p class="autores">AUTORES: autor 1, autor 2</p>
-          <p class="descripcion">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          </p>
-          <p class="doi">
-            DOI: <span class="doi-link">10.1109/INTERCON52678.2021.9532881</span>
-          </p>
-        </div>
-        <a class="detalles">
-          Más detalles ->
+        <nav role="navigation mt-4">
+          <ul class="hor--nav flex space-x-4">
+            <li><a href="#" class="text-gray-300 hover:text-white">Home</a></li>
+            <li><a href="#" class="text-white font-bold">Papers</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white">Robotica</a></li>
+            <li><a href="#" class="text-gray-300 hover:text-white">Ciencia</a></li>
+          </ul>
+        </nav>
 
-        </a>
-      </div>
-
-      <div class="card">
-        <img class="image">
-        <div class="content">
-          <h3 class="titulo">Titulo:</h3>
-         
-          <p class="autores">AUTORES: autor 1, autor 2</p>
-          <p class="descripcion">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem
-            ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          </p>
-          <p class="doi">
-            DOI: <span class="doi-link">10.1109/INTERCON52678.2021.9532881</span>
-          </p>
-        </div>
-        <a class="detalles">
-          Más detalles ->
-
-        </a>
+        
       </div>
     </div>
-    <div class="container">
-     
-        <div class="Group31">
-          <button class="btn-publicaciones">VER PUBLICACIONES</button>
-        </div>
-      </div>
   </div>
+</header>
+
+
+
+<div class="Nosotros w-full px-5 mt-36">
+     
+  <div class="main-title flex flex-col items-center gap-3 mb-8">
+    <div class="title text-2xl font-semibold text-[#2e5382]">Publicaciones-papers</div>
+    <div class="blue-line w-1/5 h-1 bg-[#2371d4]"></div>
+  </div>
+
+  <div class="container flex justify-center items-center flex-wrap gap-5 mb-5 mx-auto">
+ 
+    <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
+      <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
+      <div class="content p-4">
+        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: </span></h3>
+        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
+        <p class="descripcion text-base mb-3 text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+        </p>
+        <p class="doi text-sm mb-3"><span class="text-gray-600">
+          DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
+        </p>
+      </div>
+      <a class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
+        Más detalles ->
+      </a>
+    </div>
+
+    <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
+      <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
+      <div class="content p-4">
+        <h3 class="titulo text-lg font-medium mb-2"><span class="text-gray-500"> Titulo:</span></h3>
+        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
+        <p class="descripcion text-base mb-3 text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+        </p>
+        <p class="doi text-sm mb-3"> <span class="text-gray-600">
+          DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
+        </p>
+      </div>
+      <a class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
+        Más detalles ->
+      </a>
+    </div>
+
+ 
+    <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
+      <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
+      <div class="content p-4">
+        <h3 class="titulo text-lg font-medium mb-2"><span class="text-gray-500"> Titulo: </span></h3>
+        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
+        <p class="descripcion text-base mb-3 text-justify">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+        </p>
+        <p class="doi text-sm mb-3"> <span class="text-gray-600">
+          DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
+        </p>
+      </div>
+      <a class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
+        Más detalles ->
+      </a>
+    </div>
+  </div>
+
+  <div class="flex justify-center mt-5 p-6 ">
+      <button class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
+        VER PUBLICACIONES
+      </button>
+    </div>
   
 @endsection

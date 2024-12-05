@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('usuario.index');
-});
+})->name('home');
 
 
 Route::get('/nosotros/about', function () {
@@ -33,5 +33,6 @@ use App\Http\Controllers\AuthController;
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+
 
 
