@@ -6,10 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sign Up | Base - Tailwind CSS Startup Template</title>
+
     <link rel="icon" href="favicon.ico">
     <link href="/user/template/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.tailwindcss.com"></script>
+
+  
+    @vite(['resources/css/app.css', 'resources/css/about.css','resources/js/app.js'])
+    @stack('styles') 
+
 </head>
 
 <body x-data="{ page: 'signup', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
@@ -19,7 +26,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
         @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
         <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
             <div class="vd to/2 tc wf yf">
-                <a href="index.html">
+                <a href="{{route('home')}}">
                     <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
                 </a>
 
@@ -130,8 +137,14 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 </nav>
 
                 <a href="signup.html"
+
+              
+
+
+                    <a href="{{ route('contacto') }}"
+
                     :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white">Contacto</a>
+                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
             </div>
         </div>
         </div>
@@ -140,8 +153,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     <!-- ===== Header End ===== -->
 
     <main>
-        @yield('contenido')
+       @yield('contenido')
     </main>
+
 
     <!-- ===== Footer Start ===== -->
     <footer class="bg-[#1E5397]">
@@ -152,7 +166,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 <div class="tc uf ap gg fp">
                     {{-- primera columna --}}
                     <div class="animate_top zd/2 to/4">
-                        <a href="">
+                        <a href="https://www.unitru.edu.pe/">
                             <img src="/user/template/images/logo_unt.png" alt="Logo" class="w-60" />
                         </a>
 
@@ -228,7 +242,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                         {{-- tercera columna --}}
                         <div class="animate_top zd/2 to/3">
-                            <a href="">
+                            <a href="{{route('home')}}">
                                 <img src="/user/template/images/logoLabCam.png" alt="Logo" class="w-96" />
                             </a>
 
@@ -375,6 +389,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     </script>
     <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+@stack('scripts')
 </body>
 
 </html>
