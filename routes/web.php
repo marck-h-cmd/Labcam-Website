@@ -7,6 +7,15 @@ Route::get('/', function () {
 })->name('home');
 
 
+Route::get('/direccion', function(){
+    return view ('usuario.Organizacion.Direccion');
+})->name('direccion');
+
+Route::get('/capital', function () {
+    return view('usuario.Organizacion.CapitalHumano');
+})->name('capital');
+
+
 Route::get('/nosotros/about', function () {
     return view('usuario.nosotros.about');
 });
@@ -33,6 +42,7 @@ use App\Http\Controllers\AuthController;
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+
 
 
 
