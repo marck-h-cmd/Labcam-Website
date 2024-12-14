@@ -13,20 +13,20 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 
-  
-    @vite(['resources/css/app.css', 'resources/css/about.css','resources/js/app.js'])
-    @stack('styles') 
+
+    @vite(['resources/css/app.css', 'resources/css/about.css', 'resources/js/app.js'])
+    @stack('styles')
 
 </head>
 
 <body x-data="{ page: 'signup', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
 $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))" :class="{ 'b eh': darkMode === true }">
     <!-- ===== Header Start ===== -->
-    <header class="g s r vd ya cj bg-[#1E5397]" :class="{ 'hh sm _k dj bl ll': stickyMenu }"
+    {{-- <header class="g s r vd ya cj bg-[#1E5397]" :class="{ 'hh sm _k dj bl ll': stickyMenu }"
         @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
         <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
             <div class="vd to/2 tc wf yf">
-                <a href="{{route('home')}}">
+                <a href="{{ route('home') }}">
                     <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
                 </a>
 
@@ -55,7 +55,8 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
             <div class="vd wo/4 sd qo f ho oo wf yf ml-44" :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen }">
                 <nav>
                     <ul class="tc _o sf yo cg ep">
-                        <li><a href="{{route('home')}}" class="xl text-white" :class="{ 'mk': page === 'home' }">Home</a>
+                        <li><a href="{{ route('home') }}" class="xl text-white"
+                                :class="{ 'mk': page === 'home' }">Home</a>
                         </li>
                         <li class="c i" x-data="{ dropdown: false }">
                             <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
@@ -136,24 +137,148 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                     </ul>
                 </nav>
 
-                <a href="signup.html"
-
-              
 
 
-                    <a href="{{ route('contacto') }}"
-
+                <a href="{{ route('contacto') }}"
                     :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
                     class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
             </div>
         </div>
         </div>
+    </header> --}}
+
+    <header class="g s r vd ya cj bg-[#1E5397] transition-all duration-300"
+        :class="{ 'hh sm _k dj bl ll bg-transparent opacity-0': stickyMenu, 'bg-[#1E5397] opacity-100': !stickyMenu }"
+        @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false" @mouseenter="stickyMenu = false"
+        @mouseleave="stickyMenu = (window.pageYOffset > 20)">
+        <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
+            <div class="vd to/2 tc wf yf">
+                <a href="{{ route('home') }}">
+                    <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
+                </a>
+
+                <!-- Hamburger Toggle BTN -->
+                <button class="po rc" @click="navigationOpen = !navigationOpen">
+                    <span class="rc i pf re pd">
+                        <span class="du-block h q vd yc">
+                            <span class="rc i r s eh um tg te rd eb ml jl dl"
+                                :class="{ 'ue el': !navigationOpen }"></span>
+                            <span class="rc i r s eh um tg te rd eb ml jl fl"
+                                :class="{ 'ue qr': !navigationOpen }"></span>
+                            <span class="rc i r s eh um tg te rd eb ml jl gl"
+                                :class="{ 'ue hl': !navigationOpen }"></span>
+                        </span>
+                        <span class="du-block h q vd yc lf">
+                            <span class="rc eh um tg ml jl el h na r ve yc"
+                                :class="{ 'sd dl': !navigationOpen }"></span>
+                            <span class="rc eh um tg ml jl qr h s pa vd rd"
+                                :class="{ 'sd rr': !navigationOpen }"></span>
+                        </span>
+                    </span>
+                </button>
+                <!-- Hamburger Toggle BTN -->
+            </div>
+
+
+            <div class="vd wo/4 sd qo f ho oo wf yf ml-44"
+                :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen, 'opacity-0': stickyMenu }">
+                <nav>
+                    <ul class="tc _o sf yo cg ep">
+                        <li><a href="{{ route('home') }}" class="xl text-white"
+                                :class="{ 'mk': page === 'home' }">Home</a>
+                        </li>
+                        <li class="c i" x-data="{ dropdown: false }">
+                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
+                                :class="{
+                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
+                                        page === 'signup' || page === '404'
+                                }">
+                                Nosotros
+
+                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path
+                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                                </svg>
+                            </a>
+
+                            <!-- Dropdown Start -->
+                            <ul class="a" :class="{ 'tc': dropdown }">
+                                <li><a href="blog-grid.html" class="xl"
+                                        :class="{ 'mk': page === 'blog-grid' }">Acerca</a></li>
+                                <li><a href="blog-single.html" class="xl"
+                                        :class="{ 'mk': page === 'blog-single' }">Historia</a></li>
+                                <li><a href="404.html" class="xl"
+                                        :class="{ 'mk': page === '404' }">Biblioteca</a>
+                                </li>
+                            </ul>
+                            <!-- Dropdown End -->
+                        </li>
+                        <li class="c i" x-data="{ dropdown: false }">
+                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
+                                :class="{
+                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
+                                        page === 'signup'
+                                }">
+                                Organización
+                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path
+                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                                </svg>
+
+                            </a>
+
+                            <!-- Dropdown Start -->
+                            <ul class="a" :class="{ 'tc': dropdown }">
+                                <li><a href="blog-grid.html" class="xl"
+                                        :class="{ 'mk': page === 'blog-grid' }">Dirección</a></li>
+                                <li><a href="blog-single.html" class="xl"
+                                        :class="{ 'mk': page === 'blog-single' }">Capital Humano</a></li>
+                            </ul>
+                            <!-- Dropdown End -->
+                        </li>
+                        <li class="c i" x-data="{ dropdown: false }">
+                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
+                                :class="{
+                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
+                                        page === 'signup' || page === '404'
+                                }">
+                                Investigación
+                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <path
+                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                                </svg>
+                            </a>
+
+                            <!-- Dropdown Start -->
+                            <ul class="a" :class="{ 'tc': dropdown }">
+                                <li><a href="blog-grid.html" class="xl"
+                                        :class="{ 'mk': page === 'blog-grid' }">Noticias</a></li>
+                                <li><a href="blog-single.html" class="xl"
+                                        :class="{ 'mk': page === 'blog-single' }">Proyectos</a></li>
+                                <li><a href="signup.html" class="xl"
+                                        :class="{ 'mk': page === 'signup' }">Eventos</a></li>
+                            </ul>
+                            <!-- Dropdown End -->
+                        </li>
+                    </ul>
+                </nav>
+
+                <a href="{{ route('contacto') }}"
+                    :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
+                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
+            </div>
+        </div>
     </header>
+
+
 
     <!-- ===== Header End ===== -->
 
     <main>
-       @yield('contenido')
+        @yield('contenido')
     </main>
 
 
@@ -242,7 +367,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                         {{-- tercera columna --}}
                         <div class="animate_top zd/2 to/3">
-                            <a href="{{route('home')}}">
+                            <a href="{{ route('home') }}">
                                 <img src="/user/template/images/logoLabCam.png" alt="Logo" class="w-96" />
                             </a>
 
@@ -390,7 +515,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
     <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-@stack('scripts')
+    @stack('scripts')
 </body>
 
 </html>
