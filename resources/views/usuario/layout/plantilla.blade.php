@@ -102,9 +102,9 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                             <!-- Dropdown Start -->
                             <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl"
+                                <li><a href="{{route('direccion')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-grid' }">Dirección</a></li>
-                                <li><a href="blog-single.html" class="xl"
+                                <li><a href="{{route('capital')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-single' }">Capital Humano</a></li>
                             </ul>
                             <!-- Dropdown End -->
@@ -136,6 +136,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                         </li>
                     </ul>
                 </nav>
+
 
 
                 <a href="{{ route('contacto') }}"
@@ -177,6 +178,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 </button>
                 <!-- Hamburger Toggle BTN -->
             </div>
+
 
             <div class="vd wo/4 sd qo f ho oo wf yf ml-44"
                 :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen, 'opacity-0': stickyMenu }">
