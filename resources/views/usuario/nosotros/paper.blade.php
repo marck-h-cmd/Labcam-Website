@@ -188,19 +188,22 @@
 }
 
 .cards h3{
-  color: #4d4d4d
-}
-.r {
-  text-align: right;
+  color: #0e72c4;
+  font-size: 20px;
+  margin: 5px;
 }
 
 .card-item {
   text-align: left;
   flex: 1;
-  padding: 20px 10px;
+  padding: 20px 40px;
   background-color: #f8f8f8;
   border: 1px solid #545353;
   cursor: pointer;
+}
+
+.card-item.r{
+  text-align: right;
 }
 
 .card-item:hover {
@@ -209,6 +212,11 @@
   transform: ease-out all;
 }
 
+@media (max-width: 768px) {
+   .header-content{
+   flex-direction: column;
+   }
+}
 
 .doi {
   margin-top: 20px;
@@ -252,6 +260,8 @@
   fill: rgb(31, 194, 172);
   transition: all 0.5s;
 }
+
+
 
 
 </style>
@@ -335,22 +345,24 @@
         </div>
       </div>
     
+      <!--
       <div class="action-buttons">
         <button class="btn btn-cita">DOCX</button>
         <button class="btn btn-pdf">PDF </button>
       </div>
     
+    -->
       <iframe class="main-image" src="https://www.unilibrecucuta.edu.co/portal/images/investigacion/pdf/formato_papers.pdf" alt="Main Image" >
       </iframe>
     
       <div class="cards">
         <div class="card-item r">
-          <h3>Paper anterior</h3>
-          <p>Titulo paper anterior</p>
+          <h3>Titulo Paper anterior</h3>
+          <p>paper anterior</p>
         </div>
         <div class="card-item">
-          <h3>Paper siguiente</h3>
-          <p>Titulo paper siguiente</p>
+          <h3>Titulo Paper siguiente</h3>
+          <p> Paper siguiente</p>
         </div>
       </div>
     
