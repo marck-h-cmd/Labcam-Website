@@ -205,6 +205,14 @@ slider
     width: 422px;
     min-height: 325px;
    }
+
+   /*
+   .social-links-container{
+    justify-content: right;
+    align-items: flex-end;
+    justify-items: right;
+   }
+    */
 }
 
 

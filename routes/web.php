@@ -18,20 +18,20 @@ Route::get('/capital', function () {
 
 Route::get('/nosotros/about', function () {
     return view('usuario.nosotros.about');
-});
+})->name('about');
 
 
 Route::get('/nosotros/biblioteca', function () {
     return view('usuario.nosotros.biblioteca');
-});
+})->name('biblioteca');
 
 Route::get('/nosotros/historia', function () {
     return view('usuario.nosotros.historia');
-});
+})->name('historia');
 
 Route::get('/nosotros/paper', function () {
     return view('usuario.nosotros.paper');
-});
+})->name('biblioteca.paper');
 
 use App\Http\Controllers\ContactoController;
 
