@@ -13,9 +13,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.tailwindcss.com"></script>
 
-  
+
     @vite(['resources/css/app.css', 'resources/css/about.css','resources/js/app.js'])
-    @stack('styles') 
+    @stack('styles')
 
 </head>
 
@@ -124,11 +124,11 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                             <!-- Dropdown Start -->
                             <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl"
+                                <li><a href="{{route('noticias')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-grid' }">Noticias</a></li>
-                                <li><a href="blog-single.html" class="xl"
+                                <li><a href="{{route('proyectos')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-single' }">Proyectos</a></li>
-                                <li><a href="signup.html" class="xl"
+                                <li><a href="{{route('eventos')}}" class="xl"
                                         :class="{ 'mk': page === 'signup' }">Eventos</a></li>
                             </ul>
                             <!-- Dropdown End -->
@@ -136,12 +136,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                     </ul>
                 </nav>
 
-                <a href="signup.html"
-
-              
-
-
-                    <a href="{{ route('contacto') }}"
+                <a href="{{ route('contacto') }}"
 
                     :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
                     class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
