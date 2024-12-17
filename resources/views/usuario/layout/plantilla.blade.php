@@ -14,7 +14,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
 
+
     @vite(['resources/css/app.css', 'resources/css/about.css', 'resources/js/app.js'])
+
     @stack('styles')
 
 </head>
@@ -125,17 +127,18 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
 
                             <!-- Dropdown Start -->
                             <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl"
+                                <li><a href="{{route('noticias')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-grid' }">Noticias</a></li>
-                                <li><a href="blog-single.html" class="xl"
+                                <li><a href="{{route('proyectos')}}" class="xl"
                                         :class="{ 'mk': page === 'blog-single' }">Proyectos</a></li>
-                                <li><a href="signup.html" class="xl"
+                                <li><a href="{{route('eventos')}}" class="xl"
                                         :class="{ 'mk': page === 'signup' }">Eventos</a></li>
                             </ul>
                             <!-- Dropdown End -->
                         </li>
                     </ul>
                 </nav>
+
 
 
 
@@ -156,6 +159,7 @@ $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(valu
                 <a href="{{ route('home') }}">
                     <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
                 </a>
+
 
                 <!-- Hamburger Toggle BTN -->
                 <button class="po rc" @click="navigationOpen = !navigationOpen">

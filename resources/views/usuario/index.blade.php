@@ -79,7 +79,7 @@
                         <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+                            <a href="{{ route('detalle-noticias') }}"class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
                         </div>
                     </div>
 
@@ -106,7 +106,7 @@
                         <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+                            <a href="{{ route('detalle-noticias') }}" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
                         </div>
                     </div>
 
@@ -133,7 +133,7 @@
                         <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+                            <a href="{{ route('detalle-noticias') }}" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
                         </div>
                     </div>
 
@@ -158,8 +158,11 @@
         </div>
 
         <div class="my-10 flex justify-center">
-            <a class=" bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">VER MÁS NOTICIAS</a>
+            <a href="{{ route('noticias') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
+            VER MÁS NOTICIAS
+            </a>
         </div>
+
     </section>
 
     {{-- Seccion de proyectos --}}
@@ -186,10 +189,11 @@
                             ligula
                             ornare vel.
                         </p>
-                        <button
-                            class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
-                            VER TODOS LOS PROYECTOS
-                        </button>
+                        <a href="{{ route('proyectos') }}">
+                           <button class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+                           VER TODOS LOS PROYECTOS
+                           </button>
+                        </a>
                     </div>
                 </div>
 
@@ -225,7 +229,7 @@
                         <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
                         </div>
                     </div>
 
@@ -252,7 +256,7 @@
                         <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
                         </div>
                     </div>
 
@@ -279,7 +283,7 @@
                         <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
                         </div>
                     </div>
 
@@ -304,7 +308,10 @@
         </div>
 
         <div class="my-10 flex justify-center">
-            <a class=" bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">VER MÁS EVENTOS</a>
+            <a href="{{ route('eventos') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
+            VER MÁS EVENTOS
+           </a>
         </div>
+
     </section>
 @endsection
