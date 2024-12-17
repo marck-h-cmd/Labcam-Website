@@ -42,7 +42,7 @@
 
         <!-- Imagen -->
         <div class="flex flex-col items-center">
-            <img src="{{ asset('images/contacto.png') }}" alt="Imagen de contacto" class="mb-4 w-1/4">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.410276127892!2d-79.04060262589138!3d-8.115327781204812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3d9fb3467261%3A0x752547ad9a204df6!2sUniversidad%20Nacional%20de%20Trujillo%20(UNT)!5e1!3m2!1ses-419!2spe!4v1734127574943!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <p class="text-gray-500 mt-2">Descripción: lorem lorem</p>
         </div>
     </div>
