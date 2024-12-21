@@ -38,7 +38,7 @@
 
 .description {
     max-width: 800px;
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 300;
@@ -105,7 +105,7 @@
 }
 
 .text {
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 300;

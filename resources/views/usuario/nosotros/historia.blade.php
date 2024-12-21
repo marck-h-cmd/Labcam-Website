@@ -64,7 +64,7 @@
 
 .text-content {
     font-family: Inter, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-style: italic;
     font-weight: 300;
     color: black;
@@ -109,6 +109,11 @@
 .image-section img {
     max-width: 100%;
     height: auto;
+}
+
+.slider-item img{
+    width: 650px;
+    height: 250px;
 }
 
 .explore-button {
