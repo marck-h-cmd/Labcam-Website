@@ -141,7 +141,7 @@ slider
     overflow: hidden;
     box-sizing: border-box;
     text-align: center;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .slider .slider-item {
