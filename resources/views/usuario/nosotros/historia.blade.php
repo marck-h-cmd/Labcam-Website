@@ -163,7 +163,7 @@ slider
 }
 
 .slider .slider-item img:hover {
-    opacity: 0.5 !important;
+    opacity: 0.8 !important;
 }
 
 .slider .slider-item>* {
@@ -269,7 +269,7 @@ slider
             <input type="radio" name="nav" value="4">
     
               <div class="slider-item">
-                  <img src="https://placehold.co/650x250" alt="Sport" />
+                  <img src="/user/template/images/carrusel/carrusel_03.jpg" alt="Sport" />
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore a neque perspiciatis facere labore consequuntur.</p>
               </div>
               <div class="slider-item">
