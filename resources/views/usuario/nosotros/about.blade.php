@@ -38,7 +38,7 @@
 
 .description {
     max-width: 800px;
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 300;
@@ -105,7 +105,7 @@
 }
 
 .text {
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 300;
@@ -132,6 +132,11 @@
 .image-main{
     height: 400px;
     width: 460px;
+}
+
+.text-heading{
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -161,8 +166,7 @@
         
     }
     .description {
-        max-width: 600px;
-        
+        max-width: 85%; 
     }
     .about-section{
         font-size: 0.5em;
@@ -171,6 +175,10 @@
     .image-gallery,.image-highlight,.image-main{
         max-width: 500px;
         height: auto;
+    }
+
+    .text-heading{
+        align-items: center;
     }
 }
 
@@ -199,8 +207,10 @@
 <div class="vision">
     <img class="image-main" src="/images/labcam-icon.png" alt="Main Image" />
     <div class="content">
+        <div class="text-heading">
         <div class="title">Visión</div>
         <div class="line"></div>
+        </div>
         <div class="text">
             Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at.
             Ad
@@ -217,8 +227,10 @@
 <div class="mission">
 
     <div class="content">
+        <div class="text-heading">
         <div class="title">Misión</div>
         <div class="line"></div>
+        </div>
         <div class="text">
             Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at.
             Ad

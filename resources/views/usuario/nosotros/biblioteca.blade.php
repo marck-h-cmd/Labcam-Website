@@ -51,7 +51,7 @@
     <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
       <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
       <div class="content p-4">
-        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: </span></h3>
+        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: Placeholder titulo</span></h3>
         <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
         <p class="descripcion text-base mb-3 text-justify">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
