@@ -11,54 +11,9 @@
   align-items: center;
   background-color: white;
   padding: 20px;
-  margin-top: 150px
-}
-/*
-.orgHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  justify-content: flex-start;
-  text-align: left;
-  width: 100%;
-  background: #2f8ce4;
-  color: #eee;
-  padding: 2%;
+  margin-top: 120px
 }
 
-.orgHeader h1 {
-  font-size: 2em;
-  text-transform: capitalize;
-  margin-bottom: 2%;
-}
-
-
-
-.nav {
-  width: 100%;
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
-}
-
-.nav li {
-  width: auto;
-  display: inline-block;
-  padding: 2%;
-  white-space: nowrap;
-}
-
-.nav li:hover{
-  color: #1321da;
-}
-
-.nav li, .photos img {
-  cursor: pointer;
-}
-  */
 
 .header {
   display: flex;
@@ -72,22 +27,25 @@
   display: flex;
   gap: 10px;
   justify-content: space-between;
+  margin: 15px 10px;
 
 }
 
-
+/*
 .container {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   
 }
-
+*/
 
 
 .title {
-  display: flex;
-  flex-direction: column;
+ /* display: flex;
+  flex-direction: column;  */
+  display: block;
+  text-align: center;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -99,7 +57,7 @@
 }
 
 .paper-title {
-  font-size: 32px;
+  font-size: 30px;
   color: #2e5382;
   margin: 10px 0;
 }
@@ -113,7 +71,7 @@
 .header-image {
   border-radius: 10px;
   width: 100%;
-  max-width: 913px;
+  max-width: 920px;
 }
 
 .abstract-container {
@@ -124,7 +82,7 @@
   width: 90%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #4d4d4d;
-  max-width: 1024px;
+  max-width: 1000px;
   background-color: rgb(249, 245, 245, 0.7);
 }
 
@@ -133,7 +91,7 @@
 }
 
 .abstract-container strong {
-  color: #585757;
+  color: #686868;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -181,7 +139,7 @@
   justify-content: space-between;
   gap: 20px;
   width: 90%;
-  max-width: 1024px;
+  max-width: 1000px;
   margin-top: 20px;
 }
 
@@ -196,7 +154,7 @@
   flex: 1;
   padding: 20px 40px;
   background-color: #f8f8f8;
-  border: 1px solid #545353;
+  border: 1px solid rgb(114, 114, 114,0.7);
   cursor: pointer;
 }
 
@@ -221,6 +179,22 @@
    }
    .card-item{
     font-size: 12px;
+   }
+
+   .pdf-frame{
+    max-width: 500px;
+   }
+
+   .paper-title{
+    font-size: 20px;
+   }
+
+   .header-content{
+    font-size: 12px;
+   }
+
+   .abstract-container{
+    font-size: 14px;
    }
 
 
@@ -283,20 +257,21 @@
 <div class="nosotros">
 
       <div class="header">
+        <div class="title">
+          
+          <!--Solucionar problema con contenedor header -->
+          <h1 class="paper-title">Titulo Paper</h1>
+          <div class="title-line"></div>
+        </div>
       
         <div class="header-content">
-          <div class="container">
-            <div class="title">
-          
-              <!--Solucionar problema con contenedor header -->
-              <h1 class="paper-title">Titulo Paper</h1>
-              <div class="title-line"></div>
-            </div>
+    <!--      <div class="container"> -->
+           
             <div class="additional-info">
               <p><strong>Autor publicación: </strong>Informacion adicional</p>
               <p><strong>Fecha: </strong>   M/D/Y</p>
             </div>
-          </div>
+    <!--      </div>           -->
             <div class="social-links-container">
   
 
@@ -357,13 +332,6 @@
         </div>
       </div>
     
-      <!--
-      <div class="action-buttons">
-        <button class="btn btn-cita">DOCX</button>
-        <button class="btn btn-pdf">PDF </button>
-      </div>
-    
-    -->
       <iframe class="pdf-frame" src="https://www.unilibrecucuta.edu.co/portal/images/investigacion/pdf/formato_papers.pdf" alt="Main Image" >
       </iframe>
     
