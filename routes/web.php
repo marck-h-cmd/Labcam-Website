@@ -67,3 +67,14 @@ Route::get('/detalle-proyectos', function(){
 Route::get('/detalle-eventos', function(){
     return view ('usuario.Investigacion.detalle-eventos');
 })->name('detalle-eventos');
+
+
+
+// ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
+Route::get('/admin/slider', function(){
+    return view ('administrador.homeSlider');
+})->name('admin-homeSlider');
+
+Route::get('/admin/topProyectos', function(){
+    return view ('administrador.homeProyectos');
+})->name('admin-homeProyectos');
