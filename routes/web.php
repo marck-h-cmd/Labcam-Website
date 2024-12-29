@@ -1,14 +1,14 @@
 <?php
 
+use App\Http\Controllers\PestañaHomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('usuario.index');
-})->name('home');
+// -----------------------------------------------------USUARIO--------------------------------------------------------------------------------------
+Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion', function(){
-    return view ('usuario.Organizacion.Direccion');
+Route::get('/direccion', function () {
+    return view('usuario.Organizacion.Direccion');
 })->name('direccion');
 
 Route::get('/capital', function () {
@@ -43,38 +43,38 @@ Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 
-Route::get('/noticias', function(){
-    return view ('usuario.Investigacion.noticias');
+Route::get('/noticias', function () {
+    return view('usuario.Investigacion.noticias');
 })->name('noticias');
 
 
-Route::get('/proyectos', function(){
-    return view ('usuario.Investigacion.proyectos');
+Route::get('/proyectos', function () {
+    return view('usuario.Investigacion.proyectos');
 })->name('proyectos');
 
-Route::get('/eventos', function(){
-    return view ('usuario.Investigacion.eventos');
+Route::get('/eventos', function () {
+    return view('usuario.Investigacion.eventos');
 })->name('eventos');
 
-Route::get('/detalle-noticias', function(){
-    return view ('usuario.Investigacion.detalle-noticias');
+Route::get('/detalle-noticias', function () {
+    return view('usuario.Investigacion.detalle-noticias');
 })->name('detalle-noticias');
 
-Route::get('/detalle-proyectos', function(){
-    return view ('usuario.Investigacion.detalle-proyectos');
+Route::get('/detalle-proyectos', function () {
+    return view('usuario.Investigacion.detalle-proyectos');
 })->name('detalle-proyectos');
 
-Route::get('/detalle-eventos', function(){
-    return view ('usuario.Investigacion.detalle-eventos');
+Route::get('/detalle-eventos', function () {
+    return view('usuario.Investigacion.detalle-eventos');
 })->name('detalle-eventos');
 
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
-Route::get('/admin/slider', function(){
-    return view ('administrador.homeSlider');
-})->name('admin-homeSlider');
+Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
+Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slider_admin'])->name('admin-homeSliderUpdate');
 
-Route::get('/admin/topProyectos', function(){
-    return view ('administrador.homeProyectos');
+
+Route::get('/admin/topProyectos', function () {
+    return view('administrador.homeProyectos');
 })->name('admin-homeProyectos');

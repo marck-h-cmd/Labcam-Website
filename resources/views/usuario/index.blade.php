@@ -7,19 +7,19 @@
             <div class="relative h-56 overflow-hidden md:h-[700px]">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/carrusel_01.png"
+                    <img src="/user/template/images/carrusel/{{$slider->img1}}"
                         class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/carrusel_02.jpg"
+                    <img src="/user/template/images/carrusel/{{$slider->img2}}"
                         class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/carrusel_03.jpg"
+                    <img src="/user/template/images/carrusel/{{$slider->img3}}"
                         class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
