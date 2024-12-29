@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/admin/dist/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- SweetAlert2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Dashboard</title>
 </head>
 
@@ -19,7 +21,8 @@
             <span class="text-lg font-bold text-white ml-3">Logo</span>
         </a>
         <ul class="mt-4">
-            <li class="mb-1 group {{ request()->routeIs(['admin-homeSlider', 'admin-homeProyectos']) ? 'active' : '' }}">
+            <li
+                class="mb-1 group {{ request()->routeIs(['admin-homeSlider', 'admin-homeProyectos']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
