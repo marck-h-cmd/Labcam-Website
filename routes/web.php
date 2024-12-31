@@ -78,3 +78,7 @@ Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slide
 Route::get('/admin/topProyectos', function () {
     return view('administrador.homeProyectos');
 })->name('admin-homeProyectos');
+
+Route::get('/admin/paper/create', function () {
+    return view('administrador.panel.paper-panel');
+})->name('paper-panel');
