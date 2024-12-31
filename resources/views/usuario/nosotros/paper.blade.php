@@ -2,8 +2,6 @@
 
 @section('title', 'biblioteca')
 
-
-
 @section('contenido')
 
 <style>
@@ -13,54 +11,9 @@
   align-items: center;
   background-color: white;
   padding: 20px;
-  margin-top: 150px
-}
-/*
-.orgHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  justify-content: flex-start;
-  text-align: left;
-  width: 100%;
-  background: #2f8ce4;
-  color: #eee;
-  padding: 2%;
+  margin-top: 120px
 }
 
-.orgHeader h1 {
-  font-size: 2em;
-  text-transform: capitalize;
-  margin-bottom: 2%;
-}
-
-
-
-.nav {
-  width: 100%;
-  list-style-type: none;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: center;
-}
-
-.nav li {
-  width: auto;
-  display: inline-block;
-  padding: 2%;
-  white-space: nowrap;
-}
-
-.nav li:hover{
-  color: #1321da;
-}
-
-.nav li, .photos img {
-  cursor: pointer;
-}
-  */
 
 .header {
   display: flex;
@@ -74,22 +27,25 @@
   display: flex;
   gap: 10px;
   justify-content: space-between;
+  margin: 15px 10px;
 
 }
 
-
+/*
 .container {
   margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   
 }
-
+*/
 
 
 .title {
-  display: flex;
-  flex-direction: column;
+ /* display: flex;
+  flex-direction: column;  */
+  display: block;
+  text-align: center;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -101,7 +57,7 @@
 }
 
 .paper-title {
-  font-size: 32px;
+  font-size: 30px;
   color: #2e5382;
   margin: 10px 0;
 }
@@ -115,7 +71,7 @@
 .header-image {
   border-radius: 10px;
   width: 100%;
-  max-width: 913px;
+  max-width: 920px;
 }
 
 .abstract-container {
@@ -126,7 +82,7 @@
   width: 90%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #4d4d4d;
-  max-width: 1024px;
+  max-width: 1000px;
   background-color: rgb(249, 245, 245, 0.7);
 }
 
@@ -135,7 +91,7 @@
 }
 
 .abstract-container strong {
-  color: #585757;
+  color: #686868;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
@@ -171,9 +127,9 @@
   background-color: #98c560;
 }
 
-.main-image {
+.pdf-frame {
   width: 100%;
-  max-width: 1091px;
+  max-width: 1000px;
   margin: 20px 0;
   height: 800px;
 }
@@ -183,24 +139,27 @@
   justify-content: space-between;
   gap: 20px;
   width: 90%;
-  max-width: 1024px;
+  max-width: 1000px;
   margin-top: 20px;
 }
 
 .cards h3{
-  color: #4d4d4d
-}
-.r {
-  text-align: right;
+  color: #0e72c4;
+  font-size: 20px;
+  margin: 5px 20px;
 }
 
 .card-item {
   text-align: left;
   flex: 1;
-  padding: 20px 10px;
+  padding: 20px 40px;
   background-color: #f8f8f8;
-  border: 1px solid #545353;
+  border: 1px solid rgb(114, 114, 114,0.7);
   cursor: pointer;
+}
+
+.card-item.r{
+  text-align: right;
 }
 
 .card-item:hover {
@@ -209,6 +168,37 @@
   transform: ease-out all;
 }
 
+
+@media (max-width: 768px) {
+   .header-content{
+   flex-direction: column;
+   }
+
+   .cards h3{
+    font-size: 14px;
+   }
+   .card-item{
+    font-size: 12px;
+   }
+
+   .pdf-frame{
+    max-width: 500px;
+   }
+
+   .paper-title{
+    font-size: 20px;
+   }
+
+   .header-content{
+    font-size: 12px;
+   }
+
+   .abstract-container{
+    font-size: 14px;
+   }
+
+
+}
 
 .doi {
   margin-top: 20px;
@@ -242,6 +232,11 @@
   height: 50px;
   width: 50px;
 }
+
+.social-link:first-child{
+  padding: 12px;
+}
+  
 .social-link:hover {
   transform: scale(1.1);
   transition: all 0.5s;
@@ -254,32 +249,34 @@
 }
 
 
+
+
 </style>
 
 
 <div class="nosotros">
 
       <div class="header">
+        <div class="title">
+          
+          <!--Solucionar problema con contenedor header -->
+          <h1 class="paper-title">Titulo Paper</h1>
+          <div class="title-line"></div>
+        </div>
       
         <div class="header-content">
-          <div class="container">
-            <div class="title">
-          
-              <!--Solucionar problema con contenedor header -->
-              <h1 class="paper-title">Titulo Paper</h1>
-              <div class="title-line"></div>
-            </div>
+    <!--      <div class="container"> -->
+           
             <div class="additional-info">
               <p><strong>Autor publicación: </strong>Informacion adicional</p>
               <p><strong>Fecha: </strong>   M/D/Y</p>
             </div>
-          </div>
+    <!--      </div>           -->
             <div class="social-links-container">
   
 
-              <a href="#" target="_blank" class="social-link">
-                <svg  fill="#02dfe3" height="32px" width="32px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 458.624 458.624" xml:space="preserve" stroke="#02dfe3"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <g> <path d="M339.588,314.529c-14.215,0-27.456,4.133-38.621,11.239l-112.682-78.67c1.809-6.315,2.798-12.976,2.798-19.871 c0-6.896-0.989-13.557-2.798-19.871l109.64-76.547c11.764,8.356,26.133,13.286,41.662,13.286c39.79,0,72.047-32.257,72.047-72.047 C411.634,32.258,379.378,0,339.588,0c-39.79,0-72.047,32.257-72.047,72.047c0,5.255,0.578,10.373,1.646,15.308l-112.424,78.491 c-10.974-6.759-23.892-10.666-37.727-10.666c-39.79,0-72.047,32.257-72.047,72.047s32.256,72.047,72.047,72.047 c13.834,0,26.753-3.907,37.727-10.666l113.292,79.097c-1.629,6.017-2.514,12.34-2.514,18.872c0,39.79,32.257,72.047,72.047,72.047 c39.79,0,72.047-32.257,72.047-72.047C411.635,346.787,379.378,314.529,339.588,314.529z"></path></g></g></g></svg>
-                
+              <a href="#"  target="_blank" class="social-link">
+               <svg viewBox="0 0 24 24" height="24px" width="24px"  fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="style=fill"> <g id="share"> <path id="vector (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M15.8358 16.1305L9.02549 12.1985L8.27549 13.4976L15.0858 17.4295L15.8358 16.1305Z" fill="#000000"></path> <path id="vector (Stroke)_2" fill-rule="evenodd" clip-rule="evenodd" d="M15.8358 7.8656L9.02549 11.7976L8.27549 10.4985L15.0858 6.56657L15.8358 7.8656Z" fill="#000000"></path> <path id="Vector (Stroke)" fill-rule="evenodd" clip-rule="evenodd" d="M17.85 9.14961C19.5896 9.14961 21 7.73931 21 5.99961C21 4.25991 19.5896 2.84961 17.85 2.84961C16.1103 2.84961 14.7 4.25991 14.7 5.99961C14.7 7.73931 16.1103 9.14961 17.85 9.14961ZM9.3 11.9936C9.3 13.7333 7.8897 15.1436 6.15 15.1436C4.4103 15.1436 3 13.7333 3 11.9936C3 10.2539 4.4103 8.84363 6.15 8.84363C7.8897 8.84363 9.3 10.2539 9.3 11.9936ZM21 17.9959C21 16.2562 19.5896 14.8459 17.85 14.8459C16.1103 14.8459 14.7 16.2562 14.7 17.9959C14.7 19.7356 16.1103 21.1459 17.85 21.1459C19.5896 21.1459 21 19.7356 21 17.9959Z" fill="#000000"></path> </g> </g> </g></svg>              
               </a>
               
           
@@ -335,22 +332,17 @@
         </div>
       </div>
     
-      <div class="action-buttons">
-        <button class="btn btn-cita">DOCX</button>
-        <button class="btn btn-pdf">PDF </button>
-      </div>
-    
-      <iframe class="main-image" src="https://www.unilibrecucuta.edu.co/portal/images/investigacion/pdf/formato_papers.pdf" alt="Main Image" >
+      <iframe class="pdf-frame" src="https://www.unilibrecucuta.edu.co/portal/images/investigacion/pdf/formato_papers.pdf" alt="Main Image" >
       </iframe>
     
       <div class="cards">
         <div class="card-item r">
-          <h3>Paper anterior</h3>
-          <p>Titulo paper anterior</p>
+          <h3>Titulo Paper anterior</h3>
+          <p>paper anterior</p>
         </div>
         <div class="card-item">
-          <h3>Paper siguiente</h3>
-          <p>Titulo paper siguiente</p>
+          <h3>Titulo Paper siguiente</h3>
+          <p> Paper siguiente</p>
         </div>
       </div>
     

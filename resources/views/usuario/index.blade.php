@@ -7,27 +7,30 @@
             <div class="relative h-56 overflow-hidden md:h-[700px]">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/carrusel_01.png"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="/user/template/images/carrusel/{{$slider->img1}}"
+                        class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                        alt="...">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/carrusel_02.jpg"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="/user/template/images/carrusel/{{$slider->img2}}"
+                        class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                        alt="...">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/carrusel_03.jpg"
-                        class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    <img src="/user/template/images/carrusel/{{$slider->img3}}"
+                        class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                        alt="...">
                 </div>
             </div>
             <!-- Slider indicators -->
             <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
+                <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="true" aria-label="Slide 1"
                     data-carousel-slide-to="0"></button>
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
+                <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="false" aria-label="Slide 2"
                     data-carousel-slide-to="1"></button>
-                <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
+                <button type="button" class="w-3 h-3 rounded-full bg-white" aria-current="false" aria-label="Slide 3"
                     data-carousel-slide-to="2"></button>
             </div>
             <!-- Slider controls -->
@@ -35,9 +38,9 @@
                 class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                 data-carousel-prev>
                 <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 group-hover:bg-white/70 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-black rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M5 1 1 5l4 4" />
                     </svg>
@@ -48,9 +51,9 @@
                 class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
                 data-carousel-next>
                 <span
-                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/90 group-hover:bg-white/70 group-focus:ring-4 group-focus:ring-white group-focus:outline-none">
+                    <svg class="w-4 h-4 text-black rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 6 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 9 4-4-4-4" />
                     </svg>
@@ -76,7 +79,7 @@
                         <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+                            <a href="{{ route('detalle-noticias') }}"class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
                         </div>
                     </div>
 
@@ -103,7 +106,7 @@
                         <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+                            <a href="{{ route('detalle-noticias') }}" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
                         </div>
                     </div>
 
@@ -130,7 +133,7 @@
                         <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+                            <a href="{{ route('detalle-noticias') }}" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
                         </div>
                     </div>
 
@@ -155,8 +158,11 @@
         </div>
 
         <div class="my-10 flex justify-center">
-            <a class=" bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">VER MÁS NOTICIAS</a>
+            <a href="{{ route('noticias') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
+            VER MÁS NOTICIAS
+            </a>
         </div>
+
     </section>
 
     {{-- Seccion de proyectos --}}
@@ -183,10 +189,11 @@
                             ligula
                             ornare vel.
                         </p>
-                        <button
-                            class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
-                            VER TODOS LOS PROYECTOS
-                        </button>
+                        <a href="{{ route('proyectos') }}">
+                           <button class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+                           VER TODOS LOS PROYECTOS
+                           </button>
+                        </a>
                     </div>
                 </div>
 
@@ -222,7 +229,7 @@
                         <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
                         </div>
                     </div>
 
@@ -249,7 +256,7 @@
                         <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
                         </div>
                     </div>
 
@@ -276,7 +283,7 @@
                         <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
                         </div>
                     </div>
 
@@ -301,7 +308,10 @@
         </div>
 
         <div class="my-10 flex justify-center">
-            <a class=" bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">VER MÁS EVENTOS</a>
+            <a href="{{ route('eventos') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
+            VER MÁS EVENTOS
+           </a>
         </div>
+
     </section>
 @endsection

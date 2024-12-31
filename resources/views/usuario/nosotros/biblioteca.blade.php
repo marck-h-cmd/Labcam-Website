@@ -51,7 +51,7 @@
     <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
       <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
       <div class="content p-4">
-        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: </span></h3>
+        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: Placeholder titulo</span></h3>
         <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
         <p class="descripcion text-base mb-3 text-justify">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -60,7 +60,7 @@
           DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
         </p>
       </div>
-      <a class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
+      <a href="{{ route('biblioteca.paper') }}" class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
         Más detalles ->
       </a>
     </div>

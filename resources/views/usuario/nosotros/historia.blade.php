@@ -64,7 +64,7 @@
 
 .text-content {
     font-family: Inter, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-style: italic;
     font-weight: 300;
     color: black;
@@ -111,6 +111,11 @@
     height: auto;
 }
 
+.slider-item img{
+    width: 650px;
+    height: 250px;
+}
+
 .explore-button {
     background: #98C560;
     border-radius: 5px;
@@ -136,7 +141,7 @@ slider
     overflow: hidden;
     box-sizing: border-box;
     text-align: center;
-    margin: 0 auto;
+    margin: 10px auto;
 }
 
 .slider .slider-item {
@@ -158,7 +163,7 @@ slider
 }
 
 .slider .slider-item img:hover {
-    opacity: 0.5 !important;
+    opacity: 0.8 !important;
 }
 
 .slider .slider-item>* {
@@ -205,6 +210,14 @@ slider
     width: 422px;
     min-height: 325px;
    }
+
+   /*
+   .social-links-container{
+    justify-content: right;
+    align-items: flex-end;
+    justify-items: right;
+   }
+    */
 }
 
 
@@ -256,7 +269,7 @@ slider
             <input type="radio" name="nav" value="4">
     
               <div class="slider-item">
-                  <img src="https://placehold.co/650x250" alt="Sport" />
+                  <img src="/user/template/images/carrusel/carrusel_03.jpg" alt="Sport" />
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore a neque perspiciatis facere labore consequuntur.</p>
               </div>
               <div class="slider-item">

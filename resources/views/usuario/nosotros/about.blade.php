@@ -38,12 +38,13 @@
 
 .description {
     max-width: 800px;
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 300;
     color: black;
-    text-align: center; 
+    /*text-align: center; */
+    letter-spacing: 1px;
 }
 
 .heading {
@@ -69,11 +70,13 @@
 .vision, .mission {
     display: flex;
     flex-direction: row;
-    justify-content:space-evenly;
+    justify-content:center;
     align-items: center;
-    gap: 10%;
+    /*justify-items: center; */
+    gap: 5%;
     padding: 20px;
    /* flex-wrap: wrap; */
+   letter-spacing: 1px;
 }
 
 .vision{
@@ -88,11 +91,10 @@
 }
 
 .title {
-    font-size: 24px;
-    font-family: 'Inria Serif', serif;
-    font-style: italic;
+    font-size: 26px;
+    font-family: 'Inter', sans-serif;
     font-weight: 700;
-    color: #2b07f5;
+    color: #5185c9;
     margin-left: 10px;
 }
 
@@ -103,24 +105,43 @@
 }
 
 .text {
-    font-size: 20px;
+    font-size: 16px;
     font-family: 'Inter', sans-serif;
     font-style: italic;
     font-weight: 300;
     color: black;
+    max-width: 500px;
 }
 
 .image-main, .image-highlight, .image-gallery {
-    max-width: 100%;
-    height: auto;
+    
     border-radius: 10px;
     margin: 20px 10px;
 }
 
+.image-gallery{
+    height: 491px;
+    width: 700px;
+}
+
+.image-highlight{
+   height: 350px; 
+   width: 460px;
+}
+
+.image-main{
+    height: 400px;
+    width: 460px;
+}
+
+.text-heading{
+  display: flex;
+  flex-direction: column;
+}
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 968px) {
     .vision, .mission {
         flex-direction: column;
         align-items: center;
@@ -131,12 +152,33 @@
     }
 
     .content {
+        text-align: center; 
+        justify-content: center;
+        letter-spacing: 1px;
+    }
+
+    .title {
         text-align: center;
     }
 
     .mission-line{
         justify-content: center;
         
+    }
+    .description {
+        max-width: 85%; 
+    }
+    .about-section{
+        font-size: 0.5em;
+    }
+
+    .image-gallery,.image-highlight,.image-main{
+        max-width: 500px;
+        height: auto;
+    }
+
+    .text-heading{
+        align-items: center;
     }
 }
 
@@ -163,10 +205,12 @@
 
 
 <div class="vision">
-    <img class="image-main" src="https://via.placeholder.com/459x291" alt="Main Image" />
+    <img class="image-main" src="/images/labcam-icon.png" alt="Main Image" />
     <div class="content">
+        <div class="text-heading">
         <div class="title">Visión</div>
         <div class="line"></div>
+        </div>
         <div class="text">
             Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at.
             Ad
@@ -183,8 +227,10 @@
 <div class="mission">
 
     <div class="content">
+        <div class="text-heading">
         <div class="title">Misión</div>
         <div class="line"></div>
+        </div>
         <div class="text">
             Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at.
             Ad
@@ -197,7 +243,7 @@
             mauris est parturient varius molestie condimentum eleifend sit.
         </div>
     </div>
-    <img class="image-highlight" src="https://via.placeholder.com/459x291" alt="Highlighted Image" />
+    <img class="image-highlight" src="/user/template/images/carrusel/carrusel_02.jpg" alt="Highlighted Image" />
 
 </div>
 
@@ -215,7 +261,7 @@
       
     </div>
 
-    <img class="image-gallery" src="https://via.placeholder.com/600x291" alt="Highlighted Image">
+    <img class="image-gallery" src="/user/template/images/carrusel/carrusel_03.jpg" alt="Highlighted Image" >
 </div>
 </div>
 @endsection
