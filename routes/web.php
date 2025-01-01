@@ -15,15 +15,13 @@ Route::get('/capital', function () {
     return view('usuario.Organizacion.CapitalHumano');
 })->name('capital');
 
-
+use App\Http\Controllers\PaperController;
 Route::get('/nosotros/about', function () {
     return view('usuario.nosotros.about');
 })->name('about');
 
 
-Route::get('/nosotros/biblioteca', function () {
-    return view('usuario.nosotros.biblioteca');
-})->name('biblioteca');
+Route::get('/nosotros/biblioteca',[PaperController::class, 'index'])->name('biblioteca');
 
 Route::get('/nosotros/historia', function () {
     return view('usuario.nosotros.historia');

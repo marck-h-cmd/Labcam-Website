@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('papers', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('autores');
-            $table->string('publisher');
+            $table->string('titulo',100);
+            $table->string('autores',50);
+            $table->string('publisher',50);
             $table->text('descripcion');
+            $table->string('doi',100);
             $table->date('fecha_publicacion');
             $table->string('pdf_filename')->nullable();
             $table->string('img_filename')->nullable();

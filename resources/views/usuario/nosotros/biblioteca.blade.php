@@ -46,15 +46,16 @@
     <div class="blue-line w-1/5 h-1 bg-[#2371d4]"></div>
   </div>
 
+
   <div class="container flex justify-center items-center flex-wrap gap-5 mb-5 mx-auto">
- 
+    @foreach($papers as $paper)
     <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
-      <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
+      <img class="image h-52 bg-[#d9d9d9] rounded-t-lg" src="/images/{{ $paper->img_filename }}">
       <div class="content p-4">
-        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: Placeholder titulo</span></h3>
-        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
+        <h3 class="titulo text-lg font-medium mb-2 text-gray-500"><span class="text-gray-500">Titulo: </span>{{ $paper->titulo }}</h3>
+        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> {{ $paper->autores }}</p>
         <p class="descripcion text-base mb-3 text-justify">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+          {{ $paper->descripcion }}
         </p>
         <p class="doi text-sm mb-3"><span class="text-gray-600">
           DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
@@ -65,6 +66,9 @@
       </a>
     </div>
 
+    @endforeach
+
+<!--
     <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
       <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
       <div class="content p-4">
@@ -99,7 +103,9 @@
         Más detalles ->
       </a>
     </div>
+    -->
   </div>
+
 
   <div class="flex justify-center mt-5 p-6 ">
       <button class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
