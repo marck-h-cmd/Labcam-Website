@@ -68,49 +68,116 @@
 
     @endforeach
 
-<!--
-    <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
-      <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
-      <div class="content p-4">
-        <h3 class="titulo text-lg font-medium mb-2"><span class="text-gray-500"> Titulo:</span></h3>
-        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
-        <p class="descripcion text-base mb-3 text-justify">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-        </p>
-        <p class="doi text-sm mb-3"> <span class="text-gray-600">
-          DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
-        </p>
-      </div>
-      <a class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
-        Más detalles ->
-      </a>
-    </div>
-
- 
-    <div class="card flex flex-col w-4/5 max-w-96 bg-white shadow-lg rounded-lg">
-      <div class="image h-52 bg-[#d9d9d9] rounded-t-lg"></div>
-      <div class="content p-4">
-        <h3 class="titulo text-lg font-medium mb-2"><span class="text-gray-500"> Titulo: </span></h3>
-        <p class="autores italic text-base mb-3"><span class="text-gray-600">AUTORES: </span> autor 1, autor 2</p>
-        <p class="descripcion text-base mb-3 text-justify">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-        </p>
-        <p class="doi text-sm mb-3"> <span class="text-gray-600">
-          DOI: </span><span class="doi-link underline text-gray-700">10.1109/INTERCON52678.2021.9532881</span>
-        </p>
-      </div>
-      <a class="detalles text-lg text-white italic font-bold bg-[#98c560] p-4 text-center rounded-b-lg hover:bg-[#66b308] transition-all duration-400 cursor-pointer">
-        Más detalles ->
-      </a>
-    </div>
-    -->
   </div>
 
 
   <div class="flex justify-center mt-5 p-6 ">
       <button class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
-        VER PUBLICACIONES
+        VER MÁS PUBLICACIONES
       </button>
     </div>
+
+    <div class="pt-6 pb-12">  
+      <div id="card" class="">
+        <h2 class="text-center font-serif  uppercase text-4xl xl:text-5xl">Papers</h2>
+        <!-- container for all cards -->
+        <div class="container w-100  lg:w-4/6 mx-auto flex flex-col">
+          <!-- card -->
+          @foreach($papers as $paper)
+          <div  class="flex flex-col md:flex-row overflow-hidden
+                                             rounded-lg shadow-xl  mt-4 w-100 mx-2 bg-gray-100">
+            <!-- media -->
+            <div class="h-64 w-72 md:w-1/2 p-4">
+            <a class=" cursor-pointer">  <h3 class="font-semibold text-lg mt-4 text-blue-400">{{ $paper->titulo}}</h3> </a>
+              <div class="mt-5">
+                <p class="text-gray-600 ">Autores:</p>
+                <p class="autores italic text-base mb-3">{{ $paper->autores }}</p>
+              </div>
+          
+            <p class="doi text-sm mt-3"><span class="text-gray-600">
+              DOI: </span><span class="doi-link underline text-gray-500">10.1109/INTERCON52678.2021.9532881</span>
+            </p>
+
+          
+              <p class="text-base  mt-4">
+                <span class="text-gray-600  ">Publicado: </span>
+              <strong class="text-gray-700 uppercase font-semibold text-sm ">  {{ $paper->fecha_publicacion }} </strong>
+              </p>
+
+            
+            </div>
+          
+            <div class="w-full py-8 px-6 text-gray-800 flex flex-col justify-between">
+            
+              <p class="mt-2  text-justify text-gray-500 text-sm">
+                {{ $paper->descripcion}}
+              </p>
+             
+            </div>
+
+          </div>
+
+          @endforeach
+        </div>
+      </div>
+    </div>
+
+    <div class="flex justify-center mt-5 p-6 ">
+      <button id="load-more" class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
+        VER MÁS PUBLICACIONES
+      </button>
+    </div>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          let offset = {{ $papers->count() }};
+          const limit = 3;
+  
+          document.getElementById('load-more').addEventListener('click', function () {
+              fetch(`/nosotros/biblioteca/fetch-more?offset=${offset}&limit=${limit}`)
+                  .then(response => response.json())
+                  .then(data => {
+                      if (data.length > 0) {
+                          const container = document.getElementById('papers-container');
+                          data.forEach(paper => {
+                              const card = `
+                                  <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 w-100 mx-2 bg-gray-100">
+                                      <div class="h-64 w-72 md:w-1/2 p-4">
+                                          <a class="cursor-pointer">
+                                              <h3 class="font-semibold text-lg mt-4 text-blue-400">${paper.titulo}</h3>
+                                          </a>
+                                          <div class="mt-5">
+                                              <p class="text-gray-600">Autores:</p>
+                                              <p class="autores italic text-base mb-3">${paper.autores}</p>
+                                          </div>
+                                          <p class="doi text-sm mt-3">
+                                              <span class="text-gray-600">DOI: </span>
+                                              <span class="doi-link underline text-gray-500">10.1109/INTERCON52678.2021.9532881</span>
+                                          </p>
+                                          <p class="text-base mt-4">
+                                              <span class="text-gray-600">Publicado: </span>
+                                              <strong class="text-gray-700 uppercase font-semibold text-sm">${paper.fecha_publicacion}</strong>
+                                          </p>
+                                      </div>
+                                      <div class="w-full py-8 px-6 text-gray-800 flex flex-col justify-between">
+                                          <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
+                                      </div>
+                                  </div>`;
+                              container.insertAdjacentHTML('beforeend', card);
+                          });
+  
+                     
+                          offset += data.length;
+                      } else {
+                         
+                          document.getElementById('load-more').style.display = 'none';
+                      }
+                  })
+                  .catch(error => console.error('Error fetching data:', error));
+          });
+      });
+  </script>
+  
   
 @endsection
