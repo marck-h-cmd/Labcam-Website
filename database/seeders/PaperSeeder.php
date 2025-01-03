@@ -14,7 +14,8 @@ class PaperSeeder extends Seeder
     {
         Paper::factory(3)->create([
             'pdf_filename' => 'sample_pdf.pdf', 
-            'img_filename' => 'imagen.png'
+            'img_filename' => 'imagen.png',
+            'doi'=>'10.1109/INTERCON52678.2021.9532881'
 
         ]);
     }
