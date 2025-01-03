@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('papers', function (Blueprint $table) {
             $table->id();
             $table->string('titulo',100);
-            $table->string('autores',50);
+            $table->json('autores');
             $table->string('publisher',50);
             $table->text('descripcion');
             $table->string('doi',100);
