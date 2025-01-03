@@ -15,6 +15,7 @@ Route::get('/capital', function () {
     return view('usuario.Organizacion.CapitalHumano');
 })->name('capital');
 
+// RUTAS DE SECCIÓN NOSOTROS
 use App\Http\Controllers\PaperController;
 Route::get('/nosotros/about', function () {
     return view('usuario.nosotros.about');
@@ -22,6 +23,9 @@ Route::get('/nosotros/about', function () {
 
 
 Route::get('/nosotros/biblioteca',[PaperController::class, 'index'])->name('biblioteca');
+
+Route::get('/nosotros/biblioteca/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('biblioteca.fetchMore');
+
 
 Route::get('/nosotros/historia', function () {
     return view('usuario.nosotros.historia');
@@ -77,6 +81,16 @@ Route::get('/admin/topProyectos', function () {
     return view('administrador.homeProyectos');
 })->name('admin-homeProyectos');
 
-Route::get('/admin/paper/create', function () {
-    return view('administrador.panel.paper-panel');
-})->name('paper-panel');
+Route::get('/admin/papers', PaperController::class .'@adminIndex')->name('paper-panel');
+
+Route::get('/admin/papers/create', PaperController::class . '@create')->name('papers.create');
+
+Route::post('/admin/papers', PaperController::class .'@storePaper')->name('papers.store');
+// returns a page that shows a full post
+Route::get('/admin/papers/{paper}', PaperController::class .'@show')->name('papers.show');
+// returns the form for editing a post
+Route::get('/admin/papers/{paper}/edit', PaperController::class .'@edit')->name('papers.edit');
+// updates a post
+Route::put('/admin/papers/{paper}', PaperController::class .'@update')->name('papers.update');
+// deletes a post
+Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name('papers.destroy');
