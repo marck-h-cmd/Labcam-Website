@@ -81,7 +81,7 @@
       <div id="card" class="">
         <h2 class="text-center font-serif  uppercase text-4xl xl:text-5xl">Papers</h2>
         <!-- container for all cards -->
-        <div class="container w-100  lg:w-4/6 mx-auto flex flex-col">
+        <div id="papers-container"class="container w-100  lg:w-4/6 mx-auto flex flex-col">
           <!-- card -->
           @foreach($papers as $paper)
           <div  class="flex flex-col md:flex-row overflow-hidden
@@ -124,7 +124,7 @@
 
     <div class="flex justify-center mt-5 p-6 ">
       <button id="load-more" class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
-        VER MÁS PUBLICACIONES
+        VER {{ $displayCount}} MÁS PUBLICACIONES
       </button>
     </div>
 
@@ -132,15 +132,20 @@
     <script>
       document.addEventListener('DOMContentLoaded', function () {
           let offset = {{ $papers->count() }};
+          console.log(offset)
           const limit = 3;
+
+          const button =  document.getElementById('load-more');
   
-          document.getElementById('load-more').addEventListener('click', function () {
+           button.addEventListener('click', function () {
               fetch(`/nosotros/biblioteca/fetch-more?offset=${offset}&limit=${limit}`)
                   .then(response => response.json())
                   .then(data => {
-                      if (data.length > 0) {
+                    const { papers, total, remaining } = data;
+
+                     if (papers.length >0) {
                           const container = document.getElementById('papers-container');
-                          data.forEach(paper => {
+                          papers.forEach(paper => {
                               const card = `
                                   <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 w-100 mx-2 bg-gray-100">
                                       <div class="h-64 w-72 md:w-1/2 p-4">
@@ -168,11 +173,19 @@
                           });
   
                      
-                          offset += data.length;
-                      } else {
-                         
-                          document.getElementById('load-more').style.display = 'none';
-                      }
+                          offset += papers.length;
+                          if(remaining > 0){
+                            button.textContent = ` VER ${remaining} MÁS PUBLICACIONES`;
+
+                          } else{
+                         button.style.display = 'none';
+                         }
+                      
+                        } else{
+                          button.style.display = 'none';
+                         }
+                        
+                      
                   })
                   .catch(error => console.error('Error fetching data:', error));
           });
