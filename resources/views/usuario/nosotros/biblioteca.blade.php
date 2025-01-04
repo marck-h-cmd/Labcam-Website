@@ -88,7 +88,7 @@
                                              rounded-lg shadow-xl  mt-4 w-100 mx-2 bg-gray-100">
             <!-- media -->
             <div class="h-64 w-72 md:w-1/2 p-4">
-            <a class=" cursor-pointer">  <h3 class="font-semibold text-lg mt-4 text-blue-400">{{ $paper->titulo}}</h3> </a>
+            <a href="{{route('papers.show',$paper->id)}}" class=" cursor-pointer">  <h3 class="font-semibold text-lg mt-4 text-blue-400">{{ $paper->titulo}}</h3> </a>
               <div class="mt-5">
                 <p class="text-gray-600 ">Autores:</p>
                 <p class="autores italic text-base mb-3">{{ $paper->autores }}</p>

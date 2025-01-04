@@ -49,7 +49,7 @@
                                         
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->titulo }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->area }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 overflow-hidden">{{ $paper->descripcion }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 overflow-hidden max-w-96">{{ $paper->descripcion }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->autores }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->publisher }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->doi }}</td>                                                                  
@@ -62,7 +62,7 @@
                                                 <a href="{{ route('papers.edit', $paper->id) }}" class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">Editar</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <a href="{{ route('papers.destroy', $paper->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">Eliminar</a>
+                                                <a href="{{ route('papers.destroy', $paper->id) }}" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Estas seguro que quieres eliminarlo?') ? this.closest('form').submit() : false;">Eliminar</a>
                                             </form>
                                         </td>
                                     </tr>

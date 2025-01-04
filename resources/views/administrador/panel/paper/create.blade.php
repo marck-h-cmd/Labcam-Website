@@ -9,7 +9,7 @@
         <div class="title text-2xl font-semibold text-[#2e5382]">Crear Papers</div>
         <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
       </div>
-    <form class="p-10" action="{{ route('papers.store') }}" method="post" id="form">
+    <form class="p-10" action="{{ route('papers.store') }}" method="post" id="form" enctype="multipart/form-data">
         @csrf
     <div class="grid gap-6 mb-6 md:grid-cols-2 bg-slate-200 p-4 rounded-lg">
         <div>
@@ -89,7 +89,7 @@
                     <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                     <p class="text-xs text-gray-500">PDF (MAX. 800x400px)</p>
                 </div>
-                <input id="dropzone-file" name="pdf_filename" type="file" class="hidden" accept=".pdf" />
+                <input id="dropzone-file" name="pdf_filename" type="file"  class="hidden" accept=".pdf" />
             </label>
         </div>
         <div id="info-container" class="mt-2"></div>
@@ -97,19 +97,58 @@
     
     </div>
 
-    </div>
+    
 
     <div class="flex justify-center gap-2">
-        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Guardar</button>
+        <button type="submit" class="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Guardar</button>
 
-        <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancelar</button>
+        <a href="{{ route('papers.create') }}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">Cancelar</a>
+
+        <a href="{{ route('paper-panel') }}" class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer "> Volver</a>
 
     </div>
 
-    </form>
- 
-  </div>
 
+   
+
+    </form>
+
+  </div>
+    @if (session('success'))
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Creado exitosamente!',
+            text: 'Nuevo paper ha sido publicado.',
+            showConfirmButton: true, 
+            confirmButtonText: 'Aceptar',
+            customClass: {
+                confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+            }
+        });
+    </script>
+
+   @elseif (session('error'))
+    <script>
+    Swal.fire({
+        icon: 'error',
+        title: '¡Hubo un error!',
+        text: 'Vuelve a intentar.',
+        showConfirmButton: true, 
+        confirmButtonText: 'Aceptar',
+        customClass: {
+            confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
+        }
+    });
+    </script>
+    @endif
+    
+@endsection
+
+
+
+
+@section('script')
   <script>
     document.addEventListener("DOMContentLoaded", () => {
     const authorsContainer = document.getElementById("authors-container");
@@ -195,11 +234,7 @@ imgInput.addEventListener('change', (event) => {
   });
 });
 
-  
-
-
-
 </script>
 
-  
 @endsection
+
