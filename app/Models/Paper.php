@@ -11,5 +11,5 @@ class Paper extends Model
     use HasFactory;
     protected $table = 'papers'; // Nombre de la tabla
     protected $primaryKey = 'id';
-    protected $fillable = ['titulo', 'autores', 'publisher','descripcion','fecha_publicacion','doi','pdf_filename','img_filename'];
+    protected $fillable = ['titulo', 'autores', 'publisher','descripcion','area','fecha_publicacion','doi','pdf_filename','img_filename'];
 }

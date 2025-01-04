@@ -86,11 +86,11 @@ Route::get('/admin/papers', PaperController::class .'@adminIndex')->name('paper-
 Route::get('/admin/papers/create', PaperController::class . '@create')->name('papers.create');
 
 Route::post('/admin/papers', PaperController::class .'@storePaper')->name('papers.store');
-// returns a page that shows a full post
-Route::get('/admin/papers/{paper}', PaperController::class .'@show')->name('papers.show');
-// returns the form for editing a post
+
+Route::get('/nosotros/biblioteca/papers/{paper}', PaperController::class .'@show')->name('papers.show');
+
 Route::get('/admin/papers/{paper}/edit', PaperController::class .'@edit')->name('papers.edit');
-// updates a post
+
 Route::put('/admin/papers/{paper}', PaperController::class .'@update')->name('papers.update');
-// deletes a post
+
 Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name('papers.destroy');
