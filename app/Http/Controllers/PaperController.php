@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Paper;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 
 class PaperController extends Controller
@@ -48,36 +51,76 @@ class PaperController extends Controller
 
     public function storePaper(Request $request)
     {
-        $request->validate([
-            'titulo' => 'required|max:100',
-            'autores' => 'required|json',
-            'publisher' => 'required|max:50',
-            'descripcion' => 'required',
-            'doi' => 'required|max:100',
-            'fecha_publicacion' => 'required',
-            'pdf_filename' => 'required',
-            'img_filename' => 'required',
 
-          ]);
-          Paper::create($request->all());
-          return redirect()->route('papers.create')
-            ->with('success', 'Nuevo paper creado exitosamente.');
+      try{
+
+        $request->validate([
+          'titulo' => 'required|max:100',
+          'autores' => 'required|json',
+          'publisher' => 'required|max:50',
+          'descripcion' => 'required',
+          'area' => 'required|max:60',
+          'doi' => 'required|max:100',
+          'fecha_publicacion' => 'required',
+          'pdf_filename' => 'required|file|mimes:pdf|max:10240',
+          'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
+
+        ]);
+
+        $pdf_fileName = null;
+        $img_fileName = null;
+
+        if ($request->hasFile('pdf_filename')) {
+          $pdf = $request->file('pdf_filename');
+          $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalName(); 
+          Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
+        }
+  
+        if ($request->hasFile('img_filename')) {
+          $img = $request->file('img_filename');
+          $img_fileName = Str::uuid() . '.' . $img->getClientOriginalName(); 
+          Storage::disk('paper_img')->putFileAs('', $img, $img_fileName);
+        }
+
+      $paper = Paper::create([
+          'titulo' =>  $request->titulo,
+          'autores' =>  $request->autores,
+          'publisher' =>  $request->publisher,
+          'descripcion' =>  $request->descripcion,
+          'area' =>   $request->area,
+          'doi' =>  $request->doi,
+          'fecha_publicacion' => $request->fecha_publicacion,
+          'pdf_filename' => $pdf_fileName,
+          'img_filename' => $img_fileName,
+      ]);
+
+      Log::info("Paper stored successfully", ['paper' => $paper]);
+
+        return redirect()->route('papers.create')
+          ->with('success', 'Nuevo paper creado exitosamente.');
+      }catch(Exception $e) {
+        Log::error("Error storing paper: " . $e->getMessage());
+
+        return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+    }
 
     }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'titulo' => 'required|max:100',
-            'autores' => 'required|json',
-            'publisher' => 'required|max:50',
-            'descripcion' => 'required',
-            'doi' => 'required|max:100',
-            'fecha_publicacion' => 'required',
-            'pdf_filename' => 'required',
-            'img_filename' => 'required',
+       
+      $request->validate([
+        'titulo' => 'required|max:100',
+        'autores' => 'required|json',
+        'publisher' => 'required|max:50',
+        'descripcion' => 'required',
+        'area' => 'required|max:60',
+        'doi' => 'required|max:100',
+        'fecha_publicacion' => 'required',
+        'pdf_filename' => 'required|file|mimes:pdf|max:10240',
+        'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
 
-          ]);
+      ]);
       $paper = Paper::find($id);
       $paper->update($request->all());
       return redirect()->route('paper-panel')
@@ -87,9 +130,23 @@ class PaperController extends Controller
     public function destroy($id)
     {
       $paper = Paper::find($id);
+
+      if (!$paper) {
+        return redirect()->route('paper-panel')
+            ->with('error', 'Paper no encontrado');
+      }
+
+
+      if ($paper->pdf_filename) {
+        Storage::disk('pdfs')->delete($paper->pdf_filename);
+      }
+
+      if ($paper->img_filename) {
+        Storage::disk('paper_img')->delete($paper->img_filename);
+      }
       $paper->delete();
       return redirect()->route('paper-panel')
-        ->with('success', 'Post deleted successfully');
+        ->with('success', 'Paper borrado exitosamente');
     }
 
     public function adminIndex(Request $request): View
@@ -108,12 +165,32 @@ class PaperController extends Controller
     public function show($id)
     {
       $paper = Paper::find($id);
-      return view('administrador.panel.paper.show', compact('paper'));
+      $paper->formatted_autores = $this->formatAutores($paper->autores);
+      return view('usuario.nosotros.paper', compact('paper'));
     }
+
+    public function formatAutores($autoresJson)
+   {
+      $autores = json_decode($autoresJson, true);
+    
+      if (is_array($autores)) {
+        sort($autores); // ordenar alfabeticamente
+        return implode(', ', $autores); // dar formato separado por coma
+      }
+
+      return ''; 
+    }
+
  
     public function edit($id)
     {
       $paper = Paper::find($id);
+
+      if (!$paper) {
+        return redirect()->route('paper-panel')
+            ->with('error', 'Paper no encontrado');
+      }
+
       return view('administrador.panel.paper.edit', compact('paper'));
     }
 

@@ -260,7 +260,7 @@
         <div class="title">
           
           <!--Solucionar problema con contenedor header -->
-          <h1 class="paper-title">Titulo Paper</h1>
+          <h1 class="paper-title">{{$paper->titulo}}</h1>
           <div class="title-line"></div>
         </div>
       
@@ -268,8 +268,8 @@
     <!--      <div class="container"> -->
            
             <div class="additional-info">
-              <p><strong>Autor publicación: </strong>Informacion adicional</p>
-              <p><strong>Fecha: </strong>   M/D/Y</p>
+              <p><strong>Autor publicación: </strong>{{ $paper->formatted_autores }}</p>
+              <p><strong>Fecha: </strong>  {{$paper->fecha_publicacion}}</p>
             </div>
     <!--      </div>           -->
             <div class="social-links-container">
@@ -315,24 +315,18 @@
       <div class="abstract-container">
         <h3>Abstract:</h3>
         <p class="abstract-text">
-          Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris est
-          parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus netus
-          sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin eleifend
-          hac pharetra. Tempor mus curabitur interdum interdum sociosqu.
-          parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus netus
-          sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin eleifend
-          hac pharetra. Tempor mus curabitur interdum interdum sociosqu.
+          {{$paper->descripcion}}
         </p>
-        <p><strong>Autores:</strong> autor 1, autor 2</p>
-        <p><strong>Área:</strong> tema relacionado</p>
-        <p><strong>Fecha Publicación:</strong> M/D/Y</p>
-        <p><strong>Publisher:</strong> nombre publisher</p>
+        <p><strong>Autores:</strong> {{ $paper->formatted_autores }}</p>
+        <p><strong>Área:</strong> {{ $paper->area }}</p>
+        <p><strong>Fecha Publicación:</strong>{{ $paper->fecha_publicacion}}</p>
+        <p><strong>Publisher:</strong> {{ $paper->publisher }}</p>
         <div class="doi">
-          <p><strong>DOI:</strong> <a href="#">10.1109/INTERCON52678.2021.9532881</a></p>        
+          <p><strong>DOI:</strong> <a href="">{{ $paper->doi }}</a></p>        
         </div>
       </div>
     
-      <iframe class="pdf-frame" src="https://www.unilibrecucuta.edu.co/portal/images/investigacion/pdf/formato_papers.pdf" alt="Main Image" >
+      <iframe class="pdf-frame" src="{{ Storage::disk('pdfs')->url($paper->pdf_filename) }}" alt="Main Image" >
       </iframe>
     
       <div class="cards">
