@@ -44,6 +44,20 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'pdfs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/pdf'),
+            'url' => env('APP_URL').'/storage/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'paper_img' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/paper_img'),
+            'url' => env('APP_URL').'/storage/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',
