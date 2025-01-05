@@ -10,16 +10,18 @@
   flex-direction: column;
   align-items: center;
   background-color: white;
-  padding: 20px;
-  margin-top: 120px
+  padding: 20px; 
+  margin-top: 120px;
+  font-family: "Garamond", "Times New Roman", serif;
 }
 
 
 .header {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  /*align-items: center; */
+  display: block;
+  width: 100%;
+  margin: 20px 0;
+ max-width: 1000px;
+ font-family: "Lato", "Helvetica", sans-serif;
 }
 
 
@@ -27,7 +29,7 @@
   display: flex;
   gap: 10px;
   justify-content: space-between;
-  margin: 15px 10px;
+  margin: 15px;
 
 }
 
@@ -54,12 +56,15 @@
   width: 100%;
   height: 2px;
   background-color: #2078bf;
+  display: flex; 
+  justify-content: center;
 }
 
 .paper-title {
   font-size: 30px;
   color: #2e5382;
   margin: 10px 0;
+  font-family: "Georgia", serif;
 }
 
 .additional-info p {
@@ -70,8 +75,6 @@
 
 .header-image {
   border-radius: 10px;
-  width: 100%;
-  max-width: 920px;
 }
 
 .abstract-container {
@@ -80,24 +83,24 @@
   padding: 20px;
   border-radius: 10px;
   width: 90%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Times New Roman", serif;
   color: #4d4d4d;
   max-width: 1000px;
   background-color: rgb(249, 245, 245, 0.7);
 }
 
 .abstract-container p{
-  margin: 10px 0;
+  margin: 15px 10px 5px 5px;
 }
 
 .abstract-container strong {
-  color: #686868;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: #555;
+  font-family: "Garamond", "Times New Roman", serif;
 }
 
 .abstract-text {
   font-style: italic;
-  font-weight: 300;
+  font-weight: 200;
   margin: 10px 0;
   
 }
@@ -111,12 +114,18 @@
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 12px 24px;
   border: none;
   border-radius: 6px;
   color: white;
   font-size: 18px;
   cursor: pointer;
+  font-family: "Arial", sans-serif;
+  transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+  opacity: 0.9;
 }
 
 .btn-cita {
@@ -134,6 +143,10 @@
   height: 800px;
 }
 
+.header-image{
+  width: 401px;
+  height: 252px;
+}
 .cards {
   display: flex;
   justify-content: space-between;
@@ -156,6 +169,8 @@
   background-color: #f8f8f8;
   border: 1px solid rgb(114, 114, 114,0.7);
   cursor: pointer;
+  font-family: "Lato", "Helvetica", sans-serif;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .card-item.r{
@@ -165,7 +180,7 @@
 .card-item:hover {
 
   background-color: #ebebeb;
-  transform: ease-out all;
+
 }
 
 
@@ -178,7 +193,8 @@
     font-size: 14px;
    }
    .card-item{
-    font-size: 12px;
+    font-size: 8px;
+    padding: 8px;
    }
 
    .pdf-frame{
@@ -197,6 +213,12 @@
     font-size: 14px;
    }
 
+   .cards{
+    gap: 0px;
+    width: 80%;
+   
+   }
+
 
 }
 
@@ -210,7 +232,7 @@
 
 .doi a {
   font-size: 14px;
-  color: black;
+  color: rgb(25, 130, 216);
   text-decoration: underline;
   
 }
@@ -248,6 +270,42 @@
   transition: all 0.5s;
 }
 
+/*  Shape  */
+.ribbon {
+  background-color: #98c560;
+  padding-left: 45px; 
+  height: 45px;
+  line-height: 45px;
+  width: 150px; 
+  margin: 15px 0; 
+  color: #fff;
+  position: relative;
+  left: 0; 
+}
+
+.ribbon:after {
+  content: "";
+  height: 0;
+  width: 0;
+  border-left: 22.5px solid #98c560;
+  border-top: 22.5px dashed transparent;
+  border-bottom: 22.5px dashed transparent;
+  position: absolute;
+  top: 0;
+  left: 100%; 
+}
+
+.ribbon:before {
+  content: "";
+  height: 0;
+  width: 0;
+  border-left: 22.5px solid #fff; /* White triangle */
+  border-top: 22.5px dashed transparent;
+  border-bottom: 22.5px dashed transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
 
 
@@ -258,20 +316,16 @@
 
       <div class="header">
         <div class="title">
-          
-          <!--Solucionar problema con contenedor header -->
           <h1 class="paper-title">{{$paper->titulo}}</h1>
           <div class="title-line"></div>
         </div>
       
         <div class="header-content">
-    <!--      <div class="container"> -->
            
             <div class="additional-info">
               <p><strong>Autor publicación: </strong>{{ $paper->formatted_autores }}</p>
               <p><strong>Fecha: </strong>  {{$paper->fecha_publicacion}}</p>
             </div>
-    <!--      </div>           -->
             <div class="social-links-container">
   
 
@@ -307,26 +361,32 @@
                 </svg>
               </a>        
           </div>
-          </div>
-        
-            <img class="header-image" src="https://via.placeholder.com/913x212" alt="Header Image" />
+         
       </div>
-    
-      <div class="abstract-container">
-        <h3>Abstract:</h3>
+
+    </div>
+        
+    <img class="header-image" src="{{ Storage::url('uploads/paper_img/' . $paper->img_filename) }}" alt="Header Image" />
+ 
+         <!-- CONTENEDOR PAPER INFORMACIÓN --->
+      <div class="abstract-container">     
+      
+      <div class="ribbon"><h3>Abstract:</h3> </div>
         <p class="abstract-text">
           {{$paper->descripcion}}
         </p>
-        <p><strong>Autores:</strong> {{ $paper->formatted_autores }}</p>
-        <p><strong>Área:</strong> {{ $paper->area }}</p>
-        <p><strong>Fecha Publicación:</strong>{{ $paper->fecha_publicacion}}</p>
-        <p><strong>Publisher:</strong> {{ $paper->publisher }}</p>
+        <p><strong>Autores:  </strong> {{ $paper->formatted_autores }}</p>
+        <p><strong>Área:  </strong> {{ $paper->area }}</p>
+        <p><strong>Fecha Publicación: </strong>{{ $paper->fecha_publicacion}}</p>
+        <p><strong>Publisher:  </strong> {{ $paper->publisher }}</p>
         <div class="doi">
-          <p><strong>DOI:</strong> <a href="">{{ $paper->doi }}</a></p>        
+          <p><strong>DOI:  </strong> <a href="">{{ $paper->doi }}</a></p>        
         </div>
       </div>
+
     
-      <iframe class="pdf-frame" src="{{ Storage::disk('pdfs')->url($paper->pdf_filename) }}" alt="Main Image" >
+      <!-- PDF FRAME --->
+      <iframe class="pdf-frame" src="{{ Storage::url('uploads/pdf/' . $paper->pdf_filename) }}" alt="PDF" >
       </iframe>
     
       <div class="cards">
@@ -340,7 +400,8 @@
         </div>
       </div>
     
-     
     </div>
+     
+    
 
     @endsection

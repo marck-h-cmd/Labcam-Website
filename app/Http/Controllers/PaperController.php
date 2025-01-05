@@ -149,6 +149,14 @@ class PaperController extends Controller
         ->with('success', 'Paper borrado exitosamente');
     }
 
+    public function findByArea($area){
+
+      $papers = Paper::all()->where('area', $area);
+
+      return view('usuario.nosotros.biblioteca', compact('papers'));
+
+    }
+
     public function adminIndex(Request $request): View
     {
         $papers = Paper::paginate();
