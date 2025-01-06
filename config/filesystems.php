@@ -44,6 +44,27 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'pdfs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/pdf'),
+            'url' => env('APP_URL').'/storage/uploads/pdf',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'paper_img' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/paper_img'),
+            'url' => env('APP_URL').'/storage/uploads/paper_img',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+        'imgs' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads/imgs'),
+            'url' => env('APP_URL').'/storage/uploads/imgs',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
 
         's3' => [
             'driver' => 's3',

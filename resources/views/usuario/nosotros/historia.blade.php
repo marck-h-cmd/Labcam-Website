@@ -211,13 +211,7 @@ slider
     min-height: 325px;
    }
 
-   /*
-   .social-links-container{
-    justify-content: right;
-    align-items: flex-end;
-    justify-items: right;
-   }
-    */
+
 }
 
 
@@ -260,34 +254,23 @@ slider
       <div class="separator"></div>
     </div>
 
+    @if(!$sliders ->isEmpty())
+
     <div class="image-section">
         <div class="slider">
 
-            <input type="radio" name="nav" value="1">
-            <input type="radio" name="nav" value="2">
-            <input type="radio" name="nav" value="3">
-            <input type="radio" name="nav" value="4">
-    
-              <div class="slider-item">
-                  <img src="/user/template/images/carrusel/carrusel_03.jpg" alt="Sport" />
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore a neque perspiciatis facere labore consequuntur.</p>
-              </div>
-              <div class="slider-item">
-                  <img src="https://placehold.co/650x250/000000/FFFFFF/png" alt="Sport" />
-                  <p>Cum, delectus, possimus facilis impedit blanditiis ullam distinctio. Hic, provident, magnam fuga non modi eos!</p>
-              </div>
-              <div class="slider-item">
-                  <img src="https://placehold.co/650x250" alt="Sport" />
-                  <p>A, asperiores facere laudantium voluptates eveniet eligendi non reprehenderit quae eum dolores sequi iste laborum.</p>
-              </div>
-              <div class="slider-item">
-                  <img src="https://placehold.co/650x250/000000/FFFFFF/png" alt="Sport" />
-                  <p>Ducimus, alias, aspernatur voluptatum facilis velit porro nesciunt error eos dicta doloribus perspiciatis odio itaque?</p>
-              </div>
+            @foreach($sliders as $slider)
+            <input type="radio" name="nav" value="{{$slider->id}}">
+            <div class="slider-item">
+                <img src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}" alt="imagegen {{$slider->id}}" />
+                <p>{{$slider->descripcion}}</p>
+            </div>
+            @endforeach
     
         </div>
       <div class="explore-button">Explorar más</div>
     </div>
+    @endif
   </div>
   
 
