@@ -50,7 +50,7 @@
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->titulo }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->area }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 overflow-hidden max-w-96">{{ $paper->descripcion }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->autores }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->formatted_autores }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->publisher }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->doi }}</td>                                                                  
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $paper->fecha_publicacion }}</td>

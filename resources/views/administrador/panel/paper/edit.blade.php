@@ -75,7 +75,10 @@
             <div class="my-6">
             <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Imagen Paper</label>
             <input value="{{ $paper->img_filename}}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="file_input" type="file" name="img_filename"  accept="image/jpeg,image/png">
-            <div id="img-container" class="mt-2"></div>
+            <div id="img-container" class="mt-2">
+              <label  class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="img_display" >Archivo Seleccionado: {{$paper->img_filename}} </label>
+
+            </div>
             </div>
     
     
@@ -94,13 +97,15 @@
                     <input id="dropzone-file" value="{{ $paper->pdf_filename}}"  name="pdf_filename" type="file"  class="hidden" accept=".pdf" />
                 </label>
             </div>
-            <div id="info-container" class="mt-2"></div>
+            <div id="info-container" class="mt-2">
+              <label  class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="pdf_display" >Archivo Seleccionado: {{$paper->pdf_filename}} </label>
+            </div>
         </div>
         
         </div>
     
     <div class="flex justify-center gap-2">
-        <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Guardar Edicion</button>
+        <button type="submit" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Guardar Edicion</button>
 
         <a href="{{ route('papers.edit', $paper->id) }}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">Cancelar</a>
 
@@ -205,21 +210,19 @@
 
   pdfInput.addEventListener('change', (event) => {
  
-    fileDisplay(event,pdfContainer);
+    fileDisplay(event, document.getElementById('img_display'));
   });
 
-  function fileDisplay(event, container){
+  function fileDisplay(event, element{
     const file = event.target.files[0];
     if (file) {
-    //   if (file.type === ".pdf") {
-    container.innerHTML = `
-      <label  class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="file_display" >Archivo Seleccionado: ${file.name} </label>`;
+    element.textContent = file.name ;
         }
    }
 
 imgInput.addEventListener('change', (event) => {
  
-    fileDisplay(event,imgContainer);
+    fileDisplay(event,document.getElementById('pdf_display'));
 });
 
 
