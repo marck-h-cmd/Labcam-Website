@@ -28,7 +28,7 @@ class HistoriaSliderController extends Controller
     {
 
         try {
-
+           // validar campos
             $request->validate([
                 'descripcion' => 'required',
                 'historia_img' => 'required|file|mimes:jpeg,png,jpg|max:5120',
@@ -36,7 +36,7 @@ class HistoriaSliderController extends Controller
 
 
             $img_name = null;
-
+              // Guardar la imagen historia con un string aleatorio para almacenarlo en storage/uploads/imgs
             if ($request->hasFile('historia_img')) {
                 $img = $request->file('historia_img');
                 $img_name = Str::uuid() . '.' . $img->getClientOriginalName();
@@ -48,6 +48,7 @@ class HistoriaSliderController extends Controller
                 'historia_img' => $img_name,
             ]);
 
+            // Logs de comprobación que se guarde correctamente
             Log::info("Stored successfully", ['slider' => $slider]);
 
             return redirect()->route('h-slider.create')
@@ -60,6 +61,7 @@ class HistoriaSliderController extends Controller
 
     }
 
+    // Funciones para las views del blade
     public function create()
     {
         return view('administrador.panel.historia-slider.create-slider');
