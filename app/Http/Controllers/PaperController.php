@@ -19,12 +19,14 @@ class PaperController extends Controller
 
         $papers= Paper::take($amount)->get();
 
+        // Dar formato a cada atributo de autores del paper para la view
         $papers->each(function($paper) {
           $paper->formatted_autores = $this->formatAutores($paper->autores);
         });
 
         $totalPapers = Paper::count();
 
+        // Conteo de papers restantes
         $displayCount = $totalPapers -  $amount;
 
         return view('usuario.nosotros.biblioteca', compact('papers','displayCount'));
@@ -58,14 +60,14 @@ class PaperController extends Controller
     {
 
       try{
-
+         // validar campos
         $request->validate([
-          'titulo' => 'required|max:100',
           'autores' => 'required|json',
-          'publisher' => 'required|max:50',
+          'titulo' => 'required|string|max:100',
+          'publisher' => 'required|string|max:50',
           'descripcion' => 'required',
-          'area' => 'required|max:60',
-          'doi' => 'required|max:100',
+          'area' => 'required|string|max:60',
+          'doi' => 'required|string|max:100',
           'fecha_publicacion' => 'required',
           'pdf_filename' => 'required|file|mimes:pdf|max:10240',
           'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
@@ -75,12 +77,14 @@ class PaperController extends Controller
         $pdf_fileName = null;
         $img_fileName = null;
 
+        // Guardar el pdf con un string aleatorio para almacenarlo en storage/uploads/pdfs
         if ($request->hasFile('pdf_filename')) {
           $pdf = $request->file('pdf_filename');
           $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalName(); 
           Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
         }
   
+          // Guardar la imagen paper con un string aleatorio para almacenarlo en storage/uploads/img_paper
         if ($request->hasFile('img_filename')) {
           $img = $request->file('img_filename');
           $img_fileName = Str::uuid() . '.' . $img->getClientOriginalName(); 
@@ -114,6 +118,7 @@ class PaperController extends Controller
     public function update(Request $request, $id)
     {
       try{
+         // validar campos
       $request->validate([
         'titulo' => 'required|max:100',
         'autores' => 'required|json',
@@ -174,11 +179,12 @@ class PaperController extends Controller
             ->with('error', 'Paper no encontrado');
       }
 
-
+      // Borrar el pdf en la ruta storage/uploads/pdfs
       if ($paper->pdf_filename) {
         Storage::disk('pdfs')->delete($paper->pdf_filename);
       }
 
+       // Borrar la imagen en la ruta storage/uploads/paper_img
       if ($paper->img_filename) {
         Storage::disk('paper_img')->delete($paper->img_filename);
       }
@@ -195,6 +201,7 @@ class PaperController extends Controller
 
     }
 
+     // Función para mostrar papers en el panel
     public function adminIndex(Request $request): View
     {
         $papers = Paper::paginate();
