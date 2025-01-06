@@ -3,6 +3,21 @@
 
 @section('contenido')
 
+<!-- Pop-up para mensaje enviado -->
+@if(session('success'))
+<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 text-center">
+        <h3 class="text-lg font-bold mb-4">{{ session('success') }}</h3>
+        <button onclick="closePopup()" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Aceptar</button>
+    </div>
+</div>
+<script>
+    function closePopup() {
+        document.getElementById('popup').remove();
+    }
+</script>
+@endif
+
 <!-- Imagen de fondo ocupando el ancho completo -->
 <div class="w-full bg-cover bg-center" style="background-image: url('{{ asset('images/imagen.png') }}'); height: 300px;">
     <div class="flex flex-col items-center justify-center h-full bg-black bg-opacity-50">
@@ -15,20 +30,20 @@
     <div class="grid grid-cols-2 gap-6">
         <!-- Formulario -->
         <div>
-            <form action="{{ route('contacto') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <form action="{{ route('contacto.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 <div class="grid grid-cols-3 gap-4">
-                    <input type="text" name="nombres" placeholder="Nombres *" required class="w-full p-2 border border-gray-300 rounded">
-                    <input type="text" name="apellidos" placeholder="Apellidos *" required class="w-full p-2 border border-gray-300 rounded">
-                    <input type="email" name="correo" placeholder="Correo electrónico *" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="nombres" placeholder="Nombres *" value="{{ old('nombres') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="apellidos" placeholder="Apellidos *" value="{{ old('apellidos') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="email" name="correo" placeholder="Correo electrónico *" value="{{ old('correo') }}" required class="w-full p-2 border border-gray-300 rounded">
                 </div>
                 <div class="grid grid-cols-3 gap-4">
-                    <input type="tel" name="telefono" placeholder="Teléfono *" required class="w-full p-2 border border-gray-300 rounded">
-                    <input type="text" name="pais" placeholder="País *" required class="w-full p-2 border border-gray-300 rounded">
-                    <input type="text" name="departamento" placeholder="Departamento *" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="tel" name="telefono" placeholder="Teléfono *" value="{{ old('telefono') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="pais" placeholder="País *" value="{{ old('pais') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="departamento" placeholder="Departamento *" value="{{ old('departamento') }}" required class="w-full p-2 border border-gray-300 rounded">
                 </div>
-                <input type="text" name="asunto" placeholder="Asunto *" required class="w-full p-2 border border-gray-300 rounded">
-                <textarea name="mensaje" placeholder="Mensaje *" required class="w-full p-2 border border-gray-300 rounded" rows="4"></textarea>
+                <input type="text" name="asunto" placeholder="Asunto *" value="{{ old('asunto') }}" required class="w-full p-2 border border-gray-300 rounded">
+                <textarea name="mensaje" placeholder="Mensaje *" required class="w-full p-2 border border-gray-300 rounded" rows="4">{{ old('mensaje') }}</textarea>
                 <div>
                     <label class="block text-gray-500 font-bold">
                         Archivo adjunto
@@ -37,6 +52,7 @@
                     </label>
                 </div>
                 <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">ENVIAR</button>
+                <button type="button" class="bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600" onclick="location.reload();">CANCELAR</button>
             </form>
         </div>
 

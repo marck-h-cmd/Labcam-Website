@@ -36,6 +36,7 @@ Route::get('/nosotros/paper', function () {
 use App\Http\Controllers\ContactoController;
 
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
 use App\Http\Controllers\AuthController;
 
@@ -51,6 +52,15 @@ Route::get('/noticias', function () {
 Route::get('/proyectos', function () {
     return view('usuario.Investigacion.proyectos');
 })->name('proyectos');
+
+use App\Http\Controllers\ProyectoController;
+Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos');
+Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
+
+Route::get('/detalle-proyectos', function () {
+    return view('usuario.Investigacion.detalle-proyectos');
+})->name('detalle-proyectos');
+
 
 Route::get('/eventos', function () {
     return view('usuario.Investigacion.eventos');

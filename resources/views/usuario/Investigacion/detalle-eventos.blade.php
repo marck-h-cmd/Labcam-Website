@@ -7,8 +7,14 @@
         <!-- Encabezado -->
         <div class="flex items-center mb-8">
             <!-- Fecha -->
-            <div class="bg-gray-800 text-white text-sm px-4 py-2 rounded-none mr-8 mt-9">
-              dd/mm/yy
+            <div class="text-center">
+                <div class="bg-gray-800 text-white text-sm px-4 py-2 rounded-none mr-8 mt-20">
+                    dd/mm/yy
+                </div>
+                <div class="bg-gray-600 text-white text-sm px-4 py-2 rounded-none mr-8 mt-1">
+                    Categoría:
+                    <span class="text-green-500">Futuro</span>
+                </div>
             </div>
 
             <!-- Titulo y Subtitulo -->
