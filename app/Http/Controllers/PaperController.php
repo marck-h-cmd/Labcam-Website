@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Paper;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +18,10 @@ class PaperController extends Controller
         $amount = $request->query('count', 3);
 
         $papers= Paper::take($amount)->get();
+
+        $papers->each(function($paper) {
+          $paper->formatted_autores = $this->formatAutores($paper->autores);
+        });
 
         $totalPapers = Paper::count();
 
@@ -37,6 +39,9 @@ class PaperController extends Controller
  
          // recibir 3 papers más
          $papers = Paper::skip($offset)->take($limit)->get();
+         $papers->each(function($paper) {
+          $paper->formatted_autores = $this->formatAutores($paper->autores);
+        });
 
          $totalPapers = Paper::count();
  
@@ -108,7 +113,7 @@ class PaperController extends Controller
 
     public function update(Request $request, $id)
     {
-       
+      try{
       $request->validate([
         'titulo' => 'required|max:100',
         'autores' => 'required|json',
@@ -122,9 +127,42 @@ class PaperController extends Controller
 
       ]);
       $paper = Paper::find($id);
-      $paper->update($request->all());
+
+      $pdf_fileName = $paper->pdf_filename;
+      $img_fileName = $paper->img_filename;
+
+      if ($paper->pdf_filename!=$pdf_fileName) {
+        Storage::disk('pdfs')->delete( $pdf_fileName);
+        $pdf = $request->file('pdf_filename');
+        $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalName(); 
+        Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
+      }
+
+      if ($paper->img_filenamepdf_filename!=$img_fileName) {
+        Storage::disk('paper_img')->delete($img_fileName);
+        $img = $request->file('img_filename');
+        $img_fileName = Str::uuid() . '.' . $img->getClientOriginalName(); 
+        Storage::disk('paper_img')->putFileAs('', $img, $img_fileName);
+      }
+
+      $paper->update([
+        'titulo' =>  $request->titulo,
+        'autores' =>  $request->autores,
+        'publisher' =>  $request->publisher,
+        'descripcion' =>  $request->descripcion,
+        'area' =>   $request->area,
+        'doi' =>  $request->doi,
+        'fecha_publicacion' => $request->fecha_publicacion,
+        'pdf_filename' => $pdf_fileName,
+        'img_filename' => $img_fileName,
+    ]);
       return redirect()->route('paper-panel')
         ->with('success', 'Paper actualizado exitosamente.');
+      }catch(Exception $e) {
+        Log::error("Error updating paper: " . $e->getMessage());
+
+        return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+    }
     }
 
     public function destroy($id)
@@ -160,6 +198,9 @@ class PaperController extends Controller
     public function adminIndex(Request $request): View
     {
         $papers = Paper::paginate();
+        $papers->each(function($paper) {
+          $paper->formatted_autores = $this->formatAutores($paper->autores);
+        });
 
         return view('administrador.panel.paper-panel', compact('papers'))
             ->with('i', ($request->input('page', 1) - 1) * $papers->perPage());
