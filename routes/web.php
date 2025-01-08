@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,9 +28,7 @@ Route::get('/nosotros/biblioteca',[PaperController::class, 'index'])->name('bibl
 Route::get('/nosotros/biblioteca/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('biblioteca.fetchMore');
 
 
-Route::get('/nosotros/historia', function () {
-    return view('usuario.nosotros.historia');
-})->name('historia');
+Route::get('/nosotros/historia', HistoriaSliderController::class . '@index')->name('historia');
 
 Route::get('/nosotros/paper', function () {
     return view('usuario.nosotros.paper');
@@ -38,6 +37,7 @@ Route::get('/nosotros/paper', function () {
 use App\Http\Controllers\ContactoController;
 
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
+Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
 use App\Http\Controllers\AuthController;
 
@@ -53,6 +53,15 @@ Route::get('/noticias', function () {
 Route::get('/proyectos', function () {
     return view('usuario.Investigacion.proyectos');
 })->name('proyectos');
+
+use App\Http\Controllers\ProyectoController;
+Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos');
+Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
+
+Route::get('/detalle-proyectos', function () {
+    return view('usuario.Investigacion.detalle-proyectos');
+})->name('detalle-proyectos');
+
 
 Route::get('/eventos', function () {
     return view('usuario.Investigacion.eventos');
@@ -81,6 +90,7 @@ Route::get('/admin/topProyectos', function () {
     return view('administrador.homeProyectos');
 })->name('admin-homeProyectos');
 
+// ------------------------- CRUD PAPERS ---------------------------------------------
 Route::get('/admin/papers', PaperController::class .'@adminIndex')->name('paper-panel');
 
 Route::get('/admin/papers/create', PaperController::class . '@create')->name('papers.create');
@@ -94,3 +104,10 @@ Route::get('/admin/papers/{paper}/edit', PaperController::class .'@edit')->name(
 Route::put('/admin/papers/{paper}', PaperController::class .'@update')->name('papers.update');
 
 Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name('papers.destroy');
+
+// ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
+
+
+Route::get('/admin/h-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
+
+Route::post('/admin/h-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');

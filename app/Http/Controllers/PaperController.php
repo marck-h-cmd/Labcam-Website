@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Paper;
-use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
@@ -14,101 +12,113 @@ use Exception;
 
 class PaperController extends Controller
 {
-    public function index(Request $request)
-    {
-        // inicializar 3 o menos papers
-        $amount = $request->query('count', 3);
+  public function index(Request $request)
+  {
+    // inicializar 3 o menos papers
+    $amount = $request->query('count', 3);
 
-        $papers= Paper::take($amount)->get();
+    $papers = Paper::take($amount)->get();
 
-        $totalPapers = Paper::count();
+    // Dar formato a cada atributo de autores del paper para la view
+    $papers->each(function ($paper) {
+      $paper->formatted_autores = $this->formatAutores($paper->autores);
+    });
 
-        $displayCount = $totalPapers -  $amount;
+    $totalPapers = Paper::count();
 
-        return view('usuario.nosotros.biblioteca', compact('papers','displayCount'));
-    }
+    // Conteo de papers restantes
+    $displayCount = $totalPapers - $amount;
 
-    public function fetchMorePapers(Request $request)
-    {
-        // data inicial
-         $offset = $request->input('offset', 0);
-         $limit = $request->input('limit', 3);
+    return view('usuario.nosotros.biblioteca', compact('papers', 'displayCount'));
+  }
 
- 
-         // recibir 3 papers más
-         $papers = Paper::skip($offset)->take($limit)->get();
+  public function fetchMorePapers(Request $request)
+  {
+    // data inicial
+    $offset = $request->input('offset', 0);
+    $limit = $request->input('limit', 3);
 
-         $totalPapers = Paper::count();
- 
-         // retornar la información en json
-         return response()->json([
-            'papers' => $papers,
-            'total' => $totalPapers,
-            'remaining' => max(0, $totalPapers - ($offset + $limit)),
-         ]);
 
-    }
+    // recibir 3 papers más
+    $papers = Paper::skip($offset)->take($limit)->get();
+    $papers->each(function ($paper) {
+      $paper->formatted_autores = $this->formatAutores($paper->autores);
+    });
 
-    public function storePaper(Request $request)
-    {
+    $totalPapers = Paper::count();
 
-      try{
+    // retornar la información en json
+    return response()->json([
+      'papers' => $papers,
+      'total' => $totalPapers,
+      'remaining' => max(0, $totalPapers - ($offset + $limit)),
+    ]);
 
-        $request->validate([
-          'titulo' => 'required|max:100',
-          'autores' => 'required|json',
-          'publisher' => 'required|max:50',
-          'descripcion' => 'required',
-          'area' => 'required|max:60',
-          'doi' => 'required|max:100',
-          'fecha_publicacion' => 'required',
-          'pdf_filename' => 'required|file|mimes:pdf|max:10240',
-          'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
+  }
 
-        ]);
+  public function storePaper(Request $request)
+  {
 
-        $pdf_fileName = null;
-        $img_fileName = null;
+    try {
+      // validar campos
+      $request->validate([
+        'autores' => 'required|json',
+        'titulo' => 'required|string|max:100',
+        'publisher' => 'required|string|max:50',
+        'descripcion' => 'required',
+        'area' => 'required|string|max:60',
+        'doi' => 'required|string|max:100',
+        'fecha_publicacion' => 'required',
+        'pdf_filename' => 'required|file|mimes:pdf|max:10240',
+        'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
 
-        if ($request->hasFile('pdf_filename')) {
-          $pdf = $request->file('pdf_filename');
-          $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalName(); 
-          Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
-        }
-  
-        if ($request->hasFile('img_filename')) {
-          $img = $request->file('img_filename');
-          $img_fileName = Str::uuid() . '.' . $img->getClientOriginalName(); 
-          Storage::disk('paper_img')->putFileAs('', $img, $img_fileName);
-        }
+      ]);
+
+      $pdf_fileName = null;
+      $img_fileName = null;
+
+      // Guardar el pdf con un string aleatorio para almacenarlo en storage/uploads/pdfs
+      if ($request->hasFile('pdf_filename')) {
+        $pdf = $request->file('pdf_filename');
+        $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalName();
+        Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
+      }
+
+      // Guardar la imagen paper con un string aleatorio para almacenarlo en storage/uploads/img_paper
+      if ($request->hasFile('img_filename')) {
+        $img = $request->file('img_filename');
+        $img_fileName = Str::uuid() . '.' . $img->getClientOriginalName();
+        Storage::disk('paper_img')->putFileAs('', $img, $img_fileName);
+      }
 
       $paper = Paper::create([
-          'titulo' =>  $request->titulo,
-          'autores' =>  $request->autores,
-          'publisher' =>  $request->publisher,
-          'descripcion' =>  $request->descripcion,
-          'area' =>   $request->area,
-          'doi' =>  $request->doi,
-          'fecha_publicacion' => $request->fecha_publicacion,
-          'pdf_filename' => $pdf_fileName,
-          'img_filename' => $img_fileName,
+        'titulo' => $request->titulo,
+        'autores' => $request->autores,
+        'publisher' => $request->publisher,
+        'descripcion' => $request->descripcion,
+        'area' => $request->area,
+        'doi' => $request->doi,
+        'fecha_publicacion' => $request->fecha_publicacion,
+        'pdf_filename' => $pdf_fileName,
+        'img_filename' => $img_fileName,
       ]);
 
       Log::info("Paper stored successfully", ['paper' => $paper]);
 
-        return redirect()->route('papers.create')
-          ->with('success', 'Nuevo paper creado exitosamente.');
-      }catch(Exception $e) {
-        Log::error("Error storing paper: " . $e->getMessage());
+      return redirect()->route('papers.create')
+        ->with('success', 'Nuevo paper creado exitosamente.');
+    } catch (Exception $e) {
+      Log::error("Error storing paper: " . $e->getMessage());
 
-        return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+      return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
 
-    }
+  }
 
-    public function update(Request $request, $id)
-    {
-       
+  public function update(Request $request, $id)
+  {
+    try {
+      // validar campos
       $request->validate([
         'titulo' => 'required|max:100',
         'autores' => 'required|json',
@@ -117,90 +127,140 @@ class PaperController extends Controller
         'area' => 'required|max:60',
         'doi' => 'required|max:100',
         'fecha_publicacion' => 'required',
-        'pdf_filename' => 'required|file|mimes:pdf|max:10240',
-        'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
+        'pdf_filename' => 'file|mimes:pdf|max:10240',
+        'img_filename' => 'file|mimes:jpeg,png,jpg|max:5120',
 
       ]);
       $paper = Paper::find($id);
-      $paper->update($request->all());
+
+      $pdf_fileName = $paper->pdf_filename;
+      $img_fileName = $paper->img_filename;
+
+      if ($request->hasFile('pdf_filename')) {
+        // Borrar antiguo PDF si existe
+        if ($paper->pdf_filename && Storage::disk('pdfs')->exists($pdf_fileName)) {
+          Storage::disk('pdfs')->delete($pdf_fileName);
+        }
+
+        // Remplazar por nuevo pdf
+        $pdf = $request->file('pdf_filename');
+        $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalExtension();
+        Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
+      }
+
+
+      if ($request->hasFile('img_filename')) {
+        // Borrar antigua imagen si existe
+        if ($paper->img_filename && Storage::disk('paper_img')->exists($img_fileName)) {
+          Storage::disk('paper_img')->delete($img_fileName);
+        }
+
+        // Remplazar por nueva imagen
+        $img = $request->file('img_filename');
+        $img_fileName = Str::uuid() . '.' . $img->getClientOriginalExtension();
+        Storage::disk('paper_img')->putFileAs('', $img, $img_fileName);
+      }
+
+      $paper->update([
+        'titulo' => $request->titulo,
+        'autores' => $request->autores,
+        'publisher' => $request->publisher,
+        'descripcion' => $request->descripcion,
+        'area' => $request->area,
+        'doi' => $request->doi,
+        'fecha_publicacion' => $request->fecha_publicacion,
+        'pdf_filename' => $pdf_fileName,
+        'img_filename' => $img_fileName,
+      ]);
       return redirect()->route('paper-panel')
-        ->with('success', 'Paper actualizado exitosamente.');
+        ->with('Success', 'Paper actualizado exitosamente.');
+    } catch (Exception $e) {
+      Log::error("Error updating paper: " . $e->getMessage());
+
+      return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
+  }
 
-    public function destroy($id)
-    {
-      $paper = Paper::find($id);
+  public function destroy($id)
+  {
+    $paper = Paper::find($id);
 
-      if (!$paper) {
-        return redirect()->route('paper-panel')
-            ->with('error', 'Paper no encontrado');
-      }
-
-
-      if ($paper->pdf_filename) {
-        Storage::disk('pdfs')->delete($paper->pdf_filename);
-      }
-
-      if ($paper->img_filename) {
-        Storage::disk('paper_img')->delete($paper->img_filename);
-      }
-      $paper->delete();
+    if (!$paper) {
       return redirect()->route('paper-panel')
-        ->with('success', 'Paper borrado exitosamente');
+        ->with('error', 'Paper no encontrado');
     }
 
-    public function findByArea($area){
-
-      $papers = Paper::all()->where('area', $area);
-
-      return view('usuario.nosotros.biblioteca', compact('papers'));
-
+    // Borrar el pdf en la ruta storage/uploads/pdfs
+    if ($paper->pdf_filename) {
+      Storage::disk('pdfs')->delete($paper->pdf_filename);
     }
 
-    public function adminIndex(Request $request): View
-    {
-        $papers = Paper::paginate();
-
-        return view('administrador.panel.paper-panel', compact('papers'))
-            ->with('i', ($request->input('page', 1) - 1) * $papers->perPage());
+    // Borrar la imagen en la ruta storage/uploads/paper_img
+    if ($paper->img_filename) {
+      Storage::disk('paper_img')->delete($paper->img_filename);
     }
+    $paper->delete();
+    return redirect()->route('paper-panel')
+      ->with('success', 'Paper eliminado exitosamente');
+  }
 
-    public function create()
-    {
-      return view('administrador.panel.paper.create');
-    }
-   
-    public function show($id)
-    {
-      $paper = Paper::find($id);
+  public function findByArea($area)
+  {
+
+    $papers = Paper::all()->where('area', $area);
+
+    return view('usuario.nosotros.biblioteca', compact('papers'));
+
+  }
+
+  // Función para mostrar papers en el panel
+  public function adminIndex(Request $request): View
+  {
+    $papers = Paper::paginate();
+    $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
-      return view('usuario.nosotros.paper', compact('paper'));
+    });
+
+    return view('administrador.panel.paper-panel', compact('papers'))
+      ->with('i', ($request->input('page', 1) - 1) * $papers->perPage());
+  }
+
+  public function create()
+  {
+    return view('administrador.panel.paper.create');
+  }
+
+  public function show($id)
+  {
+    $paper = Paper::find($id);
+    $paper->formatted_autores = $this->formatAutores($paper->autores);
+    return view('usuario.nosotros.paper', compact('paper'));
+  }
+
+  public function formatAutores($autoresJson)
+  {
+    $autores = json_decode($autoresJson, true);
+
+    if (is_array($autores)) {
+      sort($autores); // ordenar alfabeticamente
+      return implode(', ', $autores); // dar formato separado por coma
     }
 
-    public function formatAutores($autoresJson)
-   {
-      $autores = json_decode($autoresJson, true);
-    
-      if (is_array($autores)) {
-        sort($autores); // ordenar alfabeticamente
-        return implode(', ', $autores); // dar formato separado por coma
-      }
+    return '';
+  }
 
-      return ''; 
+
+  public function edit($id)
+  {
+    $paper = Paper::find($id);
+
+    if (!$paper) {
+      return redirect()->route('paper-panel')
+        ->with('error', 'Paper no encontrado');
     }
 
- 
-    public function edit($id)
-    {
-      $paper = Paper::find($id);
-
-      if (!$paper) {
-        return redirect()->route('paper-panel')
-            ->with('error', 'Paper no encontrado');
-      }
-
-      return view('administrador.panel.paper.edit', compact('paper'));
-    }
+    return view('administrador.panel.paper.edit', compact('paper'));
+  }
 
 
 

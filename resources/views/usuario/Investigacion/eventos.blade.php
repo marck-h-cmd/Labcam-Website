@@ -4,8 +4,32 @@
 
 <section class="pt-16 pb-2">
     <div class="text-center">
-        <h2 class="text-blue-800 font-semibold text-5xl mt-20">Eventos</h2>
-        <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        <h2 class="text-blue-800 font-semibold text-5xl mt-20">Próximos Eventos</h2>
+        <div class="w-[500px] h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+    </div>
+
+    <!-- Mes, Año y Navegación -->
+    <div class="flex items-center justify-center mt-6">
+    <button class="text-gray-500 hover:text-gray-800 transition mr-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+    </button>
+    <span class="text-lg font-semibold text-gray-700">Enero, 2025</span>
+    <button class="text-gray-500 hover:text-gray-800 transition ml-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+    </button>
+</div>
+
+
+
+    <!-- Categorías -->
+    <div class="flex justify-center mt-4 space-x-4">
+        <button class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition">Todo</button>
+        <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">Pasados</button>
+        <button class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition">Futuros</button>
     </div>
 
     <div class="bb ye ki xn vq jb jo">
@@ -35,6 +59,7 @@
                         <h4 class="ek tj ml il kk wm xl eq lb">
                             <a href="blog-single.html">Free advertising for your online business</a>
                         </h4>
+                        <p class="text-sm text-gray-600 mt-1">Categoría: <span class="text-green-500 font-medium">Futuro</span></p>
                     </div>
                 </div>
 
@@ -63,6 +88,7 @@
                         <h4 class="ek tj ml il kk wm xl eq lb">
                             <a href="blog-single.html">9 simple ways to improve your design skills</a>
                         </h4>
+                        <p class="text-sm text-gray-600 mt-1">Categoría: <span class="text-red-500 font-medium">Pasado</span></p>
                     </div>
                 </div>
 
@@ -92,6 +118,7 @@
                         <h4 class="ek tj ml il kk wm xl eq lb">
                             <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
                         </h4>
+                        <p class="text-sm text-gray-600 mt-1">Categoría: <span class="text-red-500 font-medium">Pasado</span></p>
                     </div>
                 </div>
 
@@ -119,6 +146,7 @@
                         <h4 class="ek tj ml il kk wm xl eq lb">
                             <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
                         </h4>
+                        <p class="text-sm text-gray-600 mt-1">Categoría: <span class="text-red-500 font-medium">Pasado</span></p>
                     </div>
                 </div>
 
@@ -147,6 +175,7 @@
                         <h4 class="ek tj ml il kk wm xl eq lb">
                             <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
                         </h4>
+                        <p class="text-sm text-gray-600 mt-1">Categoría: <span class="text-green-500 font-medium">Futuro</span></p>
                     </div>
                 </div>
 
@@ -174,6 +203,7 @@
                         <h4 class="ek tj ml il kk wm xl eq lb">
                             <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
                         </h4>
+                        <p class="text-sm text-gray-600 mt-1">Categoría: <span class="text-green-500 font-medium">Futuro</span></p>
                     </div>
                 </div>
         </div>
