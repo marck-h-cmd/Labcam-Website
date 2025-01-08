@@ -74,7 +74,7 @@
             id="descripcion" name="descripcion" rows="5" placeholder="Message">{{ $paper->descripcion }}</textarea>
             <div class="my-6">
             <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Imagen Paper</label>
-            <input value="{{ $paper->img_filename}}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="file_input" type="file" name="img_filename"  accept="image/jpeg,image/png">
+            <input value="{{ $paper->img_filename}}" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="file_input" type="file" name="img_filename"  accept="image/jpeg,image/png,image/jpg">
             <div id="img-container" class="mt-2">
               <label  class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="img_display" >Archivo Seleccionado: {{$paper->img_filename}} </label>
 
@@ -94,7 +94,7 @@
                         <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500">PDF (MAX. 800x400px)</p>
                     </div>
-                    <input id="dropzone-file" value="{{ $paper->pdf_filename}}"  name="pdf_filename" type="file"  class="hidden" accept=".pdf" />
+                    <input id="dropzone-file" value="{{ $paper->pdf_filename}}"  name="pdf_filename" type="file"  class="hidden" accept="application/pdf" />
                 </label>
             </div>
             <div id="info-container" class="mt-2">
@@ -117,7 +117,7 @@
  
   </div>
 
-  @if (session('success'))
+  @if (session('Success'))
     <script>
         Swal.fire({
             icon: 'success',
