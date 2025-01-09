@@ -11,5 +11,6 @@ class TopProyecto extends Model
 
     protected $table = 'top_proyectos'; // Nombre de la tabla
     protected $primaryKey = 'id'; // Clave primaria
+    public $timestamps = false;
     protected $fillable = ['img1', 'img2', 'descripcion'];
 }
