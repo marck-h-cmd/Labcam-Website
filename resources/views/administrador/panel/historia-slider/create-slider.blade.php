@@ -95,3 +95,40 @@
     @endif
 
 @endsection
+
+@section('script')
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+    const imgContainer = document.getElementById("info-container")
+    const imgInput = document.getElementById("dropzone-file")
+ 
+
+  
+
+    imgInput.addEventListener('change', (event) => {
+ 
+    fileDisplay(event,imgContainer);
+  });
+
+  function fileDisplay(event, container){
+    const file = event.target.files[0];
+    if (file) {
+    //   if (file.type === ".pdf") {
+    container.innerHTML = `
+      <label  class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="file_display" >Archivo Seleccionado: ${file.name} </label>`;
+        }
+   }
+
+
+
+  form.addEventListener("submit", (event) => {
+    
+    const authorsArray = Array.from(addedAuthors);
+    autoresJsonInput.value = JSON.stringify(authorsArray);
+  });
+});
+
+</script>
+
+@endsection
