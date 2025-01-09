@@ -173,7 +173,7 @@ class PaperController extends Controller
         'img_filename' => $img_fileName,
       ]);
       return redirect()->route('paper-panel')
-        ->with('Success', 'Paper actualizado exitosamente.');
+        ->with('edited', 'Paper actualizado exitosamente.');
     } catch (Exception $e) {
       Log::error("Error updating paper: " . $e->getMessage());
 
@@ -204,10 +204,13 @@ class PaperController extends Controller
       ->with('success', 'Paper eliminado exitosamente');
   }
 
-  public function findByArea($area)
+  public function fetchByArea($area)
   {
 
     $papers = Paper::all()->where('area', $area);
+    $papers->each(function ($paper) {
+      $paper->formatted_autores = $this->formatAutores($paper->autores);
+    });
 
     return view('usuario.nosotros.biblioteca', compact('papers'));
 
