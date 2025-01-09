@@ -31,22 +31,22 @@
                 <div class="p-4 pb-0 text-gray-900 md:pb-4">
                     <ul class="space-y-4" aria-labelledby="mega-menu-dropdown-button">
                         <li>
-                            <a href="#" class="text-gray-500  hover:text-blue-600 ">
-                              Inteligencia Artificial
+                            <a href="{{route('biblioteca.area',"programacion")}}" class="text-gray-500  hover:text-blue-600 ">
+                              Programación
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="text-gray-500  hover:text-blue-600 ">
+                            <a href="{{route('biblioteca.area',"estructuras")}}" class="text-gray-500  hover:text-blue-600 ">
                               Estructuras
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="text-gray-500  hover:text-blue-600 ">
+                            <a href="{{route('biblioteca.area',"robotica")}}" class="text-gray-500  hover:text-blue-600 ">
                               Robótica
                             </a>
                         </li>
                         <li>
-                            <a href="#" class="text-gray-500  hover:text-blue-600 ">
+                            <a href="{{route('biblioteca.area',"ecologia")}}" class="text-gray-500  hover:text-blue-600 ">
                               Ecología
                             </a>
                         </li>
@@ -150,8 +150,8 @@
 </div>
 -->
 
-  <div class="flex justify-center items-start ">
-<aside class=" w-96  max-lg:hidden h-auto mt-12 static " aria-label="Sidebar">
+  <div class="flex justify-center items-start">
+<aside class=" w-[450px]  max-lg:hidden h-auto mt-12 " aria-label="Sidebar">
   <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 ">
     <ul class="space-y-2">
       <li>
@@ -160,7 +160,7 @@
   <button id="dropdown-button" data-dropdown-toggle="dropdown" class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 " type="button">All<svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
 </svg></button>
-  <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
+  <div id="dropdown" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-auto">
       <ul class="py-2 text-sm text-gray-700 " aria-labelledby="dropdown-button">
       <li>
           <button type="button" class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">Titulo</button>
@@ -184,6 +184,7 @@
   </div>
 </div>
       </li>
+      <hr>
       <li>
         <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  " aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">      
                 <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "  fill="#000000" width="64px" height="64px" viewBox="-4 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" class="jam jam-document-f"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M3 0h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3zm1 7a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2H4zM4 3a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2H4z"></path></g></svg>
@@ -215,8 +216,17 @@
             <a href="#"
               class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">AI</a>
           </li>
+          <li>
+            <a href="#"
+              class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">Neurociencia</a>
+          </li>
+          <li>
+            <a href="#"
+              class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">Espacio</a>
+          </li>
         </ul>
       </li>
+      <hr>
       <li>
         <button type="button" class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 " aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
           <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 " width="64px" height="64px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M10 10C10 10.5523 10.4477 11 11 11V17C10.4477 17 10 17.4477 10 18C10 18.5523 10.4477 19 11 19H13C13.5523 19 14 18.5523 14 18C14 17.4477 13.5523 17 13 17V9H11C10.4477 9 10 9.44772 10 10Z" fill="#0F0F0F"></path> <path d="M12 8C12.8284 8 13.5 7.32843 13.5 6.5C13.5 5.67157 12.8284 5 12 5C11.1716 5 10.5 5.67157 10.5 6.5C10.5 7.32843 11.1716 8 12 8Z" fill="#0F0F0F"></path> <path fill-rule="evenodd" clip-rule="evenodd" d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4Z" fill="#0F0F0F"></path> </g></svg>
@@ -242,9 +252,9 @@
           </li>
         </ul>
       </li>
- 
+      <hr>
       <li>
-        <a href="#"
+        <a href="{{route('noticias')}}"
           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
           <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
             fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -264,22 +274,27 @@
   </div>
 </aside>
 
+@if($papers->isEmpty())
+  <div class="flex justify-center items-center h-45 bg-slate-100 p-4 rounded-md  w-auto">
+    <p class="text-gray-500 text-3xl font-semibold">No hay papers registrados.</p>
+  </div>
+  @else
 
-  <div class="w-auto mx-2 overflow-y-auto">
-    @if($papers->isEmpty())
-    <div class="flex justify-center items-center h-64 bg-slate-100">
-      <p class="text-gray-500 text-lg font-semibold">No hay papers registrados.</p>
-    </div>
-    @else
+<div class="pt-6 pb-12">  
+  
 
-    <div class="pt-6 pb-12">  
+  <div class=" w-auto mx-2 overflow-y-auto">
+   
+   
+  
+
       <div id="card" class="">
         <!-- container para papers -->
         <div id="papers-container"class="container w-100 lg:w-4/5  mx-auto flex flex-col">
           <!-- paper -->
           @foreach($papers as $paper)
           <div  class="flex flex-col md:flex-row overflow-hidden
-                                             rounded-lg shadow-xl  mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">
+                                             rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">
             <!-- información del paper -->
             <div class="max-h-96  md:w-1/2 p-4">
             <a href="{{route('papers.show',$paper->id)}}" class=" cursor-pointer hover:underline max-md:text-center ">  <h3 class="font-semibold text-lg mt-4 text-blue-400 text-justify ">{{ $paper->titulo}}</h3> </a>
@@ -350,7 +365,7 @@
                           const container = document.getElementById('papers-container');
                           papers.forEach(paper => {
                               const card = `
-                                  <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 w-100 mx-2 bg-gray-100 h-auto">
+                                  <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4  mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
                                       <div class="max-h-96  md:w-1/2 p-4">
                                           <a href="/nosotros/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
                                               <h3 class="font-semibold text-lg mt-4 text-blue-400">${paper.titulo}</h3>

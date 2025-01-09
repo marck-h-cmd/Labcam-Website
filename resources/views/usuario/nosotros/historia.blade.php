@@ -135,7 +135,7 @@ slider
     border: solid 1px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     background-color: #fff;
-    min-height: 375px;
+    min-height: 380px;
     width: 622px;
     position: relative;
     overflow: hidden;
@@ -260,15 +260,17 @@ slider
         <div class="slider">
 
             @foreach($sliders as $slider)
+           
             <input type="radio" name="nav" value="{{$slider->id}}">
             <div class="slider-item">
                 <img src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}" alt="imagegen {{$slider->id}}" />
                 <p>{{$slider->descripcion}}</p>
             </div>
+
             @endforeach
     
         </div>
-      <div class="explore-button">Explorar más</div>
+   <!--   <div class="explore-button">Explorar más</div>  -->
     </div>
     @endif
   </div>
