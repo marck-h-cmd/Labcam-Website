@@ -144,6 +144,18 @@
             }
         });
     </script>
+    @elseif(session('edited'))
+    <script>
+        Swal.fire({
+            title: "Actualizado!",
+            text: "{{ session('edited') }}",
+            icon: "success",
+            customClass: {
+                confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+            }
+        });
+    </script>
+
      @endif
 
 

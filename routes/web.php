@@ -82,13 +82,13 @@ Route::get('/detalle-eventos', function () {
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
+// ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
 Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slider_admin'])->name('admin-homeSliderUpdate');
 
-
-Route::get('/admin/topProyectos', function () {
-    return view('administrador.homeProyectos');
-})->name('admin-homeProyectos');
+// ------------------------- HOME TOP PROYECTOS ---------------------------------------------
+Route::get('/admin/topProyectos', [PestañaHomeController::class, 'vista_topProyectos_admin'])->name('admin-homeProyectos');
+Route::put('/admin/topProyectos/update', [PestañaHomeController::class, 'update_topProyectos_admin'])->name('admin-homeProyectosUpdate');
 
 // ------------------------- CRUD PAPERS ---------------------------------------------
 Route::get('/admin/papers', PaperController::class .'@adminIndex')->name('paper-panel');
@@ -104,6 +104,8 @@ Route::get('/admin/papers/{paper}/edit', PaperController::class .'@edit')->name(
 Route::put('/admin/papers/{paper}', PaperController::class .'@update')->name('papers.update');
 
 Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name('papers.destroy');
+
+Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea'])->name('biblioteca.area');
 
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
 
