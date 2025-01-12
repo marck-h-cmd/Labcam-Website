@@ -7,19 +7,19 @@
             <div class="relative h-56 overflow-hidden md:h-[700px]">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/{{$slider->img1}}"
+                    <img src="/user/template/images/carrusel/{{ $slider->img1 }}"
                         class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
                 <!-- Item 2 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/{{$slider->img2}}"
+                    <img src="/user/template/images/carrusel/{{ $slider->img2 }}"
                         class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
                 <!-- Item 3 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <img src="/user/template/images/carrusel/{{$slider->img3}}"
+                    <img src="/user/template/images/carrusel/{{ $slider->img3 }}"
                         class="absolute block w-full h-full object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                         alt="...">
                 </div>
@@ -159,7 +159,7 @@
 
         <div class="my-10 flex justify-center">
             <a href="{{ route('noticias') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
-            VER MÁS NOTICIAS
+                VER MÁS NOTICIAS
             </a>
         </div>
 
@@ -172,27 +172,21 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative">
                 <div class="ml-10">
                     <!-- Título -->
-                    <div class="mb-12">
+                    <div class="mb-4">
                         <h2 class="text-5xl font-bold border-b-4 border-blue-300 inline-block pb-2 px-12">
                             Proyectos
                         </h2>
                     </div>
                     <!-- Texto descriptivo -->
                     <div>
-                        <p class="text-lg leading-relaxed mb-6">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis orci orci, sed convallis
-                            ligula
-                            ornare vel.
-                        </p>
-                        <p class="text-lg leading-relaxed mb-8">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis orci orci, sed convallis
-                            ligula
-                            ornare vel.
-                        </p>
+                        <div class="my-6 flex flex-col space-y-4">
+                            {!! $topProyecto->descripcion !!}
+                        </div>
                         <a href="{{ route('proyectos') }}">
-                           <button class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
-                           VER TODOS LOS PROYECTOS
-                           </button>
+                            <button
+                                class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+                                VER TODOS LOS PROYECTOS
+                            </button>
                         </a>
                     </div>
                 </div>
@@ -201,11 +195,11 @@
                 <div class="relative w-full h-[600px] flex items-center justify-center">
                     <!-- Imagen inferior -->
                     <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-40 left-4 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 hover:translate-x-16 hover:translate-y-8"
-                        src="/user/template/images/proyectos/proyecto_01.jpg">
+                        src="/user/template/images/proyectos/{{ $topProyecto->img1 }}">
 
                     <!-- Imagen superior -->
                     <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-2 left-40 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 hover:-translate-x-16 hover:-translate-y-8"
-                        src="/user/template/images/proyectos/proyecto_02.jpg">
+                        src="/user/template/images/proyectos/{{ $topProyecto->img2 }}">
                 </div>
 
             </div>
@@ -229,7 +223,8 @@
                         <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más
+                                detalles</a>
                         </div>
                     </div>
 
@@ -256,7 +251,8 @@
                         <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más
+                                detalles</a>
                         </div>
                     </div>
 
@@ -283,7 +279,8 @@
                         <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
 
                         <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más detalles</a>
+                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más
+                                detalles</a>
                         </div>
                     </div>
 
@@ -309,8 +306,8 @@
 
         <div class="my-10 flex justify-center">
             <a href="{{ route('eventos') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
-            VER MÁS EVENTOS
-           </a>
+                VER MÁS EVENTOS
+            </a>
         </div>
 
     </section>

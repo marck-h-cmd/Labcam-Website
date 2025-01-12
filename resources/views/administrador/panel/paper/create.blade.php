@@ -30,6 +30,7 @@
                   class="author-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Nombre del autor"
                 />
+                <!-- Input oculto para enviar los autores ingresados seleccionados -->
                 <input type="hidden" name="autores" id="autores-json" />
             </div>
             <div id="dropdownSearch" class="z-20 hidden bg-white rounded-lg shadow w-60 absolute mt-8">
@@ -73,12 +74,40 @@
       
         
     <div>
-
+      <div class="relative">
+        <label for="topicos" class="block mb-2 text-sm font-medium text-gray-900">Tópicos</label>
+        
+        <!-- Botón que activa el menú -->
+        <button type="button" id="toggle-menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-left">
+            Selecciona Tópicos
+        </button>
+    
+        <!-- Menú desplegable flotante -->
+        <div id="topicos-menu" class="absolute z-10 w-full bg-white border border-gray-300 shadow-md rounded-lg hidden">
+          <div class="max-h-48 overflow-y-auto p-2">
+           
+                  <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
+                      <input type="checkbox" value="1" class="checkbox-topico">
+                      <span>1</span>
+                  </label>
+                  <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
+                    <input type="checkbox" value="2" class="checkbox-topico">
+                    <span>2</span>
+                </label>
+             
+          </div>
+      </div>  
+      <!-- Input oculto para enviar los IDs de los tópicos seleccionados -->
+      <input type="hidden" name="topicos" id="topicos">
+  
+    </div>
+     <div class="mt-4">
         <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 ">Abstract</label>
         <textarea
         class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
         id="descripcion" name="descripcion" rows="5" placeholder="Message"></textarea>
-        <div class="my-6">
+     </div>
+        <div class="my-4">
         <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Imagen Paper</label>
         <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="file_input" type="file" name="img_filename"  accept="image/jpeg,image/png">
         <div id="img-container" class="mt-2"></div>
@@ -170,6 +199,15 @@
 
     const addedAuthors = new Set();
 
+    const toggleButton = document.getElementById("toggle-menu");
+    const menu = document.getElementById("topicos-menu");
+    const checkboxes = document.querySelectorAll(".checkbox-topico");
+    const hiddenInput = document.getElementById("topicos");
+
+    let selectedTopicos = [];
+
+   
+
   
   addAuthorBtn.addEventListener("click", () => {
     const authorInput = document.getElementById("new-author");
@@ -188,6 +226,12 @@
 
       authorInput.value = ""; 
     }
+  });
+
+  document.addEventListener("click", function (event) {
+      if (!showAuthorsBtn.contains(event.target) && !dropdownSearch.contains(event.target)) {
+          dropdownSearch.add("hidden");
+      }
   });
 
   
@@ -237,8 +281,44 @@ imgInput.addEventListener('change', (event) => {
     autoresJsonInput.value = JSON.stringify(authorsArray);
   });
 });
+   // Boton de desplegar el menu
+  toggleButton.addEventListener("click", function () {
+      menu.classList.toggle("hidden");
+  });
+
+  // Cerrar menú si se hace clic fuera
+  document.addEventListener("click", function (event) {
+      if (!toggleButton.contains(event.target) && !menu.contains(event.target)) {
+          menu.classList.add("hidden");
+      }
+  });
+
+  // Manejar selección de tópicos
+  checkboxes.forEach(checkbox => {
+      checkbox.addEventListener("change", function () {
+          const id = this.value;
+
+          if (this.checked) {
+              // Agregar si no está en la lista
+              if (!selectedTopicos.includes(id)) {
+                  selectedTopicos.push(id);
+              }
+          } else {
+              // Remover si se deselecciona
+              selectedTopicos = selectedTopicos.filter(t => t !== id);
+          }
+
+        
+          hiddenInput.value = selectedTopicos.join(",");
+      });
+  });
 
 </script>
+
+
+
+<script>
+
 
 @endsection
 

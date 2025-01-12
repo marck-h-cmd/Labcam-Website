@@ -8,8 +8,7 @@
 
     <form action="{{ route('admin-homeSliderUpdate') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT') <!-- Para hacer un update en lugar de un POST -->
-
+        @method('PUT')
         <div class="grid grid-cols-2 gap-8 items-center justify-center py-7">
             <!-- Primera Imagen -->
             <div class="flex flex-col items-center">

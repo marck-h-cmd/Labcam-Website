@@ -9,6 +9,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/admin/dist/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Dashboard</title>
 </head>
 
@@ -22,7 +23,7 @@
         </a>
         <ul class="mt-4">
             <li
-                class="mb-1 group {{ request()->routeIs(['admin-homeSlider', 'admin-homeProyectos']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-homeSlider', 'admin-homeProyectos']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
