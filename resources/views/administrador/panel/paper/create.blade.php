@@ -3,7 +3,7 @@
 @section('title', 'crear paper')
 
 @section('contenido')
-<div class="paper-container">
+    <div class="paper-container">
 
     <div class="main-title flex flex-col items-center gap-3 mb-8">
         <div class="title text-2xl font-semibold text-[#2e5382]">Crear Papers</div>
@@ -114,90 +114,99 @@
         </div>
 
 
-    </div>
-    <div>
-        <label for="pdf" class="block mb-2 text-sm font-medium text-gray-900">Archivo PDF</label>
-        <div class="flex items-center justify-center w-full">
-            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                    <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16" aria-hidden="true">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"/>
-                    </svg>
-                    <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                    <p class="text-xs text-gray-500">PDF (MAX. 800x400px)</p>
                 </div>
-                <input id="dropzone-file" name="pdf_filename" type="file"  class="hidden" accept=".pdf" />
-            </label>
-        </div>
-        <div id="info-container" class="mt-2"></div>
+                <div>
+                    <label for="pdf" class="block mb-2 text-sm font-medium text-gray-900">Archivo PDF</label>
+                    <div class="flex items-center justify-center w-full">
+                        <label for="dropzone-file"
+                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
+                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                                <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 20 16" aria-hidden="true">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                </svg>
+                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span>
+                                    or drag and drop</p>
+                                <p class="text-xs text-gray-500">PDF (MAX. 800x400px)</p>
+                            </div>
+                            <input id="dropzone-file" name="pdf_filename" type="file" class="hidden"
+                                accept=".pdf" />
+                        </label>
+                    </div>
+                    <div id="info-container" class="mt-2"></div>
+                </div>
+
+            </div>
+
+
+
+            <div class="flex justify-center gap-2">
+                <button type="submit"
+                    class="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Guardar</button>
+
+                <a href="{{ route('papers.create') }}"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">Cancelar</a>
+
+                <a href="{{ route('paper-panel') }}"
+                    class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">
+                    Volver</a>
+
+            </div>
+        </form>
+
     </div>
-    
-    </div>
-
-    
-
-    <div class="flex justify-center gap-2">
-        <button type="submit" class="focus:outline-none text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 ">Guardar</button>
-
-        <a href="{{ route('papers.create') }}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">Cancelar</a>
-
-        <a href="{{ route('paper-panel') }}" class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer "> Volver</a>
-
-    </div>
-    </form>
-
-  </div>
     @if (session('success'))
-    <script>
-        Swal.fire({
-            icon: 'success',
-            title: '¡Creado exitosamente!',
-            text: 'Nuevo paper ha sido publicado.',
-            showConfirmButton: true, 
-            confirmButtonText: 'Aceptar',
-            customClass: {
-                confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
-            }
-        });
-    </script>
-
-   @elseif (session('error'))
-    <script>
-    Swal.fire({
-        icon: 'error',
-        title: '¡Hubo un error!',
-        text: 'Vuelve a intentar.',
-        showConfirmButton: true, 
-        confirmButtonText: 'Aceptar',
-        customClass: {
-            confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
-        }
-    });
-    </script>
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Creado exitosamente!',
+                text: 'Nuevo paper ha sido publicado.',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @elseif (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Hubo un error!',
+                text: 'Vuelve a intentar.',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
     @endif
-    
+
 @endsection
 
 
 
 
 @section('script')
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-    const authorsContainer = document.getElementById("authors-container");
-    const authorsList = document.getElementById("authors-list");
-    const addAuthorBtn = document.getElementById("add-author-btn");
-    const showAuthorsBtn = document.getElementById("show-authors-btn");
-    const dropdownSearch = document.getElementById("dropdownSearch");
-    const removeAuthorsBtn = document.getElementById("remove-authors-btn");
-    const autoresJsonInput = document.getElementById("autores-json");
-    const authorsForm = document.getElementById("form");
-    const pdfInput = document.getElementById("dropzone-file");
-    const pdfContainer = document.getElementById("info-container");
-    const imgContainer = document.getElementById("img-container")
-    const imgInput = document.getElementById("file_input")
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const authorsContainer = document.getElementById("authors-container");
+            const authorsList = document.getElementById("authors-list");
+            const addAuthorBtn = document.getElementById("add-author-btn");
+            const showAuthorsBtn = document.getElementById("show-authors-btn");
+            const dropdownSearch = document.getElementById("dropdownSearch");
+            const removeAuthorsBtn = document.getElementById("remove-authors-btn");
+            const autoresJsonInput = document.getElementById("autores-json");
+            const authorsForm = document.getElementById("form");
+            const pdfInput = document.getElementById("dropzone-file");
+            const pdfContainer = document.getElementById("info-container");
+            const imgContainer = document.getElementById("img-container")
+            const imgInput = document.getElementById("file_input")
 
-    const addedAuthors = new Set();
+            const addedAuthors = new Set();
 
     const toggleButton = document.getElementById("toggle-menu");
     const menu = document.getElementById("topicos-menu");
@@ -213,16 +222,16 @@
     const authorInput = document.getElementById("new-author");
     const authorName = authorInput.value.trim();
 
-    if (authorName && !addedAuthors.has(authorName)) {
-      addedAuthors.add(authorName);
+                if (authorName && !addedAuthors.has(authorName)) {
+                    addedAuthors.add(authorName);
 
-      const listItem = document.createElement("li");
-      listItem.innerHTML = `
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `
         <div class="flex items-center ps-2 rounded hover:bg-gray-100 w-full">
           <input type="checkbox" class="author-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 " value="${authorName}">
           <label class="w-full py-2 ms-2 text-sm font-medium text-gray-900 rounded ">${authorName}</label>
         </div>`;
-      authorsList.appendChild(listItem);
+                    authorsList.appendChild(listItem);
 
       authorInput.value = ""; 
     }
@@ -234,45 +243,46 @@
       }
   });
 
-  
-  showAuthorsBtn.addEventListener("click", () => {
 
-    if(Array.from(addedAuthors).length>0)
-      dropdownSearch.classList.toggle("hidden");
-  });
+            showAuthorsBtn.addEventListener("click", () => {
 
-  
-  removeAuthorsBtn.addEventListener("click", () => {
-    const checkboxes = document.querySelectorAll(".author-checkbox:checked");
+                if (Array.from(addedAuthors).length > 0)
+                    dropdownSearch.classList.toggle("hidden");
+            });
 
-    checkboxes.forEach((checkbox) => {
-      const authorName = checkbox.value;
-      addedAuthors.delete(authorName);
-      checkbox.closest("li").remove();
-    });
 
-    if(Array.from(addedAuthors).length===0)
-       dropdownSearch.classList.toggle("hidden");
-  });
+            removeAuthorsBtn.addEventListener("click", () => {
+                const checkboxes = document.querySelectorAll(".author-checkbox:checked");
 
-  pdfInput.addEventListener('change', (event) => {
- 
-    fileDisplay(event,pdfContainer);
-  });
+                checkboxes.forEach((checkbox) => {
+                    const authorName = checkbox.value;
+                    addedAuthors.delete(authorName);
+                    checkbox.closest("li").remove();
+                });
 
-  function fileDisplay(event, container){
-    const file = event.target.files[0];
-    if (file) {
-    //   if (file.type === ".pdf") {
-    container.innerHTML = `
+                if (Array.from(addedAuthors).length === 0)
+                    dropdownSearch.classList.toggle("hidden");
+            });
+
+            pdfInput.addEventListener('change', (event) => {
+
+                fileDisplay(event, pdfContainer);
+            });
+
+            function fileDisplay(event, container) {
+                const file = event.target.files[0];
+                if (file) {
+                    //   if (file.type === ".pdf") {
+                    container.innerHTML =
+                        `
       <label  class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="file_display" >Archivo Seleccionado: ${file.name} </label>`;
-        }
-   }
+                }
+            }
 
-imgInput.addEventListener('change', (event) => {
- 
-    fileDisplay(event,imgContainer);
-});
+            imgInput.addEventListener('change', (event) => {
+
+                fileDisplay(event, imgContainer);
+            });
 
 
   form.addEventListener("submit", (event) => {
@@ -321,4 +331,3 @@ imgInput.addEventListener('change', (event) => {
 
 
 @endsection
-

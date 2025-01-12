@@ -35,7 +35,7 @@
                         <a href="{{ route('admin-homeSlider') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-2.5 h-2.5 rounded-full mr-3 {{ request()->routeIs('admin-homeSlider') ? 'bg-[#98C560]' : 'bg-transparent' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-homeSlider') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Slider
                         </a>
                     </li>
@@ -43,14 +43,14 @@
                         <a href="{{ route('admin-homeProyectos') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-2.5 h-2.5 rounded-full mr-3 {{ request()->routeIs('admin-homeProyectos') ? 'bg-[#98C560]' : 'bg-transparent' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-homeProyectos') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Top Proyectos
                         </a>
                     </li>
                 </ul>
             </li>
-            <li class="mb-1 group">
-                <a href=""
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['h-slider.create']) ? 'active' : '' }}">
+                <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Nosotros</span>
@@ -59,23 +59,15 @@
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
                         <a href="{{ route('h-slider.create') }}"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-slider.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Crear Historia Slider</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="#"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Completed
-                            order</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="#"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">Canceled
-                            order</a>
                     </li>
                 </ul>
             </li>
-            <li class="mb-1 group">
-                <a href="{{ route('paper-panel') }}"
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'paper-panel']) ? 'active' : '' }}">
+                <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Papers</span>
@@ -84,15 +76,19 @@
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
                         <a href="{{ route('papers.create') }}"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                        class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <span
+                            class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('papers.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Crear Paper</a>
                     </li>
                     <li class="mb-4">
                         <a href="{{ route('paper-panel') }}"
-                            class="text-gray-300 text-sm flex items-center hover:text-gray-100 before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">
+                        class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <span
+                            class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('paper-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Panel de Control</a>
                     </li>
-                    
+
                 </ul>
             </li>
             <li class="mb-1 group">
