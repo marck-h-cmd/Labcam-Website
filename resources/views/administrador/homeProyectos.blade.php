@@ -1,25 +1,24 @@
 @extends('administrador.dashboard.plantilla')
 
 @section('contenido')
-    <div class="text-center">
-        <h2 class="text-blue-800 font-semibold text-4xl">Proyectos</h2>
-        <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+    <div class="main-title flex flex-col items-center gap-3 mb-8">
+        <div class="title text-2xl font-semibold text-[#2e5382]">Home Proyectos</div>
+        <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
     </div>
 
-    <form action="{{ route('admin-homeProyectosUpdate') }}" method="POST" enctype="multipart/form-data">
+    <form class=" p-8" action="{{ route('admin-homeProyectosUpdate') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="grid grid-cols-2 gap-8 items-center justify-center py-7">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-10 bg-slate-200 rounded-lg">
             <!-- Primera Imagen -->
-            <div class="flex flex-col items-center">
-                <label class="block pb-2">Primera imagen</label>
+            <div class="flex flex-col gap-3">
+                <label class="text-base font-medium">Primera imagen</label>
                 <div class="relative">
-                    <!-- Imagen con tamaño fijo -->
                     <img id="image1-preview" src="/user/template/images/proyectos/{{ $topProyAdmin->img1 }}" alt="Foto 1"
-                        class="w-[500px] h-80 object-cover rounded-md" />
-                    <!-- Icono de lápiz para editar -->
-                    <input type="file" id="image1" class="absolute top-0 right-0 opacity-0 cursor-pointer"
-                        accept="image/*" onchange="previewImage(event, 'image1-preview')" />
+                        class="w-full h-auto aspect-[16/9] object-cover rounded-md border border-gray-300" />
+                    <input type="file" name="img1" id="image1"
+                        class="absolute top-0 right-0 opacity-0 cursor-pointer" accept="image/*"
+                        onchange="previewImage(event, 'image1-preview')" />
                     <label for="image1"
                         class="absolute top-2 right-2 p-2 bg-gray-700 bg-opacity-50 text-white rounded-full cursor-pointer">
                         ✏️
@@ -28,13 +27,14 @@
             </div>
 
             <!-- Segunda Imagen -->
-            <div class="flex flex-col items-center">
-                <label class="block pb-2">Segunda imagen</label>
+            <div class="flex flex-col gap-3">
+                <label class="text-base font-medium">Segunda imagen</label>
                 <div class="relative">
                     <img id="image2-preview" src="/user/template/images/proyectos/{{ $topProyAdmin->img2 }}" alt="Foto 2"
-                        class="w-[500px] h-80 object-cover rounded-md" />
-                    <input type="file" id="image2" class="absolute top-0 right-0 opacity-0 cursor-pointer"
-                        accept="image/*" onchange="previewImage(event, 'image2-preview')" />
+                        class="w-full h-auto aspect-[16/9] object-cover rounded-md border border-gray-300" />
+                    <input type="file" name="img2" id="image2"
+                        class="absolute top-0 right-0 opacity-0 cursor-pointer" accept="image/*"
+                        onchange="previewImage(event, 'image2-preview')" />
                     <label for="image2"
                         class="absolute top-2 right-2 p-2 bg-gray-700 bg-opacity-50 text-white rounded-full cursor-pointer">
                         ✏️
@@ -43,7 +43,7 @@
             </div>
 
             <!-- Descripción -->
-            <div class="col-span-2 flex justify-center pt-2">
+            <div class="flex md:col-span-2 justify-center pt-2">
                 <div class="w-full max-w-[800px]"> <!-- Se ajustó el ancho máximo a 800px -->
                     <label for="description" class="block pb-2">Descripción</label>
                     <textarea id="description" name="description" rows="6" maxlength="65535"
