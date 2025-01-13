@@ -1,525 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up | Base - Tailwind CSS Startup Template</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PAGINA LABCAM</title>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <link rel="icon" href="favicon.ico">
     <link href="/user/template/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+    <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-
-
-
-    @vite(['resources/css/app.css', 'resources/css/about.css', 'resources/js/app.js'])
-
-    @stack('styles')
-
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 </head>
 
-<body x-data="{ page: 'signup', 'darkMode': true, 'stickyMenu': false, 'navigationOpen': false, 'scrollTop': false }" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
-$watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))" :class="{ 'b eh': darkMode === true }">
-    <!-- ===== Header Start ===== -->
-    {{-- <header class="g s r vd ya cj bg-[#1E5397]" :class="{ 'hh sm _k dj bl ll': stickyMenu }"
-        @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false">
-        <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
-            <div class="vd to/2 tc wf yf">
-                <a href="{{ route('home') }}">
-                    <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
-                </a>
-
-                <!-- Hamburger Toggle BTN -->
-                <button class="po rc" @click="navigationOpen = !navigationOpen">
-                    <span class="rc i pf re pd">
-                        <span class="du-block h q vd yc">
-                            <span class="rc i r s eh um tg te rd eb ml jl dl"
-                                :class="{ 'ue el': !navigationOpen }"></span>
-                            <span class="rc i r s eh um tg te rd eb ml jl fl"
-                                :class="{ 'ue qr': !navigationOpen }"></span>
-                            <span class="rc i r s eh um tg te rd eb ml jl gl"
-                                :class="{ 'ue hl': !navigationOpen }"></span>
-                        </span>
-                        <span class="du-block h q vd yc lf">
-                            <span class="rc eh um tg ml jl el h na r ve yc"
-                                :class="{ 'sd dl': !navigationOpen }"></span>
-                            <span class="rc eh um tg ml jl qr h s pa vd rd"
-                                :class="{ 'sd rr': !navigationOpen }"></span>
-                        </span>
-                    </span>
-                </button>
-                <!-- Hamburger Toggle BTN -->
-            </div>
-
-            <div class="vd wo/4 sd qo f ho oo wf yf ml-44" :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen }">
-                <nav>
-                    <ul class="tc _o sf yo cg ep">
-                        <li><a href="{{ route('home') }}" class="xl text-white"
-                                :class="{ 'mk': page === 'home' }">Home</a>
-                        </li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
-                                :class="{
-                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup' || page === '404'
-                                }">
-                                Nosotros
-
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-                            </a>
-
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="blog-grid.html" class="xl"
-                                        :class="{ 'mk': page === 'blog-grid' }">Acerca</a></li>
-                                <li><a href="blog-single.html" class="xl"
-                                        :class="{ 'mk': page === 'blog-single' }">Historia</a></li>
-                                <li><a href="404.html" class="xl"
-                                        :class="{ 'mk': page === '404' }">Biblioteca</a>
+<body>
+    <nav x-data="{ stickyMenu: false, openDropdown: null }"
+        :class="{ 'bg-transparent opacity-0': stickyMenu, 'bg-[#1E5397] opacity-100': !stickyMenu }"
+        @scroll.window="stickyMenu = (window.pageYOffset > 20); if(stickyMenu) openDropdown = null"
+        @mouseenter="stickyMenu = false; openDropdown = null"
+        @mouseleave="stickyMenu = (window.pageYOffset > 20); if(stickyMenu) openDropdown = null"
+        class="transition-all duration-300 fixed top-0 w-full z-50 py-1 md:px-12">
+        <div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
+            <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img class="h-9 md:h-10 my-3" src="/user/template/images/logoLabCam.png" alt="Logo" />
+            </a>
+            <button data-collapse-toggle="navbar-multi-level" type="button"
+                class="text-white inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden focus:outline-none focus:ring-2 focus:ring-gray-200"
+                aria-controls="navbar-multi-level" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
+            <div class="hidden w-full md:block md:w-auto md:my-3" id="navbar-multi-level">
+                <ul
+                    class="flex flex-col font-medium p-4 space-y-1 md:space-y-0 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-11 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:items-center">
+                    <li>
+                        <a href="{{ route('home') }}"
+                            class="text-white block py-2 px-3 rounded md:border-0 md:hover:text-[#98C560] hover:bg-[#98C560] md:hover:bg-transparent md:p-0 {{ request()->routeIs('home') ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}">Inicio</a>
+                    </li>
+                    <li>
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto  {{ request()->routeIs(['about', 'historia', 'biblioteca']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'">Nosotros
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdownNavbar" x-show="openDropdown === 'dropdownNavbar'"
+                            class="z-10 font-normal rounded shadow w-44 bg-white outline-2"
+                            @click.away="openDropdown = null">
+                            <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
+                                <li>
+                                    <a href="{{ route('about') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('about') ? 'text-[#98C560]' : 'text-black' }}">Acerca</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('historia') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('historia') ? 'text-[#98C560]' : 'text-black' }}">Historia</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('biblioteca') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca') ? 'text-[#98C560]' : 'text-black' }}">Biblioteca</a>
                                 </li>
                             </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
-                                :class="{
-                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup'
-                                }">
-                                Organización
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-
-                            </a>
-
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="{{route('direccion')}}" class="xl"
-                                        :class="{ 'mk': page === 'blog-grid' }">Dirección</a></li>
-                                <li><a href="{{route('capital')}}" class="xl"
-                                        :class="{ 'mk': page === 'blog-single' }">Capital Humano</a></li>
-                            </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
-                                :class="{
-                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup' || page === '404'
-                                }">
-                                Investigación
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-                            </a>
-
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="{{route('noticias')}}" class="xl"
-                                        :class="{ 'mk': page === 'blog-grid' }">Noticias</a></li>
-                                <li><a href="{{route('proyectos')}}" class="xl"
-                                        :class="{ 'mk': page === 'blog-single' }">Proyectos</a></li>
-                                <li><a href="{{route('eventos')}}" class="xl"
-                                        :class="{ 'mk': page === 'signup' }">Eventos</a></li>
-                            </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                    </ul>
-                </nav>
-
-
-
-
-                <a href="{{ route('contacto') }}"
-                    :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
-            </div>
-        </div>
-        </div>
-    </header> --}}
-
-    <header class="g s r vd ya cj bg-[#1E5397] transition-all duration-300"
-        :class="{ 'hh sm _k dj bl ll bg-transparent opacity-0': stickyMenu, 'bg-[#1E5397] opacity-100': !stickyMenu }"
-        @scroll.window="stickyMenu = (window.pageYOffset > 20) ? true : false" @mouseenter="stickyMenu = false"
-        @mouseleave="stickyMenu = (window.pageYOffset > 20)">
-        <div class="bb ze ki xn 2xl:ud-px-0 oo wf yf i">
-            <div class="vd to/2 tc wf yf">
-                <a href="{{ route('home') }}">
-                    <img class="w-96" src="/user/template/images/logoLabCam.png" alt="Logo" />
-                </a>
-
-
-                <!-- Hamburger Toggle BTN -->
-                <button class="po rc" @click="navigationOpen = !navigationOpen">
-                    <span class="rc i pf re pd">
-                        <span class="du-block h q vd yc">
-                            <span class="rc i r s eh um tg te rd eb ml jl dl"
-                                :class="{ 'ue el': !navigationOpen }"></span>
-                            <span class="rc i r s eh um tg te rd eb ml jl fl"
-                                :class="{ 'ue qr': !navigationOpen }"></span>
-                            <span class="rc i r s eh um tg te rd eb ml jl gl"
-                                :class="{ 'ue hl': !navigationOpen }"></span>
-                        </span>
-                        <span class="du-block h q vd yc lf">
-                            <span class="rc eh um tg ml jl el h na r ve yc"
-                                :class="{ 'sd dl': !navigationOpen }"></span>
-                            <span class="rc eh um tg ml jl qr h s pa vd rd"
-                                :class="{ 'sd rr': !navigationOpen }"></span>
-                        </span>
-                    </span>
-                </button>
-                <!-- Hamburger Toggle BTN -->
-            </div>
-
-
-            <div class="vd wo/4 sd qo f ho oo wf yf ml-44"
-                :class="{ 'd hh rm sr td ud qg ug jc yh': navigationOpen, 'opacity-0': stickyMenu }">
-                <nav>
-                    <ul class="tc _o sf yo cg ep">
-                        <li><a href="{{ route('home') }}" class="xl text-white"
-                                :class="{ 'mk': page === 'home' }">Home</a>
-                        </li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
-                                :class="{
-                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup' || page === '404'
-                                }">
-                                Nosotros
-
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-                            </a>
-
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="{{ route('about') }}" class="xl"
-                                        :class="{ 'mk': page === 'blog-grid' }">Acerca</a></li>
-                                <li><a href="{{ route('historia') }}" class="xl"
-                                        :class="{ 'mk': page === 'blog-single' }">Historia</a></li>
-                                <li><a href="{{ route('biblioteca') }}" class="xl"
-                                        :class="{ 'mk': page === '404' }">Biblioteca</a>
+                        </div>
+                    </li>
+                    <li>
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar2"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto  {{ request()->routeIs(['direccion', 'capital']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar2' ? null : 'dropdownNavbar2'">Organización
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdownNavbar2" x-show="openDropdown === 'dropdownNavbar2'"
+                            class="z-10 font-normal rounded shadow w-44 bg-white outline-2"
+                            @click.away="openDropdown = null">
+                            <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
+                                <li>
+                                    <a href="{{ route('direccion') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('direccion') ? 'text-[#98C560]' : 'text-black' }}">Dirección</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('capital') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital') ? 'text-[#98C560]' : 'text-black' }}">Capital
+                                        Humano</a>
                                 </li>
                             </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
-                                :class="{
-                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup'
-                                }">
-                                Organización
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-
-                            </a>
-
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="{{ route('direccion') }}" class="xl"
-                                        :class="{ 'mk': page === 'blog-grid' }">Dirección</a></li>
-                                <li><a href="{{ route('capital') }}" class="xl"
-                                        :class="{ 'mk': page === 'blog-single' }">Capital Humano</a></li>
+                        </div>
+                    </li>
+                    <li>
+                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar3"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['noticias', 'proyectos', 'eventos']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'">Investigación
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <!-- Dropdown menu -->
+                        <div id="dropdownNavbar3" x-show="openDropdown === 'dropdownNavbar3'"
+                            class="z-10 font-normal rounded shadow w-44 bg-white outline-2"
+                            @click.away="openDropdown = null">
+                            <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
+                                <li>
+                                    <a href="{{ route('noticias') }}" class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias') ? 'text-[#98C560]' : 'text-black' }}">Noticias</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('proyectos') }}" class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos') ? 'text-[#98C560]' : 'text-black' }}">Proyectos</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('eventos') }}" class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos') ? 'text-[#98C560]' : 'text-black' }}">Eventos</a>
+                                </li>
                             </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                        <li class="c i" x-data="{ dropdown: false }">
-                            <a href="#" class="xl tc wf yf bg text-white" @click.prevent="dropdown = !dropdown"
-                                :class="{
-                                    'mk': page === 'blog-grid' || page === 'blog-single' || page === 'signin' ||
-                                        page === 'signup' || page === '404'
-                                }">
-                                Investigación
-                                <svg :class="{ 'wh': dropdown }" class="th mm we fd pf text-white fill-current"
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                                    <path
-                                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                                </svg>
-                            </a>
-
-                            <!-- Dropdown Start -->
-                            <ul class="a" :class="{ 'tc': dropdown }">
-                                <li><a href="{{ route('noticias') }}" class="xl"
-                                        :class="{ 'mk': page === 'blog-grid' }">Noticias</a></li>
-                                <li><a href="{{ route('proyectos') }}" class="xl"
-                                        :class="{ 'mk': page === 'blog-single' }">Proyectos</a></li>
-                                <li><a href="{{ route('eventos') }}" class="xl"
-                                        :class="{ 'mk': page === 'signup' }">Eventos</a></li>
-                            </ul>
-                            <!-- Dropdown End -->
-                        </li>
-                    </ul>
-                </nav>
-
-                <a href="{{ route('contacto') }}"
-                    :class="{ 'hh/[0.15]': page === 'home', 'sh': page === 'home' && stickyMenu }"
-                    class="bg-[#98C560] dk rg tc wf xf _l gi hi text-white px-6 py-2 rounded-lg">Contacto</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="{{ route('contacto') }}"
+                            class="text-white block py-2 px-3 rounded md:border-0 md:px-4 bg-[#98C560] w-max md:w-auto">Contacto</a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </header>
-
-
-
-    <!-- ===== Header End ===== -->
+    </nav>
 
     <main>
         @yield('contenido')
     </main>
-
-
-    <!-- ===== Footer Start ===== -->
-    <footer class="bg-[#1E5397]">
-        <div class="bb ze ki xn 2xl:ud-px-0">
-            <!-- Footer Top -->
-
-            <div class="ji gp">
-                <div class="tc uf ap gg fp">
-                    {{-- primera columna --}}
-                    <div class="animate_top zd/2 to/4">
-                        <a href="https://www.unitru.edu.pe/">
-                            <img src="/user/template/images/logo_unt.png" alt="Logo" class="w-60" />
+    <footer class="bg-[#1E5397] px-6">
+        <div class="mx-auto w-full py-6 lg:py-8">
+            <div class="flex flex-col gap-8 sm:grid sm:grid-cols-2 lg:grid-cols-4 pt-4 w-full">
+                <!-- Primera Columna -->
+                <div class="flex flex-col items-center text-justify px-5">
+                    <a href="https://www.unitru.edu.pe/">
+                        <img src="/user/template/images/logo_unt.png" class="w-full h-16 mb-4" alt="FlowBite Logo" />
+                        <p class="text-white text-base font-normal mb-4">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad provident nostrum praesentium
+                            itaque, quisquam blanditiis unde sapiente odit
+                        </p>
+                    </a>
+                    <div class="flex mt-4 sm:justify-center sm:mt-0 gap-4">
+                        <a href="" class="text-white border-2 rounded p-1">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 8 19">
+                                <path fill-rule="evenodd"
+                                    d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                    clip-rule="evenodd" />
+                            </svg>
                         </a>
-
-                        <p class="lc fb text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                        <ul class="tc wf cg">
-                            <li>
-                                <a href="#">
-                                    <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_48_1499)">
-                                            <path
-                                                d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z"
-                                                fill="" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_48_1499">
-                                                <rect width="24" height="24" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_48_1502)">
-                                            <path
-                                                d="M22.162 5.65593C21.3985 5.99362 20.589 6.2154 19.76 6.31393C20.6337 5.79136 21.2877 4.96894 21.6 3.99993C20.78 4.48793 19.881 4.82993 18.944 5.01493C18.3146 4.34151 17.4803 3.89489 16.5709 3.74451C15.6615 3.59413 14.7279 3.74842 13.9153 4.18338C13.1026 4.61834 12.4564 5.30961 12.0771 6.14972C11.6978 6.98983 11.6067 7.93171 11.818 8.82893C10.1551 8.74558 8.52832 8.31345 7.04328 7.56059C5.55823 6.80773 4.24812 5.75098 3.19799 4.45893C2.82628 5.09738 2.63095 5.82315 2.63199 6.56193C2.63199 8.01193 3.36999 9.29293 4.49199 10.0429C3.828 10.022 3.17862 9.84271 2.59799 9.51993V9.57193C2.59819 10.5376 2.93236 11.4735 3.54384 12.221C4.15532 12.9684 5.00647 13.4814 5.95299 13.6729C5.33661 13.84 4.6903 13.8646 4.06299 13.7449C4.32986 14.5762 4.85 15.3031 5.55058 15.824C6.25117 16.345 7.09712 16.6337 7.96999 16.6499C7.10247 17.3313 6.10917 17.8349 5.04687 18.1321C3.98458 18.4293 2.87412 18.5142 1.77899 18.3819C3.69069 19.6114 5.91609 20.2641 8.18899 20.2619C15.882 20.2619 20.089 13.8889 20.089 8.36193C20.089 8.18193 20.084 7.99993 20.076 7.82193C20.8949 7.2301 21.6016 6.49695 22.163 5.65693L22.162 5.65593Z"
-                                                fill="" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_48_1502">
-                                                <rect width="24" height="24" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <g clip-path="url(#clip0_48_1505)">
-                                            <path
-                                                d="M6.94 5.00002C6.93974 5.53046 6.72877 6.03906 6.35351 6.41394C5.97825 6.78883 5.46944 6.99929 4.939 6.99902C4.40857 6.99876 3.89997 6.78779 3.52508 6.41253C3.1502 6.03727 2.93974 5.52846 2.94 4.99802C2.94027 4.46759 3.15124 3.95899 3.5265 3.5841C3.90176 3.20922 4.41057 2.99876 4.941 2.99902C5.47144 2.99929 5.98004 3.21026 6.35492 3.58552C6.72981 3.96078 6.94027 4.46959 6.94 5.00002ZM7 8.48002H3V21H7V8.48002ZM13.32 8.48002H9.34V21H13.28V14.43C13.28 10.77 18.05 10.43 18.05 14.43V21H22V13.07C22 6.90002 14.94 7.13002 13.28 10.16L13.32 8.48002Z"
-                                                fill="" />
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip0_48_1505">
-                                                <rect width="24" height="24" fill="white" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-
-                    <div class="vd ro tc sf rn un gg vn">
-                        {{-- segunda columna --}}
-                        <div class="animate_top">
-                            <h4 class="kk wm tj ec text-[#FFFF] font-bold">Contacto</h4>
-
-                            <ul class="text-white">
-                                <li><a href="#" class="sc xl vb">Correo</a></li>
-                                <li><a href="#" class="sc xl vb">Celular</a></li>
-                                <li><a href="#" class="sc xl vb">Dirección</a></li>
-                            </ul>
-                        </div>
-
-                        {{-- tercera columna --}}
-                        <div class="animate_top zd/2 to/3">
-                            <a href="{{ route('home') }}">
-                                <img src="/user/template/images/logoLabCam.png" alt="Logo" class="w-96" />
-                            </a>
-
-                            <p class="lc fb text-white">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-                            <ul class="tc wf cg">
-                                <li>
-                                    <a href="#">
-                                        <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_48_1499)">
-                                                <path
-                                                    d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47 14 5.5 16 5.5H17.5V2.14C17.174 2.097 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z"
-                                                    fill="" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_48_1499">
-                                                    <rect width="24" height="24" fill="white" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_48_1502)">
-                                                <path
-                                                    d="M22.162 5.65593C21.3985 5.99362 20.589 6.2154 19.76 6.31393C20.6337 5.79136 21.2877 4.96894 21.6 3.99993C20.78 4.48793 19.881 4.82993 18.944 5.01493C18.3146 4.34151 17.4803 3.89489 16.5709 3.74451C15.6615 3.59413 14.7279 3.74842 13.9153 4.18338C13.1026 4.61834 12.4564 5.30961 12.0771 6.14972C11.6978 6.98983 11.6067 7.93171 11.818 8.82893C10.1551 8.74558 8.52832 8.31345 7.04328 7.56059C5.55823 6.80773 4.24812 5.75098 3.19799 4.45893C2.82628 5.09738 2.63095 5.82315 2.63199 6.56193C2.63199 8.01193 3.36999 9.29293 4.49199 10.0429C3.828 10.022 3.17862 9.84271 2.59799 9.51993V9.57193C2.59819 10.5376 2.93236 11.4735 3.54384 12.221C4.15532 12.9684 5.00647 13.4814 5.95299 13.6729C5.33661 13.84 4.6903 13.8646 4.06299 13.7449C4.32986 14.5762 4.85 15.3031 5.55058 15.824C6.25117 16.345 7.09712 16.6337 7.96999 16.6499C7.10247 17.3313 6.10917 17.8349 5.04687 18.1321C3.98458 18.4293 2.87412 18.5142 1.77899 18.3819C3.69069 19.6114 5.91609 20.2641 8.18899 20.2619C15.882 20.2619 20.089 13.8889 20.089 8.36193C20.089 8.18193 20.084 7.99993 20.076 7.82193C20.8949 7.2301 21.6016 6.49695 22.163 5.65693L22.162 5.65593Z"
-                                                    fill="" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_48_1502">
-                                                    <rect width="24" height="24" fill="white" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <svg class="vh ul cl il" width="24" height="24" viewBox="0 0 24 24"
-                                            fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <g clip-path="url(#clip0_48_1505)">
-                                                <path
-                                                    d="M6.94 5.00002C6.93974 5.53046 6.72877 6.03906 6.35351 6.41394C5.97825 6.78883 5.46944 6.99929 4.939 6.99902C4.40857 6.99876 3.89997 6.78779 3.52508 6.41253C3.1502 6.03727 2.93974 5.52846 2.94 4.99802C2.94027 4.46759 3.15124 3.95899 3.5265 3.5841C3.90176 3.20922 4.41057 2.99876 4.941 2.99902C5.47144 2.99929 5.98004 3.21026 6.35492 3.58552C6.72981 3.96078 6.94027 4.46959 6.94 5.00002ZM7 8.48002H3V21H7V8.48002ZM13.32 8.48002H9.34V21H13.28V14.43C13.28 10.77 18.05 10.43 18.05 14.43V21H22V13.07C22 6.90002 14.94 7.13002 13.28 10.16L13.32 8.48002Z"
-                                                    fill="" />
-                                            </g>
-                                            <defs>
-                                                <clipPath id="clip0_48_1505">
-                                                    <rect width="24" height="24" fill="white" />
-                                                </clipPath>
-                                            </defs>
-                                        </svg>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-
-
-                        {{-- cuarto columna --}}
-                        <div class="animate_top">
-                            <h4 class="kk wm tj ec text-[#FFFF] font-bold">Contacto</h4>
-
-                            <ul class="text-white">
-                                <li><a href="#" class="sc xl vb">Correo</a></li>
-                                <li><a href="#" class="sc xl vb">Celular</a></li>
-                                <li><a href="#" class="sc xl vb">Dirección</a></li>
-                            </ul>
-                        </div>
-
+                        <a href="" class="text-white border-2 rounded p-1">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 17">
+                                <path fill-rule="evenodd"
+                                    d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="" class="text-white border-2 rounded p-1">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M12.51 8.796v1.697a3.74 3.74 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766c-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483a1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.6 1.6 0 0 1 1.6 1.606"
+                                        clip-rule="evenodd" />
+                                    <path d="M7.2 8.809H4V19.5h3.2z" />
+                                </g>
+                            </svg>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <!-- Footer Top -->
 
-            <!-- Footer Bottom -->
-            <div class="bh ch pm tc uf sf yo wf xf ap cg fp bj">
-                <div class="animate_top">
-                    <ul class="tc wf gg text-white">
-                        <li><a href="#" class="xl">English</a></li>
-                        <li><a href="#" class="xl">Privacy Policy</a></li>
-                        <li><a href="#" class="xl">Support</a></li>
+                <!-- Segunda Columna -->
+                <div class="flex flex-col items-center text-left">
+
+                    <ul class="text-white font-medium space-y-4">
+                        <h2 class="mb-6 text-xl font-semibold text-white uppercase">Contacto</h2>
+                        <li>
+                            <span>Celular: 123456789</span>
+                        </li>
+                        <li>
+                            <span>Correo: correo@gmail.com</span>
+                        </li>
+                        <li>
+                            <span>Dirección: Av. Juan Pablo II</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="animate_top text-white">
-                    <p>&copy; 2025 LabCam. All rights reserved</p>
+                <!-- Tercera Columna (Duplicado de la Primera) -->
+                <div class="flex flex-col items-center text-justify px-5">
+                    <a href="{{ route('home') }}">
+                        <img src="/user/template/images/logoLabCam.png" class="w-full h-16 mb-4" alt="Logo LabCam" />
+                        <p class="text-white text-base font-normal mb-4">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad provident nostrum praesentium
+                            itaque, quisquam blanditiis unde sapiente odit
+                        </p>
+                    </a>
+                    <div class="flex mt-4 sm:justify-center sm:mt-0 gap-4">
+                        <a href="" class="text-white border-2 rounded p-1">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 8 19">
+                                <path fill-rule="evenodd"
+                                    d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="" class="text-white border-2 rounded p-1">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 17">
+                                <path fill-rule="evenodd"
+                                    d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a href="" class="text-white border-2 rounded p-1">
+                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <g fill="currentColor">
+                                    <path fill-rule="evenodd"
+                                        d="M12.51 8.796v1.697a3.74 3.74 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766c-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483a1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.6 1.6 0 0 1 1.6 1.606"
+                                        clip-rule="evenodd" />
+                                    <path d="M7.2 8.809H4V19.5h3.2z" />
+                                </g>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Cuarta Columna (Duplicado de la Segunda) -->
+                <div class="flex flex-col items-center text-left">
+                    <ul class="text-white font-medium space-y-4">
+                        <h2 class="mb-6 text-xl font-semibold text-white uppercase">Contacto</h2>
+                        <li>
+                            <span>Celular: 123456789</span>
+                        </li>
+                        <li>
+                            <span>Correo: correo@gmail.com</span>
+                        </li>
+                        <li>
+                            <span>Dirección: Av. Juan Pablo II</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-            <!-- Footer Bottom -->
+
+
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-base text-white sm:text-center">© 2025 LabCam. All Rights Reserved.
+                </span>
+            </div>
         </div>
     </footer>
 
-    <!-- ===== Footer End ===== -->
+    <!-- Botón para desplazarse al inicio -->
+    <div x-data="{ scrollTop: false }" x-init="window.addEventListener('scroll', () => scrollTop = window.scrollY > 50)" class="fixed bottom-4 right-4">
+        <button x-show="scrollTop" x-cloak @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="bg-[#98C560] text-white p-3 rounded-md shadow-lg focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                stroke="currentColor" class="w-5 h-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
+            </svg>
+        </button>
+    </div>
 
-    <!-- ====== Back To Top Start ===== -->
-    <button class="xc wf xf ie ld vg sr gh tr g sa ta _a" @click="window.scrollTo({top: 0, behavior: 'smooth'})"
-        @scroll.window="scrollTop = (window.pageYOffset > 50) ? true : false" :class="{ 'uc': scrollTop }">
-        <svg class="uh se qd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path
-                d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z" />
-        </svg>
-    </button>
-
-    <!-- ====== Back To Top End ===== -->
-
-    <script>
-        //  Pricing Table
-        const setup = () => {
-            return {
-                isNavOpen: false,
-
-                billPlan: 'monthly',
-
-                plans: [{
-                        name: 'Starter',
-                        price: {
-                            monthly: 29,
-                            annually: 29 * 12 - 199,
-                        },
-                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
-                    },
-                    {
-                        name: 'Growth Plan',
-                        price: {
-                            monthly: 59,
-                            annually: 59 * 12 - 100,
-                        },
-                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
-                    },
-                    {
-                        name: 'Business',
-                        price: {
-                            monthly: 139,
-                            annually: 139 * 12 - 100,
-                        },
-                        features: ['400 GB Storaget', 'Unlimited Photos & Videos', 'Exclusive Support'],
-                    },
-                ],
-            };
-        };
-    </script>
-    <script defer src="/user/template/bundle.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-    @stack('scripts')
 </body>
 
 </html>
