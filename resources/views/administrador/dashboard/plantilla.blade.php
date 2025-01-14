@@ -23,7 +23,8 @@
         <ul class="mt-8">
             <h4 class="text-[#98C560] text-sm font-bold uppercase mb-3">Administración general</h4>
             <li class="mb-1 group cursor-pointer">
-                <a href="{{ route('admin-principal') }}" class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('admin-principal') ? 'bg-[#98C560]' : 'bg-transparent' }}">
+                <a href="{{ route('admin-principal') }}"
+                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('admin-principal') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Principal</span>
                 </a>
