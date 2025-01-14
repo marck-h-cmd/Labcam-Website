@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="/admin/dist/css/style.css">
+    <link rel="stylesheet" href="/admin_dash/dist/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="/admin/dist/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="/admin_dash/dist/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     <title>Dashboard</title>
 </head>
 
@@ -23,7 +23,7 @@
         <ul class="mt-8">
             <h4 class="text-[#98C560] text-sm font-bold uppercase mb-3">Administración general</h4>
             <li class="mb-1 group cursor-pointer">
-                <a class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md">
+                <a href="{{ route('admin-principal') }}" class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('admin-principal') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Principal</span>
                 </a>
@@ -231,14 +231,14 @@
                 </li>
             </ul>
         </section>
-        <section class="d-flex px-6 pt-9">
+        <section class="d-flex px-6 py-9">
             @yield('contenido')
         </section>
     </main>
     <!-- end: Main -->
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
-    <script src="/admin/dist/js/script.js"></script>
+    <script src="/admin_dash/dist/js/script.js"></script>
     @yield('script')
 </body>
 
