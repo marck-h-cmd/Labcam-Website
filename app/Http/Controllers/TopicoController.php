@@ -81,7 +81,7 @@ class TopicoController extends Controller
 
         $topico->delete();
         return redirect()->route('topic-panel')
-            ->with('success', 'Paper eliminado exitosamente');
+            ->with('success', 'Topico eliminado exitosamente');
     }
 
     public function edit($id,Request $request)
