@@ -376,7 +376,7 @@
           {{$paper->descripcion}}
         </p>
         <p><strong>Autores:  </strong> {{ $paper->formatted_autores }}</p>
-        <p><strong>Área:  </strong> {{ $paper->area }}</p>
+        <p><strong>Área:  </strong> {{ $paper->area->nombre }}</p>
         <p><strong>Fecha Publicación: </strong>{{ $paper->fecha_publicacion}}</p>
         <p><strong>Publisher:  </strong> {{ $paper->publisher }}</p>
         <div class="doi">
@@ -389,19 +389,23 @@
       <iframe class="pdf-frame" src="{{ Storage::url('uploads/pdf/' . $paper->pdf_filename) }}" alt="PDF" >
       </iframe>
     
+      @if($previousPaper || $nextPaper)
       <div class="cards">
-        <div class="card-item r">
-          <h3>Titulo Paper anterior</h3>
-          <p>paper anterior</p>
-        </div>
-        <div class="card-item">
-          <h3>Titulo Paper siguiente</h3>
+       
+        @if($previousPaper)
+        <a class="card-item r" href="{{ route('paper.show', $previousPaper->id) }}">
+          <h3>{{$previousPaper->titulo}}</h3>
+          <p>Paper anterior</p>
+        </a>
+        @endif
+        @if($nextPaper)
+        <a class="card-item"  href="{{ route('paper.show', $nextPaper->id) }}">
+          <h3>{{$nextPaper->titulo}}</h3>
           <p> Paper siguiente</p>
-        </div>
+        </a>
+        @endif
       </div>
-    
-    </div>
-     
-    
+      @endif
 
+    </div>
     @endsection
