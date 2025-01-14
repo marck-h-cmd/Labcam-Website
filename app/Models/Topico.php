@@ -9,6 +9,7 @@ class Topico extends Model
     use HasFactory;
 
     protected $fillable = ['nombre'];
+    protected $table = 'topicos';
 
     public function papers()
     {

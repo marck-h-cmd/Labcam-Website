@@ -8,6 +8,7 @@ class AreaInvestigacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'areas_investigacion';
     protected $fillable = ['nombre'];
 
     public function papers()
