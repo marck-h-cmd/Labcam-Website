@@ -7,6 +7,8 @@ use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use App\Models\Topico;
+use App\Models\AreaInvestigacion;
 use Exception;
 
 
@@ -63,16 +65,20 @@ class PaperController extends Controller
       // validar campos
       $request->validate([
         'autores' => 'required|json',
-        'titulo' => 'required|string|max:100',
+        'titulo' => 'required|string|max:100|unique:papers,titulo',
         'publisher' => 'required|string|max:50',
         'descripcion' => 'required',
-        'area' => 'required|string|max:60',
-        'doi' => 'required|string|max:100',
-        'fecha_publicacion' => 'required',
+        'area_id' => 'required|exists:areas_investigacion,id',
+        'fecha_publicacion' => 'required|date',
+        'doi' => 'required|string|max:100|unique:papers,doi',
         'pdf_filename' => 'required|file|mimes:pdf|max:10240',
         'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
+        'topicos' => 'required|string',
+        'topicos.*' => 'exists:topicos,id',
 
       ]);
+
+      $topicoIds = explode(',', $request->topicos);
 
       $pdf_fileName = null;
       $img_fileName = null;
@@ -96,12 +102,13 @@ class PaperController extends Controller
         'autores' => $request->autores,
         'publisher' => $request->publisher,
         'descripcion' => $request->descripcion,
-        'area' => $request->area,
+        'area_id' => $request->area_id,
         'doi' => $request->doi,
         'fecha_publicacion' => $request->fecha_publicacion,
         'pdf_filename' => $pdf_fileName,
         'img_filename' => $img_fileName,
       ]);
+      $paper->topicos()->attach($topicoIds);
 
       Log::info("Paper stored successfully", ['paper' => $paper]);
 
@@ -124,14 +131,18 @@ class PaperController extends Controller
         'autores' => 'required|json',
         'publisher' => 'required|max:50',
         'descripcion' => 'required',
-        'area' => 'required|max:60',
+        'area_id' => 'required|exists:areas_investigacion,id',
         'doi' => 'required|max:100',
-        'fecha_publicacion' => 'required',
+        'fecha_publicacion' => 'required|date',
         'pdf_filename' => 'file|mimes:pdf|max:10240',
         'img_filename' => 'file|mimes:jpeg,png,jpg|max:5120',
+        'topicos' => 'string',
+        'topicos.*' => 'exists:topicos,id',
 
       ]);
-      $paper = Paper::find($id);
+      $paper = Paper::findOrFail($id);
+
+      $topicoIds = explode(',', $request->topicos);
 
       $pdf_fileName = $paper->pdf_filename;
       $img_fileName = $paper->img_filename;
@@ -166,12 +177,15 @@ class PaperController extends Controller
         'autores' => $request->autores,
         'publisher' => $request->publisher,
         'descripcion' => $request->descripcion,
-        'area' => $request->area,
+        'area_id' => $request->area_id,
         'doi' => $request->doi,
         'fecha_publicacion' => $request->fecha_publicacion,
         'pdf_filename' => $pdf_fileName,
         'img_filename' => $img_fileName,
       ]);
+
+      $paper->topicos()->sync($topicoIds);
+
       return redirect()->route('paper-panel')
         ->with('edited', 'Paper actualizado exitosamente.');
     } catch (Exception $e) {
@@ -230,14 +244,21 @@ class PaperController extends Controller
 
   public function create()
   {
-    return view('administrador.panel.paper.create');
+    return view('administrador.panel.paper.create',[
+      'areas' => AreaInvestigacion::all(),
+      'topicos' => Topico::all()
+  ]);
   }
 
   public function show($id)
   {
     $paper = Paper::find($id);
+    //FORMATO DE AUTORES
     $paper->formatted_autores = $this->formatAutores($paper->autores);
-    return view('usuario.nosotros.paper', compact('paper'));
+    // PAPERS ANTERIOR Y SIGUIENTE
+    $previousPaper = Paper::where('id', '<', $paper->id)->orderBy('id', 'desc')->first();
+    $nextPaper = Paper::where('id', '>', $paper->id)->orderBy('id', 'asc')->first();
+    return view('usuario.nosotros.paper', compact('paper', 'previousPaper', 'nextPaper'));
   }
 
   public function formatAutores($autoresJson)
@@ -262,7 +283,13 @@ class PaperController extends Controller
         ->with('error', 'Paper no encontrado');
     }
 
-    return view('administrador.panel.paper.edit', compact('paper'));
+    $areas= AreaInvestigacion::where('id', '!=', $paper->area->id)->get('*');
+
+    return view('administrador.panel.paper.edit', [
+      'paper' => $paper,
+      'areas' => $areas,
+      'topicos' => Topico::all()
+  ]);
   }
 
 

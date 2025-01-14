@@ -1,23 +1,21 @@
 @extends('administrador.dashboard.plantilla')
 
 @section('contenido')
-    <div class="text-center">
-        <h2 class="text-blue-800 font-semibold text-4xl">Slider</h2>
-        <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+    <div class="main-title flex flex-col items-center gap-3 mb-8">
+        <div class="title text-2xl font-semibold text-[#2e5382]">Home Slider</div>
+        <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
     </div>
 
-    <form action="{{ route('admin-homeSliderUpdate') }}" method="POST" enctype="multipart/form-data">
+    <form class=" p-8" action="{{ route('admin-homeSliderUpdate') }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="grid grid-cols-2 gap-8 items-center justify-center py-7">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-10 bg-slate-200 rounded-lg">
             <!-- Primera Imagen -->
-            <div class="flex flex-col items-center">
-                <label class="block pb-2">Primera imagen</label>
+            <div class="flex flex-col gap-3">
+                <label class="text-base font-medium">Primera imagen</label>
                 <div class="relative">
-                    <!-- Imagen con tamaño fijo -->
                     <img id="image1-preview" src="/user/template/images/carrusel/{{ $sliderAdmin->img1 }}" alt="Foto 1"
-                        class="w-[500px] h-80 object-cover rounded-md" />
-                    <!-- Icono de lápiz para editar -->
+                        class="w-full h-auto aspect-[16/9] object-cover rounded-md border border-gray-300" />
                     <input type="file" name="img1" id="image1"
                         class="absolute top-0 right-0 opacity-0 cursor-pointer" accept="image/*"
                         onchange="previewImage(event, 'image1-preview')" />
@@ -29,11 +27,11 @@
             </div>
 
             <!-- Segunda Imagen -->
-            <div class="flex flex-col items-center">
-                <label class="block pb-2">Segunda imagen</label>
+            <div class="flex flex-col gap-3">
+                <label class="text-base font-medium">Segunda imagen</label>
                 <div class="relative">
                     <img id="image2-preview" src="/user/template/images/carrusel/{{ $sliderAdmin->img2 }}" alt="Foto 2"
-                        class="w-[500px] h-80 object-cover rounded-md" />
+                        class="w-full h-auto aspect-[16/9] object-cover rounded-md border border-gray-300" />
                     <input type="file" name="img2" id="image2"
                         class="absolute top-0 right-0 opacity-0 cursor-pointer" accept="image/*"
                         onchange="previewImage(event, 'image2-preview')" />
@@ -44,27 +42,26 @@
                 </div>
             </div>
 
-            <!-- Tercera Imagen (centrada en la segunda fila) -->
-            <div class="col-span-2 flex justify-center pt-2">
-                <div class="flex flex-col items-center">
-                    <label class="block pb-2">Tercera imagen</label>
-                    <div class="relative">
-                        <img id="image3-preview" src="/user/template/images/carrusel/{{ $sliderAdmin->img3 }}"
-                            alt="Foto 3" class="w-[500px] h-80 object-cover rounded-md" />
-                        <input type="file" name="img3" id="image3"
-                            class="absolute top-0 right-0 opacity-0 cursor-pointer" accept="image/*"
-                            onchange="previewImage(event, 'image3-preview')" />
-                        <label for="image3"
-                            class="absolute top-2 right-2 p-2 bg-gray-700 bg-opacity-50 text-white rounded-full cursor-pointer">
-                            ✏️
-                        </label>
-                    </div>
+            <!-- Tercera Imagen -->
+            <div class="flex flex-col gap-3 relative md:left-1/2">
+                <label class="text-base font-medium">Tercera imagen</label>
+                <div class="relative">
+                    <img id="image3-preview" src="/user/template/images/carrusel/{{ $sliderAdmin->img3 }}" alt="Foto 3"
+                        class="w-full h-auto aspect-[16/9] object-cover rounded-md border border-gray-300" />
+                    <input type="file" name="img3" id="image3"
+                        class="absolute top-0 right-0 opacity-0 cursor-pointer" accept="image/*"
+                        onchange="previewImage(event, 'image3-preview')" />
+                    <label for="image3"
+                        class="absolute top-2 right-2 p-2 bg-gray-700 bg-opacity-50 text-white rounded-full cursor-pointer">
+                        ✏️
+                    </label>
                 </div>
             </div>
+
         </div>
 
         <!-- Botón Guardar -->
-        <div class="flex justify-center mt-4">
+        <div class="flex justify-center mt-6">
             <button type="submit" class="py-2 px-4 bg-green-500 text-white rounded-lg hover:bg-green-600">Guardar</button>
         </div>
     </form>
@@ -72,10 +69,10 @@
     @if (session('message'))
         <script>
             Swal.fire({
-                icon: 'success', // 'success', 'error', 'warning', 'info', 'question'
+                icon: 'success',
                 title: '¡Imágenes actualizadas correctamente!',
                 text: 'Tus imágenes han sido actualizadas correctamente en el sistema.',
-                showConfirmButton: true, // Mostrar el botón de confirmación
+                showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
                 customClass: {
                     confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
