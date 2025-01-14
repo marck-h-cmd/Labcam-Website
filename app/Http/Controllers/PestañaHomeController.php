@@ -16,7 +16,7 @@ class PestañaHomeController extends Controller
     public function vista_slider_admin()
     {
         $sliderAdmin = Slider::first();
-        return view('administrador.homeSlider', compact('sliderAdmin'));
+        return view('administrador.home.homeSlider', compact('sliderAdmin'));
     }
 
     public function update_slider_admin(Request $request)
@@ -90,7 +90,7 @@ class PestañaHomeController extends Controller
     public function vista_topProyectos_admin()
     {
         $topProyAdmin = TopProyecto::first();
-        return view('administrador.homeProyectos', compact('topProyAdmin'));
+        return view('administrador.home.homeProyectos', compact('topProyAdmin'));
     }
 
     public function update_topProyectos_admin(Request $request)

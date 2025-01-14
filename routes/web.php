@@ -40,6 +40,7 @@ Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PrincipalController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -82,6 +83,10 @@ Route::get('/detalle-eventos', function () {
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
+// ------------------------- PRINCIPAL ---------------------------------------------
+Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
+
+
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
 Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slider_admin'])->name('admin-homeSliderUpdate');
