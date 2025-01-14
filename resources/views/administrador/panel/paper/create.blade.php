@@ -5,113 +5,137 @@
 @section('contenido')
     <div class="paper-container">
 
-    <div class="main-title flex flex-col items-center gap-3 mb-8">
-        <div class="title text-2xl font-semibold text-[#2e5382]">Crear Papers</div>
-        <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
-      </div>
-    <form class="p-10" action="{{ route('papers.store') }}" method="post" id="form" enctype="multipart/form-data">
-        @csrf
-    <div class="grid gap-6 mb-6 md:grid-cols-2 bg-slate-200 p-4 rounded-lg">
-        <div>
-            <label for="titulo" class="block mb-2 text-sm font-medium text-gray-900 align-baseline">Titulo</label>
-            <input type="text" name="titulo" id="titulo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Titulo del paper" required />
+        <div class="main-title flex flex-col items-center gap-3 mb-8">
+            <div class="title text-2xl font-semibold text-[#2e5382]">Crear Papers</div>
+            <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
         </div>
-        <div>
-            <label for="doi" class="block mb-2 text-sm font-medium text-gray-900 ">DOI</label>
-            <input type="text" name="doi" id="doi" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="DOI" required />
-        </div>
-        <div>
-            <label for="autores" class="block mb-2 text-sm font-medium text-gray-900">Autores</label>
-           
-            <div id="authors-container" class="space-y-2">
-                <input
-                  type="text"
-                  id="new-author"
-                  class="author-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                  placeholder="Nombre del autor"
-                />
-                <!-- Input oculto para enviar los autores ingresados seleccionados -->
-                <input type="hidden" name="autores" id="autores-json" />
-            </div>
-            <div id="dropdownSearch" class="z-20 hidden bg-white rounded-lg shadow w-60 absolute mt-8">
-                <div class="p-3">
-                  
-                <ul  id="authors-list" class="h-auto px-3 pb-3 overflow-y-auto text-sm text-gray-700"  aria-labelledby="dropdownSearchButton">
-                                 
-                </ul>
-                <button  id="remove-authors-btn" class="flex items-center p-3 px-10 text-sm font-medium text-red-600 border-t border-gray-200 rounded-b-lg bg-gray-50  hover:bg-gray-100 ">
-                  <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
-                    <path d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-6a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2Z"/>
-                  </svg>
-                  Remover autor
-              </button>
-            </div>
-            </div>
-            <div class="flex justify-between">
-              <button type="button" id="add-author-btn" class="mt-2 text-sm font-medium text-blue-500 hover:underline">+ Añadir autor</button>
-              <button type="button" id="show-authors-btn" class="mt-2 px-4 text-sm font-medium text-green-500 hover:underline"> Mostrar Autores</button>
-            </div>
-        </div>
-        
-        <div>
-            <label for="publisher" class="block mb-2 text-sm font-medium text-gray-900 ">Publisher</label>
-            <input type="text" name="publisher" id="publisher" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="Nombre publisher" required />
-        </div>
-        <div>
-            <label for="fecha_publicacion" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha Publicación</label>
-            <input type="date" name="fecha_publicacion" id="fecha_publicacion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="    " required />
-        </div>
-        <div>
-          <label for="area" class="block mb-2 text-sm font-medium text-gray-900">Area</label>
-          <select name="area" id="area" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
-              <option value="" disabled selected>Selecciona un Area de Investigación</option>
-              <option value="robotica">Robótica</option>
-              <option value="estructuras">Estructuras</option>
-              <option value="programacion">Programación</option>
-              <option value="sistemas">Sistemas</option>
-          </select>
-      </div>
-      
-        
-    <div>
-      <div class="relative">
-        <label for="topicos" class="block mb-2 text-sm font-medium text-gray-900">Tópicos</label>
-        
-        <!-- Botón que activa el menú -->
-        <button type="button" id="toggle-menu" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-left">
-            Selecciona Tópicos
-        </button>
-    
-        <!-- Menú desplegable flotante -->
-        <div id="topicos-menu" class="absolute z-10 w-full bg-white border border-gray-300 shadow-md rounded-lg hidden">
-          <div class="max-h-48 overflow-y-auto p-2">
-           
-                  <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
-                      <input type="checkbox" value="1" class="checkbox-topico">
-                      <span>1</span>
-                  </label>
-                  <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
-                    <input type="checkbox" value="2" class="checkbox-topico">
-                    <span>2</span>
-                </label>
-             
-          </div>
-      </div>  
-      <!-- Input oculto para enviar los IDs de los tópicos seleccionados -->
-      <input type="hidden" name="topicos" id="topicos">
-  
-    </div>
-     <div class="mt-4">
-        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 ">Abstract</label>
-        <textarea
-        class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-        id="descripcion" name="descripcion" rows="5" placeholder="Message"></textarea>
-     </div>
-        <div class="my-4">
-        <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Imagen Paper</label>
-        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none" id="file_input" type="file" name="img_filename"  accept="image/jpeg,image/png">
-        <div id="img-container" class="mt-2"></div>
-        </div>
+        <form class="p-10" action="{{ route('papers.store') }}" method="post" id="form" enctype="multipart/form-data">
+            @csrf
+            <div class="grid gap-6 mb-6 md:grid-cols-2 bg-slate-200 p-4 rounded-lg">
+                <div>
+                    <label for="titulo" class="block mb-2 text-sm font-medium text-gray-900 align-baseline">Titulo</label>
+                    <input type="text" name="titulo" id="titulo"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Titulo del paper" required />
+                </div>
+                <div>
+                    <label for="doi" class="block mb-2 text-sm font-medium text-gray-900 ">DOI</label>
+                    <input type="text" name="doi" id="doi"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        placeholder="DOI" required />
+                </div>
+                <div>
+                    <label for="autores" class="block mb-2 text-sm font-medium text-gray-900">Autores</label>
+
+                    <div id="authors-container" class="space-y-2">
+                        <input type="text" id="new-author"
+                            class="author-input bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Nombre del autor" />
+                        <!-- Input oculto para enviar los autores ingresados seleccionados -->
+                        <input type="hidden" name="autores" id="autores-json" />
+                    </div>
+                    <div id="dropdownSearch" class="z-20 hidden bg-white rounded-lg shadow w-60 absolute mt-8">
+                        <div class="p-3">
+
+                            <ul id="authors-list" class="h-auto px-3 pb-3 overflow-y-auto text-sm text-gray-700"
+                                aria-labelledby="dropdownSearchButton">
+
+                            </ul>
+                            <button id="remove-authors-btn"
+                                class="flex items-center p-3 px-10 text-sm font-medium text-red-600 border-t border-gray-200 rounded-b-lg bg-gray-50  hover:bg-gray-100 ">
+                                <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 20 18">
+                                    <path
+                                        d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-6a1 1 0 1 0 0 2h6a1 1 0 1 0 0-2Z" />
+                                </svg>
+                                Remover autor
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <button type="button" id="add-author-btn"
+                            class="mt-2 text-sm font-medium text-blue-500 hover:underline">+ Añadir autor</button>
+                        <button type="button" id="show-authors-btn"
+                            class="mt-2 px-4 text-sm font-medium text-green-500 hover:underline"> Mostrar Autores</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="publisher" class="block mb-2 text-sm font-medium text-gray-900 ">Publisher</label>
+                    <input type="text" name="publisher" id="publisher"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        placeholder="Nombre publisher" required />
+                </div>
+                <div>
+                    <label for="fecha_publicacion" class="block mb-2 text-sm font-medium text-gray-900 ">Fecha
+                        Publicación</label>
+                    <input type="date" name="fecha_publicacion" id="fecha_publicacion"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                        placeholder="    " required />
+                </div>
+                <div>
+                    <label for="area_id" class="block mb-2 text-sm font-medium text-gray-900">Area</label>
+                    <select name="area_id" id="area"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        required>
+                        <option value="" disabled selected>Selecciona un Area de Investigación</option>
+                        @if (!$areas->isEmpty())
+                            @foreach ($areas as $area)
+                                <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                            @endforeach
+                        @else
+                            <option value="none">No hay areas Registradas</option>
+                        @endif
+                    </select>
+                </div>
+
+
+                <div>
+                    <div class="relative">
+                        <label for="topicos" class="block mb-2 text-sm font-medium text-gray-900">Tópicos</label>
+
+                        <!-- Botón que activa el menú -->
+                        <button type="button" id="toggle-menu"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 text-left">
+                            Selecciona Tópicos
+                        </button>
+
+                        <!-- Menú desplegable flotante -->
+                        <div id="topicos-menu"
+                            class="absolute z-10 w-full bg-white border border-gray-300 shadow-md rounded-lg hidden">
+                            <div class="max-h-48 overflow-y-auto p-2">
+                                @if (!$topicos->isEmpty())
+                                    @foreach ($topicos as $topico)
+                                        <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
+                                            <input type="checkbox" value="{{ $topico->id }}" class="checkbox-topico">
+                                            <span>{{ $topico->nombre }}</span>
+                                        </label>
+                                    @endforeach
+                                @else
+                                    <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
+                                        <span>No hay topicos registrados</span>
+                                    </label>
+                                @endif
+
+                            </div>
+                        </div>
+                        <!-- Input oculto para enviar los IDs de los tópicos seleccionados -->
+                        <input type="hidden" name="topicos" id="topicos">
+
+                    </div>
+                    <div class="mt-4">
+                        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 ">Abstract</label>
+                        <textarea
+                            class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
+                            id="descripcion" name="descripcion" rows="5" placeholder="Message"></textarea>
+                    </div>
+                    <div class="my-4">
+                        <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Imagen Paper</label>
+                        <input
+                            class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none"
+                            id="file_input" type="file" name="img_filename" accept="image/jpeg,image/png">
+                        <div id="img-container" class="mt-2"></div>
+                    </div>
 
 
                 </div>
@@ -208,19 +232,11 @@
 
             const addedAuthors = new Set();
 
-    const toggleButton = document.getElementById("toggle-menu");
-    const menu = document.getElementById("topicos-menu");
-    const checkboxes = document.querySelectorAll(".checkbox-topico");
-    const hiddenInput = document.getElementById("topicos");
 
-    let selectedTopicos = [];
 
-   
-
-  
-  addAuthorBtn.addEventListener("click", () => {
-    const authorInput = document.getElementById("new-author");
-    const authorName = authorInput.value.trim();
+            addAuthorBtn.addEventListener("click", () => {
+                const authorInput = document.getElementById("new-author");
+                const authorName = authorInput.value.trim();
 
                 if (authorName && !addedAuthors.has(authorName)) {
                     addedAuthors.add(authorName);
@@ -233,15 +249,15 @@
         </div>`;
                     authorsList.appendChild(listItem);
 
-      authorInput.value = ""; 
-    }
-  });
+                    authorInput.value = "";
+                }
+            });
 
-  document.addEventListener("click", function (event) {
-      if (!showAuthorsBtn.contains(event.target) && !dropdownSearch.contains(event.target)) {
-          dropdownSearch.add("hidden");
-      }
-  });
+            document.addEventListener("click", function(event) {
+                if (!showAuthorsBtn.contains(event.target) && !dropdownSearch.contains(event.target)) {
+                    dropdownSearch.add("hidden");
+                }
+            });
 
 
             showAuthorsBtn.addEventListener("click", () => {
@@ -249,6 +265,10 @@
                 if (Array.from(addedAuthors).length > 0)
                     dropdownSearch.classList.toggle("hidden");
             });
+
+            /*    showAuthorsBtn.addEventListener("click", () => {
+                    dropdownSearch.classList.toggle("hidden");
+                });   */
 
 
             removeAuthorsBtn.addEventListener("click", () => {
@@ -264,9 +284,15 @@
                     dropdownSearch.classList.toggle("hidden");
             });
 
+              // eventos de actualizar contenedor con información de los archivos
             pdfInput.addEventListener('change', (event) => {
 
                 fileDisplay(event, pdfContainer);
+            });
+
+            imgInput.addEventListener('change', (event) => {
+
+                fileDisplay(event, imgContainer);
             });
 
             function fileDisplay(event, container) {
@@ -279,55 +305,58 @@
                 }
             }
 
-            imgInput.addEventListener('change', (event) => {
+            // transformar el formato de autores json a array de strings
+            form.addEventListener("submit", (event) => {
 
-                fileDisplay(event, imgContainer);
+                const authorsArray = Array.from(addedAuthors);
+                autoresJsonInput.value = JSON.stringify(authorsArray);
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const toggleButton = document.getElementById("toggle-menu");
+            const menu = document.getElementById("topicos-menu");
+            const checkboxes = document.querySelectorAll(".checkbox-topico");
+            const hiddenInput = document.getElementById("topicos");
+
+            let selectedTopicos = [];
+
+            // Mostrar/ocultar el menú
+            toggleButton.addEventListener("click", function() {
+                menu.classList.toggle("hidden");
             });
 
+            // Cerrar menú si se hace clic fuera
+            document.addEventListener("click", function(event) {
+                if (!toggleButton.contains(event.target) && !menu.contains(event.target)) {
+                    menu.classList.add("hidden");
+                }
+            });
 
-  form.addEventListener("submit", (event) => {
-    
-    const authorsArray = Array.from(addedAuthors);
-    autoresJsonInput.value = JSON.stringify(authorsArray);
-  });
-});
-   // Boton de desplegar el menu
-  toggleButton.addEventListener("click", function () {
-      menu.classList.toggle("hidden");
-  });
+            // Manejar selección de tópicos
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", function() {
+                    const id = this.value;
 
-  // Cerrar menú si se hace clic fuera
-  document.addEventListener("click", function (event) {
-      if (!toggleButton.contains(event.target) && !menu.contains(event.target)) {
-          menu.classList.add("hidden");
-      }
-  });
+                    if (this.checked) {
+                        // Agregar si no está en la lista
+                        if (!selectedTopicos.includes(id)) {
+                            selectedTopicos.push(id);
+                        }
+                    } else {
+                        // Remover si se deselecciona
+                        selectedTopicos = selectedTopicos.filter(t => t !== id);
+                    }
 
-  // Manejar selección de tópicos
-  checkboxes.forEach(checkbox => {
-      checkbox.addEventListener("change", function () {
-          const id = this.value;
+                    // Actualizar el input oculto con los IDs seleccionados
+                    hiddenInput.value = selectedTopicos.join(",");
+                });
+            });
+        });
+    </script>
 
-          if (this.checked) {
-              // Agregar si no está en la lista
-              if (!selectedTopicos.includes(id)) {
-                  selectedTopicos.push(id);
-              }
-          } else {
-              // Remover si se deselecciona
-              selectedTopicos = selectedTopicos.filter(t => t !== id);
-          }
-
-        
-          hiddenInput.value = selectedTopicos.join(",");
-      });
-  });
-
-</script>
-
-
-
-<script>
 
 
 @endsection

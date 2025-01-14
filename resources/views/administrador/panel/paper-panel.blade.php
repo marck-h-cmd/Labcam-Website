@@ -72,7 +72,7 @@
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                     {{ $paper->titulo }}</td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    {{ $paper->area }}</td>
+                                                    {{ $paper->area->nombre }}</td>
                                                 <td
                                                     class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 overflow-hidden max-w-96">
                                                     {{ $paper->descripcion }}</td>
