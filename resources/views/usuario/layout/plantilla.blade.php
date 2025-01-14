@@ -21,7 +21,7 @@
         @scroll.window="stickyMenu = (window.pageYOffset > 20); if(stickyMenu) openDropdown = null"
         @mouseenter="stickyMenu = false; openDropdown = null"
         @mouseleave="stickyMenu = (window.pageYOffset > 20); if(stickyMenu) openDropdown = null"
-        class="transition-all duration-300 fixed top-0 w-full z-50 py-1 md:px-12">
+        class="transition-all duration-300 fixed top-0 w-full z-50 py-1 md:px-12" id="navbar">
         <div class="w-full flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="{{ route('home') }}" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img class="h-9 md:h-10 my-3" src="/user/template/images/logoLabCam.png" alt="Logo" />
@@ -116,13 +116,16 @@
                             @click.away="openDropdown = null">
                             <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
                                 <li>
-                                    <a href="{{ route('noticias') }}" class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias') ? 'text-[#98C560]' : 'text-black' }}">Noticias</a>
+                                    <a href="{{ route('noticias') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias') ? 'text-[#98C560]' : 'text-black' }}">Noticias</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('proyectos') }}" class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos') ? 'text-[#98C560]' : 'text-black' }}">Proyectos</a>
+                                    <a href="{{ route('proyectos') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos') ? 'text-[#98C560]' : 'text-black' }}">Proyectos</a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('eventos') }}" class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos') ? 'text-[#98C560]' : 'text-black' }}">Eventos</a>
+                                    <a href="{{ route('eventos') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos') ? 'text-[#98C560]' : 'text-black' }}">Eventos</a>
                                 </li>
                             </ul>
                         </div>
@@ -136,7 +139,7 @@
         </div>
     </nav>
 
-    <main>
+    <main id="main-content">
         @yield('contenido')
     </main>
     <footer class="bg-[#1E5397] px-6">
@@ -274,6 +277,20 @@
             </svg>
         </button>
     </div>
+
+    <script>
+        // Obtener la altura del navbar y agregarla a main
+        window.addEventListener('load', function() {
+            const navbarHeight = document.getElementById('navbar').offsetHeight;
+            document.getElementById('main-content').style.marginTop = `${navbarHeight}px`;
+        });
+
+        // Actualizar en caso de que el tamaño de la ventana cambie
+        window.addEventListener('resize', function() {
+            const navbarHeight = document.getElementById('navbar').offsetHeight;
+            document.getElementById('main-content').style.marginTop = `${navbarHeight}px`;
+        });
+    </script>
 
 </body>
 

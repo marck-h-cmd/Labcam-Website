@@ -1,7 +1,8 @@
 @extends('usuario.layout.plantilla')
 
 @section('contenido')
-    <section>
+    {{-- Sección slider --}}
+    <section class="mt-0">
         <div id="default-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
             <div
@@ -66,11 +67,10 @@
 
     {{-- Sección noticias --}}
     <section class="pt-16 pb-2">
-        <div class="text-center">
-            <h2 class="text-blue-800 font-semibold text-5xl">Noticias</h2>
-            <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        <div class="flex flex-col items-center gap-3 mb-4">
+            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Noticias</h2>
+            <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
         </div>
-
         {{-- <div class="ji gp uq"> --}}
         <div class="bb ye ki xn vq jb jo">
             <div class="wc qf pn xo zf iq">
@@ -176,9 +176,8 @@
                 <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
                     <!-- Título -->
                     <div class="mb-6">
-                        <h2 class="text-4xl lg:text-5xl font-bold border-b-4 border-blue-300 inline-block pb-2">
-                            Proyectos
-                        </h2>
+                        <h2 class="font-semibold text-4xl mb-1">Proyectos</h2>
+                        <div class="blue-line w-full h-0.5 bg-blue-300"></div>
                     </div>
                     <!-- Texto descriptivo -->
                     <div class="mb-6">
@@ -215,9 +214,9 @@
 
     {{-- Sección eventos --}}
     <section class="py-16">
-        <div class="text-center">
-            <h2 class="text-blue-800 font-semibold text-5xl">Próximos Eventos</h2>
-            <div class="w-[420px] h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        <div class="flex flex-col items-center gap-3 mb-4">
+            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Próximos Eventos</h2>
+            <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
         </div>
 
         {{-- <div class="ji gp uq"> --}}
