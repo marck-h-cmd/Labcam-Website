@@ -114,6 +114,8 @@ Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name
 
 Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea'])->name('biblioteca.area');
 
+Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search']);
+
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
 
 

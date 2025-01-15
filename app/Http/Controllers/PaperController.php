@@ -17,7 +17,7 @@ class PaperController extends Controller
   public function index(Request $request)
   {
     // inicializar 3 o menos papers
-    $amount = $request->query('count', 3);
+    $amount = $request->query('count', 4);
 
     $papers = Paper::take($amount)->get();
 
@@ -31,7 +31,11 @@ class PaperController extends Controller
     // Conteo de papers restantes
     $displayCount = $totalPapers - $amount;
 
-    return view('usuario.nosotros.biblioteca', compact('papers', 'displayCount'));
+     // Obtener áreas de investigación y topicos relacionadas con almenos un paper
+    $topicos = Topico::has('papers', '>', 0)->get();  
+    $areas = AreaInvestigacion::has('papers', '>', 0)->get();
+
+    return view('usuario.nosotros.biblioteca', compact('papers', 'displayCount','topicos','areas'));
   }
 
   public function fetchMorePapers(Request $request)
@@ -57,6 +61,54 @@ class PaperController extends Controller
     ]);
 
   }
+
+  public function search(Request $request)
+{
+  /*
+    $query = $request->input('query', '');
+    $topics = $request->input('topics', []);
+
+    // Iniciar la consulta de los papers
+    $papers = Paper::query();
+
+    // Filtrar por título si hay una consulta de búsqueda
+    if (!empty($query)) {
+        $papers->where('titulo', 'like', "%{$query}%");
+    }
+
+    // Filtrar por tópicos si hay checkboxes seleccionados
+    if (!empty($topics)) {
+        $topicsArray = explode(',', $topics); // Convertir string en array
+        $papers->whereHas('topicos', function ($q) use ($topicsArray) {
+            $q->whereIn('nombre', $topicsArray);
+        });
+    }
+
+    // Obtener los resultados
+    $results = $papers->get();
+
+    return response()->json([
+        'papers' => $results
+    ]);
+    */
+    $query = $request->input('query');
+    $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
+
+    $papers = Paper::query();
+
+    if ($query) {
+        $papers->where('titulo', 'like', "%$query%");
+    }
+
+    if (!empty($topics)) {
+        $papers->whereHas('topicos', function ($q) use ($topics) {
+            $q->whereIn('nombre', $topics);
+        });
+    }
+
+    return response()->json(['papers' => $papers->get()]);
+}
+
 
   public function storePaper(Request $request)
   {
@@ -218,15 +270,19 @@ class PaperController extends Controller
       ->with('success', 'Paper eliminado exitosamente');
   }
 
-  public function fetchByArea($area)
+  public function fetchByArea($areaId)
   {
 
-    $papers = Paper::all()->where('area', $area);
+    $papers = Paper::all()->where('area_id', $areaId);
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
 
-    return view('usuario.nosotros.biblioteca', compact('papers'));
+    $topicos = Topico::has('papers', '>', 0)->get();  
+    $areas = AreaInvestigacion::has('papers', '>', 0)->get();
+
+
+    return view('usuario.nosotros.biblioteca', compact('papers','topicos','areas'));
 
   }
 
