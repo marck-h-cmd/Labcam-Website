@@ -393,13 +393,13 @@
       <div class="cards">
        
         @if($previousPaper)
-        <a class="card-item r" href="{{ route('paper.show', $previousPaper->id) }}">
+        <a class="card-item r" href="{{ route('papers.show', $previousPaper->id) }}">
           <h3>{{$previousPaper->titulo}}</h3>
           <p>Paper anterior</p>
         </a>
         @endif
         @if($nextPaper)
-        <a class="card-item"  href="{{ route('paper.show', $nextPaper->id) }}">
+        <a class="card-item"  href="{{ route('papers.show', $nextPaper->id) }}">
           <h3>{{$nextPaper->titulo}}</h3>
           <p> Paper siguiente</p>
         </a>

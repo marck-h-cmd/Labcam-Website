@@ -42,6 +42,7 @@ Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PrincipalController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -84,6 +85,10 @@ Route::get('/detalle-eventos', function () {
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
+// ------------------------- PRINCIPAL ---------------------------------------------
+Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
+
+
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
 Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slider_admin'])->name('admin-homeSliderUpdate');
@@ -109,12 +114,20 @@ Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name
 
 Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea'])->name('biblioteca.area');
 
+Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search']);
+
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
+Route::get('/admin/historia-sliders', HistoriaSliderController::class .'@index')->name('h-sliders-panel');
 
+Route::get('/admin/historia-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
 
-Route::get('/admin/h-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
+Route::post('/admin/historia-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');
 
-Route::post('/admin/h-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');
+Route::get('/admin/historia-sliders/{slider}/edit', HistoriaSliderController::class .'@edit')->name('h-slider.edit');
+
+Route::put('/admin/historia-sliders/{slider}', HistoriaSliderController::class .'@update')->name('h-slider.update');
+
+Route::delete('/admin/historia-sliders/{slider}', HistoriaSliderController::class .'@destroy')->name('h-slider.destroy');
 
 
 // --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
