@@ -117,11 +117,17 @@ Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea']
 Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search']);
 
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
+Route::get('/admin/historia-sliders', HistoriaSliderController::class .'@index')->name('h-sliders-panel');
 
+Route::get('/admin/historia-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
 
-Route::get('/admin/h-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
+Route::post('/admin/historia-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');
 
-Route::post('/admin/h-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');
+Route::get('/admin/historia-sliders/{slider}/edit', HistoriaSliderController::class .'@edit')->name('h-slider.edit');
+
+Route::put('/admin/historia-sliders/{slider}', HistoriaSliderController::class .'@update')->name('h-slider.update');
+
+Route::delete('/admin/historia-sliders/{slider}', HistoriaSliderController::class .'@destroy')->name('h-slider.destroy');
 
 
 // --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
