@@ -116,6 +116,13 @@
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-slider.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Crear Historia Slider</a>
                     </li>
+                    <li class="mb-4">
+                        <a href="{{ route('h-sliders-panel') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-slider.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Panel Historia Slider</a>
+                    </li>
                 </ul>
             </li>
             <li
