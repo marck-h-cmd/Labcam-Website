@@ -289,7 +289,7 @@ class PaperController extends Controller
   // Función para mostrar papers en el panel
   public function adminIndex(Request $request): View
   {
-    $papers = Paper::paginate();
+    $papers = Paper::paginate(10);
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });

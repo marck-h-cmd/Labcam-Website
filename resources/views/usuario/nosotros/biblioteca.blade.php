@@ -237,8 +237,8 @@
                                         </path>
                                     </svg>
                                     <span class="flex-1 ml-3 whitespace-nowrap">Noticias</span>
-                                    <span
-                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full ">3</span>
+                           <!--         <span
+                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full ">3</span>  -->
                                 </a>
                             </li>
 
