@@ -21,9 +21,14 @@
 
                 <div class="yh">
                     <div class="tc uf wf ag jq">
+                            <div class="tc wf ag">
+                                <img src="/user/template/images/icon-man.svg" alt="User" />
+                                <p>{{ $proyecto->autor }}</p>
+                            </div>
                         <div class="tc wf ag">
                             <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                            <p>{{ $proyecto->fecha_publicacion }}</p>
+                            <p>{{ \Carbon\Carbon::parse($proyecto->fecha_publicacion)->format('d/m/Y') }}
+                            </p>
                         </div>
                     </div>
                     <h4 class="ek tj ml il kk wm xl eq lb">

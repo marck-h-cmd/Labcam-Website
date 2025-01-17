@@ -180,7 +180,7 @@
                     <!-- Texto descriptivo -->
                     <div>
                         <div class="my-6 flex flex-col space-y-4">
-                            {!! $topProyecto->descripcion !!}
+                             {!! $topProyecto->descripcion !!}
                         </div>
                         <a href="{{ route('proyectos') }}">
                             <button
@@ -195,9 +195,9 @@
                 <div class="relative w-full h-[600px] flex items-center justify-center">
                     <!-- Imagen inferior -->
                     <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-40 left-4 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 hover:translate-x-16 hover:translate-y-8"
-                        src="/user/template/images/proyectos/{{ $topProyecto->img1 }}">
-
+                       src="/user/template/images/proyectos/{{ $topProyecto->img1 }}">
                     <!-- Imagen superior -->
+
                     <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-2 left-40 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 hover:-translate-x-16 hover:-translate-y-8"
                         src="/user/template/images/proyectos/{{ $topProyecto->img2 }}">
                 </div>
