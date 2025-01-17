@@ -16,7 +16,7 @@ class TopicoController extends Controller
     {
 
 
-        $topicos = Topico::paginate();
+        $topicos = Topico::paginate(10);
 
 
         return view('administrador.panel.categoria-investigacion.topico-panel-tab', compact('topicos'))->with('i', ($request->input('page', 1) - 1) * $topicos->perPage());

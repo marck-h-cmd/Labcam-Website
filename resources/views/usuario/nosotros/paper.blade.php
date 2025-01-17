@@ -165,7 +165,7 @@
 .card-item {
   text-align: left;
   flex: 1;
-  padding: 20px 40px;
+  padding: 20px 30px;
   background-color: #f8f8f8;
   border: 1px solid rgb(114, 114, 114,0.7);
   cursor: pointer;
@@ -393,13 +393,13 @@
       <div class="cards">
        
         @if($previousPaper)
-        <a class="card-item r" href="{{ route('paper.show', $previousPaper->id) }}">
+        <a class="card-item r" href="{{ route('papers.show', $previousPaper->id) }}">
           <h3>{{$previousPaper->titulo}}</h3>
           <p>Paper anterior</p>
         </a>
         @endif
         @if($nextPaper)
-        <a class="card-item"  href="{{ route('paper.show', $nextPaper->id) }}">
+        <a class="card-item"  href="{{ route('papers.show', $nextPaper->id) }}">
           <h3>{{$nextPaper->titulo}}</h3>
           <p> Paper siguiente</p>
         </a>

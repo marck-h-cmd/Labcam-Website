@@ -22,4 +22,31 @@ class ProyectoController extends Controller
         return view('usuario.Investigacion.detalle-proyectos', compact('proyecto'));
 
     }
+    public function store(Request $request)
+    {
+        //
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'subtitulo' => 'required|string|max:1000',
+            'descripcion' => 'required',
+            'autor' => 'required|string|max:255',
+            'fecha' => 'required|date',
+            'imagen' => 'required|image',
+        ]);
+
+        $imagenPath = $request->file('imagen')->store('proyectos', 'public');
+
+        Proyecto::create([
+            'titulo' => $request->titulo,
+            'subtitulo' => $request->subtitulo,
+            'descripcion' => $request->contenido,
+            'autor' => $request->autor,
+            'fecha' => $request->fecha,
+            'imagen' => $imagenPath,
+        ]);
+
+        return redirect()->route('proyectos.index')->with('success', 'Proyecto creado con éxito');
+    //usuario.Investigacion.noticias
+    }
+
 }

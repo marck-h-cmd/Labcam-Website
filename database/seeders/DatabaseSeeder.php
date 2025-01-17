@@ -2,22 +2,22 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Obtener todos los seeders en database/seeders
+        $seeders = collect(File::files(__DIR__))
+            ->map(fn ($file) => pathinfo($file, PATHINFO_FILENAME))
+            ->filter(fn ($class) => $class !== 'DatabaseSeeder') // Evitar recursión
+            ->toArray();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Ejecutar cada seeder automáticamente
+        foreach ($seeders as $seeder) {
+            $this->call("Database\\Seeders\\$seeder");
+        }
     }
 }

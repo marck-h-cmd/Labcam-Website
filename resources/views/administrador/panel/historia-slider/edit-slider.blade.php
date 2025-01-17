@@ -3,15 +3,16 @@
 @section('title', 'Crear Slider historia')
 
 @section('contenido')
-    <div class="slider-container ">
+    <div class="slider-container max-w-screen-2xl flex flex-col items-center ">
 
         <div class="main-title flex flex-col items-center gap-3 mb-8">
             <div class="title text-2xl font-semibold text-[#2e5382]">Crear Slider de Momentos Importantes</div>
             <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
         </div>
-        <form class="md:px-20 px-40 py-10 " action="{{ route('h-slider.store') }}" method="post" id="form"
+        <form class="md:px-20 px-40 py-10 " action="{{ route('h-slider.update',$slider->id) }}" method="post" id="form"
             enctype="multipart/form-data">
             @csrf
+            @method('PUT')
             <div class="grid gap-6 mb-6 md:grid-cols-1 bg-slate-200 p-4 rounded-lg">
 
                 <div>
@@ -28,22 +29,21 @@
                 <div>
                     <label for="historia_img" class="block mb-2 text-sm font-medium text-gray-900">Imagen Slider</label>
                     <div class="flex items-center justify-center w-full">
-                        <label for="dropzone-file"
-                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50">
-                            <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 20 16" aria-hidden="true">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                </svg>
-                                <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click to upload</span> or
-                                    drag and drop</p>
-                                <p class="text-xs text-gray-500">PNG, JPG (MAX. 800x400px)</p>
+                    <!--    <label for="dropzone-file"
+                            class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"> -->
+                            <div class="relative">
+                                <img id="img-preview" src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}" alt="Foto 1"
+                                    class="w-auto  h-auto object-cover rounded-md border border-gray-300" />
+                                <input type="file" name="historia_img" id="dropzone-file"
+                                    class="absolute z-20 bottom-0 w-full opacity-0 cursor-pointer" accept="image/png,image/jpg,image/jpeg"
+                                   />
+                                <label for="historia_img"
+                                    class="absolute bottom-0 w-full text-center p-2 bg-blue-500 bg-opacity-50 text-white  cursor-pointer">
+                                   Editar ✏️
+                                </label>
                             </div>
-                            <input id="dropzone-file" name="historia_img" type="file" class="hidden"
-                                accept="image/png,image/jpg,image/jpeg" />
-                        </label>
+                            
+                  <!--      </label> -->
                     </div>
                     <div id="info-container" class="mt-2"></div>
                 </div>
@@ -101,7 +101,9 @@
             const imgContainer = document.getElementById("info-container")
             const imgInput = document.getElementById("dropzone-file")
             const charCount = document.getElementById('char-count');
+            const imgPreview = document.getElementById('img-preview')
             const maxChars = 200;
+      
 
             const updateCount = () => {
 
@@ -149,6 +151,12 @@
                 autoresize_max_width: 400,
                 setup: (editor) => {
 
+                    editor.on('init', () => {
+                        editor.setContent(
+                            `{!! $slider->descripcion !!}`); 
+                        updateCount(); 
+                    });
+
                     // Actualizar el contador al escribir
                     editor.on('input', updateCount);
 
@@ -186,6 +194,17 @@
                     });
                 }
             });
+
+            imgInput.addEventListener("change",(event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imgPreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
 
         });
     </script>
