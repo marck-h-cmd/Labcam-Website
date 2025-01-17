@@ -13,7 +13,7 @@ class AreaInvestigacionController extends Controller
     {
 
 
-        $areas = AreaInvestigacion::paginate();
+        $areas = AreaInvestigacion::paginate(10);
 
 
         return view('administrador.panel.categoria-investigacion.area-panel-tab', compact('areas'))->with('i', ($request->input('page', 1) - 1) * $areas->perPage());

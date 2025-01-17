@@ -155,7 +155,7 @@ slider
 }
 
 .slider .slider-item:nth-of-type(1)>* {
-    opacity: 1;
+    opacity: 1;  
 }
 
 .slider .slider-item img {
@@ -163,10 +163,10 @@ slider
 }
 
 .slider .slider-item img:hover {
-    opacity: 0.8 !important;
+    opacity: 0.9 !important;
 }
 
-.slider .slider-item>* {
+.slider .slider-item > * {
     opacity: 0;
     transition: all 0.5s;
 }
@@ -178,23 +178,22 @@ slider
 }
 
 .slider input[type=radio]:before {
-    content: '';
-   
+    content: '';   
     float: left;
     height: 100%;
     width: 100%;
     transition: all 0.5s;
 }
 
-.slider input[type=radio]:checked~.slider-item {
+.slider input[type=radio]:checked ~ .slider-item {
     visibility: hidden;
 }
 
 
-.slider input[type=radio]:nth-of-type(1):checked~.slider-item:nth-of-type(1),
-.slider input[type=radio]:nth-of-type(2):checked~.slider-item:nth-of-type(2),
-.slider input[type=radio]:nth-of-type(3):checked~.slider-item:nth-of-type(3),
-.slider input[type=radio]:nth-of-type(4):checked~.slider-item:nth-of-type(4) {
+.slider input[type=radio]:nth-of-type(1):checked ~ .slider-item:nth-of-type(1),
+.slider input[type=radio]:nth-of-type(2):checked ~ .slider-item:nth-of-type(2),
+.slider input[type=radio]:nth-of-type(3):checked ~ .slider-item:nth-of-type(3),
+.slider input[type=radio]:nth-of-type(4):checked ~ .slider-item:nth-of-type(4) {
     visibility: visible;
 }
 
@@ -213,6 +212,119 @@ slider
 
 
 }
+/*
+
+.slider {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #fff;
+    min-height: 380px;
+    width: 622px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.slider .slider-item {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease-in-out, visibility 0.5s;
+    padding: 10px;
+}
+
+.slider .slider-item img {
+    margin-bottom: 6px;
+}
+
+
+.slider .slider-item:first-child {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+.slider input[type=radio] {
+    cursor: pointer;
+    position: relative;
+    margin: 12px 0;
+    display: inline-block;
+}
+
+@media (max-width: 968px) {
+   .slider {
+      width: 422px;
+      min-height: 325px;
+   }
+}
+   
+   .slider {
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    background-color: #fff;
+    min-height: 380px;
+    width: 622px;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.slider input[type=radio] {
+    cursor: pointer;
+    position: relative;
+    margin: 12px 0;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: gray;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background 0.3s;
+}
+
+ Estilos de los puntos de navegación 
+.slider input[type=radio]:checked {
+    background: black;
+}
+
+
+.slider .slider-item {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s;
+    padding: 10px;
+}
+
+
+.slider .slider-item:nth-of-type(1) {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.slider .slider-item img {
+    margin-bottom: 6px;
+}
+
+.slider .slider-item img:hover {
+    opacity: 0.9 !important;
+}
+
+
+@media (max-width: 968px) {
+   .slider {
+      width: 422px;
+      min-height: 325px;
+   }
+}
+
+*/
 
 
 
@@ -260,21 +372,62 @@ slider
         <div class="slider">
 
             @foreach($sliders as $slider)
-           
             <input type="radio" name="nav" value="{{$slider->id}}">
+            @endforeach
+            @foreach($sliders as $slider)
             <div class="slider-item">
                 <img src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}" alt="imagegen {{$slider->id}}" />
-                <p>{{$slider->descripcion}}</p>
-            </div>
-
-            @endforeach
-    
+                <p>{!!$slider->descripcion!!}</p>
+            </div>            
+          
+        @endforeach
         </div>
-   <!--   <div class="explore-button">Explorar más</div>  -->
     </div>
     @endif
   </div>
   
+
+
+@endsection
+
+@section('script')
+
+<script>
+ /*   
+document.addEventListener("DOMContentLoaded", function () {
+    const radios = document.querySelectorAll('.slider input[type="radio"]');
+    const slides = document.querySelectorAll('.slider .slider-item');
+
+    function updateSlider(index) {
+        slides.forEach((slide, i) => {
+            if (i == index) {
+                slide.style.opacity = "1";
+                slide.style.visibility = "visible";
+            } else {
+                slide.style.opacity = "0";
+                slide.style.visibility = "hidden";
+            }
+        });
+    }
+
+  
+    radios.forEach((radio) => {
+        radio.addEventListener('change', function () {
+            updateSlider(this.dataset.index);
+        });
+    });
+
+   
+    updateSlider(0);
+});
+
+*/
+
+</script>
+
+
+
+
 
 
 @endsection
