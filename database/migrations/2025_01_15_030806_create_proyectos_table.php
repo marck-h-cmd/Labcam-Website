@@ -11,8 +11,10 @@ class CreateProyectosTable extends Migration
         Schema::create('proyectos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
+            $table->string('subtitulo')->nullable();
             $table->text('descripcion');
             $table->string('imagen');
+            $table->string('autor');
             $table->date('fecha_publicacion')->nullable();
             $table->timestamps();
         });

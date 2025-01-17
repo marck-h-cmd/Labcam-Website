@@ -36,23 +36,37 @@ Route::get('/nosotros/paper', function () {
     return view('usuario.nosotros.paper');
 })->name('biblioteca.paper');
 
+//RUTA CONTACTO
 use App\Http\Controllers\ContactoController;
 
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
+//RUTA LOGIN
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PrincipalController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 
+//RUTA NOTICIA
 Route::get('/noticias', function () {
     return view('usuario.Investigacion.noticias');
 })->name('noticias');
 
+use App\Http\Controllers\NoticiaController;
 
+Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias');
+Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias.show');
+// Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticias.create');
+// Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticias.store');
+Route::get('/detalle-noticias', function () {
+    return view('usuario.Investigacion.detalle-noticias');
+})->name('detalle-noticias');
+
+//RUTA PROYECTO
 Route::get('/proyectos', function () {
     return view('usuario.Investigacion.proyectos');
 })->name('proyectos');
@@ -65,18 +79,18 @@ Route::get('/detalle-proyectos', function () {
     return view('usuario.Investigacion.detalle-proyectos');
 })->name('detalle-proyectos');
 
-
+//RUTA EVENTO
 Route::get('/eventos', function () {
     return view('usuario.Investigacion.eventos');
 })->name('eventos');
 
-Route::get('/detalle-noticias', function () {
-    return view('usuario.Investigacion.detalle-noticias');
-})->name('detalle-noticias');
+use App\Http\Controllers\EventoController;
 
-Route::get('/detalle-proyectos', function () {
-    return view('usuario.Investigacion.detalle-proyectos');
-})->name('detalle-proyectos');
+Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
+Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.show');
+// Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
+// Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
+
 
 Route::get('/detalle-eventos', function () {
     return view('usuario.Investigacion.detalle-eventos');
@@ -120,6 +134,7 @@ Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea']
 Route::get('/admin/h-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
 
 Route::post('/admin/h-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');
+
 
 
 // --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
