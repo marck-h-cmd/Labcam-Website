@@ -102,11 +102,11 @@ class PaperController extends Controller
 
     if (!empty($topics)) {
         $papers->whereHas('topicos', function ($q) use ($topics) {
-            $q->whereIn('nombre', $topics);
+            $q->whereIn('id', $topics);
         });
     }
 
-    return response()->json(['papers' => $papers->get()]);
+    return response()->json(['papers' => $papers->get()], 200);
 }
 
 

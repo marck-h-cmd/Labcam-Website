@@ -21,6 +21,17 @@ class HistoriaSliderController extends Controller
         return view('administrador.panel.h-slider-panel', compact('sliders'))->with('i', ($request->input('page', 1) - 1) * $sliders->perPage());
     }
 
+    public function view(Request $request)
+    {
+        // inicializar 
+
+
+        $sliders = HistoriaSlider::all();
+
+
+        return view('usuario.nosotros.historia', compact('sliders'));
+    }
+
 
 
 
@@ -66,8 +77,8 @@ class HistoriaSliderController extends Controller
         try {
             // validar campos
             $request->validate([
-                'descripcion' => 'max:100',
-                'historia_img' => 'required|file|mimes:jpeg,png,jpg|max:5120',
+                'descripcion' => '',
+                'historia_img' => 'file|mimes:jpeg,png,jpg|max:5120',
             ]);
             $slider = HistoriaSlider::findOrFail($id);
 
@@ -90,12 +101,12 @@ class HistoriaSliderController extends Controller
 
             $slider->update([
                 'descripcion' => $request->descripcion,
-                'historiaImg' => $historiaImg,
+                'historia_img' => $historiaImg,
             ]);
 
 
 
-            return redirect()->route('slider-panel')
+            return redirect()->route('h-sliders-panel')
                 ->with('edited', 'Slider actualizado exitosamente.');
         } catch (Exception $e) {
             Log::error("Error updating: " . $e->getMessage());
@@ -115,13 +126,13 @@ class HistoriaSliderController extends Controller
         $slider = HistoriaSlider::find($id);
 
         if (!$slider) {
-            return redirect()->route('areas-panel')
+            return redirect()->route('h-sliders-panel')
                 ->with('error', 'No encontrado');
         }
 
 
         $slider->delete();
-        return redirect()->route('slider-panel')
+        return redirect()->route('h-sliders-panel')
             ->with('success', 'Slider eliminado exitosamente');
     }
 
@@ -131,11 +142,11 @@ class HistoriaSliderController extends Controller
         $slider = HistoriaSlider::find($id);
 
         if (!$slider) {
-            return redirect()->route('slider-panel')
+            return redirect()->route('h-sliders-panel')
                 ->with('error', 'No encontrado');
         }
 
-        return view('administrador.panel.paper.edit', compact('slider'));
+        return view('administrador.panel.historia-slider.edit-slider', compact('slider'));
     }
 
 

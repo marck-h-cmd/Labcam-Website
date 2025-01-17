@@ -30,7 +30,7 @@ Route::get('/nosotros/biblioteca',[PaperController::class, 'index'])->name('bibl
 Route::get('/nosotros/biblioteca/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('biblioteca.fetchMore');
 
 
-Route::get('/nosotros/historia', HistoriaSliderController::class . '@index')->name('historia');
+Route::get('/nosotros/historia', HistoriaSliderController::class . '@view')->name('historia');
 
 Route::get('/nosotros/paper', function () {
     return view('usuario.nosotros.paper');
