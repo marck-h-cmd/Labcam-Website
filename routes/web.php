@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
+use App\Http\Controllers\AreaInvestigacionController;
+use App\Http\Controllers\TopicoController;
 use Illuminate\Support\Facades\Route;
 
 // -----------------------------------------------------USUARIO--------------------------------------------------------------------------------------
@@ -42,6 +44,7 @@ Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.s
 
 //RUTA LOGIN
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PrincipalController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -96,6 +99,10 @@ Route::get('/detalle-eventos', function () {
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
+// ------------------------- PRINCIPAL ---------------------------------------------
+Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
+
+
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
 Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slider_admin'])->name('admin-homeSliderUpdate');
@@ -127,3 +134,30 @@ Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea']
 Route::get('/admin/h-sliders/create', HistoriaSliderController::class . '@create')->name('h-slider.create');
 
 Route::post('/admin/h-sliders', HistoriaSliderController::class .'@store')->name('h-slider.store');
+
+
+
+// --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
+
+
+// ---- Areas ---- //
+Route::get('/admin/areas', AreaInvestigacionController::class .'@index')->name('areas-panel');
+
+Route::post('/admin/areas', AreaInvestigacionController::class .'@store')->name('areas.store');
+
+Route::get('/admin/areas/{area}/edit', AreaInvestigacionController::class .'@edit')->name('areas.edit');
+
+Route::put('/admin/areas/{area}', AreaInvestigacionController::class .'@update')->name('areas.update');
+
+Route::delete('/admin/areas/{area}', AreaInvestigacionController::class .'@destroy')->name('areas.destroy');
+
+// ---- Topicos ---- //
+Route::get('/admin/topicos', TopicoController::class .'@index')->name('topic-panel');
+
+Route::post('/admin/topicos', TopicoController::class .'@store')->name('topics.store');
+
+Route::get('/admin/topicos/{topico}/edit', TopicoController::class .'@edit')->name('topics.edit');
+
+Route::put('/admin/topicos/{topico}', TopicoController::class .'@update')->name('topics.update');
+
+Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->name('topics.destroy');

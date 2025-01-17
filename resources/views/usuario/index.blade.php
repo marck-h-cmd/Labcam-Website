@@ -1,10 +1,12 @@
 @extends('usuario.layout.plantilla')
 
 @section('contenido')
-    <section>
+    {{-- Sección slider --}}
+    <section class="mt-0">
         <div id="default-carousel" class="relative w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
-            <div class="relative h-56 overflow-hidden md:h-[700px]">
+            <div
+                class="relative overflow-hidden transition-all duration-500 ease-in-out h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px]">
                 <!-- Item 1 -->
                 <div class="hidden duration-700 ease-in-out" data-carousel-item>
                     <img src="/user/template/images/carrusel/{{ $slider->img1 }}"
@@ -65,11 +67,10 @@
 
     {{-- Sección noticias --}}
     <section class="pt-16 pb-2">
-        <div class="text-center">
-            <h2 class="text-blue-800 font-semibold text-5xl">Noticias</h2>
-            <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        <div class="flex flex-col items-center gap-3 mb-4">
+            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Noticias</h2>
+            <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
         </div>
-
         {{-- <div class="ji gp uq"> --}}
         <div class="bb ye ki xn vq jb jo">
             <div class="wc qf pn xo zf iq">
@@ -167,18 +168,19 @@
 
     {{-- Seccion de proyectos --}}
     <section class="bg-blue-900 text-white py-20 relative overflow-hidden">
-        <div class="mx-auto px-5 relative">
+        <div class="container-fluid mx-auto px-9 md:px-16">
             <!-- Contenido principal -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative">
-                <div class="ml-10">
+            <div
+                class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative transition-all duration-500 ease-in-out">
+                <!-- Texto -->
+                <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
                     <!-- Título -->
-                    <div class="mb-4">
-                        <h2 class="text-5xl font-bold border-b-4 border-blue-300 inline-block pb-2 px-12">
-                            Proyectos
-                        </h2>
+                    <div class="mb-6">
+                        <h2 class="font-semibold text-4xl mb-1">Proyectos</h2>
+                        <div class="blue-line w-full h-0.5 bg-blue-300"></div>
                     </div>
                     <!-- Texto descriptivo -->
-                    <div>
+                    <div class="mb-6">
                         <div class="my-6 flex flex-col space-y-4">
                              {!! $topProyecto->descripcion !!}
                         </div>
@@ -190,28 +192,33 @@
                         </a>
                     </div>
                 </div>
-
                 <!-- Contenedor de imágenes -->
-                <div class="relative w-full h-[600px] flex items-center justify-center">
+                <div class="h-[450px] flex items-center justify-center relative w-full mt-5 sm:mt-16 lg:mt-28">
                     <!-- Imagen inferior -->
-                    <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-40 left-4 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 hover:translate-x-16 hover:translate-y-8"
-                       src="/user/template/images/proyectos/{{ $topProyecto->img1 }}">
+
+                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)] 
+        absolute top-1/2 left-[calc(50%-70px)] lg:left-[calc(50%-10px)] xl:left-[calc(50%-30px)] transform -translate-x-1/2 -translate-y-1/2 
+        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 
+        hover:translate-x-6 hover:translate-y-8"
+                        src="/user/template/images/proyectos/{{ $topProyecto->img1 }}" alt="Imagen 1">
+
                     <!-- Imagen superior -->
+                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)] 
+        absolute top-1/4 left-[calc(50%+70px)] lg:left-[calc(50%+45px)] xl:left-[calc(50%+60px)] transform -translate-x-1/2 -translate-y-1/2 
+        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 
+        hover:-translate-x-6 hover:-translate-y-8"
+                        src="/user/template/images/proyectos/{{ $topProyecto->img2 }}" alt="Imagen 2">
 
-                    <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-2 left-40 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 hover:-translate-x-16 hover:-translate-y-8"
-                        src="/user/template/images/proyectos/{{ $topProyecto->img2 }}">
                 </div>
-
             </div>
         </div>
     </section>
 
-
     {{-- Sección eventos --}}
     <section class="py-16">
-        <div class="text-center">
-            <h2 class="text-blue-800 font-semibold text-5xl">Próximos Eventos</h2>
-            <div class="w-[420px] h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        <div class="flex flex-col items-center gap-3 mb-4">
+            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Próximos Eventos</h2>
+            <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
         </div>
 
         {{-- <div class="ji gp uq"> --}}
