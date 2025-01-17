@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -19,11 +22,26 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Lógica para iniciar sesión
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        if (Auth::attempt($request->only('email', 'password'))) {
+            // return redirect()->route('dashboard')->with('success', 'Sesión iniciada correctamente');
+        }
+
+        return back()->withErrors(['email' => 'Las credenciales no coinciden']);
     }
 
     public function showRegisterForm()
     {
         return view('usuario.auth.register');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('login')->with('success', 'Sesión cerrada correctamente');
     }
 }
