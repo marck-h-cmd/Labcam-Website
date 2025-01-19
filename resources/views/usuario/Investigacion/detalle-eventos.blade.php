@@ -9,44 +9,39 @@
             <!-- Fecha -->
             <div class="text-center">
                 <div class="bg-gray-800 text-white text-sm px-4 py-2 rounded-none mr-8 mt-20">
-                    dd/mm/yy
+                    {{ \Carbon\Carbon::parse($evento->fecha)->format('d/m/Y') }}
                 </div>
                 <div class="bg-gray-600 text-white text-sm px-4 py-2 rounded-none mr-8 mt-1">
                     Categoría:
-                    <span class="text-green-500">Futuro</span>
+                    @if ($evento->categoria === 'pasado')
+                        <span class="text-red-500">{{ $evento->categoria }}</span>
+                    @elseif ($evento->categoria === 'futuro')
+                        <span class="text-green-500">{{ $evento->categoria }}</span>
+                    @endif
                 </div>
             </div>
 
             <!-- Titulo y Subtitulo -->
             <div>
-                <h1 class="text-3xl font-bold text-gray-800 mt-20">Titulo Free advertising for your online business</h1>
-                <h2 class="text-xl text-gray-600">Subitulo Free advertising for your online business</h2>
+                <h1 class="text-3xl font-bold text-gray-800 mt-20">{{ $evento->titulo }}</h1>
+                <h2 class="text-xl text-gray-600">{{ $evento->subtitulo }}</h2>
                 <p class="text-sm text-gray-500 mt-2">
-                   Autor Musharof Chy
+                   Autor {{ $evento->autor }}
                 </p>
             </div>
         </div>
 
             <!-- Imagen destacada -->
             <div class="flex-shrink-0 w-3/3">
-                <img src="/user/template/images/blog-03.png" alt="Imagen de la noticia" class="w-full rounded-lg shadow-md">
+                <img src="{{ asset('storage/' . $evento->imagen) }}" alt="Imagen de la noticia" class="w-full rounded-lg shadow-md">
             </div>
 
         <!-- <div class="flex mb-8"> -->
             <!-- Contenido de la noticia -->
-            <div class="w-full">
-                <article class="text-gray-700 leading-relaxed mt-10">
-                    <p class="mb-4">
-                    Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                    Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                    Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
-                Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem Lorem Lorem lorem
+            <div style="max-width: 100%; margin-top: 1rem;">
+                <article style="font-size: 1rem; color: #4A5568; line-height: 1.5; word-wrap: break-word;">
+                    <p>
+                       {{ $evento->descripcion }}
                     </p>
                 </article>
             </div>

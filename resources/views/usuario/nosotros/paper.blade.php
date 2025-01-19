@@ -165,7 +165,7 @@
 .card-item {
   text-align: left;
   flex: 1;
-  padding: 20px 40px;
+  padding: 20px 30px;
   background-color: #f8f8f8;
   border: 1px solid rgb(114, 114, 114,0.7);
   cursor: pointer;

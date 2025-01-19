@@ -49,7 +49,8 @@
 
                                     </div>
                                 </li>
-                                <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>
+                                <!--
+                                    <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
 
                             </ul>
                         </nav>
@@ -61,16 +62,21 @@
         </header>
 
 
-        <div class="Nosotros w-full px-5 mt-36">
+        <div class="Nosotros max-w-screen-2xl max w-full px-5 mx-auto mt-36">
 
             <div class="main-title flex flex-col items-center gap-3 mb-8">
                 <div class="title text-2xl font-semibold text-[#2e5382]">Publicaciones-papers</div>
                 <div class="blue-line w-1/5 h-1 bg-[#2371d4]"></div>
             </div>
-            <div class="flex justify-center items-start">
-                <form class=" w-[450px]  max-lg:hidden h-auto mt-12 " aria-label="Sidebar">
+
+            <div class="grid  grid-cols-10 gap-x-16 max-lg:grid-cols-1 justify-center">
+                <form class=" w-[450px]  max-[1200px]:hidden h-auto mt-12 col-span-3 " id="sidebar" aria-label="Sidebar">
                     <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 ">
                         <ul class="space-y-2">
+                            <li>
+                                <button id="closeBtn" class="max-[1024px]:block hidden text-black text-2xl">X</button>
+
+                            </li>
                             <li>
                                 <div class="flex justify-start ">
                                     <label for="search-dropdown"
@@ -92,20 +98,19 @@
                                             <li>
                                                 <button type="button"
                                                     class="inline-flex w-full px-4 py-2 hover:bg-gray-100 ">Topicos</button>
-                                            </li>                                         
+                                            </li>
                                         </ul>
                                     </div>
                                     <div class="relative w-full ">
                                         <input type="search" id="search-dropdown"
                                             class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                                            placeholder="Search Title..."  />
+                                            placeholder="Search Title..." />
                                         <button type="button"
                                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  ">
                                             <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                 fill="none" viewBox="0 0 20 20">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
-                                                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                                             </svg>
                                             <span class="sr-only">Search</span>
                                         </button>
@@ -117,15 +122,27 @@
                                 <button type="button"
                                     class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  "
                                     aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">
+                                    <!--             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
+                                            fill="#000000" width="64px" height="64px" viewBox="-4 -2 24 24"
+                                            xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin"
+                                            class="jam jam-document-f">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M3 0h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3zm1 7a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2H4zM4 3a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2H4z">
+                                                </path>
+                                            </g>
+                                        </svg>  -->
                                     <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
-                                        fill="#000000" width="64px" height="64px" viewBox="-4 -2 24 24"
-                                        xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin"
-                                        class="jam jam-document-f">
+                                        width="64px" height="64px" viewBox="0 0 32 32" id="i-options"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                         <g id="SVGRepo_iconCarrier">
                                             <path
-                                                d="M3 0h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3zm1 7a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2H4zM4 3a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2H4z">
+                                                d="M28 6 L4 6 M28 16 L4 16 M28 26 L4 26 M24 3 L24 9 M8 13 L8 19 M20 23 L20 29">
                                             </path>
                                         </g>
                                     </svg>
@@ -143,15 +160,16 @@
                                         <li>
 
                                             <span
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">
+                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">
                                                 <input class="mr-2" type="checkbox" value="{{ $topico->id }}"
                                                     class="checkbox-topico">
-                                                {{ $topico->nombre }}</span>
+                                                {{ $topico->nombre }} <span
+                                                    class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full">{{ count($topico->papers) }}</span></span>
                                         </li>
                                     @empty
                                         <li>
                                             <a href="#"
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
+                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
                                                 hay más topicos</a>
                                         </li>
                                     @endforelse
@@ -189,16 +207,16 @@
                                             clip-rule="evenodd"></path>
                                     </svg>
                                 </button>
-                                <ul id="dropdown-example" class="hidden py-2 space-y-2 overflow-y-auto max-h-36">
+                                <ul id="dropdown-example" class=" py-2 space-y-2 overflow-y-auto max-h-36">
                                     @forelse($areas as $area)
                                         <li>
                                             <a href="{{ route('biblioteca.area', $area->id) }}"
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">{{ $area->nombre }}</a>
+                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">{{ $area->nombre }}</a>
                                         </li>
                                     @empty
                                         <li>
                                             <a href="#"
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
+                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
                                                 hay más areas</a>
                                         </li>
                                     @endforelse
@@ -219,8 +237,8 @@
                                         </path>
                                     </svg>
                                     <span class="flex-1 ml-3 whitespace-nowrap">Noticias</span>
-                                    <span
-                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">3</span>
+                           <!--         <span
+                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full ">3</span>  -->
                                 </a>
                             </li>
 
@@ -228,17 +246,30 @@
                     </div>
                 </form>
 
-                @if ($papers->isEmpty())
-                    <div class="flex justify-center items-center h-45 bg-slate-100 p-4 rounded-md  w-auto">
-                        <p class="text-gray-500 text-3xl font-semibold">No hay papers registrados.</p>
-                    </div>
-                @else
-                    <div class="pt-6 pb-12">
-                        <div class=" w-auto mx-2 overflow-y-auto">
-                            <div id="card" class="">
-                                <!-- container para papers -->
-                                <div id="papers-container"class="container w-100 lg:w-4/5  mx-auto flex flex-col">
-                                    <!-- paper -->
+
+                <div class="pt-6 pb-12  col-span-7">
+                    <div class=" w-auto mx-2 overflow-y-auto">
+                        <div id="card" class="">
+                            <!-- container para papers -->
+                            <div id="papers-container"class="container w-100 lg:w-4/5  mx-auto flex flex-col">
+                                <!-- paper -->
+                                <div class="px-4 ">
+                                    <div
+                                        class="p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
+                                        <p class="text-gray-50 ">Mostrando {{ count($papers) }} resultados</p>
+                                        <button id="menuBtn"
+                                            class="max-[1024px]:block hidden bg-[#28ddc5] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                                            ☰
+                                        </button>
+                                    </div>
+                                </div>
+                                @if ($papers->isEmpty())
+                                    <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center">
+                                        <p class="text-gray-500 text-3xl font-semibold">No se encontraron papers.</p>
+                                        <small class="text-blue-400 ">Busca por más información</small>
+
+                                    </div>
+                                @else
                                     @foreach ($papers as $paper)
                                         <div
                                             class="flex flex-col md:flex-row overflow-hidden
@@ -288,22 +319,23 @@
 
                                         </div>
                                     @endforeach
-                                </div>
+                                @endif
                             </div>
                         </div>
+                    </div>
 
-                        @if (count($papers) > 3 && count($papers) != 3)
-                            <div class="flex justify-center mt-5 p-6 ">
-                                <button id="load-more"
-                                    class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
-                                    VER MÁS PUBLICACIONES
-                                </button>
-                            </div>
-                        @endif
+                    @if (count($papers) > 3 && count($papers) != 3)
+                        <div class="flex justify-center mt-5 p-6 ">
+                            <button id="load-more"
+                                class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
+                                VER MÁS PUBLICACIONES
+                            </button>
+                        </div>
+                    @endif
 
-                @endif
+
+                </div>
             </div>
-        </div>
         </div>
 
     </section>
@@ -311,7 +343,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let offset = {{ $papers->count() }};
-            console.log(offset)
+            //  console.log(offset)
             const limit = 3;
 
             const button = document.getElementById('load-more');
@@ -379,35 +411,46 @@
     </script>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-dropdown');
+            const checkboxes = document.querySelectorAll('.checkbox-topico');
+            const container = document.getElementById('papers-container');
 
-document.addEventListener('DOMContentLoaded', function() { 
-    const searchInput = document.getElementById('search-dropdown'); // Input de búsqueda
-    const checkboxes = document.querySelectorAll('.checkbox-topico'); // Checkboxes de tópicos
-    const container = document.getElementById('papers-container'); // Contenedor de papers
 
-    function performSearch() {
-        const query = searchInput.value.trim();
-        const selectedTopics = Array.from(checkboxes)
-            .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value); // Obtiene los valores de los checkboxes seleccionados
+            document.getElementById("menuBtn").addEventListener("click", function() {
+                document.getElementById("sidebar").classList.add("-translate-x-full");
+            });
 
-        const params = new URLSearchParams();
-        if (query.length > 2) {
-            params.append('query', query);
-        }
-        if (selectedTopics.length > 0) {
-            params.append('topics', selectedTopics.join(',')); // Une los valores en una cadena separada por comas
-        }
+            document.getElementById("closeBtn").addEventListener("click", function() {
+                document.getElementById("sidebar").classList.toggle("-translate-x-full");
+            });
 
-        fetch(`/nosotros/biblioteca/search?${params.toString()}`)
-            .then(response => response.json())
-            .then(data => {
-                const { papers } = data;
-                container.innerHTML = ''; // Limpia el contenedor antes de agregar nuevos resultados
 
-                if (papers.length > 0) {
-                    papers.forEach(paper => {
-                        const card = `
+            function performSearch() {
+                const query = searchInput.value.trim();
+                const selectedTopics = Array.from(checkboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+                const params = new URLSearchParams();
+                if (query.length > 2) {
+                    params.append('query', query);
+                }
+                if (selectedTopics.length > 0) {
+                    params.append('topics', selectedTopics.join(
+                        ','));
+                }
+
+                fetch(`/nosotros/biblioteca/search?${params.toString()}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const {
+                            papers
+                        } = data;
+                        container.innerHTML = '';
+
+                        if (papers.length > 0) {
+                            papers.forEach(paper => {
+                                const card = `
                           <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
                               <div class="max-h-96 md:w-1/2 p-4">
                                   <a href="/nosotros/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
@@ -435,27 +478,26 @@ document.addEventListener('DOMContentLoaded', function() {
                                   <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
                               </div>
                           </div>`;
-                        container.insertAdjacentHTML('beforeend', card);
-                    });
-                } else {
-                    container.innerHTML = '<p class="text-center text-gray-500">No se encontraron resultados.</p>';
-                }
-            })
-            .catch(error => console.error('Error en la búsqueda:', error));
-    }
-
-    // Evento para detectar cambios en la búsqueda
-    searchInput.addEventListener('input', performSearch);
-
-    // Evento para detectar cambios en los checkboxes
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', performSearch);
-    });
-});
+                                container.insertAdjacentHTML('beforeend', card);
+                            });
+                        } else {
+                            container.innerHTML =
+                                '<p class="text-center text-gray-500">No se encontraron resultados.</p>';
+                        }
+                    })
+                    .catch(error => console.error('Error en la búsqueda:', error));
+            }
 
 
+            searchInput.addEventListener('input', performSearch);
 
-  </script>
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', performSearch);
+            });
+
+        });
+    </script>
 
 
 @endsection

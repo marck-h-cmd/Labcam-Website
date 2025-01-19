@@ -49,7 +49,7 @@
                                                             <td class="p-4">
                                                                 <img src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}"
                                                                     class="w-16 md:w-32 max-w-full max-h-full"
-                                                                    alt="Imagen {{ ++$i }}">
+                                                                    alt="Imagen {{$slider->id}}">
                                                             </td>
                                                             <td class="px-6 py-4 text-gray-900">
                                                                 {!! $slider->descripcion !!}</p>

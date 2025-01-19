@@ -102,11 +102,11 @@ class PaperController extends Controller
 
     if (!empty($topics)) {
         $papers->whereHas('topicos', function ($q) use ($topics) {
-            $q->whereIn('nombre', $topics);
+            $q->whereIn('id', $topics);
         });
     }
 
-    return response()->json(['papers' => $papers->get()]);
+    return response()->json(['papers' => $papers->get()], 200);
 }
 
 
@@ -289,7 +289,7 @@ class PaperController extends Controller
   // Función para mostrar papers en el panel
   public function adminIndex(Request $request): View
   {
-    $papers = Paper::paginate();
+    $papers = Paper::paginate(10);
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
