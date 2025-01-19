@@ -66,104 +66,90 @@
     </section>
 
     {{-- Sección noticias --}}
-    <section class="pt-16 pb-2">
-        <div class="flex flex-col items-center gap-3 mb-4">
+    <section class="py-12">
+        <div class="flex flex-col items-center gap-3 mb-12">
             <h2 class="text-blue-800 font-semibold text-4xl mb-1">Noticias</h2>
-            <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
+            <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
         </div>
-        {{-- <div class="ji gp uq"> --}}
-        <div class="bb ye ki xn vq jb jo">
-            <div class="wc qf pn xo zf iq">
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-noticias') }}"class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
+        <div class="px-10 max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 gap-10 lg:gap-14">
+            <!-- ✅ Product card 1 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
                         </div>
                     </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Free advertising for your online business</a>
-                        </h4>
-                    </div>
-                </div>
-
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-noticias') }}" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">9 simple ways to improve your design skills</a>
-                        </h4>
-                    </div>
-                </div>
-
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-noticias') }}" class="vc ek rg lk gh sl ml il gi hi">Leer más</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
-                        </h4>
-                    </div>
-                </div>
+                </a>
             </div>
-            {{-- </div> --}}
+
+            <!-- ✅ Product card 2 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- ✅ Product card 3 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- ✅ Product card 4 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
-        <div class="my-10 flex justify-center">
-            <a href="{{ route('noticias') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
+        <div class="mt-10 flex justify-center">
+            <a href="{{ route('noticias') }}" class="bg-[#98C560] p-4 rounded-xl text-sm text-white hover:bg-[#a6d073] cursor-pointer">
                 VER MÁS NOTICIAS
             </a>
         </div>
-
     </section>
 
     {{-- Seccion de proyectos --}}
@@ -182,11 +168,11 @@
                     <!-- Texto descriptivo -->
                     <div class="mb-6">
                         <div class="my-6 flex flex-col space-y-4">
-                             {!! $topProyecto->descripcion !!}
+                            {!! $topProyecto->descripcion !!}
                         </div>
                         <a href="{{ route('proyectos') }}">
                             <button
-                                class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+                                class="bg-[#98C560] text-blue-900 font-bold text-sm px-8 py-4 rounded-lg hover:bg-[#a6d073] transition duration-300">
                                 VER TODOS LOS PROYECTOS
                             </button>
                         </a>
@@ -215,107 +201,89 @@
     </section>
 
     {{-- Sección eventos --}}
-    <section class="py-16">
-        <div class="flex flex-col items-center gap-3 mb-4">
-            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Próximos Eventos</h2>
+    <section class="py-12">
+        <div class="flex flex-col items-center gap-3 mb-12">
+            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Eventos</h2>
             <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
         </div>
-
-        {{-- <div class="ji gp uq"> --}}
-        <div class="bb ye ki xn vq jb jo">
-            <div class="wc qf pn xo zf iq">
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="/user/template/images/blog-01.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más
-                                detalles</a>
+        <div class="px-10 max-w-screen-2xl mx-auto grid grid-cols-1 lg:grid-cols-4 sm:grid-cols-2 gap-10 lg:gap-14">
+            <!-- ✅ Product card 1 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
                         </div>
                     </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Free advertising for your online business</a>
-                        </h4>
-                    </div>
-                </div>
-
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="/user/template/images/blog-02.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más
-                                detalles</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">9 simple ways to improve your design skills</a>
-                        </h4>
-                    </div>
-                </div>
-
-                <!-- Blog Item -->
-                <div class="animate_top sg vk rm xm">
-                    <div class="c rc i z-1 pg">
-                        <img class="w-full" src="/user/template/images/blog-03.png" alt="Blog" />
-
-                        <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                            <a href="{{ route('detalle-eventos') }}" class="vc ek rg lk gh sl ml il gi hi">Más
-                                detalles</a>
-                        </div>
-                    </div>
-
-                    <div class="yh">
-                        <div class="tc uf wf ag jq">
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-man.svg" alt="User" />
-                                <p>Musharof Chy</p>
-                            </div>
-                            <div class="tc wf ag">
-                                <img src="/user/template/images/icon-calender.svg" alt="Calender" />
-                                <p>25 Dec, 2025</p>
-                            </div>
-                        </div>
-                        <h4 class="ek tj ml il kk wm xl eq lb">
-                            <a href="blog-single.html">Tips to quickly improve your coding speed.</a>
-                        </h4>
-                    </div>
-                </div>
+                </a>
             </div>
-            {{-- </div> --}}
+
+            <!-- ✅ Product card 2 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- ✅ Product card 3 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- ✅ Product card 4 -->
+            <div class="w-full h-[310px] bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+                <a href="#" class="w-full h-full">
+                    <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                        alt="Product" class="w-full h-[150px] object-cover rounded-t-xl" />
+                    <div class="px-4 py-3 w-full h-[150px]">
+                        <span class="text-gray-400 mr-3 uppercase text-xs">Brand</span>
+                        <p class="text-sm font-bold text-black truncate block capitalize">Product Name</p>
+                        <div class="flex items-center">
+                            <p class="text-sm font-semibold text-black cursor-auto my-3">$149</p>
+                            <del>
+                                <p class="text-xs text-gray-600 cursor-auto ml-2">$199</p>
+                            </del>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
 
-        <div class="my-10 flex justify-center">
-            <a href="{{ route('eventos') }}" class="bg-[#98C560] p-4 rounded-xl text-white cursor-pointer">
+        <div class="mt-10 flex justify-center">
+            <a href="{{ route('noticias') }}" class="bg-[#98C560] p-4 rounded-xl text-sm text-white hover:bg-[#a6d073] cursor-pointer">
                 VER MÁS EVENTOS
             </a>
         </div>
-
     </section>
 @endsection
