@@ -3,24 +3,25 @@
 @section('contenido')
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-10 bg-slate-200 rounded-lg">
         <!-- Sección de bienvenida -->
-        <div class="flex flex-col justify-center text-center lg:text-left">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+        <div class="flex flex-col justify-center">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6 text-center">
                 ¡Bienvenido al Panel de Administración de LABCAM!
             </h1>
-            <p class="text-lg text-gray-600 leading-relaxed">
+            <p class="text-lg text-gray-600 leading-relaxed text-justify">
                 Este panel te permite gestionar y mantener actualizada toda la información de LABCAM. En la sección
                 <span class="font-medium text-blue-500">Administración General</span> podrás gestionar usuarios, crear nuevos
                 administradores y modificar los datos de tu cuenta.
                 Podrás controlar el acceso al sistema, asegurándote de que la información esté actualizada y accesible.
             </p>
-            <p class="text-lg text-gray-600 mt-4 leading-relaxed">
+            <p class="text-lg text-gray-600 mt-4 leading-relaxed text-justify">
                 En la sección <span class="font-medium text-green-500">Pestañas</span>, podrás acceder a las diferentes áreas
                 de LABCAM, como <span class="font-medium text-yellow-500">Home</span>,
-                <span class="font-medium text-red-500">Nosotros</span>, <span
-                    class="font-medium text-purple-500">Papers</span>, <span
-                    class="font-medium text-indigo-500">Organización</span> e
-                <span class="font-medium text-teal-500">Investigación</span>. Estas áreas contienen información clave sobre
-                el funcionamiento y los proyectos de LABCAM.
+                <span class="font-medium text-red-500">Nosotros</span>,
+                <span class="font-medium text-purple-500">Papers</span>,
+                <span class="font-medium text-indigo-500">Investigación</span>,
+                <span class="font-medium text-teal-500">Organización</span> y
+                <span class="font-medium text-amber-950">Novedades</span>.
+                Estas áreas contienen información clave sobre el funcionamiento y los proyectos de LABCAM.
             </p>
         </div>
         <div class="w-full h-full">
