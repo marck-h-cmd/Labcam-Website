@@ -18,7 +18,7 @@ class NoticiasSeeder extends Seeder
             'contenido' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Noticia1',
             'fecha' => '2025-01-14',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'imagen' => 'images/noticia_01.jpg',
         ]);
 
         Noticia::create([
@@ -26,8 +26,8 @@ class NoticiasSeeder extends Seeder
             'subtitulo' => 'Subtitulo de Noticia2',
             'contenido' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Noticia2',
-            'fecha' => '2025-01-14',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'fecha' => '2025-01-16',
+            'imagen' => 'images/noticia_01.jpg',
         ]);
 
         Noticia::create([
@@ -35,8 +35,8 @@ class NoticiasSeeder extends Seeder
             'subtitulo' => 'Subtitulo de Noticia3',
             'contenido' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Noticia3',
-            'fecha' => '2025-01-14',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'fecha' => '2025-01-19',
+            'imagen' => 'images/noticia_01.jpg',
         ]);
 
         Noticia::create([
@@ -44,8 +44,8 @@ class NoticiasSeeder extends Seeder
             'subtitulo' => 'Subtitulo de Noticia4',
             'contenido' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Noticia4',
-            'fecha' => '2025-01-14',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'fecha' => '2025-01-17',
+            'imagen' => 'images/noticia_01.jpg',
         ]);
 
         Noticia::create([
@@ -54,7 +54,7 @@ class NoticiasSeeder extends Seeder
             'contenido' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Noticia5',
             'fecha' => '2025-01-14',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'imagen' => 'images/noticia_01.jpg',
         ]);
 
         Noticia::create([
@@ -62,8 +62,8 @@ class NoticiasSeeder extends Seeder
             'subtitulo' => 'Subtitulo de Noticia6',
             'contenido' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Noticia6',
-            'fecha' => '2025-01-14',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'fecha' => '2025-01-15',
+            'imagen' => 'images/noticia_01.jpg',
         ]);
     }
 }

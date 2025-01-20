@@ -15,7 +15,7 @@ class EventosSeeder extends Seeder
             'descripcion' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Evento1',
             'fecha' => '2025-01-15',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'imagen' => 'images/evento_01.jpg',
             'categoria' => 'pasado',
         ]);
 
@@ -25,7 +25,7 @@ class EventosSeeder extends Seeder
             'descripcion' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Evento2',
             'fecha' => '2024-12-02',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'imagen' => 'images/evento_01.jpg',
             'categoria' => 'pasado',
         ]);
 
@@ -35,7 +35,17 @@ class EventosSeeder extends Seeder
             'descripcion' => str_repeat('HOLA', 100),
             'autor' => 'Autor de Evento3',
             'fecha' => '2025-01-31',
-            'imagen' => 'imagenes/proyecto_01.jpg',
+            'imagen' => 'images/evento_01.jpg',
+            'categoria' => 'futuro',
+        ]);
+
+        Evento::create([
+            'titulo' => 'TITULO de Evento4',
+            'subtitulo' => 'Subtitulo de Evento4',
+            'descripcion' => str_repeat('HOLA', 100),
+            'autor' => 'Autor de Evento4',
+            'fecha' => '2025-01-25',
+            'imagen' => 'images/evento_01.jpg',
             'categoria' => 'futuro',
         ]);
     }
