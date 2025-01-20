@@ -13,7 +13,7 @@ class NoticiaController extends Controller
     public function index()
     {
         $noticias = Noticia::paginate(6);
-        return view('usuario.Investigacion.noticias', compact('noticias'));
+        return view('usuario.novedades.noticias', compact('noticias'));
     }
 
     public function showNoticia()
@@ -71,7 +71,7 @@ class NoticiaController extends Controller
     {
         //
         $noticia = Noticia::findOrFail($id);
-        return view('usuario.Investigacion.detalle-noticias', compact('noticia'));
+        return view('usuario.novedades.detalle-noticias', compact('noticia'));
 
     }
 

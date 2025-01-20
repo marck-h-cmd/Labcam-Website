@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Evento;
 use App\Models\Slider;
 use App\Models\TopProyecto;
+use App\Models\Noticia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -154,6 +156,8 @@ class PestañaHomeController extends Controller
     {
         $slider = Slider::first();
         $topProyecto = TopProyecto::first();
-        return view('usuario.index', compact('slider', 'topProyecto'));
+        $noticias = Noticia::orderBy('fecha', 'desc')->take(3)->get();
+        $eventos = Evento::orderBy('fecha', 'desc')->take(3)->get();
+        return view('usuario.index', compact('slider', 'topProyecto', 'noticias', 'eventos'));
     }
 }

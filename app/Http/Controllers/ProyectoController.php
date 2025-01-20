@@ -11,7 +11,7 @@ class ProyectoController extends Controller
     {
 
         $proyectos = Proyecto::paginate(6);
-        return view('usuario.Investigacion.proyectos', compact('proyectos'));
+        return view('usuario.novedades.proyectos', compact('proyectos'));
     }
 
     public function show($id)
@@ -19,7 +19,7 @@ class ProyectoController extends Controller
 
         $proyecto = Proyecto::findOrFail($id);
 
-        return view('usuario.Investigacion.detalle-proyectos', compact('proyecto'));
+        return view('usuario.novedades.detalle-proyectos', compact('proyecto'));
 
     }
     public function store(Request $request)
@@ -46,7 +46,6 @@ class ProyectoController extends Controller
         ]);
 
         return redirect()->route('proyectos.index')->with('success', 'Proyecto creado con éxito');
-    //usuario.Investigacion.noticias
     }
 
 }

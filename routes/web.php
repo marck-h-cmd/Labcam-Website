@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CapitalHumanoController;
 use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use App\Http\Controllers\AreaInvestigacionController;
@@ -63,7 +64,7 @@ Route::post('custom-registration', [CustomAuthController::class, 'customRegistra
 
 //RUTA NOTICIA
 Route::get('/noticias', function () {
-    return view('usuario.Investigacion.noticias');
+    return view('usuario.novedades.noticias');
 })->name('noticias');
 
 use App\Http\Controllers\NoticiaController;
@@ -73,12 +74,12 @@ Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias
 // Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticias.create');
 // Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticias.store');
 Route::get('/detalle-noticias', function () {
-    return view('usuario.Investigacion.detalle-noticias');
+    return view('usuario.novedades.detalle-noticias');
 })->name('detalle-noticias');
 
 //RUTA PROYECTO
 Route::get('/proyectos', function () {
-    return view('usuario.Investigacion.proyectos');
+    return view('usuario.novedades.proyectos');
 })->name('proyectos');
 
 use App\Http\Controllers\ProyectoController;
@@ -86,24 +87,22 @@ Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos'
 Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 
 Route::get('/detalle-proyectos', function () {
-    return view('usuario.Investigacion.detalle-proyectos');
+    return view('usuario.novedades.detalle-proyectos');
 })->name('detalle-proyectos');
 
 //RUTA EVENTO
 Route::get('/eventos', function () {
-    return view('usuario.Investigacion.eventos');
+    return view('usuario.novedades.eventos');
 })->name('eventos');
 
 use App\Http\Controllers\EventoController;
 
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
 Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.show');
-// Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
-// Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
 
 
 Route::get('/detalle-eventos', function () {
-    return view('usuario.Investigacion.detalle-eventos');
+    return view('usuario.novedades.detalle-eventos');
 })->name('detalle-eventos');
 
 
@@ -156,8 +155,6 @@ Route::delete('/admin/historia-sliders/{slider}', HistoriaSliderController::clas
 
 
 // --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
-
-
 // ---- Areas ---- //
 Route::get('/admin/areas', AreaInvestigacionController::class .'@index')->name('areas-panel');
 
@@ -182,7 +179,6 @@ Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->n
 
 
 
-
 Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('contactos');
 Route::post('/admin/contacto', ContactoController::class .'@store')->name('contactos.store');
 
@@ -196,3 +192,8 @@ Route::put('/admin/noticias/{id}', [NoticiaController::class, 'update'])->name('
 Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('noticias.destroy');
 
 // Route::get('/admin/noticias/create', NoticiaController::class . '@create')->name('noticias.create');
+
+// ------------------------- CRUD ORGANIZACION ---------------------------------------------
+// ---- Capital Humano ---- //
+Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
+

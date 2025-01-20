@@ -29,17 +29,11 @@ class EventoController extends Controller
     // Filtrar por mes y año
             $eventos = $query->whereMonth('fecha', $month)
                              ->whereYear('fecha', $year)
+                             ->orderBy('fecha', 'desc')
                              ->paginate(6);
     // Pasar los parámetros a la vista para mostrarlos y poder usarlos en los enlaces
-        return view('usuario.Investigacion.eventos', compact('eventos', 'month', 'year', 'category'));
+        return view('usuario.novedades.eventos', compact('eventos', 'month', 'year', 'category'));
    }
-
-    // public function index()
-    // {
-    //     //
-    //     $eventos = Evento::paginate(6);
-    //     return view('usuario.Investigacion.eventos', compact('eventos'));
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -78,7 +72,6 @@ class EventoController extends Controller
         ]);
 
         return redirect()->route('eventos.index')->with('success', 'Evento creado con éxito.');
-        //usuario.Investigacion.eventos'
     }
 
     /**
@@ -88,7 +81,7 @@ class EventoController extends Controller
     {
         //
         $evento = Evento::findOrFail($id);
-        return view('usuario.Investigacion.detalle-eventos', compact('evento'));
+        return view('usuario.novedades.detalle-eventos', compact('evento'));
 
     }
 

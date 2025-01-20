@@ -41,98 +41,130 @@
                     class="flex flex-col font-medium p-4 space-y-1 md:space-y-0 md:p-0 mt-4 border border-gray-100 rounded-lg md:space-x-11 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:items-center">
                     <li>
                         <a href="{{ route('home') }}"
-                            class="text-white block py-2 px-3 rounded md:border-0 md:hover:text-[#98C560] hover:bg-[#98C560] md:hover:bg-transparent md:p-0 {{ request()->routeIs('home') ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}">Inicio</a>
+                            class="text-white block py-2 px-3 rounded md:border-0 md:hover:text-[#98C560] hover:bg-[#98C560] md:hover:bg-transparent md:p-0 {{ request()->routeIs('home') ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}">
+                            Inicio
+                        </a>
                     </li>
-                    <li>
-                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto  {{ request()->routeIs(['about', 'historia', 'biblioteca']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
-                            @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'">Nosotros
+
+                    <!-- Dropdown Nosotros -->
+                    <li class="relative">
+                        <button id="dropdownNavbarLink"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['about', 'historia', 'biblioteca']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'">
+                            Nosotros
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <!-- Dropdown menu -->
                         <div id="dropdownNavbar" x-show="openDropdown === 'dropdownNavbar'"
-                            class="z-10 font-normal rounded shadow w-44 bg-white outline-2"
-                            @click.away="openDropdown = null">
+                            class="z-10 font-normal rounded shadow w-44 bg-white absolute top-full mt-1 left-0"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'; if(openDropdown !== 'dropdownNavbar') openDropdown = 'dropdownNavbar'"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:leave="transition ease-in duration-150">
                             <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
                                 <li>
                                     <a href="{{ route('about') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('about') ? 'text-[#98C560]' : 'text-black' }}">Acerca</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('about') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Acerca
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('historia') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('historia') ? 'text-[#98C560]' : 'text-black' }}">Historia</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('historia') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Historia
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('biblioteca') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca') ? 'text-[#98C560]' : 'text-black' }}">Biblioteca</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Biblioteca
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar2"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto  {{ request()->routeIs(['direccion', 'capital']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
-                            @click="openDropdown = openDropdown === 'dropdownNavbar2' ? null : 'dropdownNavbar2'">Organización
+
+                    <!-- Dropdown Organización -->
+                    <li class="relative">
+                        <button id="dropdownNavbarLink2"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['direccion', 'capital']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar2' ? null : 'dropdownNavbar2'">
+                            Organización
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <!-- Dropdown menu -->
                         <div id="dropdownNavbar2" x-show="openDropdown === 'dropdownNavbar2'"
-                            class="z-10 font-normal rounded shadow w-44 bg-white outline-2"
-                            @click.away="openDropdown = null">
-                            <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
+                            class="z-10 font-normal rounded shadow w-44 bg-white absolute top-full mt-1 left-0"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar2' ? null : 'dropdownNavbar2'; if(openDropdown !== 'dropdownNavbar2') openDropdown = 'dropdownNavbar2'"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:leave="transition ease-in duration-150">
+                            <ul class="py-2 text-sm">
                                 <li>
                                     <a href="{{ route('direccion') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('direccion') ? 'text-[#98C560]' : 'text-black' }}">Dirección</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('direccion') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Dirección
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('capital') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital') ? 'text-[#98C560]' : 'text-black' }}">Capital
-                                        Humano</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Capital Humano
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
-                    <li>
-                        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar3"
+
+                    <!-- Dropdown Novedades -->
+                    <li class="relative">
+                        <button id="dropdownNavbarLink3"
                             class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['noticias', 'proyectos', 'eventos']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
-                            @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'">Investigación
+                            @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'">
+                            Novedades
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <!-- Dropdown menu -->
                         <div id="dropdownNavbar3" x-show="openDropdown === 'dropdownNavbar3'"
-                            class="z-10 font-normal rounded shadow w-44 bg-white outline-2"
-                            @click.away="openDropdown = null">
-                            <ul class="py-2 text-sm" aria-labelledby="dropdownLargeButton">
+                            class="z-10 font-normal rounded shadow w-44 bg-white absolute top-full mt-1 left-0"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'; if(openDropdown !== 'dropdownNavbar3') openDropdown = 'dropdownNavbar3'"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:leave="transition ease-in duration-150">
+                            <ul class="py-2 text-sm">
                                 <li>
                                     <a href="{{ route('noticias') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias') ? 'text-[#98C560]' : 'text-black' }}">Noticias</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Noticias
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('proyectos') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos') ? 'text-[#98C560]' : 'text-black' }}">Proyectos</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Proyectos
+                                    </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('eventos') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos') ? 'text-[#98C560]' : 'text-black' }}">Eventos</a>
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Eventos
+                                    </a>
                                 </li>
                             </ul>
                         </div>
                     </li>
+
                     <li>
                         <a href="{{ route('contacto') }}"
-                            class="text-white block py-2 px-3 rounded md:border-0 md:px-4 bg-[#98C560] w-max md:w-auto">Contacto</a>
+                            class="text-white block py-2 px-3 rounded md:border-0 md:px-4 bg-[#98C560] w-max md:w-auto">
+                            Contacto
+                        </a>
                     </li>
                 </ul>
             </div>
