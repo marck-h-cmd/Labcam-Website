@@ -49,7 +49,17 @@ use App\Http\Controllers\PrincipalController;
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+
+
+//RUTA REGISTRO
+use App\Http\Controllers\CustomAuthController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 
 //RUTA NOTICIA
 Route::get('/noticias', function () {
@@ -169,3 +179,20 @@ Route::get('/admin/topicos/{topico}/edit', TopicoController::class .'@edit')->na
 Route::put('/admin/topicos/{topico}', TopicoController::class .'@update')->name('topics.update');
 
 Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->name('topics.destroy');
+
+
+
+
+Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('contactos');
+Route::post('/admin/contacto', ContactoController::class .'@store')->name('contactos.store');
+
+// use App\Http\Controllers\NoticiaController;
+
+Route::get('/admin/noticias', [NoticiaController::class, 'showNoticia'])->name('noticias');
+Route::post('/admin/noticias', NoticiaController::class .'@store')->name('noticias.store');
+Route::get('/admin/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('noticias.edit');
+Route::put('/admin/noticias/{id}', [NoticiaController::class, 'update'])->name('noticias.update');
+
+Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('noticias.destroy');
+
+// Route::get('/admin/noticias/create', NoticiaController::class . '@create')->name('noticias.create');

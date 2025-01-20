@@ -34,10 +34,6 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Las credenciales no coinciden']);
     }
 
-    public function showRegisterForm()
-    {
-        return view('usuario.auth.register');
-    }
 
     public function logout()
     {
