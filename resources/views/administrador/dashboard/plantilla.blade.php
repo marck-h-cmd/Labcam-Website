@@ -178,7 +178,6 @@
                     </li>
                     <li class="mb-4">
                         <a href="{{ route('topic-panel') }}"
-
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('topic-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Tópicos
@@ -206,12 +205,13 @@
                     <li class="mb-4">
                         <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Crear Capital Humano</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Crear
+                            Capital Humano</a>
                     </li>
                 </ul>
             </li>
 
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['h-slider.create']) ? 'active' : '' }}">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-contactos']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -220,15 +220,15 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('h-slider.create') }}"
+                        <a href="{{ route('admin-contactos') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-slider.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-contactos') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Ver</a>
                     </li>
                 </ul>
             </li>
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['h-slider.create']) ? 'active' : '' }}">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-noticias', '']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -237,28 +237,9 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('h-slider.create') }}"
-                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{route('admin-noticias')}}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-slider.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
-                            Noticias</a>
-                    </li>
-                </ul>
-            </li>
-
-
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['', '']) ? 'active' : '' }}">
-                <a
-                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
-                    <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Novedades</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-                </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Noticias</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-noticias') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Noticias</a>
                     </li>
                     <li class="mb-4">
                         <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">

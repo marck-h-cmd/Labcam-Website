@@ -179,12 +179,12 @@ Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->n
 
 
 
-Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('contactos');
+Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('admin-contactos');
 Route::post('/admin/contacto', ContactoController::class .'@store')->name('contactos.store');
 
 // use App\Http\Controllers\NoticiaController;
 
-Route::get('/admin/noticias', [NoticiaController::class, 'showNoticia'])->name('noticias');
+Route::get('/admin/noticias', [NoticiaController::class, 'showNoticia'])->name('admin-noticias');
 Route::post('/admin/noticias', NoticiaController::class .'@store')->name('noticias.store');
 Route::get('/admin/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('noticias.edit');
 Route::put('/admin/noticias/{id}', [NoticiaController::class, 'update'])->name('noticias.update');
