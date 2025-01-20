@@ -127,7 +127,9 @@
                     <!-- Texto descriptivo -->
                     <div class="mb-6">
                         <div class="my-6 flex flex-col space-y-4">
+
                             {!! $topProyecto->descripcion !!}
+
                         </div>
                         <a href="{{ route('proyectos') }}">
                             <button
@@ -141,18 +143,16 @@
                 <div class="h-[450px] flex items-center justify-center relative w-full mt-5 sm:mt-16 lg:mt-28">
                     <!-- Imagen inferior -->
 
-                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)] 
-        absolute top-1/2 left-[calc(50%-70px)] lg:left-[calc(50%-10px)] xl:left-[calc(50%-30px)] transform -translate-x-1/2 -translate-y-1/2 
-        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 
+                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)]
+        absolute top-1/2 left-[calc(50%-70px)] lg:left-[calc(50%-10px)] xl:left-[calc(50%-30px)] transform -translate-x-1/2 -translate-y-1/2
+        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20
         hover:translate-x-6 hover:translate-y-8"
-                        src="/user/template/images/proyectos/{{ $topProyecto->img1 }}" alt="Imagen 1">
 
                     <!-- Imagen superior -->
-                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)] 
-        absolute top-1/4 left-[calc(50%+70px)] lg:left-[calc(50%+45px)] xl:left-[calc(50%+60px)] transform -translate-x-1/2 -translate-y-1/2 
-        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 
+                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)]
+        absolute top-1/4 left-[calc(50%+70px)] lg:left-[calc(50%+45px)] xl:left-[calc(50%+60px)] transform -translate-x-1/2 -translate-y-1/2
+        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10
         hover:-translate-x-6 hover:-translate-y-8"
-                        src="/user/template/images/proyectos/{{ $topProyecto->img2 }}" alt="Imagen 2">
 
                 </div>
             </div>
