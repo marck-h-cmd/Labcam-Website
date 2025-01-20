@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CapitalHumanoController;
 use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use App\Http\Controllers\AreaInvestigacionController;
@@ -144,8 +145,6 @@ Route::delete('/admin/historia-sliders/{slider}', HistoriaSliderController::clas
 
 
 // --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
-
-
 // ---- Areas ---- //
 Route::get('/admin/areas', AreaInvestigacionController::class .'@index')->name('areas-panel');
 
@@ -167,3 +166,9 @@ Route::get('/admin/topicos/{topico}/edit', TopicoController::class .'@edit')->na
 Route::put('/admin/topicos/{topico}', TopicoController::class .'@update')->name('topics.update');
 
 Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->name('topics.destroy');
+
+
+
+// ------------------------- CRUD ORGANIZACION ---------------------------------------------
+// ---- Capital Humano ---- //
+Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');

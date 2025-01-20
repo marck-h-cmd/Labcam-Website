@@ -14,10 +14,9 @@
 </head>
 
 <body class="text-gray-800 font-inter">
-
     <!-- start: Sidebar -->
     <aside
-        class="fixed left-0 top-0 w-[300px] h-full bg-[#1E5397] p-4 z-50 sidebar-menu transition-transform overflow-y-auto">
+        class="fixed left-0 top-0 w-[300px] h-full bg-[#1E5397] p-4 z-50 sidebar-menu transition-transform overflow-y-auto shadow-2xl">
         <a href="{{ route('admin-principal') }}" class="flex items-center py-8 border-b border-b-[#98C560]">
             <img src="/user/template/images/logoLabCam.png" alt="logo_labcam" class="w-[260px] h-16">
         </a>
@@ -187,24 +186,25 @@
                 </ul>
             </li>
 
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['', '']) ? 'active' : '' }}">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['', 'capital_index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Organización</span>
+                    <span class="text-sm">Capital Humano</span>
                     <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('capital_index') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Dirección</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('capital_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Lista
+                            Capital Humano</a>
                     </li>
                     <li class="mb-4">
                         <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Capital
-                            Humano</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Crear Capital Humano</a>
                     </li>
                 </ul>
             </li>
@@ -236,7 +236,7 @@
             </li>
 
         </ul>
-        <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>
+        <div class="fixed top-0 left-[300px] w-full h-full z-40 md:hidden sidebar-overlay backdrop-blur-sm"></div>
     </aside>
     <!-- end: Sidebar -->
 
