@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CapitalHumanoController;
 use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use App\Http\Controllers\AreaInvestigacionController;
@@ -49,11 +50,21 @@ use App\Http\Controllers\PrincipalController;
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+
+
+//RUTA REGISTRO
+use App\Http\Controllers\CustomAuthController;
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+*/
+Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 
 //RUTA NOTICIA
 Route::get('/noticias', function () {
-    return view('usuario.Investigacion.noticias');
+    return view('usuario.novedades.noticias');
 })->name('noticias');
 
 use App\Http\Controllers\NoticiaController;
@@ -63,12 +74,12 @@ Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias
 // Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticias.create');
 // Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticias.store');
 Route::get('/detalle-noticias', function () {
-    return view('usuario.Investigacion.detalle-noticias');
+    return view('usuario.novedades.detalle-noticias');
 })->name('detalle-noticias');
 
 //RUTA PROYECTO
 Route::get('/proyectos', function () {
-    return view('usuario.Investigacion.proyectos');
+    return view('usuario.novedades.proyectos');
 })->name('proyectos');
 
 use App\Http\Controllers\ProyectoController;
@@ -76,32 +87,31 @@ Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos'
 Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 
 Route::get('/detalle-proyectos', function () {
-    return view('usuario.Investigacion.detalle-proyectos');
+    return view('usuario.novedades.detalle-proyectos');
 })->name('detalle-proyectos');
 
 //RUTA EVENTO
 Route::get('/eventos', function () {
-    return view('usuario.Investigacion.eventos');
+    return view('usuario.novedades.eventos');
 })->name('eventos');
 
 use App\Http\Controllers\EventoController;
 
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
 Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.show');
-// Route::get('/eventos/create', [EventoController::class, 'create'])->name('eventos.create');
-// Route::post('/eventos', [EventoController::class, 'store'])->name('eventos.store');
 
 
 Route::get('/detalle-eventos', function () {
-    return view('usuario.Investigacion.detalle-eventos');
+    return view('usuario.novedades.detalle-eventos');
 })->name('detalle-eventos');
 
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
 // ------------------------- PRINCIPAL ---------------------------------------------
-Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
-
+//Route::middleware('auth')->group(function () {
+ Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
+//});
 
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
@@ -128,7 +138,7 @@ Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name
 
 Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea'])->name('biblioteca.area');
 
-Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search']);
+Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search'])->name('search');
 
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
 Route::get('/admin/historia-sliders', HistoriaSliderController::class .'@index')->name('h-sliders-panel');
@@ -146,8 +156,6 @@ Route::delete('/admin/historia-sliders/{slider}', HistoriaSliderController::clas
 
 
 // --------------------------- CRUD AREAS Y TOPICOS ----------------------------------------------
-
-
 // ---- Areas ---- //
 Route::get('/admin/areas', AreaInvestigacionController::class .'@index')->name('areas-panel');
 
@@ -169,3 +177,24 @@ Route::get('/admin/topicos/{topico}/edit', TopicoController::class .'@edit')->na
 Route::put('/admin/topicos/{topico}', TopicoController::class .'@update')->name('topics.update');
 
 Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->name('topics.destroy');
+
+
+
+Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('admin-contactos');
+Route::post('/admin/contacto', ContactoController::class .'@store')->name('contactos.store');
+
+// use App\Http\Controllers\NoticiaController;
+
+Route::get('/admin/noticias', [NoticiaController::class, 'showNoticia'])->name('admin-noticias');
+Route::post('/admin/noticias', NoticiaController::class .'@store')->name('noticias.store');
+Route::get('/admin/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('noticias.edit');
+Route::put('/admin/noticias/{id}', [NoticiaController::class, 'update'])->name('noticias.update');
+
+Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('noticias.destroy');
+
+// Route::get('/admin/noticias/create', NoticiaController::class . '@create')->name('noticias.create');
+
+// ------------------------- CRUD ORGANIZACION ---------------------------------------------
+// ---- Capital Humano ---- //
+Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
+

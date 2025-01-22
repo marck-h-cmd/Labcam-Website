@@ -38,7 +38,12 @@
                     <input type="email" name="correo" placeholder="Correo electrónico *" value="{{ old('correo') }}" required class="w-full p-2 border border-gray-300 rounded">
                 </div>
                 <div class="grid grid-cols-3 gap-4">
-                    <input type="tel" name="telefono" placeholder="Teléfono *" value="{{ old('telefono') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <div>
+                        <input type="tel" name="telefono" placeholder="Teléfono *" value="{{ old('telefono') }}" required class="w-full p-2 border border-gray-300 rounded">
+                        @error('telefono')
+                             <p class="text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
                     <input type="text" name="pais" placeholder="País *" value="{{ old('pais') }}" required class="w-full p-2 border border-gray-300 rounded">
                     <input type="text" name="departamento" placeholder="Departamento *" value="{{ old('departamento') }}" required class="w-full p-2 border border-gray-300 rounded">
                 </div>

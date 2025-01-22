@@ -12,6 +12,16 @@ class ContactoController extends Controller
     public function index()
     {
         return view('usuario.contacto');
+
+    }
+
+    public function showContacts()
+    {
+        $contactos = Contacto::all(); // Obtener todos los contactos
+        $contactos = Contacto::paginate(2);
+
+        // Retornar la vista con los datos
+        return view('administrador.panel.contacto.show', compact('contactos'));
     }
 
     // Método para manejar el envío del formulario
@@ -22,12 +32,18 @@ class ContactoController extends Controller
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
             'correo' => 'required|email|max:255',
-            'telefono' => 'required|string|max:20',
+            'telefono' => [
+            'required',
+            'string',
+            'max:20',
+            'regex:/^\+?[0-9]+$/', // Permite solo números o "+" al inicio seguido de números
+            ],
             'pais' => 'required|string|max:100',
             'departamento' => 'required|string|max:100',
             'asunto' => 'required|string|max:255',
             'mensaje' => 'required|string',
             'archivo' => 'nullable|file|max:4096|mimes:pdf,jpg,png,docx',
+            'telefono.regex' => 'El teléfono solo puede contener números y un "+" opcional al inicio.',
         ]);
 
         // Procesar el archivo adjunto si existe
