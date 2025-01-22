@@ -38,16 +38,30 @@
                             <td class="px-4 py-3">
                                 @if (in_array(pathinfo($contacto->archivo, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png']))
                                   <div class="px-8 py-0.1 text-center">
-                                    <img
-                                        src="{{ Storage::url($contacto->archivo) }}"
-                                        alt="Archivo"
-                                        class="w-8 h-8 object-cover rounded shadow cursor-pointer "
-                                        onclick="openModal('{{ Storage::url($contacto->archivo) }}', 'image')"
-                                    >
+                                      <button 
+                                          class="w-8 h-8 flex items-center justify-start rounded shadow cursor-pointer"
+                                          onclick="openModal('{{ Storage::url($contacto->archivo) }}', 'image')"
+                                      >
+                                          <svg 
+                                              xmlns="http://www.w3.org/2000/svg" 
+                                              fill="none" 
+                                              stroke="currentColor" 
+                                              stroke-width="2" 
+                                              stroke-linecap="round" 
+                                              stroke-linejoin="round" 
+                                              class="w-6 h-6"
+                                              viewBox="0 0 24 24"
+                                          >
+                                              <path d="M18 22H4a2 2 0 0 1-2-2V6"/>
+                                              <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18"/>
+                                              <circle cx="12" cy="8" r="2"/>
+                                              <rect width="16" height="16" x="6" y="2" rx="2"/>
+                                          </svg>
+                                      </button>
                                   </div>
                                 @elseif (in_array(pathinfo($contacto->archivo, PATHINFO_EXTENSION), ['pdf']))
                                     <button
-                                        class=" hover:underline cursor-pointer"
+                                        class=" flex items-center justify-start hover:underline cursor-pointer"
                                         onclick="openModal('{{ Storage::url($contacto->archivo) }}', 'pdf')"
                                     >
                                         <div class="px-8 py-0.1 text-center">

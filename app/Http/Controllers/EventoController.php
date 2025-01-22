@@ -35,13 +35,28 @@ class EventoController extends Controller
         return view('usuario.novedades.eventos', compact('eventos', 'month', 'year', 'category'));
    }
 
+   
+    public function showEvento(Request $request)
+    {
+        $query = $request->input('search'); // Obtener el término de búsqueda
+
+        $event = Evento::when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->where('titulo', 'like', '%' . $query . '%')
+                         ->orWhere('autor', 'like', '%' . $query . '%');
+        })->paginate(10);
+
+        return view('administrador.panel.novedades.evento.show', compact('event'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
-        return view('usuario.crear-evento');
+       // Obtener la categoría automáticamente basada en la fecha actual
+         $categoria = Carbon::now()->isPast() ? 'pasado' : 'futuro';
+
+         return view('usuario.crear-evento', compact('categoria'));
     }
 
     /**
@@ -54,12 +69,20 @@ class EventoController extends Controller
             'subtitulo' => 'required|string|max:1000',
             'descripcion' => 'required|string',
             'autor' => 'required|string|max:255',
-            'fecha' => 'required|date',
+            'fecha' => 'required|date|after_or_equal:today',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            'categoria' => 'required|string|max:50',
         ]);
 
-        $path = $request->file('imagen') ? $request->file('imagen')->store('eventos') : null;
+        $evento = new Evento;
+        $evento->fecha = $request->fecha; // Asigna la fecha primero
+        $evento->categoria = Carbon::parse($evento->fecha)->isPast() ? 'pasado' : 'futuro';
+
+
+        $rutaImagen = null;
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $rutaImagen = $imagen->store('eventos', 'public'); // Guardar imagen en el directorio public
+        }
 
         Evento::create([
             'titulo' => $request->titulo,
@@ -67,11 +90,11 @@ class EventoController extends Controller
             'descripcion' => $request->descripcion,
             'autor' => $request->autor,
             'fecha' => $request->fecha,
-            'imagen' => $path,
-            'categoria' => $request->categoria,
+            'categoria' => Carbon::parse($request->fecha)->isPast() ? 'pasado' : 'futuro',
+            'imagen' => $rutaImagen,
         ]);
 
-        return redirect()->route('eventos.index')->with('success', 'Evento creado con éxito.');
+        return redirect()->route('event')->with('success', 'Evento creado con éxito.');
     }
 
     /**
@@ -91,21 +114,56 @@ class EventoController extends Controller
     public function edit(string $id)
     {
         //
+        $event = Evento::findOrFail($id);
+        return view('administrador.panel.novedades.evento.edit', compact('event'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,$id)
     {
-        //
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'subtitulo' => 'required|string|max:1000',
+            'descripcion' => 'required',
+            'autor' => 'required|string|max:255',
+            'fecha' => 'required|date',
+            'imagen' => 'nullable|image|mimes:jpg,png',
+        ]);
+
+
+        $evento = Evento::findOrFail($id);
+        $evento->fecha = $request->fecha;
+        $evento->categoria = Carbon::parse($evento->fecha)->isPast() ? 'pasado' : 'futuro';
+
+
+        // Actualizar la imagen si se sube una nueva
+        if ($request->hasFile('imagen')) {
+            $imagenPath = $request->file('imagen')->store('eventos', 'public');
+            $evento->imagen = $imagenPath;
+        }
+
+        $evento->update([
+            'titulo' => $request->titulo,
+            'subtitulo' => $request->subtitulo,
+            'descripcion' => $request->descripcion,
+            'autor' => $request->autor,
+            'fecha' => $request->fecha,
+        ]);
+
+        return redirect()->route('event')->with('success', 'Evento actualizada con éxito');
+
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $evento = Evento::findOrFail($id);
+        $evento->delete();
+
+        return redirect()->route('event')->with('success', 'Evento eliminada con éxito');
     }
 }
