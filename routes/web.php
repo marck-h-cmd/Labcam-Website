@@ -71,8 +71,6 @@ use App\Http\Controllers\NoticiaController;
 
 Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias');
 Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias.show');
-// Route::get('/noticias/create', [NoticiaController::class, 'create'])->name('noticias.create');
-// Route::post('/noticias', [NoticiaController::class, 'store'])->name('noticias.store');
 Route::get('/detalle-noticias', function () {
     return view('usuario.novedades.detalle-noticias');
 })->name('detalle-noticias');
@@ -177,19 +175,40 @@ Route::put('/admin/topicos/{topico}', TopicoController::class .'@update')->name(
 
 Route::delete('/admin/topicos/{topico}', TopicoController::class .'@destroy')->name('topics.destroy');
 
+// ------------------------- CRUD CONTACTO ---------------------------------------------
 
-
-Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('admin-contactos');
+Route::get('/admin/contacto', [ContactoController::class, 'showContacts'])->name('contactos');
 Route::post('/admin/contacto', ContactoController::class .'@store')->name('contactos.store');
 
-// use App\Http\Controllers\NoticiaController;
+// ------------------------- CRUD NOVEDADES ---------------------------------------------
+// ---- NOTICIA ---- //
 
-Route::get('/admin/noticias', [NoticiaController::class, 'showNoticia'])->name('admin-noticias');
-Route::post('/admin/noticias', NoticiaController::class .'@store')->name('noticias.store');
-Route::get('/admin/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('noticias.edit');
-Route::put('/admin/noticias/{id}', [NoticiaController::class, 'update'])->name('noticias.update');
+Route::get('/admin/noticias', [NoticiaController::class, 'showNoticia'])->name('notici');
+Route::post('/admin/noticias', NoticiaController::class .'@store')->name('notici.store');
+Route::get('/admin/noticias/{id}/edit', [NoticiaController::class, 'edit'])->name('notici.edit');
+Route::put('/admin/noticias/{id}', [NoticiaController::class, 'update'])->name('notici.update');
 
-Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('noticias.destroy');
+Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('notici.destroy');
+Route::get('/admin/noticias/buscar', [NoticiaController::class, 'showNoticia'])->name('notici.buscar');
+
+// ---- PROYECTO ---- //
+Route::get('/admin/proyectos', [ProyectoController::class, 'showProyecto'])->name('proyect');
+Route::post('/admin/proyectos', ProyectoController::class .'@store')->name('proyect.store');
+Route::get('/admin/proyectos/{id}/edit', [ProyectoController::class, 'edit'])->name('proyect.edit');
+Route::put('/admin/proyectos/{id}', [ProyectoController::class, 'update'])->name('proyect.update');
+
+Route::delete('/admin/proyectos/{id}', [ProyectoController::class, 'destroy'])->name('proyect.destroy');
+Route::get('/admin/proyectos/buscar', [ProyectoController::class, 'showProyecto'])->name('proyect.buscar');
+
+
+// ---- EVENTO ---- //
+Route::get('/admin/eventos', [EventoController::class, 'showEvento'])->name('event');
+Route::post('/admin/eventos', EventoController::class .'@store')->name('event.store');
+Route::get('/admin/eventos/{id}/edit', [EventoController::class, 'edit'])->name('event.edit');
+Route::put('/admin/eventos/{id}', [EventoController::class, 'update'])->name('event.update');
+
+Route::delete('/admin/eventos/{id}', [EventoController::class, 'destroy'])->name('event.destroy');
+Route::get('/admin/eventos/buscar', [EventoController::class, 'showEvento'])->name('event.buscar');
 
 // Route::get('/admin/noticias/create', NoticiaController::class . '@create')->name('noticias.create');
 
