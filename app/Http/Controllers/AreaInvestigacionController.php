@@ -76,7 +76,7 @@ class AreaInvestigacionController extends Controller
 
         $area->delete();
         return redirect()->route('areas-panel')
-            ->with('success', 'Area de Investigación eliminado exitosamente');
+            ->with('destroyed', 'Area de Investigación eliminado exitosamente');
     }
 
     public function edit($id,Request $request)
