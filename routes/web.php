@@ -33,10 +33,6 @@ Route::get('/nosotros/biblioteca/fetch-more', [PaperController::class, 'fetchMor
 
 Route::get('/nosotros/historia', HistoriaSliderController::class . '@view')->name('historia');
 
-Route::get('/nosotros/paper', function () {
-    return view('usuario.nosotros.paper');
-})->name('biblioteca.paper');
-
 //RUTA CONTACTO
 use App\Http\Controllers\ContactoController;
 
@@ -107,8 +103,9 @@ Route::get('/detalle-eventos', function () {
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
 // ------------------------- PRINCIPAL ---------------------------------------------
-Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
-
+//Route::middleware('auth')->group(function () {
+ Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
+//});
 
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
@@ -135,7 +132,7 @@ Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name
 
 Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea'])->name('biblioteca.area');
 
-Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search']);
+Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search'])->name('search');
 
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
 Route::get('/admin/historia-sliders', HistoriaSliderController::class .'@index')->name('h-sliders-panel');

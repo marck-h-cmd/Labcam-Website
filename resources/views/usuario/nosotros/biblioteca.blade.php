@@ -22,10 +22,10 @@
 
                         <nav role="navigation mt-4">
                             <ul class="hor--nav flex space-x-12">
-                                <li><a href="#" class="text-gray-300 hover:text-white">Biblioteca</a></li>
+                                <li><a href="{{route('biblioteca')}}" class="text-gray-300 hover:text-white">Biblioteca</a></li>
                                 <li><button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
                                         class="text-white font-bold flex justify-between">Áreas de Investigación <span
-                                            class="py-2"> <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                                            class="py-2"> <svg class="w-2.5 h-2.5 ms-3" aria-hidden="false"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                     stroke-width="2" d="m1 1 4 4 4-4" />
@@ -50,7 +50,7 @@
                                     </div>
                                 </li>
                                 <!--
-                                    <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
+                                                        <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
 
                             </ul>
                         </nav>
@@ -70,11 +70,17 @@
             </div>
 
             <div class="grid  grid-cols-10 gap-x-16 max-lg:grid-cols-1 justify-center">
-                <form class=" w-[450px]  max-[1200px]:hidden h-auto mt-12 col-span-3 " id="sidebar" aria-label="Sidebar">
-                    <div class="px-3 py-4 overflow-y-auto rounded bg-gray-50 ">
+                <aside
+                    class=" w-[450px] max-[1150px]:bg-slate-50  max-[1150px]:w-[350px]   max-[1150px]:z-50  transition-transform  max-[1150px]:fixed max-[1150px]:top-0 max-[1150px]:bottom-0 max-[1150px]:left-0  h-auto mt-12 max-md:mt-0 col-span-3 "
+                    id="drawer-navigation" tabindex="-1" aria-labelledby="drawer-navigation-label">
+                    <div class="px-3 py-4 overflow-y-auto rounded  ">
                         <ul class="space-y-2">
                             <li>
-                                <button id="closeBtn" class="max-[1024px]:block hidden text-black text-2xl">X</button>
+                                <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase ">
+                                    Menu</h5>
+                                <button type="button" data-drawer-hide="drawer-navigation"
+                                    aria-controls="drawer-navigation"
+                                    class="max-[1150px]:block hidden text-black text-2xl">X</button>
 
                             </li>
                             <li>
@@ -83,7 +89,7 @@
                                         class="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</label>
                                     <button id="dropdown-button" data-dropdown-toggle="dropdown"
                                         class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 "
-                                        type="button">All<svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true"
+                                        type="button">All<svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="false"
                                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                 stroke-width="2" d="m1 1 4 4 4-4" />
@@ -102,12 +108,12 @@
                                         </ul>
                                     </div>
                                     <div class="relative w-full ">
-                                        <input type="search" id="search-dropdown"
+                                        <input type="search" id="search-dropdown" name="query"
                                             class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
                                             placeholder="Search Title..." />
                                         <button type="button"
                                             class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none  ">
-                                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            <svg class="w-4 h-4" aria-hidden="false" xmlns="http://www.w3.org/2000/svg"
                                                 fill="none" viewBox="0 0 20 20">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                                     stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
@@ -122,18 +128,6 @@
                                 <button type="button"
                                     class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  "
                                     aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">
-                                    <!--             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
-                                            fill="#000000" width="64px" height="64px" viewBox="-4 -2 24 24"
-                                            xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin"
-                                            class="jam jam-document-f">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <path
-                                                    d="M3 0h10a3 3 0 0 1 3 3v14a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3zm1 7a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h5a1 1 0 0 0 0-2H4zM4 3a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2H4zm0 8a1 1 0 0 0 0 2h8a1 1 0 0 0 0-2H4z">
-                                                </path>
-                                            </g>
-                                        </svg>  -->
                                     <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
                                         width="64px" height="64px" viewBox="0 0 32 32" id="i-options"
                                         xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor"
@@ -161,8 +155,8 @@
 
                                             <span
                                                 class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">
-                                                <input class="mr-2" type="checkbox" value="{{ $topico->id }}"
-                                                    class="checkbox-topico">
+                                                <input class="mr-2 checkbox-topico" type="checkbox" name="topics[]"
+                                                    value="{{ $topico->id }}">
                                                 {{ $topico->nombre }} <span
                                                     class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full">{{ count($topico->papers) }}</span></span>
                                         </li>
@@ -237,32 +231,45 @@
                                         </path>
                                     </svg>
                                     <span class="flex-1 ml-3 whitespace-nowrap">Noticias</span>
-                           <!--         <span
-                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full ">3</span>  -->
                                 </a>
                             </li>
 
                         </ul>
                     </div>
-                </form>
+                </aside>
+
 
 
                 <div class="pt-6 pb-12  col-span-7">
                     <div class=" w-auto mx-2 overflow-y-auto">
                         <div id="card" class="">
-                            <!-- container para papers -->
-                            <div id="papers-container"class="container w-100 lg:w-4/5  mx-auto flex flex-col">
-                                <!-- paper -->
-                                <div class="px-4 ">
-                                    <div
-                                        class="p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
-                                        <p class="text-gray-50 ">Mostrando {{ count($papers) }} resultados</p>
-                                        <button id="menuBtn"
-                                            class="max-[1024px]:block hidden bg-[#28ddc5] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
-                                            ☰
-                                        </button>
-                                    </div>
+                            <div class=" px-24 max-lg:px-2 ">
+                                <div
+                                    class="p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
+                                    <button id="menuBtn" data-drawer-target="drawer-navigation"
+                                        data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"
+                                        class="max-[1024px]:block hidden bg-[#28ddc5] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
+                                        <svg class="ml-3 w-6 h-6 text-gray-50 transition duration-75 group-hover:text-gray-900 "
+                                        viewBox="0 0 32 32" id="i-options"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path
+                                                d="M28 6 L4 6 M28 16 L4 16 M28 26 L4 26 M24 3 L24 9 M8 13 L8 19 M20 23 L20 29">
+                                            </path>
+                                        </g>
+                                    </svg>
+                                    </button>
+                                    <p class="text-gray-50 ">Mostrando <span class="text-gray-100" id="paper-count">{{ count($papers) }}</span> resultados</p>
+
                                 </div>
+                            </div>
+                            <!-- container para papers -->
+                            <div id="papers-container" class="container w-100 lg:w-4/5  mx-auto flex flex-col overflow-y-visible">
+                                <!-- paper -->
+                               
                                 @if ($papers->isEmpty())
                                     <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center">
                                         <p class="text-gray-500 text-3xl font-semibold">No se encontraron papers.</p>
@@ -288,7 +295,7 @@
                                                 </div>
                                                 <p class="doi text-sm mt-3"><span class="text-gray-600">
                                                         DOI: </span><span
-                                                        class="doi-link underline text-gray-500 text-xs">{{ $paper->doi }}</span>
+                                                        class="doi-link underline text-gray-500 text-base">{{ $paper->doi }}</span>
                                                 </p>
                                                 <p class="text-base  mt-4">
                                                     <span class="text-gray-600  ">Publicado: </span>
@@ -345,23 +352,24 @@
             let offset = {{ $papers->count() }};
             //  console.log(offset)
             const limit = 3;
-
+            const paperCount = document.getElementById('paper-count')
             const button = document.getElementById('load-more');
 
-            button.addEventListener('click', function() {
-                fetch(`/nosotros/biblioteca/fetch-more?offset=${offset}&limit=${limit}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const {
-                            papers,
-                            total,
-                            remaining
-                        } = data;
+            if (button != undefined) {
+                button.addEventListener('click', function() {
+                    fetch(`/api/biblioteca/fetch-more?offset=${offset}&limit=${limit}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            const {
+                                papers,
+                                total,
+                                remaining
+                            } = data;
 
-                        if (papers.length > 0) {
-                            const container = document.getElementById('papers-container');
-                            papers.forEach(paper => {
-                                const card = `
+                            if (papers.length > 0) {
+                                const container = document.getElementById('papers-container');
+                                papers.forEach(paper => {
+                                    const card = `
                                   <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4  mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
                                       <div class="max-h-96  md:w-1/2 p-4">
                                           <a href="/nosotros/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
@@ -387,26 +395,28 @@
                                           <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
                                       </div>
                                   </div>`;
-                                container.insertAdjacentHTML('beforeend', card);
-                            });
+                                    container.insertAdjacentHTML('beforeend', card);
+                                });
 
+                                paperCount.textContent = total+remaining;
 
-                            offset += papers.length;
-                            if (remaining > 0) {
-                                button.textContent = ` VER ${remaining} MÁS PUBLICACIONES`;
+                                offset += papers.length;
+                                if (remaining > 0) {
+                                    button.textContent = ` VER ${remaining} MÁS PUBLICACIONES`;
+
+                                } else {
+                                    button.style.display = 'none';
+                                }
 
                             } else {
                                 button.style.display = 'none';
                             }
 
-                        } else {
-                            button.style.display = 'none';
-                        }
 
-
-                    })
-                    .catch(error => console.error('Error fetching data:', error));
-            });
+                        })
+                        .catch(error => console.error('Error fetching data:', error));
+                });
+            }
         });
     </script>
 
@@ -416,85 +426,131 @@
             const checkboxes = document.querySelectorAll('.checkbox-topico');
             const container = document.getElementById('papers-container');
 
+            const drawer = document.getElementById('drawer-navigation');
+            const paperCount = document.getElementById('paper-count')
 
-            document.getElementById("menuBtn").addEventListener("click", function() {
-                document.getElementById("sidebar").classList.add("-translate-x-full");
-            });
+            // Función para actualizar el sidebar segun resizing
+            function updateDrawerPosition() {
+                if (window.innerWidth >= 1024) {
+                    // Vista de escritorio
+                    drawer.style.transform = 'translateX(0)'; 
+                    drawer.style.transition = 'none';
+                } else {
 
-            document.getElementById("closeBtn").addEventListener("click", function() {
-                document.getElementById("sidebar").classList.toggle("-translate-x-full");
-            });
+                    if (drawer.style.transform !== 'translateX(0)') {
+                        drawer.style.transition = 'transform 0.3s ease-in-out'; 
+                    }
+                }
+            }
+
+            // Cerrar
+            function closeDrawer() {
+                drawer.style.transform = 'translateX(-100%)'; 
+            }
+
+            // Mostrar
+            function showDrawer() {
+                drawer.style.transform = 'translateX(0)';
+            }
+
+         
+            window.addEventListener('resize', updateDrawerPosition);
+
+           // inicializar una llamada al principio
+            updateDrawerPosition();
 
 
-            function performSearch() {
+            document.querySelector('[data-drawer-show="drawer-navigation"]').addEventListener('click', showDrawer);
+            document.querySelector('[data-drawer-hide="drawer-navigation"]').addEventListener('click', closeDrawer);
+
+
+            function getSearchParams() {
                 const query = searchInput.value.trim();
                 const selectedTopics = Array.from(checkboxes)
                     .filter(checkbox => checkbox.checked)
                     .map(checkbox => checkbox.value);
+
                 const params = new URLSearchParams();
-                if (query.length > 2) {
-                    params.append('query', query);
-                }
-                if (selectedTopics.length > 0) {
-                    params.append('topics', selectedTopics.join(
-                        ','));
-                }
+                if (query.length > 2) params.append('query', query);
+                if (selectedTopics.length > 0) params.append('topics', selectedTopics.join(','));
 
-                fetch(`/nosotros/biblioteca/search?${params.toString()}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        const {
-                            papers
-                        } = data;
-                        container.innerHTML = '';
-
-                        if (papers.length > 0) {
-                            papers.forEach(paper => {
-                                const card = `
-                          <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
-                              <div class="max-h-96 md:w-1/2 p-4">
-                                  <a href="/nosotros/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
-                                      <h3 class="font-semibold text-lg mt-4 text-blue-400">${paper.titulo}</h3>
-                                  </a>
-                                  <div class="mt-5">
-                                      <p class="text-gray-600">Autores:</p>
-                                      <p class="autores italic text-base mb-3">${paper.formatted_autores}</p>
-                                  </div>
-                                  <p class="doi text-sm mt-3"><span class="text-gray-600">DOI: </span>
-                                      <span class="doi-link underline text-gray-500 text-xs">${paper.doi }</span>
-                                  </p>
-                                  <p class="text-base mt-4">
-                                      <span class="text-gray-600">Publicado: </span>
-                                      <strong class="text-gray-700 uppercase font-semibold text-sm">${paper.fecha_publicacion}</strong>
-                                  </p>
-                                  <a href="/nosotros/biblioteca/papers/${paper.id}" class="mt-2 flex gap-2 cursor-pointer font-bold">
-                                      <svg width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-                                          <path fill="#98c560" fill-rule="evenodd" d="M8 3.517a1 1 0 011.62-.784l5.348 4.233a1 1 0 010 1.568l-5.347 4.233A1 1 0 018 11.983v-1.545c-.76-.043-1.484.003-2.254.218-.994.279-2.118.857-3.506 1.99a.993.993 0 01-1.129.096.962.962 0 01-.445-1.099c.415-1.5 1.425-3.141 2.808-4.412C4.69 6.114 6.244 5.241 8 5.042V3.517zm1.5 1.034v1.2a.75.75 0 01-.75.75c-1.586 0-3.066.738-4.261 1.835a8.996 8.996 0 00-1.635 2.014c.878-.552 1.695-.916 2.488-1.138 1.247-.35 2.377-.33 3.49-.207a.75.75 0 01.668.745v1.2l4.042-3.2L9.5 4.55z" clip-rule="evenodd"></path>
-                                      </svg>
-                                      <p class="text-[#98c560] text-base">Redirigir</p>
-                                  </a>    
-                              </div>
-                              <div class="w-full p-6 text-gray-800 flex flex-col justify-between">
-                                  <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
-                              </div>
-                          </div>`;
-                                container.insertAdjacentHTML('beforeend', card);
-                            });
-                        } else {
-                            container.innerHTML =
-                                '<p class="text-center text-gray-500">No se encontraron resultados.</p>';
-                        }
-                    })
-                    .catch(error => console.error('Error en la búsqueda:', error));
+                const newUrl = `/nosotros/biblioteca/search?${params.toString()}`;
+                window.history.pushState(null, '', newUrl);
+               console.log('[DEBUG] Params:', params.toString());
+                return params;
             }
 
+            // Renderización de resultados
+            function renderPapers(papers) {
+                container.innerHTML = '';
+                if (papers.length > 0) {
+                    papers.forEach(paper => {
+                        const card = `
+                    <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
+                        <div class="max-h-96 md:w-1/2 p-4">
+                            <a href="/nosotros/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
+                                <h3 class="font-semibold text-lg mt-4 text-blue-400">${paper.titulo}</h3>
+                            </a>
+                            <div class="mt-5">
+                                <p class="text-gray-600">Autores:</p>
+                                <p class="autores italic text-base mb-3">${paper.formatted_autores}</p>
+                            </div>
+                            <p class="doi text-sm mt-3"><span class="text-gray-600">DOI: </span>
+                                <span class="doi-link underline text-gray-500 text-xs">${paper.doi}</span>
+                            </p>
+                            <p class="text-base mt-4">
+                                <span class="text-gray-600">Publicado: </span>
+                                <strong class="text-gray-700 uppercase font-semibold text-sm">${paper.fecha_publicacion}</strong>
+                            </p>
+                            <a href="/nosotros/biblioteca/papers/${paper.id}" class="mt-2 flex gap-2 cursor-pointer font-bold">
+                                <svg width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+                                    <path fill="#98c560" fill-rule="evenodd" d="M8 3.517a1 1 0 011.62-.784l5.348 4.233a1 1 0 010 1.568l-5.347 4.233A1 1 0 018 11.983v-1.545c-.76-.043-1.484.003-2.254.218-.994.279-2.118.857-3.506 1.99a.993.993 0 01-1.129.096.962.962 0 01-.445-1.099c.415-1.5 1.425-3.141 2.808-4.412C4.69 6.114 6.244 5.241 8 5.042V3.517zm1.5 1.034v1.2a.75.75 0 01-.75.75c-1.586 0-3.066.738-4.261 1.835a8.996 8.996 0 00-1.635 2.014c.878-.552 1.695-.916 2.488-1.138 1.247-.35 2.377-.33 3.49-.207a.75.75 0 01.668.745v1.2l4.042-3.2L9.5 4.55z" clip-rule="evenodd"></path>
+                                </svg>
+                                <p class="text-[#98c560] text-base">Redirigir</p>
+                            </a>    
+                        </div>
+                        <div class="w-full p-6 text-gray-800 flex flex-col justify-between">
+                            <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
+                        </div>
+                    </div>`;
+                        container.insertAdjacentHTML('beforeend', card);
+                    });
+                } else {
+                    container.innerHTML = ` <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center">
+                                        <p class="text-gray-500 text-3xl font-semibold">No se encontraron papers.</p>
+                                        <small class="text-blue-400 ">Busca por más información</small>
+
+                                    </div>`;
+                }
+            }
+
+            // Realizar la búsqueda
+            function performSearch() {
+                const params = getSearchParams();
+                fetch(`/api/biblioteca/search?${params.toString()}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error(`[HTTP ${response.status}] ${response.statusText}`);
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Server response:', data);
+                        const {
+                                papers,
+                                total,
+                                remaining
+                            } = data;
+                        renderPapers(papers || []);
+                        paperCount.textContent = total;
+
+
+                    })
+                    .catch(error => console.error('Error durante búsqueda:', error));
+            }
 
             searchInput.addEventListener('input', performSearch);
+            checkboxes.forEach(checkbox => checkbox.addEventListener('change', performSearch));
 
 
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', performSearch);
-            });
 
         });
     </script>
