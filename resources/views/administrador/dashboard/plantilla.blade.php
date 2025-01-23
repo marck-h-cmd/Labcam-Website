@@ -178,7 +178,6 @@
                     </li>
                     <li class="mb-4">
                         <a href="{{ route('topic-panel') }}"
-
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('topic-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Tópicos
@@ -206,7 +205,8 @@
                     <li class="mb-4">
                         <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Crear Capital Humano</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Crear
+                            Capital Humano</a>
                     </li>
                 </ul>
             </li>
