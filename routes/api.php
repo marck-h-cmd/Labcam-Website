@@ -8,7 +8,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
+Route::prefix('biblioteca')->group(function () {
+    Route::get('/search', [PaperController::class, 'search']);
 
-Route::get('/biblioteca/search', [PaperController::class, 'search']);
-
-Route::get('/biblioteca/fetch-more', [PaperController::class, 'fetchMorePapers']);
+    Route::get('/fetch-more', [PaperController::class, 'fetchMorePapers']);
+});

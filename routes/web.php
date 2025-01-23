@@ -33,10 +33,6 @@ Route::get('/nosotros/biblioteca/fetch-more', [PaperController::class, 'fetchMor
 
 Route::get('/nosotros/historia', HistoriaSliderController::class . '@view')->name('historia');
 
-Route::get('/nosotros/paper', function () {
-    return view('usuario.nosotros.paper');
-})->name('biblioteca.paper');
-
 //RUTA CONTACTO
 use App\Http\Controllers\ContactoController;
 
