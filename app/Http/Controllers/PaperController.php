@@ -70,17 +70,17 @@ class PaperController extends Controller
       $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
 
       $papers = Paper::query();
-       // buscar por titulo
+      // buscar por titulo
       if ($query) {
         $papers->where('titulo', 'like', "%$query%");
       }
-       // buscar por topicos seleccionados
+      // buscar por topicos seleccionados
       if (!empty($topics)) {
         $papers->whereHas('topicos', function ($q) use ($topics) {
           $q->whereIn('topicos.id', $topics);
         });
       }
-      $papers=$papers->get();
+      $papers = $papers->get();
       // formato a los autores
       $papers->each(function ($paper) {
         $paper->formatted_autores = $this->formatAutores($paper->autores);
@@ -230,7 +230,7 @@ class PaperController extends Controller
 
       $paper->topicos()->sync($topicoIds);
 
-      return redirect()->route('paper-panel')
+      return redirect()->route('papers.index')
         ->with('edited', 'Paper actualizado exitosamente.');
     } catch (Exception $e) {
       Log::error("Error updating paper: " . $e->getMessage());
@@ -244,7 +244,7 @@ class PaperController extends Controller
     $paper = Paper::find($id);
 
     if (!$paper) {
-      return redirect()->route('paper-panel')
+      return redirect()->route('papers.index')
         ->with('error', 'Paper no encontrado');
     }
 
@@ -258,7 +258,7 @@ class PaperController extends Controller
       Storage::disk('paper_img')->delete($paper->img_filename);
     }
     $paper->delete();
-    return redirect()->route('paper-panel')
+    return redirect()->route('papers.index')
       ->with('success', 'Paper eliminado exitosamente');
   }
 
@@ -281,7 +281,12 @@ class PaperController extends Controller
   // Función para mostrar papers en el panel
   public function adminIndex(Request $request): View
   {
-    $papers = Paper::paginate(10);
+    $query = $request->input('search');
+    // $papers = Paper::paginate(10);
+    $papers = Paper::when($query, function ($queryBuilder) use ($query) {
+      $queryBuilder->where('titulo', 'like', '%' . $query . '%')
+        ->orWhere('publisher', 'like', '%' . $query . '%');
+    })->paginate(10);
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
@@ -327,7 +332,7 @@ class PaperController extends Controller
     $paper = Paper::find($id);
 
     if (!$paper) {
-      return redirect()->route('paper-panel')
+      return redirect()->route('papers.index')
         ->with('error', 'Paper no encontrado');
     }
 
