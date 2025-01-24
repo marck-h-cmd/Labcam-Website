@@ -194,7 +194,7 @@
                 <a href="{{ route('papers.create') }}"
                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">Cancelar</a>
 
-                <a href="{{ route('paper-panel') }}"
+                <a href="{{ route('papers.index') }}"
                     class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">
                     Volver</a>
 

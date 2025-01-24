@@ -164,7 +164,7 @@
                                                     class="whitespace-nowrap py-8 pl-4 pr-3 text-sm font-medium text-gray-900">
                                                     <form action="{{ route('papers.destroy', $paper->id) }}"
                                                         method="POST">
-                                                        <a href="{{ route('papers.show', $paper->id) }}"
+                                                        <a href="{{ route('biblioteca.papers.show', $paper->id) }}"
                                                             class="text-gray-600 font-bold hover:text-gray-900 mr-2">Mostrar</a>
                                                         <a href="{{ route('papers.edit', $paper->id) }}"
                                                             class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">Editar</a>

@@ -135,7 +135,7 @@
             </li>
 
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'paper-panel']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'papers.index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -144,10 +144,10 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('paper-panel') }}"
+                        <a href="{{ route('papers.index') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('paper-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('papers.index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Lista de Papers</a>
                     </li>
                     <li class="mb-4">
