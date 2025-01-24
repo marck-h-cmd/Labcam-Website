@@ -116,6 +116,12 @@
                                         Capital Humano
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ route('areas') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('areas') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Áreas de  Investigación
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </li>

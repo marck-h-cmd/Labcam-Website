@@ -11,13 +11,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion', function () {
-    return view('usuario.Organizacion.Direccion');
-})->name('direccion');
+Route::get('/direccion', function () {return view('usuario.Organizacion.Direccion');})->name('direccion');
 
-Route::get('/capital', function () {
-    return view('usuario.Organizacion.CapitalHumano');
-})->name('capital');
+Route::get('/capital', function () {return view('usuario.Organizacion.CapitalHumano');})->name('capital');
+Route::get('/areas', function () {return view('usuario.Organizacion.AreasInvestigacion');})->name('areas');
 
 // RUTAS DE SECCIÓN NOSOTROS
 use App\Http\Controllers\PaperController;
@@ -195,5 +192,13 @@ Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->na
 
 // ------------------------- CRUD ORGANIZACION ---------------------------------------------
 // ---- Capital Humano ---- //
+
+Route::get('/capitales', [CapitalHumanoController::class, 'index'])->name('capital_index');
 Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
+Route::post('/capitales', [CapitalHumanoController::class, 'store'])->name('capitales.store');
+Route::get('capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
+Route::put('capitales/{id}', [CapitalHumanoController::class, 'update'])->name('capitales.update');
+Route::delete('capitales/{id}', [CapitalHumanoController::class, 'destroy'])->name('capitales.destroy');
+
+
 

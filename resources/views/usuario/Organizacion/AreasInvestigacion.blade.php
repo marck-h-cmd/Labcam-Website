@@ -5,7 +5,7 @@
     <!-- Main Content -->
     <div class="container mx-auto mt-8 py-10 w-95">
         <div class="text-center">
-            <h2 class="text-blue-800 font-semibold text-5xl mb-1">CAPITAL HUMANO</h2>
+            <h2 class="text-blue-800 font-semibold text-5xl mb-1">ÁREAS DE INVESTIGACIÓN</h2>
             <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
         </div>
   
@@ -14,19 +14,19 @@
             <div class="bg-gray-200 p-6 w-60 m-10 shadow-md rounded">
                 <ul class="space-y-2">
                     <li>
-                        <button onclick="showSection('investigadores',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Investigadores</button>
+                        <button onclick="showSection('investigadores',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Quimica</button>
                     </li>
                     <li>
-                        <button onclick="showSection('egresados',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Egresados</button>
+                        <button onclick="showSection('egresados',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Tecnología</button>
                     </li>
                     <li>
-                         <button onclick="showSection('tesistas',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Tesistas</button>
+                         <button onclick="showSection('tesistas',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Ciencias de la Vida y Biomedicina</button>
                     </li>
                     <li>
-                        <button onclick="showSection('pasantes',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Pasantes</button>
+                        <button onclick="showSection('pasantes',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Ciencias Físicas</button>
                     </li>
                     <li>
-                        <button onclick="showSection('aliados',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Aliados</button>
+                        <button onclick="showSection('aliados',this)" class="bloque block w-full text-left px-4 py-2 hover:bg-gray-300 rounded">Inteligencia Artificial</button>
                     </li>
                 </ul>
             </div>
@@ -185,14 +185,6 @@
     
                 <!-- Tesistas Section -->
                 <div id="tesistas" class="dynamic-section hidden">
-                    <!-- Submenú Pregrado/Posgrado -->
-                    <div class="flex justify-center mb-2 p-4">
-                        <div class="bg-gray-300 rounded-lg shadow w-4/5 flex justify-evenly">
-                            <button onclick="showTesistas('pregrado',this)" class="tesistas-tab block px-8 py-2 mx-2 rounded-md bg-gray-300 hover:bg-gray-400 active">PREGRADO</button>
-                            <button onclick="showTesistas('posgrado',this)" class="tesistas-tab block px-8 py-2 mx-2 rounded-md bg-gray-300 hover:bg-gray-400">POSGRADO</button>
-                        </div>
-                    </div>
-
                     <!-- Contenido de Tesistas -->
                     <div id="pregrado" class="tesistas-content">
                         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">

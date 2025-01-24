@@ -15,4 +15,13 @@ class AreaInvestigacion extends Model
     {
         return $this->hasMany(Paper::class, 'area_id');
     }
+    
+    /**
+     * Relación con el modelo Capital.
+     * Un área de investigación tiene muchos capitales.
+     */
+    public function capitales()
+    {
+        return $this->hasMany(Capital::class, 'area_investigacion');
+    }
 }
