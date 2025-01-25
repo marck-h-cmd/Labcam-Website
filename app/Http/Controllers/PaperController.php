@@ -32,8 +32,8 @@ class PaperController extends Controller
     $displayCount = $totalPapers - $amount;
 
     // Obtener áreas de investigación y topicos relacionadas con almenos un paper
-    $topicos = Topico::has('papers', '>', 0)->get();
-    $areas = AreaInvestigacion::has('papers', '>', 0)->get();
+    $topicos = Topico::has('papers', '>=', 1)->get();
+    $areas = AreaInvestigacion::has('papers', '>=', 1)->get();
 
     return view('usuario.nosotros.biblioteca', compact('papers', 'displayCount', 'topicos', 'areas'));
   }
@@ -285,8 +285,11 @@ class PaperController extends Controller
     // $papers = Paper::paginate(10);
     $papers = Paper::when($query, function ($queryBuilder) use ($query) {
       $queryBuilder->where('titulo', 'like', '%' . $query . '%')
-        ->orWhere('publisher', 'like', '%' . $query . '%');
-    })->paginate(10);
+          ->orWhereHas('area', function ($q) use ($query) {
+              $q->where('nombre', 'like', '%' . $query . '%'); 
+          });
+  })->paginate(10);
+  
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
