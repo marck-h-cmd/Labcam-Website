@@ -128,7 +128,7 @@
                     <div class="mb-6">
                         <div class="my-6 flex flex-col space-y-4">
                             
-                            {!! $topProyecto->descripcion !!}
+                           
 
                         </div>
                         <a href="{{ route('proyectos') }}">
