@@ -1,49 +1,71 @@
 @extends('administrador.dashboard.plantilla')
 
 @section('contenido')
-<div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
-    <h2 class="text-2xl font-bold text-center mb-4 text-[#2e5382]">Editar Registro</h2>
-    <form action="{{ route('capitales.update', $capital->id) }}" method="POST" enctype="multipart/form-data">
+<div class="container mx-auto p-6">
+    <div class="main-title flex flex-col items-center gap-3 mb-8">
+        <div class="title text-2xl font-semibold text-[#2e5382]">Editar Registro</div>
+        <div class="blue-line w-2/5 h-0.5 bg-[#64d423]"></div>
+    </div>
+
+    <form action="{{ route('capitales.update', $capital->id) }}" method="POST" class="bg-white p-7 rounded shadow-lg max-w-4xl mx-auto">
         @csrf
         @method('PUT')
+
         <div class="mb-4">
-            <label for="nombres" class="block font-medium">Nombres</label>
-            <input type="text" id="nombres" name="nombres" class="w-full border px-3 py-2 rounded" value="{{ $capital->nombre }}" required>
+            <label for="nombre" class="block">Nombres</label>
+            <input type="text" id="nombre" name="nombre" value="{{ $capital->nombre }}" class="w-full px-4 py-2 border rounded" required>
         </div>
+
         <div class="mb-4">
-            <label for="carrera" class="block font-medium">Carrera</label>
-            <input type="text" id="carrera" name="carrera" class="w-full border px-3 py-2 rounded" value="{{ $capital->carrera }}" required>
+            <label for="carrera" class="block">Carrera</label>
+            <input type="text" id="carrera" name="carrera" value="{{ $capital->carrera }}" class="w-full px-4 py-2 border rounded" required>
         </div>
+
         <div class="mb-4">
-            <label for="Area_de_Investigacion" class="block font-medium">Área de Investigación</label>
-            <select id="Area_de_Investigacion" name="Area_de_Investigacion" class="w-full border px-3 py-2 rounded" required>
-                @foreach($areas as $area)
-                    <option value="{{ $area->id }}" {{ $capital->areaInvestigacion->id == $area->id ? 'selected' : '' }}>
+            <label for="area_investigacion" class="block">Área de Investigación</label>
+            <select id="area_investigacion" name="area_investigacion" class="w-full px-4 py-2 border rounded" required>
+                <option value="">Seleccione una opción</option>
+                @foreach($areasInvestigacion as $area)
+                    <option value="{{ $area->id }}" {{ $capital->area_investigacion == $area->id ? 'selected' : '' }}>
                         {{ $area->nombre }}
                     </option>
                 @endforeach
             </select>
         </div>
+
         <div class="mb-4">
-            <label for="correo" class="block font-medium">Correo</label>
-            <input type="email" id="correo" name="correo" class="w-full border px-3 py-2 rounded" value="{{ $capital->correo }}" required>
+            <label for="correo" class="block">Correo</label>
+            <input type="email" id="correo" name="correo" value="{{ $capital->correo }}" class="w-full px-4 py-2 border rounded" required>
         </div>
+
         <div class="mb-4">
-            <label for="cv" class="block font-medium">CV</label>
-            <input type="file" id="cv" name="cv" class="w-full border px-3 py-2 rounded">
+            <label for="rol" class="block">Rol</label>
+            <input type="text" id="rol" name="rol" value="{{ $capital->rol }}" class="w-full px-4 py-2 border rounded" required>
         </div>
+
+        <div class="flex justify-center mt-6">
+            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700">Guardar</button>
+            <a href="{{ route('capital_index') }}" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700 ml-4">Cancelar</a>
+        </div>
+
         <div class="mb-4">
-            <label for="rol" class="block font-medium">Rol</label>
-            <input type="text" id="rol" name="rol" class="w-full border px-3 py-2 rounded" value="{{ $capital->rol }}" required>
+            <label for="cv" class="block">Currículum (PDF/Word)</label>
+            <input type="file" id="cv" name="cv" class="w-full px-4 py-2 border rounded">
+            @if($capital->cv)
+                <a href="{{ asset('storage/' . $capital->cv) }}" target="_blank" class="text-blue-500 underline">Ver CV actual</a>
+            @endif
         </div>
-        <div class="flex justify-between mt-6">
-            <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700">
-                Guardar Cambios
-            </button>
-            <a href="{{ route('capitales') }}" class="bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-700">
-                Cancelar
-            </a>
+    
+        <div class="mb-4">
+            <label for="foto" class="block">Foto (JPG/PNG)</label>
+            <input type="file" id="foto" name="foto" class="w-full px-4 py-2 border rounded">
+            @if($capital->foto)
+                <div class="mt-2">
+                    <img src="{{ asset('storage/' . $capital->foto) }}" alt="Foto actual" class="h-20 w-20 rounded-full">
+                </div>
+            @endif
         </div>
     </form>
 </div>
 @endsection
+

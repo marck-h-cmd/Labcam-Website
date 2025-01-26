@@ -32,154 +32,73 @@
             </div>
   
             <!-- Profiles -->
-            <section class="w-full px-4 my-10">
+            <section class="w-full px-2 my-10">
                 <!-- Investigadores Section -->
                 <div id="investigadores" class="dynamic-section">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">
 
-                        {{-- --------------CARTAS----------------- --}}
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg relative ">
-                                <img src="/user/template/images/team-02.png" alt="Profile" class="mx-auto mb-2 rounded-full">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi px-4 py-2 rounded">Ver CV</a>
-                                </div>
+                        {{-- -----Investigadores-------------- --}}
+                        @foreach ($investigadores as $investigador)
+                        <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
+                            <a href="#" class="w-full h-full block">
+                                <img src="/user/template/images/{{ $investigador->foto }}" alt="{{$investigador->foto }}" class="w-full h-[200px] object-cover rounded-t-xl" />
+                                <div class="px-4 py-6 w-full min-h-[150px]">
+                                    <span class="text-gray-600 mr-3 uppercase text-lg">{{$investigador->nombre}}</span>
+                                <p class="text-lg text-black truncate block capitalize mt-3 select-none">
+                                    Carrera: {{ $investigador->carrera}}
+                                </p>
+                                <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
+                                    Área de Investigación: 
+                                    {{$investigador->areaInvestigacion->nombre}}
+                                </p>
+                                <p class="text-base text-black truncate block capitalize mt-3 select-none">
+                                    Correo: {{$investigador->correo}}
+                                </p>
                             </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Juan Pérez</h4>
-                                <p class="">ING. DE SISTEMAS</p>
-                                <p>Área de Investigación: Inteligencia Artificial</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg relative">
-                                <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2 rounded-full">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi px-4 py-2 rounded">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Elena Castro</h4>
-                                <p>ING. CIVIL</p>
-                                <p>Área de Investigación: Estructuras</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg relative">
-                                <img src="/user/template/images/team-02.png" alt="Profile" class="mx-auto mb-2 rounded-full">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi px-4 py-2 rounded">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Mario López</h4>
-                                <p class="">ING. MECATRONICO</p>
-                                <p class="">Área de Investigación: Robótica</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg relative ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2 rounded-full">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi px-4 py-2 rounded">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Carlos Sánchez</h4>
-                                <p>Biologo</p>
-                                <p>Área de Investigación: Ecología</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg relative">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2 rounded-full">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi px-4 py-2 rounded">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Javier Ramírez</h4>
-                                <p>Químico</p>
-                                <p>Área de Investigación: Química Orgánica</p>
-                            </div>
+                        </a>
+                        <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                        <div
+                            class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
+                            <a href="/user/template/uploads/pdfs/{{ $investigador->cv}}" class="text-white text-base font-semibold select-none bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
+                                Ver CV
+                            </a>
                         </div>
                     </div>
+                        @endforeach
+                    </div>
                 </div>
-    
+
                 <!-- Egresados Section -->
                 <div id="egresados" class="dynamic-section hidden">
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">
                             {{-- --------------CARTAS---------- --}}
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/team-02.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
+                            @foreach ($egresados as $egresado)
+                            <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
+                                <a href="#" class="w-full h-full block">
+                                    <img src="/user/template/images/{{ $egresado->foto }}" alt="{{$egresado->foto }}" class="w-full h-[200px] object-cover rounded-t-xl" />
+                                    <div class="px-4 py-6 w-full min-h-[150px]">
+                                        <span class="text-gray-600 mr-3 uppercase text-lg">{{$egresado->nombre}}</span>
+                                    <p class="text-lg text-black truncate block capitalize mt-3 select-none">
+                                        Carrera: {{ $egresado->carrera}}
+                                    </p>
+                                    <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
+                                        Área de Investigación: 
+                                        {{$egresado->areaInvestigacion->nombre}}
+                                    </p>
+                                    <p class="text-base text-black truncate block capitalize mt-3 select-none">
+                                        Correo: {{ $egresado->correo}}
+                                    </p>
                                 </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Alejandro Torres</h4>
-                                <p>ING. MECATRONICO</p>
-                                <p>Área de Investigación: Robótica</p>
+                            </a>
+                            <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                            <div
+                                class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
+                                <a href="" class="text-white text-base font-semibold select-none bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
+                                    Ver CV
+                                </a>
                             </div>
                         </div>
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Beatriz Ruiz</h4>
-                                <p>Ing. Electrónica</p>
-                                <p>Área de Investigación: Sistemas de Control</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Carla Mendoza</h4>
-                                <p>Ingeniera de Sistemas</p>
-                                <p>Área de Investigación: Inteligencia Artificial</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Diana López</h4>
-                                <p>Ingeniera Industrial</p>
-                                <p>Área de Investigación: Automatización Industrial</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Eduardo Salazar</h4>
-                                <p>Ingeniero de Software</p>
-                                <p>Área de Investigación: Sistemas Embebidos</p>
-                            </div>
-                        </div>
+                            @endforeach
                     </div>
                 </div>
     
@@ -194,108 +113,67 @@
                     </div>
 
                     <!-- Contenido de Tesistas -->
-                    <div id="pregrado" class="tesistas-content">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">
-
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
+                    <div id="pregrado" class="tesistas-content hidden">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-lg">
+                            @foreach ($tesistas_pre as $tesista_pre)
+                            <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
+                                <a href="#" class="w-full h-full block">
+                                    <img src="/user/template/{{ $tesista_pre->foto }}" alt="{{$tesista_pre->foto }}" class="w-full h-[200px] object-cover rounded-t-xl" />
+                                    <div class="px-4 py-6 w-full min-h-[150px]">
+                                        <span class="text-gray-600 mr-3 uppercase text-lg">{{$tesista_pre->nombre}}</span>
+                                    <p class="text-lg text-black truncate block capitalize mt-3 select-none">
+                                        Carrera: {{ $tesista_pre->carrera}}
+                                    </p>
+                                    <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
+                                        Área de Investigación: 
+                                        {{$tesista_pre->areaInvestigacion->nombre}}
+                                    </p>
+                                    <p class="text-base text-black truncate block capitalize mt-3 select-none">
+                                        Correo: {{ $tesista_pre->correo}}
+                                    </p>
                                 </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Beatriz Ruiz</h4>
-                                    <p>Ing. Electrónica</p>
-                                    <p>Área de Investigación: Sistemas de Control</p>
-                                </div>
+                            </a>
+                            <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                            <div
+                                class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
+                                <a href="" class="text-white text-base font-semibold select-none bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
+                                    Ver CV
+                                </a>
                             </div>
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
-                                </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Eduardo Salazar</h4>
-                                    <p>Ingeniero de Software</p>
-                                    <p>Área de Investigación: Sistemas Embebidos</p>
-                                </div>
-                            </div>
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
-                                </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Beatriz Ruiz</h4>
-                                    <p>Ing. Electrónica</p>
-                                    <p>Área de Investigación: Sistemas de Control</p>
-                                </div>
-                            </div>
-                            <!-- Más tarjetas de Pregrado -->
+                        </div>
+                            @endforeach
                         </div>
                     </div>
 
                     <div id="posgrado" class="tesistas-content hidden">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">
-
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-lg">
+                            @foreach ($tesistas_pos as $tesista_pos)
+                            <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
+                                <a href="#" class="w-full h-full block">
+                                    <img src="/user/template/{{ $tesista_pos->foto }}" alt="{{$tesista_pos->foto }}" class="w-full h-[200px] object-cover rounded-t-xl" />
+                                    <div class="px-4 py-6 w-full min-h-[150px]">
+                                        <span class="text-gray-600 mr-3 uppercase text-lg">{{$tesista_pos->nombre}}</span>
+                                    <p class="text-lg text-black truncate block capitalize mt-3 select-none">
+                                        Carrera: {{ $tesista_pos->carrera}}
+                                    </p>
+                                    <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
+                                        Área de Investigación: 
+                                        {{$tesista_pos->areaInvestigacion->nombre}}
+                                    </p>
+                                    <p class="text-base text-black truncate block capitalize mt-3 select-none">
+                                        Correo: {{$tesista_pos->correo}}
+                                    </p>
                                 </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Eduardo Salazar</h4>
-                                    <p>Ingeniero de Software</p>
-                                    <p>Área de Investigación: Sistemas Embebidos</p>
-                                </div>
+                            </a>
+                            <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                            <div
+                                class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
+                                <a href="" class="text-white text-base font-semibold select-none bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
+                                    Ver CV
+                                </a>
                             </div>
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
-                                </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Beatriz Ruiz</h4>
-                                    <p>Ing. Electrónica</p>
-                                    <p>Área de Investigación: Sistemas de Control</p>
-                                </div>
-                            </div>
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/team-01.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
-                                </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Beatriz Ruiz</h4>
-                                    <p>Ing. Electrónica</p>
-                                    <p>Área de Investigación: Sistemas de Control</p>
-                                </div>
-                            </div>
-                            <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                                <div class="c rc i z-1 pg ">
-                                    <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                    <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                        <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                    </div>
-                                </div>
-                                <div class="text-sm sm:text-base">
-                                    <h4 class="font-semibold">Eduardo Salazar</h4>
-                                    <p>Ingeniero de Software</p>
-                                    <p>Área de Investigación: Sistemas Embebidos</p>
-                                </div>
-                            </div>
-                            <!-- Más tarjetas de Posgrado -->
+                        </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -303,136 +181,67 @@
     
                 <!-- Pasantes Section -->
                 <div id="pasantes" class="dynamic-section hidden">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-lg">
+                        @foreach ($pasantes as $pasante)
+                        <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
+                            <a href="#" class="w-full h-full block">
+                                <img src="/user/template/{{ $pasante->foto }}" alt="{{$pasante->foto }}" class="w-full h-[200px] object-cover rounded-t-xl" />
+                                <div class="px-4 py-6 w-full min-h-[150px]">
+                                    <span class="text-gray-600 mr-3 uppercase text-lg">{{$pasante->nombre}}</span>
+                                <p class="text-lg text-black truncate block capitalize mt-3 select-none">
+                                    Carrera: {{ $pasante->carrera}}
+                                </p>
+                                <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
+                                    Área de Investigación: 
+                                    {{$pasante->areaInvestigacion->nombre}}
+                                </p>
+                                <p class="text-base text-black truncate block capitalize mt-3 select-none">
+                                    Correo: {{ $pasante->correo}}
+                                </p>
                             </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Eduardo Salazar</h4>
-                                <p>Ingeniero de Software</p>
-                                <p>Área de Investigación: Sistemas Embebidos</p>
-                            </div>
+                        </a>
+                        <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                        <div
+                            class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
+                            <a href="" class="text-white text-base font-semibold select-none bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
+                                Ver CV
+                            </a>
                         </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Eduardo Salazar</h4>
-                                <p>Ingeniero de Software</p>
-                                <p>Área de Investigación: Sistemas Embebidos</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Eduardo Salazar</h4>
-                                <p>Ingeniero de Software</p>
-                                <p>Área de Investigación: Sistemas Embebidos</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Eduardo Salazar</h4>
-                                <p>Ingeniero de Software</p>
-                                <p>Área de Investigación: Sistemas Embebidos</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/test.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Eduardo Salazar</h4>
-                                <p>Ingeniero de Software</p>
-                                <p>Área de Investigación: Sistemas Embebidos</p>
-                            </div>
-                        </div>
+                    </div>
+                        @endforeach
                     </div>
                 </div>
     
                 <!-- Aliados Section -->
                 <div id="aliados" class="dynamic-section hidden">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 text-lg">
-
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/about-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-lg">
+                        @foreach ($aliados as $aliado)
+                        <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
+                            <a href="#" class="w-full h-full block">
+                                <img src="/user/template/{{ $aliado->foto }}" alt="{{ $aliado->foto }}" class="w-full h-[200px] object-cover rounded-t-xl" />
+                                <div class="px-4 py-6 w-full min-h-[150px]">
+                                    <span class="text-gray-600 mr-3 uppercase text-lg">{{$aliado->nombre}}</span>
+                                <p class="text-lg text-black truncate block capitalize mt-3 select-none">
+                                    Carrera: {{ $aliado->carrera}}
+                                </p>
+                                <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
+                                    Área de Investigación: 
+                                    {{$aliado->areaInvestigacion->nombre}}
+                                </p>
+                                <p class="text-base text-black truncate block capitalize mt-3 select-none">
+                                    Correo: {{ $aliado->correo}}
+                                </p>
                             </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Ecolnnovate</h4>
-                                <p>Direcctor: Laura Martínez</p>
-                                <p>Área de Investigación: Medio Ambiente</p>
-                                <p>Descripción: Ecolnnovate se dedica a desarrollar soluciones sostenibles para la industria. Su misión es promover la innoación ecológica y la reducción de la huella de carbono</p>
-                            </div>
+                        </a>
+                        <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                        <div
+                            class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
+                            <a href="" class="text-white text-base font-semibold select-none bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
+                                Ver CV
+                            </a>
                         </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/about-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Tech4All</h4>
-                                <p>Direcctor: Javir López</p>
-                                <p>Área de Investigación: Tecnología</p>
-                                <p>Descripción: Tech4All busca cerrar la brecha digital proporcionando accceso a tecnología y educación digital en áreas desfavorecidas.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/about-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Innovación Digital</h4>
-                                <p>Direcctor: Andrés Torres</p>
-                                <p>Área de Investigación: Desarrollo de Software</p>
-                                <p>Descripción: Innovación Digital se enfoca en el desarrollo de software y soluciones tecnológicas para pequeñas y medianas empresas, ayudandolas a digitalizar sus operaciones.</p>
-                            </div>
-                        </div>
-                        <div class="bg-white p-4 shadow rounded text-center max-w-[17rem]">
-                            <div class="c rc i z-1 pg ">
-                                <img src="/user/template/images/about-01.png" alt="Profile" class="mx-auto mb-2">
-                                <div class="im h r s df vd yc wg tc wf xf al hh/20 nl il z-10">
-                                    <a href="./blog-single.html" class="vc ek rg lk gh sl ml il gi hi">Ver CV</a>
-                                </div>
-                            </div>
-                            <div class="text-sm sm:text-base">
-                                <h4 class="font-semibold">Ciberseguridad para Todos</h4>
-                                <p>Direcctor: Laura Martínez</p>
-                                <p>Área de Investigación: Ciberseguridad</p>
-                                <p>Descripción: Ciberseguridad para Todos trabajad para concienciar sobre la seguridad en línea y ofrece talleres gratuitos sobre protección de datos y ciberseguridad.</p>
-                            </div>
-                        </div>
+                    </div>
+                        @endforeach
                     </div>
                 </div>
             </section>
@@ -474,4 +283,5 @@
         }
         
     </script>
+    
 @endsection

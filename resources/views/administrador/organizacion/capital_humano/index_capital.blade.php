@@ -104,7 +104,7 @@
                                                     {{ $capital->carrera }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    {{ $capital->areaInvestigacion->nombre ?? 'N/A' }}
+                                                    {{ $capital->areaInvestigacion->nombre}}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                     {{ $capital->correo }}
@@ -129,7 +129,7 @@
                                                                          showCancelButton: true,
                                                                          confirmButtonColor: '#3085d6',
                                                                          cancelButtonColor: '#d33',
-                                                                         confirmButtonText: 'Sí, eliminar'
+                                                                         confirmButtonText: 'Eliminar'
                                                                      }).then((result) => {
                                                                          if (result.isConfirmed) {
                                                                              this.closest('form').submit();
@@ -154,8 +154,75 @@
             </div>
         </div>
     </div>
-     {{-- ------------------modal de Nuevo--------------- --}}
+
     <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
+        <div class="flex items-center justify-center w-full h-full">
+            <div class="bg-slate-200 p-7 rounded shadow-lg max-w-4xl w-full relative">
+                <!-- Título centrado en todo el modal -->
+                <div class="main-title flex flex-col items-center gap-3 mb-8">
+                    <div class="title text-2xl font-semibold text-[#2e5382]">Nuevo Registro</div>
+                    <div class="blue-line w-2/5 h-0.5 bg-[#64d423]"></div>
+                </div>
+                <!-- Contenido del modal -->
+                <form id="form" action="{{ route('capitales.store') }}" method="POST" enctype="multipart/form-data" class="flex gap-6">
+                    @method('POST')
+                    @csrf
+                    <!-- Sección de la imagen -->
+                    <div class="relative w-1/3 flex justify-center items-center">
+                        <div class="relative">
+                            <img id="previewImage" src="/ruta/a/imagen_por_defecto.jpg" alt="Vista previa" class="w-full h-auto rounded shadow">
+                            <button type="button" class="absolute top-2 right-2 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('imagen').click()">
+                                🖉
+                            </button>
+                            <input type="file" id="imagen" name="imagen" class="hidden" accept="image/*" onchange="mostrarVistaPrevia(event)">
+                        </div>
+                    </div>
+                    <!-- Formulario principal -->
+                    <div class="w-2/3">
+                        <div class="mb-4">
+                            <label for="nombres" class="block">Nombres:</label>
+                            <input type="text" id="nombres" name="nombres" class="w-full px-4 py-2 border rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="carrera" class="block">Carrera:</label>
+                            <input type="text" id="carrera" name="carrera" class="w-full px-4 py-2 border rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="area_investigacion" class="block">Área de Investigación:</label>
+                            <select id="area_investigacion" name="area_investigacion" class="w-full px-4 py-2 border rounded" required>
+                                <option value="">Seleccione un área</option>
+                                @foreach($areasInvestigacion as $area)
+                                    <option value="{{ $area->id }}">{{$area->nombre}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="correo" class="block">Correo</label>
+                            <input type="email" id="correo" name="correo" class="w-full px-4 py-2 border rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="cv" class="block">CV</label>
+                            <input type="file" id="cv" name="cv" class="w-full px-4 py-2 border rounded" required>
+                        </div>
+                        <div class="mb-4">
+                            <label for="rol" class="block">Rol</label>
+                            <input type="text" id="rol" name="rol" class="w-full px-4 py-2 border rounded" required>
+                        </div>
+                    <div class="flex justify-center mt-6">
+                        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-700">
+                            Guardar
+                        </button>
+                        <button type="button" onclick="closeCreateModal()" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700 ml-4">
+                            Cancelar
+                        </button>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+     {{-- ------------------modal de +Nuevo--------------- --}}
+    {{-- <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
             <div class="bg-slate-200 p-7 rounded shadow-lg max-w-4xl w-full relative">
                 <!-- Título centrado en todo el modal -->
@@ -166,22 +233,23 @@
     
                 <!-- Contenido del modal -->
                 <div class="flex justify-center items-center">
-                    <!-- Sección para la imagen -->
-                    <div class="relative w-1/3 flex justify-center items-center">
-                        <div class="relative">
-                            <img id="previewImage" src="/ruta/a/imagen_por_defecto.jpg" alt="Vista previa" class="w-full h-auto rounded shadow">
-                            <!-- Botón de edición -->
-                            <button type="button" class="absolute top-2 right-2 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('imagen').click()">
-                                🖉
-                            </button>
-                            <!-- Campo de archivo oculto -->
-                            <input type="file" id="imagen" name="imagen" class="hidden" accept="image/*" onchange="mostrarVistaPrevia(event)">
-                        </div>
-                    </div>
+                    
                     <!-- Sección del formulario -->
                     <div class="w-2/3 pl-6">
-                        <form action="{{ route('capitales.store') }}" method="POST" enctype="multipart/form-data">
+                        <form id="form" action="{{ route('capitales.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            <!-- Sección para la imagen -->
+                            <div class="relative w-1/3 flex justify-center items-center">
+                                <div class="relative">
+                                    <img id="previewImage" src="/ruta/a/imagen_por_defecto.jpg" alt="Vista previa" class="w-full h-auto rounded shadow">
+                                    <!-- Botón de edición -->
+                                    <button type="button" class="absolute top-2 right-2 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('imagen').click()">
+                                    🖉
+                                    </button>
+                                    <!-- Campo de archivo oculto -->
+                                 <input type="file" id="imagen" name="imagen" class="hidden" accept="image/*" onchange="mostrarVistaPrevia(event)">
+                                </div>
+                            </div>
                             <div class="mb-4">
                                 <label for="nombres" class="block">Nombres</label>
                                 <input type="text" id="nombres" name="nombres" class="w-full px-4 py-2 border rounded" required>
@@ -192,10 +260,10 @@
                             </div>
                             <div class="mb-4">
                                 <label for="area_investigacion" class="block">Área de Investigación</label>
-                                <select id="area_investigacion" name="Area_de_Investigacion" class="w-full px-4 py-2 border rounded" required>
+                                <select id="area_investigacion" name="area_investigacion" class="w-full px-4 py-2 border rounded" required>
                                     <option value="">Seleccione un área</option>
-                                    @foreach($capitales as $capital)
-                                        <option value="">{{ $capital->areaInvestigacion->nombre }}</option>
+                                    @foreach($areasInvestigacion as $area)
+                                        <option value="{{ $area->id }}">{{$area->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -224,62 +292,7 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    {{-- --------------------------modal de editar-------------------------------- --}}
-    <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
-        <div class="flex items-center justify-center w-full h-full">
-            <div class="bg-slate-200 p-7 rounded shadow-lg max-w-4xl w-full relative">
-                <div class="main-title flex flex-col items-center gap-3 mb-8">
-                    <div class="title text-2xl font-semibold text-[#2e5382]">Editar Registro</div>
-                    <div class="blue-line w-2/5 h-0.5 bg-[#64d423]"></div>
-                </div>
-                <form id="editForm" action="" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-4">
-                        <label for="edit_nombres" class="block">Nombres</label>
-                        <input type="text" id="edit_nombres" name="nombres" class="w-full px-4 py-2 border rounded" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit_carrera" class="block">Carrera</label>
-                        <input type="text" id="edit_carrera" name="carrera" class="w-full px-4 py-2 border rounded" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit_area_investigacion" class="block">Área de Investigación</label>
-                        <select id="edit_area_investigacion" name="Area_de_Investigacion" class="w-full px-4 py-2 border rounded" required>
-                            @foreach($capitales as $capital)
-                                <option value="{{ $capital->areaInvestigacion->id }}">{{ $capital->areaInvestigacion->nombre }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit_correo" class="block">Correo</label>
-                        <input type="email" id="edit_correo" name="correo" class="w-full px-4 py-2 border rounded" required>
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit_cv" class="block">CV</label>
-                        <input type="file" id="edit_cv" name="cv" class="w-full px-4 py-2 border rounded">
-                    </div>
-                    <div class="mb-4">
-                        <label for="edit_rol" class="block">Rol</label>
-                        <input type="text" id="edit_rol" name="rol" class="w-full px-4 py-2 border rounded" required>
-                    </div>
-                    <div class="flex justify-center mt-6">
-                        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700">
-                            Guardar
-                        </button>
-                        <button type="button" onclick="closeEditModal()" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700 ml-4">
-                            Cancelar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    
-    
+    </div> --}}
 
 
     <script>
@@ -288,7 +301,8 @@
         }
 
         function closeCreateModal() {
-            document.getElementById('createModal').classList.add('hidden');
+            document.getElementById('createModal').classList.add('hidden');  
+            // .querySelector('form').reset();
         }
 
         function mostrarVistaPrevia(event) {

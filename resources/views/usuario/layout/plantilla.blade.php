@@ -111,8 +111,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('capital') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital') ? 'text-[#98C560]' : 'text-black' }}">
+                                    <a href="{{ route('capital_usuario') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital_usuario') ? 'text-[#98C560]' : 'text-black' }}">
                                         Capital Humano
                                     </a>
                                 </li>
