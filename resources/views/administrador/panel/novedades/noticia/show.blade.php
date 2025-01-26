@@ -4,7 +4,7 @@
 
 @section('contenido')
     <div class="max-w-screen-2xl mx-auto my-8 px-4">
-         <!-- Sección de detalles de contacto -->
+        <!-- Sección de detalles de contacto -->
         <div class="text-center mb-6">
             <h1 class="text-2xl font-bold text-[#2e5382]">Noticias</h1>
             <div class="w-1/4 mx-auto h-0.5 bg-[#64d423]"></div>
@@ -21,10 +21,7 @@
                     oninput="buscarNoticias(this.value)"
                 >
             </div>
-            <button
-                class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700"
-                onclick="openCreateModal()"
-            >
+            <button class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700" onclick="openCreateModal()">
                 Crear Noticia
             </button>
         </div>
@@ -89,7 +86,7 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 3l3 3-8 8H3v-3l8-8z" />
                                     </svg>
-                                 </a>
+                                </a>
                                 <!-- Botón de Eliminar -->
                                <button onclick="openDeleteModal({{ $noticia->id }}, '{{ $noticia->titulo }}')" class="text-red-500 hover:text-red-700 flex items-center justify-center">
                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -152,12 +149,14 @@
             </form>
         </div>
     </div>
-<!-- Modal Eliminar -->
-<div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
-    <div class="bg-white p-7 rounded shadow-lg max-w-md w-full relative">
-        <button class="absolute top-0.5 right-0.5 text-gray-500 hover:text-black text-3xl p-2" onclick="closeDeleteModal()">&times;</button>
-        <h2 class="text-xl font-bold mb-4">Eliminar Noticia</h2>
-        <p>¿Estás seguro de que deseas eliminar la noticia "<span id="noticiaTitulo"></span>"?</p>
+    <!-- Modal Eliminar -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
+        <div class="flex items-center justify-center w-full h-full">
+            <div class="bg-white p-7 rounded shadow-lg max-w-md w-full relative">
+                <button class="absolute top-0.5 right-0.5 text-gray-500 hover:text-black text-3xl p-2"
+                    onclick="closeDeleteModal()">&times;</button>
+                <h2 class="text-xl font-bold mb-4">Eliminar Noticia</h2>
+                <p>¿Estás seguro de que deseas eliminar la noticia "<span id="noticiaTitulo"></span>"?</p>
 
         <!-- Formulario de eliminación -->
         <form id="deleteForm" method="POST" action="{{ route('notici.destroy', '') }}" class="mt-4">
