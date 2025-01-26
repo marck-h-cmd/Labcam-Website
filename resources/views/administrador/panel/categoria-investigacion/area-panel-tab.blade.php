@@ -149,11 +149,23 @@
 
     </section>
 
-    @if (session('success'))
+    @if(session('success'))
+    <script>
+    Swal.fire({
+        title: "Exito!",
+        text: "{{ session('success') }}",
+        icon: "success",
+        customClass: {
+            confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+        }
+    });
+    </script>
+
+    @elseif (session('destroyed'))
         <script>
             Swal.fire({
                 title: "Eliminado!",
-                text: "{{ session('success') }}",
+                text: "{{ session('destroyed') }}",
                 icon: "success",
                 customClass: {
                     confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'

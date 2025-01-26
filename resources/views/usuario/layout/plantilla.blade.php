@@ -13,6 +13,7 @@
     <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -77,7 +78,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('biblioteca') }}"
+                                    <a href="{{ route('biblioteca.papers.index') }}"
                                         class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca') ? 'text-[#98C560]' : 'text-black' }}">
                                         Biblioteca
                                     </a>
@@ -111,9 +112,15 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('capital') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital') ? 'text-[#98C560]' : 'text-black' }}">
+                                    <a href="{{ route('capital_usuario') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('capital_usuario') ? 'text-[#98C560]' : 'text-black' }}">
                                         Capital Humano
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('areas') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('areas') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Áreas de  Investigación
                                     </a>
                                 </li>
                             </ul>

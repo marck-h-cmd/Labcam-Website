@@ -11,31 +11,25 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion', function () {
-    return view('usuario.Organizacion.Direccion');
-})->name('direccion');
+Route::get('/direccion', function () {return view('usuario.Organizacion.Direccion');})->name('direccion');
 
-Route::get('/capital', function () {
-    return view('usuario.Organizacion.CapitalHumano');
-})->name('capital');
+Route::get('/capitales', [CapitalHumanoController::class, 'capHumano_us'])->name('capital_usuario');
+
+Route::get('/areas', function () {return view('usuario.Organizacion.AreasInvestigacion');})->name('areas');
 
 // RUTAS DE SECCIÓN NOSOTROS
 use App\Http\Controllers\PaperController;
-Route::get('/nosotros/about', function () {
+Route::get('/about', function () {
     return view('usuario.nosotros.about');
 })->name('about');
 
 
-Route::get('/nosotros/biblioteca',[PaperController::class, 'index'])->name('biblioteca');
+Route::get('/nosotros/biblioteca/papers',[PaperController::class, 'index'])->name('biblioteca');
 
 Route::get('/nosotros/biblioteca/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('biblioteca.fetchMore');
 
 
-Route::get('/nosotros/historia', HistoriaSliderController::class . '@view')->name('historia');
-
-Route::get('/nosotros/paper', function () {
-    return view('usuario.nosotros.paper');
-})->name('biblioteca.paper');
+Route::get('/historia', HistoriaSliderController::class . '@view')->name('historia');
 
 //RUTA CONTACTO
 use App\Http\Controllers\ContactoController;
@@ -85,6 +79,14 @@ Route::get('/detalle-eventos', function () {
     return view('usuario.novedades.detalle-eventos');
 })->name('detalle-eventos');
 
+// ------------------------- SECCION BIBLIOTECA ---------------------------------------------
+Route::prefix('biblioteca/papers')->name('biblioteca.papers.')->group(function () {
+    Route::get('/', [PaperController::class, 'index'])->name('index'); 
+    Route::get('/paper/{paper}', [PaperController::class, 'show'])->name('show'); 
+    Route::get('/area/{area}', [PaperController::class, 'fetchByArea'])->name('area'); 
+    Route::get('/search', [PaperController::class, 'index'])->name('search'); 
+    Route::get('/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('fetchMore'); 
+});
 
 
 
@@ -113,8 +115,10 @@ Route::post('custom-registration', [CustomAuthController::class, 'customRegistra
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
 // ------------------------- PRINCIPAL ---------------------------------------------
+
 Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
 Route::get('/admin', [PrincipalController::class, 'vista_admin'])->name('admin-principal')->middleware('auth');
+
 
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
@@ -125,23 +129,17 @@ Route::get('/admin/topProyectos', [PestañaHomeController::class, 'vista_topProy
 Route::put('/admin/topProyectos/update', [PestañaHomeController::class, 'update_topProyectos_admin'])->name('admin-homeProyectosUpdate');
 
 // ------------------------- CRUD PAPERS ---------------------------------------------
-Route::get('/admin/papers', PaperController::class .'@adminIndex')->name('paper-panel');
+Route::prefix('admin/papers')->name('papers.')->group(function () {
+    Route::get('/', [PaperController::class, 'adminIndex'])->name('index'); 
+    Route::get('/create', [PaperController::class, 'create'])->name('create'); 
+    Route::post('/', [PaperController::class, 'storePaper'])->name('store');
+    Route::get('/{paper}/edit', [PaperController::class, 'edit'])->name('edit'); 
+    Route::put('/{paper}', [PaperController::class, 'update'])->name('update'); 
+    Route::delete('/{paper}', [PaperController::class, 'destroy'])->name('destroy'); 
+    Route::get('/buscar', [PaperController::class, 'adminIndex'])->name('search'); 
+});
 
-Route::get('/admin/papers/create', PaperController::class . '@create')->name('papers.create');
 
-Route::post('/admin/papers', PaperController::class .'@storePaper')->name('papers.store');
-
-Route::get('/nosotros/biblioteca/papers/{paper}', PaperController::class .'@show')->name('papers.show');
-
-Route::get('/admin/papers/{paper}/edit', PaperController::class .'@edit')->name('papers.edit');
-
-Route::put('/admin/papers/{paper}', PaperController::class .'@update')->name('papers.update');
-
-Route::delete('/admin/papers/{paper}', PaperController::class .'@destroy')->name('papers.destroy');
-
-Route::get('/nosotros/biblioteca/{area}',[PaperController::class, 'fetchByArea'])->name('biblioteca.area');
-
-Route::get('/nosotros/biblioteca/search', [PaperController::class, 'search']);
 
 // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
 Route::get('/admin/historia-sliders', HistoriaSliderController::class .'@index')->name('h-sliders-panel');
@@ -220,6 +218,15 @@ Route::get('/admin/eventos/buscar', [EventoController::class, 'showEvento'])->na
 
 // ------------------------- CRUD ORGANIZACION ---------------------------------------------
 // ---- Capital Humano ---- //
+
 Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
+
+
+Route::post('/admin/capitales', [CapitalHumanoController::class, 'store'])->name('capitales.store');
+Route::get('/admin/capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
+Route::put('/admin/capitales/{id}', [CapitalHumanoController::class, 'update'])->name('capitales.update');
+Route::delete('/admin/capitales/{id}', [CapitalHumanoController::class, 'destroy'])->name('capitales.destroy');
+
+
 
 
