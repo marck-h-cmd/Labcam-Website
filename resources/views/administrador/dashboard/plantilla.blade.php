@@ -284,10 +284,12 @@
                             <img src="https://placehold.co/32x32" alt=""
                                 class="w-12 h-12 rounded-full block object-cover">
                         </div>
-                        <div>
-                            <h4 class="text-[14.5px] font-medium">Nombre_admin</h4>
-                            <h4 class="text-[12.5px] font-normal">user_admin</h4>
+                        @if(Auth::check())
+                        <div> 
+                            <h4 class="text-[14.5px] font-medium">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
+                            <h4 class="text-[12.5px] font-normal">{{ Auth::user()->email }}</h4>
                         </div>
+                        @endif
                     </button>
                     <ul
                         class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-2 rounded-md bg-white border border-gray-100 w-[140px] text-black text-[15px]">

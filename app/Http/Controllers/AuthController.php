@@ -28,10 +28,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($request->only('email', 'password'))) {
-            // return redirect()->route('dashboard')->with('success', 'Sesión iniciada correctamente');
+            // return redirect()->route('dashboard')->with('success', 'Sesión iniciada correctamente')
+            return redirect()->route('admin-principal')->with('success', 'Sesión iniciada correctamente');
         }
 
-        return back()->withErrors(['email' => 'Las credenciales no coinciden']);
+        return back()->withErrors(['email' => 'Las credenciales no coinciden'])->withInput();
     }
 
 

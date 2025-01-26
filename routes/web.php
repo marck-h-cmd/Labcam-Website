@@ -43,24 +43,6 @@ use App\Http\Controllers\ContactoController;
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
-//RUTA LOGIN
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PrincipalController;
-
-Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-//RUTA REGISTRO
-use App\Http\Controllers\CustomAuthController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 
 //RUTA NOTICIA
 Route::get('/noticias', function () {
@@ -105,10 +87,34 @@ Route::get('/detalle-eventos', function () {
 
 
 
+
+// -------------------------RUTA LOGIN ---------------------------------------------
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PrincipalController;
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// -------------------------RUTA REGISTRO ---------------------------------------------
+
+use App\Http\Controllers\CustomAuthController;
+
+Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
+
+
+// RUTAS PARA PERFIL
+// Route::middleware('auth')->group(function () {
+    Route::get('/admin/user', [CustomAuthController::class, 'edit'])->name('user.edit'); // Mostrar formulario de edición
+    Route::put('/admin/user/{id}', [CustomAuthController::class, 'update'])->name('user.update'); // Guardar cambios
+// });
+
+
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
 // ------------------------- PRINCIPAL ---------------------------------------------
 Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
-
+Route::get('/admin', [PrincipalController::class, 'vista_admin'])->name('admin-principal')->middleware('auth');
 
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
@@ -215,4 +221,5 @@ Route::get('/admin/eventos/buscar', [EventoController::class, 'showEvento'])->na
 // ------------------------- CRUD ORGANIZACION ---------------------------------------------
 // ---- Capital Humano ---- //
 Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
+
 
