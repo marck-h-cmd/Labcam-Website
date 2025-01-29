@@ -14,18 +14,21 @@ class CapitalHumanoController extends Controller
     //área de administrador
     public function index(Request $request)
     {
+        // $buscarPor = $request->input('buscarpor');
+        // $resultados = resultado::where('nombre', 'LIKE', "%".$buscarPor."%")->get();
+
         $capitales = Capital::paginate(8);
         $areasInvestigacion = AreaInvestigacion::All();
         return view('administrador.organizacion.capital_humano.index_capital', compact('capitales' ,'areasInvestigacion'))
-               ->with('i', ($request->input('page', 1) - 1) * $capitales->perPage());
+               ->with('i', ($request->input('buscarpor', 1) - 1) * $capitales->perPage());
     }
 
-    public function create()
-    {
-        // Se trae las áreas de investigación
-        $areasInvestigacion = AreaInvestigacion::all();
-        return view('administrador.organizacion.capital_humano.create', compact('areasInvestigacion'));
-    }
+    // public function create()
+    // {
+    //     // Se trae las áreas de investigación
+    //     $areasInvestigacion = AreaInvestigacion::all();
+    //     return view('administrador.organizacion.capital_humano.create', compact('areasInvestigacion'));
+    // }
 
 
     public function store(Request $request)
@@ -38,6 +41,8 @@ class CapitalHumanoController extends Controller
             'cv' => 'required|file|mimes:pdf|max:10248',
             'rol' => 'required|string|max:50',
             'imagen' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+            'linkedin' => 'required|string',
+            'ctivitae' => 'required|string'
 
         ]);
 
@@ -70,59 +75,49 @@ class CapitalHumanoController extends Controller
             'cv' => $cv1Name,
             'foto' => $image1Name,
             'rol' => $request->rol,
+            'linkedin' =>$request->linkedin,
+            'ctivitae' =>$request->ctivitae
         ]);
 
             //error en ruta
         return redirect()->route('capital_index')->with('success', 'Registro creado con éxito.');
     }
 
-    public function edit($id)
-    {
-        $capital = Capital::findOrFail($id);
-        $areasInvestigacion = AreaInvestigacion::all();
-
-        return view('administrador.organizacion.capital_humano.edit_capital', compact('capital', 'areasInvestigacion'));
-    }
+    // public function edit($id)
+    // {
+    //     $capital = Capital::findOrFail($id);
+    //     return view('administrador.organizacion.capital_humano.edit', compact('capital'));
+    // }
 
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'nombre' => 'required',
-            'carrera' => 'required',
-            'area_investigacion' => 'required',
-            'correo' => 'required|email',
-            'cv' => 'required|file|mimes:pdf,doc,docx|max:2048',
-            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-            'rol' => 'required',
-        ]);
 
         $capital = Capital::findOrFail($id);
 
-        // Manejar CV
-        if ($request->hasFile('cv')) {
-            // Eliminar el CV antiguo si existe
-            if ($capital->cv && file_exists(storage_path('app/public/' . $capital->cv))) {
-                unlink(storage_path('app/public/' . $capital->cv));
-            }
-
-            $cvPath = $request->file('cv')->store('cv', 'public');
-            $capital->cv = $cvPath;
+        // Ruta donde se guardarán las imágenes
+        $cvPath = public_path('/user/template/uploads/pdfs');
+        // Manejar la actualización de cada imagen
+        if ($request->hasFile('edit_cv')) {
+            // Obtener la nueva imagen y moverla a la carpeta
+            $cv1 = $request->file('edit_cv');
+            $cv1Name = 'cvs' . Str::random(10) . '.' . $cv1->getClientOriginalExtension();
+            $cv1->move($cvPath, $cv1Name);
+        }
+        else{
+            $cv1Name = $capital->cv;
         }
 
-        // Manejar Foto
-        if ($request->hasFile('foto')) {
-            // Eliminar la foto antigua si existe
-            if ($capital->foto && file_exists(storage_path('app/public/' . $capital->foto))) {
-                unlink(storage_path('app/public/' . $capital->foto));
-            }
+        $capital->nombre = $request ->edit_nombre;
+        $capital->carrera = $request ->edit_carrera;
+        $capital->area_investigacion = $request->edit_area_investigacion;
+        $capital->cv = $cv1Name;
+        $capital->correo = $request ->edit_correo;
+        $capital->rol = $request->edit_rol;
+        $capital->linkedin = $request->edit_linkedin;
+        $capital->ctivitae = $request->edit_ctivitae;
+        $capital->save();
 
-            $fotoPath = $request->file('foto')->store('fotos', 'public');
-            $capital->foto = $fotoPath;
-        }
-
-        $capital->update($request->except(['cv', 'foto']));
-
-        return redirect()->route('capitales.edit')->with('success', 'Registro actualizado con éxito.');
+        return redirect()->route('capital_index')->with('success', 'Registro actualizado!');
     }
 
 
@@ -151,7 +146,8 @@ class CapitalHumanoController extends Controller
 
     public function direc_us()
     {
-
+        $direccion = Direccion::All();
+        return view('usuario.Organizacion.Direccion',compact('direccion'));
     }
 
 }

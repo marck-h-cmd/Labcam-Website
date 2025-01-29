@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string("foto");
             $table->string('cv');
             $table->string("rol");
+            $table->string('linkedin');
+            $table->string('ctivitae');
             $table->timestamps();
 
             // Definimos la clave foránea
