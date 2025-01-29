@@ -36,7 +36,7 @@
                                                             Descripción
                                                         </th>
                                                         <th scope="col" class="px-6 py-3">
-                                                            Action
+                                                            Acciones
                                                         </th>
                                                     </tr>
                                                 </thead>
@@ -56,11 +56,11 @@
                                                             </td>
                                                             <td
                                                                 class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                                                                <form action="{{ route('h-slider.destroy', $slider->id) }}"
+                                                                <form class="flex" action="{{ route('h-slider.destroy', $slider->id) }}"
                                                                     method="POST">
                                                                     
                                                                     <a href="{{ route('h-slider.edit', $slider->id) }}"
-                                                                        class="text-indigo-600 font-bold hover:text-indigo-900  mr-2">Editar</a>
+                                                                        class="text-indigo-600 font-bold hover:text-indigo-900  mr-3"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M8.56078 20.2501L20.5608 8.25011L15.7501 3.43945L3.75012 15.4395V20.2501H8.56078ZM15.7501 5.56077L18.4395 8.25011L16.5001 10.1895L13.8108 7.50013L15.7501 5.56077ZM12.7501 8.56079L15.4395 11.2501L7.93946 18.7501H5.25012L5.25012 16.0608L12.7501 8.56079Z" fill="#473bce"></path> </g></svg></a>
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <a href="{{ route('h-slider.destroy', $slider->id) }}"
@@ -79,7 +79,7 @@
                                                                                  this.closest('form').submit();
                                                                              }
                                                                          });">
-                                                                        Eliminar
+                                                                         <svg class="h-6 w-6" viewBox="0 -0.5 21 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>delete [#f31212]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-179.000000, -360.000000)" fill="#f31212"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M130.35,216 L132.45,216 L132.45,208 L130.35,208 L130.35,216 Z M134.55,216 L136.65,216 L136.65,208 L134.55,208 L134.55,216 Z M128.25,218 L138.75,218 L138.75,206 L128.25,206 L128.25,218 Z M130.35,204 L136.65,204 L136.65,202 L130.35,202 L130.35,204 Z M138.75,204 L138.75,200 L128.25,200 L128.25,204 L123,204 L123,206 L126.15,206 L126.15,220 L140.85,220 L140.85,206 L144,206 L144,204 L138.75,204 Z" id="delete-[#f31212]"> </path> </g> </g> </g> </g></svg>
                                                                     </a>
 
                                                                 </form>

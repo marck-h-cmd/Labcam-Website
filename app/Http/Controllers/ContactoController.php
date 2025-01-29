@@ -18,7 +18,7 @@ class ContactoController extends Controller
     public function showContacts()
     {
         $contactos = Contacto::all(); // Obtener todos los contactos
-        $contactos = Contacto::paginate(2);
+        $contactos = Contacto::paginate(10);
 
         // Retornar la vista con los datos
         return view('administrador.panel.contacto.show', compact('contactos'));
@@ -50,7 +50,7 @@ class ContactoController extends Controller
         $rutaArchivo = null;
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
-            $rutaArchivo = $archivo->store('archivos_adjuntos', 'public'); // Guardar en storage/app/public/archivos_adjuntos
+            $rutaArchivo = $archivo->store('archivos', 'public'); // Guardar en storage/app/public/archivos_adjuntos
         }
 
         // Guardar en la base de datos

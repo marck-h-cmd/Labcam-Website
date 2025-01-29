@@ -11,5 +11,5 @@ class Proyecto extends Model
     //
     use HasFactory;
 
-    protected $fillable = ['titulo', 'subtitulo', 'descripcion', 'autor', 'fecha', 'imagen'];
+    protected $fillable = ['titulo', 'subtitulo', 'descripcion', 'autor', 'fecha_publicacion', 'imagen'];
 }

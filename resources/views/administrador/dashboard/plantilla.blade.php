@@ -135,7 +135,7 @@
             </li>
 
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'paper-panel']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'papers.index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -144,10 +144,10 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('paper-panel') }}"
+                        <a href="{{ route('papers.index') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('paper-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('papers.index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Lista de Papers</a>
                     </li>
                     <li class="mb-4">
@@ -191,7 +191,7 @@
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Capital Humano</span>
+                    <span class="text-sm">Organización</span>
                     <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
@@ -199,19 +199,21 @@
                         <a href="{{ route('capital_index') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('capital_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Lista
-                            Capital Humano</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('capital_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Capital Humano
+                        </a>
                     </li>
                     <li class="mb-4">
                         <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Crear
-                            Capital Humano</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Dirección
+                        </a>
                     </li>
                 </ul>
             </li>
 
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-contactos']) ? 'active' : '' }}">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['contactos']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -220,15 +222,16 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('admin-contactos') }}"
+                        <a href="{{ route('contactos') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-contactos') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('contactos') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Ver</a>
                     </li>
                 </ul>
             </li>
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-noticias', '']) ? 'active' : '' }}">
+            <li
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['notici', 'proyect', 'event']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -237,22 +240,31 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{route('admin-noticias')}}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('notici') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-noticias') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Noticias</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('notici') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Noticias</a>
                     </li>
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('proyect') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Proyectos</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('proyect') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Proyectos</a>
                     </li>
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('event') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Eventos</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('event') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Eventos</a>
                     </li>
                 </ul>
             </li>
+
+
+
 
         </ul>
         <div class="fixed top-0 left-[300px] w-full h-full z-40 md:hidden sidebar-overlay backdrop-blur-sm"></div>
