@@ -51,7 +51,7 @@
                                     </div>
                                 </li>
                                 <!--
-                                                                    <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
+                                                                                        <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
 
                             </ul>
                         </nav>
@@ -71,9 +71,10 @@
             </div>
 
             <div class="grid  grid-cols-10 gap-x-16 max-[1150px]:grid-cols-1 justify-center">
+
                 <aside
-                    class=" w-[450px] max-[1150px]:bg-slate-50  max-[1150px]:w-[350px]   max-[1150px]:z-50  transition-transform  max-[1150px]:fixed max-[1150px]:top-0 max-[1150px]:bottom-0 max-[1150px]:left-0  h-auto mt-12 max-[1150px]:mt-0 col-span-3 "
-                    id="drawer-navigation" tabindex="-1" aria-labelledby="drawer-navigation-label">
+                    class="w-[450px] max-[1150px]:bg-slate-50 max-[1150px]:w-[350px] max-[1150px]:z-50 transition-transform max-[1150px]:fixed max-[1150px]:top-0 max-[1150px]:bottom-0 max-[1150px]:left-0 h-auto mt-12 max-[1150px]:mt-0 col-span-3 transform max-[1150px]:-translate-x-full"
+                    id="drawer-navigation" tabindex="-1">
                     <div class="px-3 py-4 overflow-y-auto rounded  ">
                         <ul class="space-y-2">
                             <li>
@@ -100,7 +101,7 @@
                                         <input class="peer h-full w-full outline-none text-sm text-gray-700 pr-2 border-0"
                                             type="text" id="search-dropdown" placeholder="Buscar Titulo Paper..." />
                                     </div>
-                                </div>   
+                                </div>
                             </li>
                             <hr>
                             <li>
@@ -119,8 +120,7 @@
                                             </path>
                                         </g>
                                     </svg>
-                                    <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                                        sidebar-toggle-item>Topicos</span>
+                                    <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Topicos</span>
                                     <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill-rule="evenodd"
@@ -183,8 +183,8 @@
                                 <ul id="dropdown-example" class=" py-2 space-y-2 overflow-y-auto max-h-36">
                                     @forelse($areas as $area)
                                         <li>
-                                            <a href="{{ route('biblioteca.papers.area', $area->id) }}"
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">{{ $area->nombre }}</a>
+                                            <button type="button" value="{{ $area->id }}"
+                                                class="area-btn flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">{{ $area->nombre }}</button>
                                         </li>
                                     @empty
                                         <li>
@@ -259,68 +259,22 @@
 
                                     </div>
                                 @else
-                                    @foreach ($papers as $paper)
-                                        <div
-                                            class="flex flex-col md:flex-row overflow-hidden
-                                             rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">
-                                            <!-- información del paper -->
-                                            <div class="max-h-96  md:w-1/2 p-4">
-                                                <a href="{{ route('biblioteca.papers.show', $paper->id) }}"
-                                                    class=" cursor-pointer hover:underline max-md:text-center ">
-                                                    <h3 class="font-semibold text-lg mt-4 text-blue-400 text-justify ">
-                                                        {{ $paper->titulo }}</h3>
-                                                </a>
-                                                <div class="mt-5">
-                                                    <p class="text-gray-600 ">Autores:</p>
-                                                    <p class="autores italic text-base mb-3">
-                                                        {{ $paper->formatted_autores }}</p>
-                                                </div>
-                                                <p class="doi text-sm mt-3"><span class="text-gray-600">
-                                                        DOI: </span><span
-                                                        class="doi-link underline text-gray-500 text-base">{{ $paper->doi }}</span>
-                                                </p>
-                                                <p class="text-base  mt-4">
-                                                    <span class="text-gray-600  ">Publicado: </span>
-                                                    <strong class="text-gray-700 uppercase font-semibold text-sm ">
-                                                        {{ $paper->fecha_publicacion }} </strong>
-                                                </p>
-                                                <a href="{{ route('biblioteca.papers.show', $paper->id) }}"
-                                                    class="mt-2 flex gap-2 cursor-pointer font-bold">
-                                                    <svg width="24px" height="24px" viewBox="0 0 16 16"
-                                                        xmlns="http://www.w3.org/2000/svg" fill="none">
-                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
-                                                            stroke-linejoin="round"></g>
-                                                        <g id="SVGRepo_iconCarrier">
-                                                            <path fill="#98c560" fill-rule="evenodd"
-                                                                d="M8 3.517a1 1 0 011.62-.784l5.348 4.233a1 1 0 010 1.568l-5.347 4.233A1 1 0 018 11.983v-1.545c-.76-.043-1.484.003-2.254.218-.994.279-2.118.857-3.506 1.99a.993.993 0 01-1.129.096.962.962 0 01-.445-1.099c.415-1.5 1.425-3.141 2.808-4.412C4.69 6.114 6.244 5.241 8 5.042V3.517zm1.5 1.034v1.2a.75.75 0 01-.75.75c-1.586 0-3.066.738-4.261 1.835a8.996 8.996 0 00-1.635 2.014c.878-.552 1.695-.916 2.488-1.138 1.247-.35 2.377-.33 3.49-.207a.75.75 0 01.668.745v1.2l4.042-3.2L9.5 4.55z"
-                                                                clip-rule="evenodd"></path>
-                                                        </g>
-                                                    </svg>
-                                                    <p class=" text-[#98c560] text-base">Redirigir</p>
-                                                </a>
-                                            </div>
-                                            <div class="w-full p-6 text-gray-800 flex flex-col justify-between  ">
-                                                <p class="mt-2 text-justify text-gray-500 text-sm ">
-                                                    {{ $paper->descripcion }}
-                                                </p>
-                                            </div>
-
-                                        </div>
-                                    @endforeach
+                                    @include('usuario.nosotros.partials.papers', ['papers' => $papers])
                                 @endif
                             </div>
                         </div>
                     </div>
 
-                    @if (count($papers) > 3 && count($papers) != 3)
-                        <div class="flex justify-center mt-5 p-6 ">
-                            <button id="load-more"
-                                class="bg-[#98c560] text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
-                                VER MÁS PUBLICACIONES
-                            </button>
-                        </div>
-                    @endif
+                    <div class="flex justify-center mt-5 p-6 ">
+                        <button id="load-more"
+                            class="bg-[#98c560]  text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
+                            VER MÁS PUBLICACIONES
+                        </button>
+                    </div>
+                    <div class="mt-4 px-4" id="pagination-links">
+                        {!! $papers->withQueryString()->links('vendor.pagination.simple-without-buttons') !!}
+                    </div>
+
 
 
                 </div>
@@ -331,100 +285,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let offset = {{ $papers->count() }};
-            //  console.log(offset)
-            const limit = 3;
-            const paperCount = document.getElementById('paper-count')
-            const button = document.getElementById('load-more');
-
-            if (button != undefined) {
-                button.addEventListener('click', function() {
-                    fetch(`/api/biblioteca/papers/fetch-more?offset=${offset}&limit=${limit}`)
-                        .then(response => response.json())
-                        .then(data => {
-                            const {
-                                papers,
-                                total,
-                                remaining
-                            } = data;
-
-                            if (papers.length > 0) {
-                                const container = document.getElementById('papers-container');
-                                papers.forEach(paper => {
-                                    const card = `
-                                  <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4  mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
-                                      <div class="max-h-96  md:w-1/2 p-4">
-                                          <a href="/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
-                                              <h3 class="font-semibold text-lg mt-4 text-blue-400">${paper.titulo}</h3>
-                                          </a>
-                                          <div class="mt-5">
-                                              <p class="text-gray-600">Autores:</p>
-                                              <p class="autores italic text-base mb-3">${paper.formatted_autores}</p>
-                                          </div>
-                                          <p class="doi text-sm mt-3"><span class="text-gray-600">
-                                           DOI: </span><span class="doi-link underline text-gray-500 text-xs">${paper.doi }</span>
-                                          </p>
-                                          <p class="text-base mt-4">
-                                              <span class="text-gray-600">Publicado: </span>
-                                              <strong class="text-gray-700 uppercase font-semibold text-sm">${paper.fecha_publicacion}</strong>
-                                          </p>
-                                          <a href="/biblioteca/papers/${paper.id}" class="mt-2 flex gap-2 cursor-pointer font-bold">
-                                          <svg width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill="#98c560" fill-rule="evenodd" d="M8 3.517a1 1 0 011.62-.784l5.348 4.233a1 1 0 010 1.568l-5.347 4.233A1 1 0 018 11.983v-1.545c-.76-.043-1.484.003-2.254.218-.994.279-2.118.857-3.506 1.99a.993.993 0 01-1.129.096.962.962 0 01-.445-1.099c.415-1.5 1.425-3.141 2.808-4.412C4.69 6.114 6.244 5.241 8 5.042V3.517zm1.5 1.034v1.2a.75.75 0 01-.75.75c-1.586 0-3.066.738-4.261 1.835a8.996 8.996 0 00-1.635 2.014c.878-.552 1.695-.916 2.488-1.138 1.247-.35 2.377-.33 3.49-.207a.75.75 0 01.668.745v1.2l4.042-3.2L9.5 4.55z" clip-rule="evenodd"></path></g></svg>
-                                          <p class=" text-[#98c560] text-base">Redirigir</p>
-                                           </a>    
-                                      </div>
-                                      <div class="w-full p-6 text-gray-800 flex flex-col justify-between">
-                                          <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
-                                      </div>
-                                  </div>`;
-                                    container.insertAdjacentHTML('beforeend', card);
-                                });
-
-                               
-
-                                offset += papers.length;
-
-                               
-                                if (remaining > 0) {
-                                    button.textContent = ` VER ${remaining} MÁS PUBLICACIONES`;                      
-
-                                } else {
-                                    button.style.display = 'none';
-                                }
-
-                                
-                            console.log("remain: ",remaining)
-                            paperCount.textContent = parseInt(paperCount.textContent) + calCount(remaining);
-                            console.log("count ",paperCount.textContent)
-
-                            } else {
-                                button.style.display = 'none';
-                            }
-
-
-                        })
-                        .catch(error => console.error('Error fetching data:', error));
-                });
-            }
-        });
-
-        function calCount(remaining){
-            if(remaining%3==0)
-             return 3;
-            else
-              return remaining;
-        }
-    </script>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('search-dropdown');
-            const checkboxes = document.querySelectorAll('.checkbox-topico');
-            const container = document.getElementById('papers-container');
-
             const drawer = document.getElementById('drawer-navigation');
-            const paperCount = document.getElementById('paper-count')
-
             // Función para actualizar el sidebar segun resizing
             function updateDrawerPosition() {
                 if (window.innerWidth >= 1024) {
@@ -459,6 +320,7 @@
             document.querySelector('[data-drawer-show="drawer-navigation"]').addEventListener('click', showDrawer);
             document.querySelector('[data-drawer-hide="drawer-navigation"]').addEventListener('click', closeDrawer);
 
+
             // Guardar en localStorage
             function saveToLocalStorage(key, value) {
                 localStorage.setItem(key, JSON.stringify(value));
@@ -470,115 +332,212 @@
                 return value ? JSON.parse(value) : null;
             }
 
+        });
+    </script>
 
-            function getSearchParams() {
-                const query = searchInput.value.trim();
-                const selectedTopics = Array.from(checkboxes)
-                    .filter(checkbox => checkbox.checked)
-                    .map(checkbox => checkbox.value);
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search-dropdown');
+            const checkboxes = document.querySelectorAll('.checkbox-topico');
+            const areaBtns = document.querySelectorAll('.area-btn')
+            const container = document.getElementById('papers-container');
+            const paginationLinks = document.getElementById('pagination-links');
+            const paperCount = document.getElementById('paper-count')
+            const papersContainer = document.getElementById('papers-container');
+            const loadMoreButton = document.getElementById('load-more');
+            let currentSearchParams = new URLSearchParams();
+            let generalPapersCount = 0;
+            let isSearchActive = false;
+            let selectedAreaId = null;
+            const API_BASE = '/api/biblioteca/papers';
+            const UI_BASE = '/biblioteca/papers';
 
-                const params = new URLSearchParams();
-                if (query.length > 2) params.append('query', query);
-                if (selectedTopics.length > 0) params.append('topics', selectedTopics.join(','));
-
-                const newUrl = `/biblioteca/papers/search?${params.toString()}`;
-                window.history.pushState(null, '', newUrl);
-                console.log('[DEBUG] Params:', params.toString());
-                return params;
+              // links de paginación
+            if (paginationLinks) {
+                paginationLinks.addEventListener('click', function(e) {
+                    if (e.target.tagName === 'A') {
+                        e.preventDefault();
+                        const url = new URL(e.target.href);
+                        currentSearchParams = url.searchParams;
+                        loadPage(url.searchParams);
+                    }
+                });
             }
 
-            // Renderización de resultados
-            function renderPapers(papers) {
-                container.innerHTML = '';
-                if (papers.length > 0) {
-                    papers.forEach(paper => {
-                        const card = `
-                    <div class="flex flex-col md:flex-row overflow-hidden rounded-lg shadow-xl mt-4 mx-2 bg-[#f4f4f4] max-w-6xl h-auto">
-                        <div class="max-h-96 md:w-1/2 p-4">
-                            <a href="/biblioteca/papers/${paper.id}" class="cursor-pointer hover:underline max-md:text-center">
-                                <h3 class="font-semibold text-lg mt-4 text-blue-400">${paper.titulo}</h3>
-                            </a>
-                            <div class="mt-5">
-                                <p class="text-gray-600">Autores:</p>
-                                <p class="autores italic text-base mb-3">${paper.formatted_autores}</p>
-                            </div>
-                            <p class="doi text-sm mt-3"><span class="text-gray-600">DOI: </span>
-                                <span class="doi-link underline text-gray-500 text-xs">${paper.doi}</span>
-                            </p>
-                            <p class="text-base mt-4">
-                                <span class="text-gray-600">Publicado: </span>
-                                <strong class="text-gray-700 uppercase font-semibold text-sm">${paper.fecha_publicacion}</strong>
-                            </p>
-                            <a href="/biblioteca/papers/${paper.id}" class="mt-2 flex gap-2 cursor-pointer font-bold">
-                                <svg width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
-                                    <path fill="#98c560" fill-rule="evenodd" d="M8 3.517a1 1 0 011.62-.784l5.348 4.233a1 1 0 010 1.568l-5.347 4.233A1 1 0 018 11.983v-1.545c-.76-.043-1.484.003-2.254.218-.994.279-2.118.857-3.506 1.99a.993.993 0 01-1.129.096.962.962 0 01-.445-1.099c.415-1.5 1.425-3.141 2.808-4.412C4.69 6.114 6.244 5.241 8 5.042V3.517zm1.5 1.034v1.2a.75.75 0 01-.75.75c-1.586 0-3.066.738-4.261 1.835a8.996 8.996 0 00-1.635 2.014c.878-.552 1.695-.916 2.488-1.138 1.247-.35 2.377-.33 3.49-.207a.75.75 0 01.668.745v1.2l4.042-3.2L9.5 4.55z" clip-rule="evenodd"></path>
-                                </svg>
-                                <p class="text-[#98c560] text-base">Redirigir</p>
-                            </a>    
-                        </div>
-                        <div class="w-full p-6 text-gray-800 flex flex-col justify-between">
-                            <p class="mt-2 text-justify text-gray-500 text-sm">${paper.descripcion}</p>
-                        </div>
-                    </div>`;
-                        container.insertAdjacentHTML('beforeend', card);
-                    });
-                } else {
-                    container.innerHTML = ` <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center flex justify-center flex-col items-center gap-y-4">
+            if (loadMoreButton) {
+                loadMoreButton.addEventListener('click', function() {
+                    const page = currentSearchParams.get('page') ?
+                        parseInt(currentSearchParams.get('page')) + 1 :
+                        2;
+                    console.log("page", page)
+
+                    currentSearchParams.set('page', page);
+                    console.log(`${API_BASE}/fetch-more?${currentSearchParams}`)
+                    fetch(`${API_BASE}/fetch-more?${currentSearchParams}`)
+                        .then(handleResponse)
+                        .then(data => {
+                            // Append new papers
+                            papersContainer.innerHTML = ' '
+                            searchInput.value = ' '
+                            papersContainer.innerHTML += data.html;
+
+                            // Update counts
+                            generalPapersCount += data.total;
+                            updatePaperCount(generalPapersCount);
+
+
+                            // Update UI state
+                            updateHistory(currentSearchParams);
+                            toggleLoadMoreButton(data);
+                        });
+                });
+            }
+
+            function showNoResultsMessage() {
+                papersContainer.innerHTML = ` <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center flex justify-center flex-col items-center gap-y-4">
                                         <p class="text-gray-500 max-md:text-xl text-3xl font-semibold">No se encontraron papers.</p>
                                         <svg class="w-36 h-36 max-md:w-24 max-md:h-24"  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="113.732" y="333.561" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -200.477 216.8856)" style="fill:#DCDCDC;" width="95.668" height="33.757"></rect> <path style="fill:#42C8C6;" d="M455.969,326.571c-74.706,74.706-195.831,74.706-270.538,0l116.283-154.254L455.968,56.034 C530.676,130.74,530.676,251.863,455.969,326.571z"></path> <path style="fill:#81E3E2;" d="M455.969,56.033L185.432,326.571c-74.706-74.706-74.706-195.831,0-270.538 S381.262-18.674,455.969,56.033z"></path> <path style="fill:#D5F6F5;" d="M322.235,39.4v303.795c41.33-0.405,78.734-17.329,105.886-44.481 c27.49-27.49,44.492-65.467,44.492-107.416C472.613,107.917,405.425,40.222,322.235,39.4z"></path> <path style="fill:#FFFFFF;" d="M322.235,39.4c64.544,1.058,116.621,68.651,116.621,151.898s-52.077,150.84-116.621,151.897 c-0.506,0.011-1.024,0.011-1.53,0.011c-83.899,0-151.909-68.01-151.909-151.909c0-41.949,17.003-79.927,44.492-107.416 s65.467-44.492,107.416-44.492C321.211,39.389,321.729,39.389,322.235,39.4z"></path> <polygon style="fill:#737373;" points="166.494,393.243 142.624,417.113 94.883,401.2 150.58,377.33 "></polygon> <path style="fill:#FE834D;" d="M126.71,401.2L6.564,489.519l15.913,15.913c8.752,8.752,23.074,8.752,31.827,0l88.32-88.32 L126.71,401.2z"></path> <polygon style="fill:#969696;" points="150.58,377.33 126.71,401.2 94.883,401.2 94.883,369.373 118.754,345.502 "></polygon> <path style="fill:#FEA680;" d="M126.71,401.2l-88.32,88.32c-8.752,8.752-23.074,8.752-31.827,0c-8.752-8.752-8.752-23.074,0-31.827 l88.32-88.32L126.71,401.2z"></path> </g></svg>
                                         <small class="text-blue-400 max-md:text-sm ">Busca por más información</small>
 
                                     </div>`;
-                }
             }
 
-            // Realizar la búsqueda
+             // Para mostrar más btones de carga
+            function toggleLoadMoreButton(data) {
+                if (loadMoreButton) {
+                    const showButton = data.total === 0;
+                    loadMoreButton.style.display = showButton ? 'block' : 'none';
+
+                    if (paginationLinks) {
+                        paginationLinks.style.display = showButton ? 'none' : 'block';
+                    }
+                }
+            }
+            // Handle search
             function performSearch() {
-                const params = getSearchParams();
-                fetch(`/api/biblioteca/papers/search?${params.toString()}`)
-                    .then(response => {
-                        if (!response.ok) throw new Error(`[HTTP ${response.status}] ${response.statusText}`);
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('Server response:', data);
-                        const {
-                            papers,
-                            total,
-                            remaining
-                        } = data;
-                        renderPapers(papers || []);
-                        paperCount.textContent = total;
+                isSearchActive = true;
+                generalPapersCount = 0;
+                const params = new URLSearchParams();
+                const query = searchInput.value.trim();
+                const topics = Array.from(checkboxes)
+                    .filter(checkbox => checkbox.checked)
+                    .map(checkbox => checkbox.value);
+                console.log("area", selectedAreaId)
 
-                    //    saveToLocalStorage('papers', papers);
-                        saveToLocalStorage('searchInput', searchInput.value);
-                        saveToLocalStorage('checkboxStates', Array.from(checkboxes).map(cb => cb.checked));
+                if (query.length > 2) params.append('query', query);
+                if (topics.length > 0) params.append('topics', topics.join(','));
+                if (selectedAreaId) params.append('area', selectedAreaId);
 
-
-                    })
-                    .catch(error => console.error('Error durante búsqueda:', error));
+                loadPage(params);
             }
 
-            function restoreState() {
-              //  const savedPapers = loadFromLocalStorage('papers');
-                const savedInput = loadFromLocalStorage('searchInput');
-                const savedCheckboxStates = loadFromLocalStorage('checkboxStates');
 
-               // if (savedPapers) renderPapers(savedPapers);
-                if (savedInput) searchInput.value = savedInput;
-                if (savedCheckboxStates) {
-                    checkboxes.forEach((checkbox, index) => {
-                        checkbox.checked = savedCheckboxStates[index] || false;
+            // Page Loader para la api
+            async function loadPage(params) {
+                try {
+                    const response = await fetch(`${API_BASE}/search?${params}`, {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest'
+                        }
                     });
+
+                    const data = await response.json();
+
+                    console.log(data.papers.total)
+                    if (data.total === 0) {
+                        paperCount.textContent = 0
+                        showNoResultsMessage();
+                    } else {
+                        // Update UI
+                        papersContainer.innerHTML = data.html;
+                    }
+                    updatePaperCount(data.total);
+                    updateHistory(params);
+                    togglePaginationElements(data);
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    papersContainer.innerHTML =
+                        `<div class="error">Error loading content: ${error.message}</div>`;
                 }
             }
 
-          
-            restoreState();
-            searchInput.addEventListener('input', performSearch);
+            // Update UI elements
+            function togglePaginationElements(data) {
+                if (paginationLinks) {
+                    paginationLinks.innerHTML = data.links;
+                    paginationLinks.style.display = data.papers.total > 0 ? 'block' : 'none';
+                }
+
+                if (loadMoreButton) {
+                    const showLoadMore = data.papers.total === 0;
+                    loadMoreButton.style.display = showLoadMore ? 'block' : 'none';
+                    updatePaperCount(data.total);
+                }
+            }
+
+            function updatePaperCount(count) {
+                if (paperCount) {
+                    //   paperCount.textContent = isSearchActive ?
+                    //       count :
+                    //       generalPapersCount;
+                    paperCount.textContent = count
+
+                }
+            }
+
+            function updateHistory(params) {
+                const cleanURL = `${UI_BASE}?${params.toString()}`;
+                window.history.pushState(null, '', cleanURL);
+            }
+
+            function handleResponse(response) {
+                if (!response.ok) throw new Error(response.statusText);
+                return response.json();
+            }
+
+            // Event listeners
+            searchInput?.addEventListener('input', debounce(performSearch, 300));
             checkboxes.forEach(checkbox => checkbox.addEventListener('change', performSearch));
+            areaBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Activar estado de selección
+                    if (btn.classList.contains('bg-gray-100')) {
+                        // Deseleccionar si ya estaba
+                        btn.classList.remove('bg-gray-100', 'text-gray-700');
+                        selectedAreaId = null;
+                    } else {
+                        // Quitar selección previa
+                        areaBtns.forEach(b => b.classList.remove('bg-gray-100', 'text-gray-700'));
+                        // Poner nueva selección
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                        selectedAreaId = btn.value;
+                    }
+                    performSearch();
+                });
+            });
 
+            // Ocultar boton al principio
+            if (loadMoreButton) {
+                loadMoreButton.style.display = 'none';
+            }
 
+            // Debounce helper
+            function debounce(func, timeout = 300) {
+                let timer;
+                return (...args) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => {
+                        func.apply(this, args);
+                    }, timeout);
+                };
+            }
+
+            // Navegación del browser
+            window.addEventListener('popstate', function() {
+                const params = new URLSearchParams(window.location.search);
+                loadPage(params);
+            });
 
         });
     </script>
