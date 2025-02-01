@@ -17,7 +17,7 @@ class PaperController extends Controller
   public function index(Request $request)
   {
     // inicializar 10 o menos papers
-    $papers = Paper::paginate(10);
+    $papers = Paper::paginate(5);
 
 
     // Dar formato a cada atributo de autores del paper para la view
@@ -36,6 +36,7 @@ class PaperController extends Controller
           'total' => $papers->count(),
           'html' => view('usuario.nosotros.partials.papers', compact('papers'))->render(),
           'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
+          'last_page' => $papers->lastPage(),
       ]);
   }
     return view('usuario.nosotros.biblioteca', compact('papers', 'topicos', 'areas'));
@@ -46,7 +47,7 @@ class PaperController extends Controller
     try {
 
     $page = $request->input('page', 1);
-    $perPage = $request->input('per_page', 3); // Papers por pagina
+    $perPage = $request->input('per_page', 5); // Papers por pagina
 
     // Fecth papers
     $papers = Paper::query()
@@ -64,7 +65,9 @@ class PaperController extends Controller
         'next_page_url' => $papers->nextPageUrl(),
         'total' => $papers->count(),
         'current_count' => $papers->count(),
-        'papers' => $papers
+        'papers' => $papers,
+        'current_page' => $papers->currentPage(),
+        'last_page' => $papers->lastPage(),
     ]);
 
   } catch (Exception $e) {
@@ -83,7 +86,7 @@ class PaperController extends Controller
       $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
       $area = $request->input('area');
       $page = $request->input('page', 1);
-      $perPage = 10;
+      $perPage = 5;
 
       $papers = Paper::query();
       // buscar por titulo
@@ -113,7 +116,9 @@ class PaperController extends Controller
         'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
         'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
         'show_load_more' => $papers->isEmpty(),
-        'next_page_url' => $papers->nextPageUrl()
+        'next_page_url' => $papers->nextPageUrl(),
+        'last_page' => $papers->lastPage(),
+        'current_page' => $papers->currentPage(),
     ]);
     } catch (Exception $e) {
       Log::error("Error: " . $e->getMessage());
