@@ -96,9 +96,9 @@ use App\Http\Controllers\PrincipalController;
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// -------------------------RUTA REGISTRO ---------------------------------------------
+// -------------------------RUTA REGISTRO ----------------------------------------------------------------------------------------
 
 use App\Http\Controllers\CustomAuthController;
 
@@ -106,11 +106,29 @@ Route::get('registration', [CustomAuthController::class, 'registration'])->name(
 Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 
 
-// RUTAS PARA PERFIL
+
+// ------------------------- RUTAS PARA PERFIL --------------------------------------------- 
 // Route::middleware('auth')->group(function () {
-    Route::get('/admin/user', [CustomAuthController::class, 'edit'])->name('user.edit'); // Mostrar formulario de edición
-    Route::put('/admin/user/{id}', [CustomAuthController::class, 'update'])->name('user.update'); // Guardar cambios
+    Route::get('/admin/user', [CustomAuthController::class, 'edit_user'])->name('user.edit_user'); 
+    Route::put('/admin/user/{id}', [CustomAuthController::class, 'update_user'])->name('user.update_user');
+    Route::put('/admin/user/{id}/photo', [CustomAuthController::class, 'update_photo'])->name('user.update_photo'); 
+    Route::put('/admin/user/{id}/password', [CustomAuthController::class, 'update_password'])->name('user.update_password');
+
 // });
+
+// ------------------------- CRUD USUARIOS---------------------------------------------
+Route::get('/admin/users', [CustomAuthController::class, 'showUser'])->name('users');
+Route::get('/admin/users/{id}/edit', [CustomAuthController::class, 'edit'])->name('users.edit');
+Route::put('/admin/users/{id}', [CustomAuthController::class, 'update'])->name('users.update');
+
+Route::post('/admin/users', [CustomAuthController::class, 'store'])->name('users.store');
+Route::delete('/admin/users/{id}', [CustomAuthController::class, 'destroy'])->name('users.destroy');
+Route::get('/admin/users/buscar', [CustomAuthController::class, 'showUser'])->name('users.buscar');
+
+// ------------------------- VERIFICACION DE PERSONAS---------------------------------------------
+Route::get('/admin/person', [CustomAuthController::class, 'showPerson'])->name('person');
+Route::post('/admin/person/{id}/approve', [CustomAuthController::class, 'approveUser'])->name('person.approve');
+Route::delete('/admin/person/{id}', [CustomAuthController::class, 'destroy_person'])->name('person.destroy_person');
 
 
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
