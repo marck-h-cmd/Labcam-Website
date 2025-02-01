@@ -9,32 +9,38 @@
             <h2 class="text-xl font-bold text-gray-800 mb-4">Administrador</h2>
             <div class="space-y-4">
                 <div>
-                    <h3 class="text-sm text-gray-600 font-medium">FOTO</h3>
-                    <p class="text-gray-800">{{ Auth::user()->photo}}</p>
-                    <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-16 h-16 rounded-full object-cover">
+                    <h3 class="text-sm text-gray-700 font-medium">FOTO</h3>
+                    <!-- <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-50 h-50 object-cover"> -->
+                    @if(Auth::user()->photo)
+                      <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-50 h-30 object-cover">
+                    @else
+                      <div class="w-20 h-20 bg-gray-300 text-gray-700 flex items-center justify-center rounded-full text-xl font-bold uppercase">
+                          {{ substr(Auth::user()->firstname, 0, 1) }}
+                      </div>
+                    @endif
                 </div>
                 <div>
-                    <h3 class="text-sm text-gray-600 font-medium">NOMBRES Y APELLIDOS</h3>
-                    <p class="text-gray-800">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
+                    <h3 class="text-sm text-gray-700 font-medium">NOMBRES Y APELLIDOS</h3>
+                    <p class="text-gray-500">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm text-gray-600 font-medium">CORREO</h3>
-                    <p class="text-gray-800">{{ Auth::user()->email }}</p>
+                    <h3 class="text-sm text-gray-700 font-medium">CORREO</h3>
+                    <p class="text-gray-500">{{ Auth::user()->email }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm text-gray-600 font-medium">CARRERA</h3>
-                    <p class="text-gray-800">{{ Auth::user()->career }}</p>
+                    <h3 class="text-sm text-gray-700 font-medium">CARRERA</h3>
+                    <p class="text-gray-500">{{ Auth::user()->career }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm text-gray-600 font-medium">CONTACTO</h3>
-                    <p class="text-gray-800">{{ Auth::user()->phone }}</p>
+                    <h3 class="text-sm text-gray-700 font-medium">CONTACTO</h3>
+                    <p class="text-gray-500">{{ Auth::user()->phone }}</p>
                 </div>
                 <div>
-                    <h3 class="text-sm text-gray-600 font-medium">DIRECCIÓN</h3>
-                    <p class="text-gray-800">{{ Auth::user()->address }}</p>
+                    <h3 class="text-sm text-gray-700 font-medium">DIRECCIÓN</h3>
+                    <p class="text-gray-500">{{ Auth::user()->address }}</p>
                 </div>
             </div>
-            <p class="text-sm text-gray-500 mt-4">Datos personales del Administrador</p>
+            <p class="text-sm text-gray-400 mt-4">Datos personales del Administrador</p>
         </div>
 
       
@@ -43,21 +49,21 @@
         
             <div class="border-b border-gray-300 mb-6">
                 <nav class="flex space-x-4" aria-label="Tabs">
-                    <button class="tab px-3 py-2 text-sm font-medium text-indigo-600 border-b-2 border-indigo-600" data-tab="datos">
-                        Datos del Administrador
+                   <button class="tab px-3 py-2 text-sm font-medium text-indigo-600 border-b-2 border-indigo-600" data-tab="datos">
+                         Datos del Administrador
                     </button>
-                    <button class="tab px-3 py-2 text-sm font-medium text-gray-500 hover:text-indigo-600 hover:border-indigo-600" data-tab="foto">
-                        Foto
-                    </button>
-                    <button class="tab px-3 py-2 text-sm font-medium text-gray-500 hover:text-indigo-600 hover:border-indigo-600" data-tab="configuracion">
+                    <button class="tab px-3 py-2 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-indigo-600 hover:border-indigo-600" data-tab="foto">
+                         Foto
+                   </button>
+                   <button class="tab px-3 py-2 text-sm font-medium text-gray-500 border-b-2 border-transparent hover:text-indigo-600 hover:border-indigo-600" data-tab="configuracion">
                         Configuración
-                    </button>
+                   </button>
                 </nav>
             </div>
 
          
             <div id="datos" class="tab-content">
-                <form action="{{ route('user.update', Auth::user()->id) }}" method="POST">
+                <form action="{{ route('user.update_user', Auth::user()->id) }}" method="POST">
                     @csrf
                     @method('PUT')
 
@@ -95,7 +101,7 @@
                     </div>
 
                     <div class="flex justify-end mt-6">
-                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700">
+                        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700">
                             Actualizar
                         </button>
                     </div>
@@ -104,21 +110,15 @@
 
             <div id="foto" class="tab-content hidden">
                 <h3 class="text-lg font-medium text-gray-800">Foto</h3>
-                <form action="{{ route('user.update', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('user.update_photo', Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="mt-4 flex items-center space-x-4">
-                        <!-- Si el usuario tiene una foto, mostrarla -->
-                        @if(Auth::user()->photo)
-                             <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-16 h-16 rounded-full object-cover">
-                        @endif
-
-                        <!-- Campo para subir una nueva imagen -->
                         <input type="file" id="photo" name="photo"
                             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100">
                     </div>
                     <div class="flex justify-end mt-6 space-x-4">
-                        <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700">
+                        <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700">
                             Guardar Foto
                         </button>
                         <a href="{{ url()->previous() }}" 
@@ -132,54 +132,178 @@
 
             <div id="configuracion" class="tab-content hidden">
                 <h3 class="text-lg font-medium text-gray-800">Configuración</h3>
-                <form action="{{ route('user.update', Auth::user()->id) }}" method="POST">
+                <form action="{{ route('user.update_password', Auth::user()->id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div>
                         <label for="password" class="block text-sm font-medium text-gray-700 mt-2">Nueva Contraseña</label>
-                        <input type="password" id="password" name="password"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                oninput="validatePassword()"
+                            >
+                            <button 
+                                type="button" 
+                                class="absolute inset-y-0 right-0 px-3 text-gray-600"
+                                onclick="togglePasswordVisibility('password')">
+                                👁️
+                            </button>
+                        </div>
+                        <div id="password-strength" class="text-sm mt-2"></div>
                     </div>
                     <div>
                         <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Repita Contraseña</label>
-                        <input type="password" id="password_confirmation" name="password_confirmation"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password_confirmation" 
+                                name="password_confirmation"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                disabled 
+                                oninput="validatePasswordConfirmation()"
+                            >
+                            <button 
+                                type="button" 
+                                class="absolute inset-y-0 right-0 px-3 text-gray-600"
+                                onclick="togglePasswordVisibility('password_confirmation')">
+                                👁️
+                            </button>
+                        </div>
+                        <div id="password-confirmation-strength" class="text-sm mt-2"></div>
+                        <div id="password-match" class="text-sm mt-2"></div>
                     </div>
-
                     <div class="flex justify-end mt-6 space-x-4">
-                         <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded-lg shadow hover:bg-indigo-700">
+                        <button id="save-button" type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700 disabled:bg-gray-400" disabled>
                             Guardar Contraseña
                         </button>
-                        <a href="{{ url()->previous() }}"
-                            class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600">
-                               Cancelar
+                        <a href="{{ url()->previous() }}" class="bg-gray-500 text-white px-4 py-2 rounded-lg shadow hover:bg-gray-600">
+                            Cancelar
                         </a>
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-
-    <script>
+<script>
         
-        document.querySelectorAll('.tab').forEach(button => {
-            button.addEventListener('click', () => {
-                const tab = button.dataset.tab;
+    document.querySelectorAll('.tab').forEach(button => {
+        button.addEventListener('click', () => {
+            const tab = button.dataset.tab;
 
-                document.querySelectorAll('.tab-content').forEach(content => {
-                    content.classList.add('hidden');
-                });
-
-                document.querySelector(`#${tab}`).classList.remove('hidden');
-
-                document.querySelectorAll('.tab').forEach(tab => {
-                    tab.classList.remove('text-indigo-600', 'border-indigo-600');
-                    tab.classList.add('text-gray-500');
-                });
-
-                button.classList.add('text-indigo-600', 'border-indigo-600');
-                button.classList.remove('text-gray-500');
+           
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
             });
+
+           
+            document.querySelector(`#${tab}`).classList.remove('hidden');
+
+           
+            document.querySelectorAll('.tab').forEach(tabBtn => {
+                tabBtn.classList.remove('text-indigo-600', 'border-indigo-600');
+                tabBtn.classList.add('text-gray-500', 'border-transparent');
+            });
+
+           
+            button.classList.add('text-indigo-600', 'border-indigo-600');
+            button.classList.remove('text-gray-500', 'border-transparent');
         });
-    </script>
+    });
+
+        function togglePasswordVisibility(fieldId) {
+        const inputField = document.getElementById(fieldId);
+        inputField.type = inputField.type === "password" ? "text" : "password";
+    }
+
+   
+    function validatePassword() {
+        const password = document.getElementById("password").value;
+        const strengthElement = document.getElementById("password-strength");
+        let isValid = validateStrength(password, strengthElement);
+
+        
+        const confirmationField = document.getElementById("password_confirmation");
+        confirmationField.disabled = !isValid;
+
+        
+        if (isValid) validatePasswordMatch();
+    }
+
+function validatePasswordConfirmation() {
+    const confirmationPassword = document.getElementById("password_confirmation").value;
+    const strengthElement = document.getElementById("password-confirmation-strength");
+    
+  
+    let isValid = validateStrength(confirmationPassword, strengthElement, false);
+
+    if (isValid) {
+        strengthElement.innerHTML = ""; 
+    }
+
+    validatePasswordMatch();
+}
+   
+    function validatePasswordMatch() {
+        const password = document.getElementById("password").value;
+        const passwordConfirmation = document.getElementById("password_confirmation").value;
+        const matchElement = document.getElementById("password-match");
+        const saveButton = document.getElementById("save-button");
+
+        if (passwordConfirmation === "") {
+            matchElement.innerHTML = "";
+            saveButton.disabled = true;
+            return;
+        }
+
+       
+        if (password === passwordConfirmation) {
+            matchElement.innerHTML = "<span class='text-green-600'>Las contraseñas coinciden.</span>";
+            saveButton.disabled = false;
+        } else {
+            matchElement.innerHTML = "<span class='text-red-600'>Las contraseñas no coinciden.</span>";
+            saveButton.disabled = true;
+        }
+    }
+
+    function validateStrength(password, strengthElement, showValidMessage) {
+        let strengthMessage = "La contraseña debe tener:";
+        let isValid = true;
+
+        if (!/[A-Z]/.test(password)) {
+            strengthMessage += " una mayúscula,";
+            isValid = false;
+        }
+        if (!/[a-z]/.test(password)) {
+            strengthMessage += " una minúscula,";
+            isValid = false;
+        }
+        if (!/\d/.test(password)) {
+            strengthMessage += " un número,";
+            isValid = false;
+        }
+        if (password.length < 6) {
+            strengthMessage += " al menos 6 caracteres,";
+            isValid = false;
+        }
+
+        if (strengthElement) {
+            if (isValid && showValidMessage) {
+                strengthElement.innerHTML = "<span class='text-green-600'>La contraseña es válida.</span>";
+            } else if (!isValid) {
+                strengthElement.innerHTML = `<span class='text-red-600'>${strengthMessage.slice(0, -1)}.</span>`;
+            } else {
+                 strengthElement.innerHTML = ""; 
+            }
+        }
+
+        return isValid;
+    }
+</script>
+
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
 @endsection

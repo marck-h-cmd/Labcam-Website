@@ -20,10 +20,16 @@
                 <label for="subtitulo" class="block">Subtítulo</label>
                 <input type="text" id="subtitulo" name="subtitulo" value="{{ $event->subtitulo }}" class="w-full px-4 py-2 border rounded">
             </div>
-            <div class="mb-4">
+            <!-- <div class="mb-4">
                 <label for="descripcion" class="block">Descripcion</label>
                 <textarea id="descripcion" name="descripcion" class="w-full px-4 py-2 border rounded" required>{{ $event->descripcion }}</textarea>
+            </div> -->
+            <div class="mb-4">
+                <label for="descripcion" class="block">Descripción</label>
+                <div id="editor" class="w-full px-4 py-2 border rounded"></div>
+                <input type="hidden" id="descripcion" name="descripcion" class="w-full px-4 py-2 border rounded"></input>
             </div>
+
             <div class="mb-4">
                 <label for="autor" class="block">Autor</label>
                 <input type="text" id="autor" name="autor" value="{{ $event->autor }}" class="w-full px-4 py-2 border rounded" required>
@@ -47,4 +53,36 @@
             </div>
         </form>
     </div>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+    <script>
+        var quill = new Quill('#editor', { 
+            theme: 'snow',
+            modules: {
+                toolbar: [
+                    [{ 'size': ['small', false, 'large', 'huge'] }], 
+                    ['bold', 'italic', 'underline'], 
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
+                    [{ 'color': [] }, { 'background': [] }], 
+                    [{ 'align': [] }], 
+                    ['link'], 
+                    ['clean']
+                ]
+            }
+        });
+
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            var descripcion = `{!! addslashes($event->descripcion) !!}`;
+            quill.root.innerHTML = descripcion;
+            document.querySelector('#descripcion').value = descripcion;
+        });
+
+      
+        document.querySelector('form').addEventListener('submit', function() {
+            document.querySelector('#descripcion').value = quill.root.innerHTML;
+            
+        });
+    </script>
 @endsection

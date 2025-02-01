@@ -15,9 +15,9 @@ class EventoController extends Controller
     {
             $month = $request->get('month', now()->month);
             $year = $request->get('year', now()->year);
-            $category = $request->get('category', 'todo'); // Valor predeterminado: 'todo'
+            $category = $request->get('category', 'todo'); 
 
-            // Filtrar eventos según la categoría
+           
             $query = Evento::query();
 
             if ($category === 'pasado') {
@@ -26,19 +26,19 @@ class EventoController extends Controller
                 $query->where('fecha', '>=', Carbon::now());
             }
 
-    // Filtrar por mes y año
+   
             $eventos = $query->whereMonth('fecha', $month)
                              ->whereYear('fecha', $year)
                              ->orderBy('fecha', 'desc')
                              ->paginate(6);
-    // Pasar los parámetros a la vista para mostrarlos y poder usarlos en los enlaces
+    
         return view('usuario.novedades.eventos', compact('eventos', 'month', 'year', 'category'));
    }
 
    
     public function showEvento(Request $request)
     {
-        $query = $request->input('search'); // Obtener el término de búsqueda
+        $query = $request->input('search'); 
 
         $event = Evento::when($query, function ($queryBuilder) use ($query) {
             $queryBuilder->where('titulo', 'like', '%' . $query . '%')
@@ -53,7 +53,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-       // Obtener la categoría automáticamente basada en la fecha actual
+      
          $categoria = Carbon::now()->isPast() ? 'pasado' : 'futuro';
 
          return view('usuario.crear-evento', compact('categoria'));
@@ -67,22 +67,25 @@ class EventoController extends Controller
         $request->validate([
             'titulo' => 'required|string|max:255',
             'subtitulo' => 'required|string|max:1000',
-            'descripcion' => 'required|string',
+            'descripcion' => 'required',
             'autor' => 'required|string|max:255',
             'fecha' => 'required|date|after_or_equal:today',
             'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $evento = new Evento;
-        $evento->fecha = $request->fecha; // Asigna la fecha primero
+        $evento->fecha = $request->fecha; 
         $evento->categoria = Carbon::parse($evento->fecha)->isPast() ? 'pasado' : 'futuro';
 
 
         $rutaImagen = null;
         if ($request->hasFile('imagen')) {
             $imagen = $request->file('imagen');
-            $rutaImagen = $imagen->store('eventos', 'public'); // Guardar imagen en el directorio public
+            $rutaImagen = $imagen->store('eventos', 'public'); 
         }
+
+        $descripcion = strip_tags($request->descripcion, '<p><a><strong><em><ul><ol><li><br><u>');
+        $evento->descripcion = $descripcion;
 
         Evento::create([
             'titulo' => $request->titulo,
@@ -138,7 +141,7 @@ class EventoController extends Controller
         $evento->categoria = Carbon::parse($evento->fecha)->isPast() ? 'pasado' : 'futuro';
 
 
-        // Actualizar la imagen si se sube una nueva
+        
         if ($request->hasFile('imagen')) {
             $imagenPath = $request->file('imagen')->store('eventos', 'public');
             $evento->imagen = $imagenPath;
