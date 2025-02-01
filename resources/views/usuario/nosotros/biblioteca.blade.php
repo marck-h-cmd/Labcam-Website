@@ -32,16 +32,16 @@
                                                     stroke-width="2" d="m1 1 4 4 4-4" />
                                             </svg></span></button>
                                     <div id="mega-menu-dropdown"
-                                        class="absolute z-20  hidden w-auto grid  text-sm bg-white border border-gray-100 rounded-md shadow-md  ">
+                                        class="absolute z-20  hidden w-auto grid grid-cols-2  text-sm bg-white border border-gray-100 rounded-md shadow-md  ">
                                         @foreach ($areas->chunk(4) as $chunk)
                                             <div class="p-4 pb-0 text-gray-900 md:pb-4">
                                                 <ul class="space-y-4">
                                                     @foreach ($chunk as $area)
                                                         <li>
-                                                            <a href="{{ route('biblioteca.papers.area', $area->id) }}"
-                                                                class="text-gray-500 hover:text-blue-600">
+                                                            <button type="button" value="{{ $area->id }}"
+                                                                class="area-btn text-gray-500 hover:text-blue-600 p-2 rounded-lg ">
                                                                 {{ $area->nombre }}
-                                                            </a>
+                                                            </button>
                                                         </li>
                                                     @endforeach
                                                 </ul>
@@ -51,7 +51,7 @@
                                     </div>
                                 </li>
                                 <!--
-                                                                                        <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
+                                                                                                <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
 
                             </ul>
                         </nav>
@@ -73,8 +73,8 @@
             <div class="grid  grid-cols-10 gap-x-16 max-[1150px]:grid-cols-1 justify-center">
 
                 <aside
-                    class="w-[450px] max-[1150px]:bg-slate-50 max-[1150px]:w-[350px] max-[1150px]:z-50 transition-transform max-[1150px]:fixed max-[1150px]:top-0 max-[1150px]:bottom-0 max-[1150px]:left-0 h-auto mt-12 max-[1150px]:mt-0 col-span-3 transform max-[1150px]:-translate-x-full"
-                    id="drawer-navigation" tabindex="-1">
+                    class="w-[450px] max-[1150px]:bg-slate-50 max-[1150px]:w-[350px] max-[1150px]:z-50 max-[1150px]:fixed max-[1150px]:top-0 max-[1150px]:bottom-0 max-[1150px]:left-0 h-auto mt-12 max-[1150px]:mt-0 col-span-3 max-[1150px]:transform max-[1150px]:-translate-x-full max-[1150px]:transition-transform"
+                    id="drawer-navigation">
                     <div class="px-3 py-4 overflow-y-auto rounded  ">
                         <ul class="space-y-2">
                             <li>
@@ -85,133 +85,132 @@
                                     class="max-[1150px]:block hidden text-black text-2xl">X</button>
 
                             </li>
-                            <li>
+                            <div class=" space-y-2 max-md:overflow-y-visible">
+                                <li>
 
-                                <div class='max-w-md mx-auto'>
-                                    <div
-                                        class="relative flex items-center border-2 w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
-                                        <div class="grid place-items-center h-full w-12 text-gray-500">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                                                viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                            </svg>
+                                    <div class='max-w-md mx-auto'>
+                                        <div
+                                            class="relative flex items-center border-2 w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+                                            <div class="grid place-items-center h-full w-12 text-gray-500">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                                </svg>
+                                            </div>
+
+                                            <input
+                                                class="peer h-full w-full outline-none text-sm text-gray-700 pr-2 border-0"
+                                                type="text" id="search-dropdown" placeholder="Buscar Titulo Paper..." />
                                         </div>
-
-                                        <input class="peer h-full w-full outline-none text-sm text-gray-700 pr-2 border-0"
-                                            type="text" id="search-dropdown" placeholder="Buscar Titulo Paper..." />
                                     </div>
-                                </div>
-                            </li>
-                            <hr>
-                            <li>
-                                <button type="button"
-                                    class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  "
-                                    aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">
-                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
-                                        width="64px" height="64px" viewBox="0 0 32 32" id="i-options"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
+                                </li>
+                                <hr>
+                                <li>
+                                    <button type="button"
+                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  "
+                                        aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">
+                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
+                                            width="64px" height="64px" viewBox="0 0 32 32" id="i-options"
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor"
+                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path
+                                                    d="M28 6 L4 6 M28 16 L4 16 M28 26 L4 26 M24 3 L24 9 M8 13 L8 19 M20 23 L20 29">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                        <span class="flex-1 ml-3 text-left whitespace-nowrap"
+                                            sidebar-toggle-item>Topicos</span>
+                                        <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    <ul id="dropdown-example-2" class=" py-2 space-y-2 overflow-y-auto max-h-52">
+                                        @forelse($topicos as $topico)
+                                            <li>
+
+                                                <span
+                                                    class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">
+                                                    <input class="mr-2 checkbox-topico" type="checkbox" name="topics"
+                                                        value="{{ $topico->id }}">
+                                                    {{ $topico->nombre }} <span
+                                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full">{{ count($topico->papers) }}</span></span>
+                                            </li>
+                                        @empty
+                                            <li>
+                                                <a href="#"
+                                                    class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
+                                                    hay más topicos</a>
+                                            </li>
+                                        @endforelse
+
+                                    </ul>
+                                </li>
+                                <hr>
+                                <li>
+                                    <button type="button"
+                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 "
+                                        aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                                        <svg class="flex-shrink-0 w-6 h-6" viewBox="0 0 24 24" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
+                                            </g>
+                                            <g id="SVGRepo_iconCarrier">
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M2 7a1 1 0 0 1 1-1h18a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm0 5a1 1 0 0 1 1-1h14a1 1 0 1 1 0 2H3a1 1 0 0 1-1-1zm1 4a1 1 0 1 0 0 2h10a1 1 0 1 0 0-2H3z"
+                                                    fill="#000000"></path>
+                                            </g>
+                                        </svg>
+                                        <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Areas
+                                            Investigación</span>
+                                        <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                    <ul id="dropdown-example" class=" py-2 space-y-2 overflow-y-auto max-h-36">
+                                        @forelse($areas as $area)
+                                            <li>
+                                                <button type="button" value="{{ $area->id }}"
+                                                    class="area-btn flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">{{ $area->nombre }}</button>
+                                            </li>
+                                        @empty
+                                            <li>
+                                                <a href="#"
+                                                    class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
+                                                    hay más areas</a>
+                                            </li>
+                                        @endforelse
+
+                                    </ul>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a href="{{ route('contacto') }}"
+                                        class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
+                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
+                                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path
-                                                d="M28 6 L4 6 M28 16 L4 16 M28 26 L4 26 M24 3 L24 9 M8 13 L8 19 M20 23 L20 29">
+                                                d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
                                             </path>
-                                        </g>
-                                    </svg>
-                                    <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Topicos</span>
-                                    <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                                <ul id="dropdown-example-2" class=" py-2 space-y-2 overflow-y-auto max-h-52">
-                                    @forelse($topicos as $topico)
-                                        <li>
-
-                                            <span
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">
-                                                <input class="mr-2 checkbox-topico" type="checkbox" name="topics"
-                                                    value="{{ $topico->id }}">
-                                                {{ $topico->nombre }} <span
-                                                    class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full">{{ count($topico->papers) }}</span></span>
-                                        </li>
-                                    @empty
-                                        <li>
-                                            <a href="#"
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
-                                                hay más topicos</a>
-                                        </li>
-                                    @endforelse
-
-                                </ul>
-                            </li>
-                            <hr>
-                            <li>
-                                <button type="button"
-                                    class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 "
-                                    aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
-                                        width="64px" height="64px" viewBox="0 0 24 24" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                        <g id="SVGRepo_iconCarrier">
                                             <path
-                                                d="M10 10C10 10.5523 10.4477 11 11 11V17C10.4477 17 10 17.4477 10 18C10 18.5523 10.4477 19 11 19H13C13.5523 19 14 18.5523 14 18C14 17.4477 13.5523 17 13 17V9H11C10.4477 9 10 9.44772 10 10Z"
-                                                fill="#0F0F0F"></path>
-                                            <path
-                                                d="M12 8C12.8284 8 13.5 7.32843 13.5 6.5C13.5 5.67157 12.8284 5 12 5C11.1716 5 10.5 5.67157 10.5 6.5C10.5 7.32843 11.1716 8 12 8Z"
-                                                fill="#0F0F0F"></path>
-                                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                                d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4Z"
-                                                fill="#0F0F0F"></path>
-                                        </g>
-                                    </svg>
-                                    <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Areas
-                                        Investigación</span>
-                                    <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clip-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                                <ul id="dropdown-example" class=" py-2 space-y-2 overflow-y-auto max-h-36">
-                                    @forelse($areas as $area)
-                                        <li>
-                                            <button type="button" value="{{ $area->id }}"
-                                                class="area-btn flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">{{ $area->nombre }}</button>
-                                        </li>
-                                    @empty
-                                        <li>
-                                            <a href="#"
-                                                class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
-                                                hay más areas</a>
-                                        </li>
-                                    @endforelse
-
-                                </ul>
-                            </li>
-                            <hr>
-                            <li>
-                                <a href="{{ route('noticias') }}"
-                                    class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg  hover:bg-gray-100 ">
-                                    <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75  group-hover:text-gray-900 "
-                                        fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
-                                        </path>
-                                        <path
-                                            d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
-                                        </path>
-                                    </svg>
-                                    <span class="flex-1 ml-3 whitespace-nowrap">Noticias</span>
-                                </a>
-                            </li>
+                                                d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
+                                            </path>
+                                        </svg>
+                                        <span class="flex-1 ml-3 whitespace-nowrap">Contactanos</span>
+                                    </a>
+                                </li>
+                            </div>
 
                         </ul>
                     </div>
@@ -243,7 +242,10 @@
                                         </svg>
                                     </button>
                                     <p class="text-gray-50 ">Mostrando <span class="text-gray-100"
-                                            id="paper-count">{{ count($papers) }}</span> resultados</p>
+                                            id="paper-count">{{ count($papers) }}</span> resultados , Pag. <span
+                                            class=" text-slate-200"
+                                            id="current-page">{{ $papers->currentPage() }}</span>-<span
+                                            id="pages">{{ $papers->lastPage() }}</span></p>
 
                                 </div>
                             </div>
@@ -288,7 +290,7 @@
             const drawer = document.getElementById('drawer-navigation');
             // Función para actualizar el sidebar segun resizing
             function updateDrawerPosition() {
-                if (window.innerWidth >= 1024) {
+                if (window.innerWidth >= 1150) {
                     // Vista de escritorio
                     drawer.style.transform = 'translateX(0)';
                     drawer.style.transition = 'none';
@@ -309,6 +311,17 @@
             function showDrawer() {
                 drawer.style.transform = 'translateX(0)';
             }
+
+            document.addEventListener('click', (event) => {
+                if (window.innerWidth >= 1150) return;
+
+                const isClickInside = drawer.contains(event.target);
+                const isMenuButton = event.target.closest('#menuBtn');
+
+                if (!isClickInside && !isMenuButton) {
+                    closeDrawer();
+                }
+            });
 
 
             window.addEventListener('resize', updateDrawerPosition);
@@ -345,6 +358,8 @@
             const paperCount = document.getElementById('paper-count')
             const papersContainer = document.getElementById('papers-container');
             const loadMoreButton = document.getElementById('load-more');
+            const pageInfo = document.getElementById('current-page');
+            const pagesInfo = document.getElementById('pages');
             let currentSearchParams = new URLSearchParams();
             let generalPapersCount = 0;
             let isSearchActive = false;
@@ -352,7 +367,7 @@
             const API_BASE = '/api/biblioteca/papers';
             const UI_BASE = '/biblioteca/papers';
 
-              // links de paginación
+            // links de paginación
             if (paginationLinks) {
                 paginationLinks.addEventListener('click', function(e) {
                     if (e.target.tagName === 'A') {
@@ -367,8 +382,8 @@
             if (loadMoreButton) {
                 loadMoreButton.addEventListener('click', function() {
                     const page = currentSearchParams.get('page') ?
-                        parseInt(currentSearchParams.get('page')) + 1 :
-                        2;
+                        parseInt(currentSearchParams.get('page')) :
+                        1;
                     console.log("page", page)
 
                     currentSearchParams.set('page', page);
@@ -402,7 +417,7 @@
                                     </div>`;
             }
 
-             // Para mostrar más btones de carga
+            // Para mostrar más btones de carga
             function toggleLoadMoreButton(data) {
                 if (loadMoreButton) {
                     const showButton = data.total === 0;
@@ -443,7 +458,7 @@
 
                     const data = await response.json();
 
-                    console.log(data.papers.total)
+                    console.log(data.total)
                     if (data.total === 0) {
                         paperCount.textContent = 0
                         showNoResultsMessage();
@@ -454,6 +469,7 @@
                     updatePaperCount(data.total);
                     updateHistory(params);
                     togglePaginationElements(data);
+                    updatePageInfo(data)
 
                 } catch (error) {
                     console.error('Error:', error);
@@ -466,24 +482,25 @@
             function togglePaginationElements(data) {
                 if (paginationLinks) {
                     paginationLinks.innerHTML = data.links;
-                    paginationLinks.style.display = data.papers.total > 0 ? 'block' : 'none';
+                    paginationLinks.style.display = data.total > 0 ? 'block' : 'none';
                 }
 
                 if (loadMoreButton) {
-                    const showLoadMore = data.papers.total === 0;
+                    const showLoadMore = data.total === 0;
                     loadMoreButton.style.display = showLoadMore ? 'block' : 'none';
                     updatePaperCount(data.total);
+                    updatePageInfo(data)
                 }
             }
 
             function updatePaperCount(count) {
-                if (paperCount) {
-                    //   paperCount.textContent = isSearchActive ?
-                    //       count :
-                    //       generalPapersCount;
+                if (paperCount) 
                     paperCount.textContent = count
+            }
 
-                }
+            function updatePageInfo(data) {
+                    pageInfo.textContent = data.current_page
+                    pagesInfo.textContent = data.last_page;
             }
 
             function updateHistory(params) {
