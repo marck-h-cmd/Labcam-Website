@@ -5,425 +5,320 @@
 
 @section('contenido')
 
-<style>
-.nosotros-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    padding: 20px;
-    background: white;
-    margin-top: 150px
-}
-
-.main-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.main-title .blue-line{
-   width: 80%;
-}
-
-.title {
-    font-size: 30px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 500;
-    color: #2e5382;
-}
-
-
-.subtitle{
-    display: block;
-}
-.blue-line {
-    width: 150px;
-    height: 2px;
-    background: #2371d4;
-}
-
-
-
-.sub-text{
-    font-size: 24px;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    color: #30588b;
-    margin-left: 20px;
-}
-
-.content-section {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 800px;
-    text-align: left;
-}
-
-.text-content {
-    font-family: Inter, sans-serif;
-    font-size: 18px;
-    font-style: italic;
-    font-weight: 300;
-    color: black;
-    word-wrap: break-word;
-    margin-top: 5px;
-}
-
-.separator {
-    width: 100%;
-    height: 2px;
-    background: #2371D4;
-}
-
-.social-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.icon-container {
-    display: flex;
-    gap: 10px;
-}
-
-.footer-text {
-    text-align: center;
-    font-size: 18px;
-    font-weight: 700;
-    color: white;
-    background: #2462B2;
-    padding: 10px;
-}
-
-.image-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-}
-
-.image-section img {
-    max-width: 100%;
-    height: auto;
-}
-
-.slider-item img{
-    width: 650px;
-    height: 250px;
-}
-
-.explore-button {
-    background: #98C560;
-    border-radius: 5px;
-    color: white;
-    font-family: Inter, sans-serif;
-    font-weight: 700;
-    padding: 10px 20px;
-    text-align: center;
-    cursor: pointer;
-}
-
-/*
-slider
-*/
-
-.slider {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: #fff;
-    min-height: 380px;
-    width: 622px;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    text-align: center;
-    margin: 10px auto;
-}
-
-.slider .slider-item {
-    position: absolute;
-    visibility: hidden;
-    padding: 10px;
-}
-
-.slider .slider-item:nth-of-type(1) {
-    visibility: visible;
-}
-
-.slider .slider-item:nth-of-type(1)>* {
-    opacity: 1;  
-}
-
-.slider .slider-item img {
-    margin-bottom: 6px;
-}
-
-.slider .slider-item img:hover {
-    opacity: 0.9 !important;
-}
-
-.slider .slider-item > * {
-    opacity: 0;
-    transition: all 0.5s;
-}
-
-.slider input[type=radio] {
-    cursor: pointer;
-    position: relative;
-    margin: 12px 0;
-}
-
-.slider input[type=radio]:before {
-    content: '';   
-    float: left;
-    height: 100%;
-    width: 100%;
-    transition: all 0.5s;
-}
-
-.slider input[type=radio]:checked ~ .slider-item {
-    visibility: hidden;
-}
-
-
-.slider input[type=radio]:nth-of-type(1):checked ~ .slider-item:nth-of-type(1),
-.slider input[type=radio]:nth-of-type(2):checked ~ .slider-item:nth-of-type(2),
-.slider input[type=radio]:nth-of-type(3):checked ~ .slider-item:nth-of-type(3),
-.slider input[type=radio]:nth-of-type(4):checked ~ .slider-item:nth-of-type(4) {
-    visibility: visible;
-}
-
-.slider input[type=radio]:nth-of-type(1):checked~.slider-item:nth-of-type(1)>*,
-.slider input[type=radio]:nth-of-type(2):checked~.slider-item:nth-of-type(2)>*,
-.slider input[type=radio]:nth-of-type(3):checked~.slider-item:nth-of-type(3)>*,
-.slider input[type=radio]:nth-of-type(4):checked~.slider-item:nth-of-type(4)>* {
-    opacity: 1;
-}
-
-@media (max-width: 968px) {
-   .slider{
-    width: 422px;
-    min-height: 325px;
-   }
-
-
-}
-/*
-
-.slider {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: #fff;
-    min-height: 380px;
-    width: 622px;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    text-align: center;
-    margin: 10px auto;
-}
-
-.slider .slider-item {
-    position: absolute;
-    width: 100%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s;
-    padding: 10px;
-}
-
-.slider .slider-item img {
-    margin-bottom: 6px;
-}
-
-
-.slider .slider-item:first-child {
-    opacity: 1;
-    visibility: visible;
-}
-
-
-.slider input[type=radio] {
-    cursor: pointer;
-    position: relative;
-    margin: 12px 0;
-    display: inline-block;
-}
-
-@media (max-width: 968px) {
-   .slider {
-      width: 422px;
-      min-height: 325px;
-   }
-}
-   
-   .slider {
-    border: solid 1px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background-color: #fff;
-    min-height: 380px;
-    width: 622px;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-    text-align: center;
-    margin: 10px auto;
-}
-
-.slider input[type=radio] {
-    cursor: pointer;
-    position: relative;
-    margin: 12px 0;
-    appearance: none;
-    width: 12px;
-    height: 12px;
-    background: gray;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background 0.3s;
-}
-
- Estilos de los puntos de navegación 
-.slider input[type=radio]:checked {
-    background: black;
-}
-
-
-.slider .slider-item {
-    position: absolute;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.5s, visibility 0.5s;
-    padding: 10px;
-}
-
-
-.slider .slider-item:nth-of-type(1) {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.slider .slider-item img {
-    margin-bottom: 6px;
-}
-
-.slider .slider-item img:hover {
-    opacity: 0.9 !important;
-}
-
-
-@media (max-width: 968px) {
-   .slider {
-      width: 422px;
-      min-height: 325px;
-   }
-}
-
-*/
-
-
-
-</style>
-
-<div class="nosotros-container">
-
-    <div class="main-title">
-       
-        <div class="title">Historia</div>
-        <div class="blue-line"></div>
-    </div>
-
-    <div class="content-section">
-      <p class="text-content">
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris est parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus netus sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin eleifend hac pharetra. Tempor mus curabitur interdum interdum sociosqu.
-      </p>
-     
-      <div class="subtitle">
-       
-        <div class="sub-text">Subtitle 1</div>
-        <div class="blue-line"></div>
-    </div>
-
-      <p class="text-content">
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris est parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus netus sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin eleifend hac pharetra.
-      </p>
-
-      <div class="subtitle">
-       
-        <div class="sub-text">Subtitle 1</div>
-        <div class="blue-line"></div>
-    </div>
-
-      <p class="text-content">
-        Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris est parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus netus sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin eleifend hac pharetra.
-      </p>
-
-      <div class="separator"></div>
-    </div>
-
-    @if(!$sliders ->isEmpty())
-
-    <div class="image-section">
-        <div class="slider">
-
-            @foreach($sliders as $slider)
-            <input type="radio" name="nav" value="{{$slider->id}}">
-            @endforeach
-            @foreach($sliders as $slider)
-            <div class="slider-item">
-                <img src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}" alt="imagegen {{$slider->id}}" />
-                <p>{!!$slider->descripcion!!}</p>
-            </div>            
-          
-        @endforeach
+    <style>
+        .nosotros-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            background: white;
+            margin-top: 150px
+        }
+
+        .main-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-title .blue-line {
+            width: 80%;
+        }
+
+        .title {
+            font-size: 30px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            color: #2e5382;
+        }
+
+
+        .subtitle {
+            display: block;
+        }
+
+        .blue-line {
+            width: 150px;
+            height: 2px;
+            background: #2371d4;
+        }
+
+
+
+        .sub-text {
+            font-size: 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            color: #30588b;
+            margin-left: 20px;
+        }
+
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 800px;
+            text-align: left;
+        }
+
+        .text-content {
+            font-family: Inter, sans-serif;
+            font-size: 18px;
+            font-style: italic;
+            font-weight: 300;
+            color: black;
+            word-wrap: break-word;
+            margin-top: 5px;
+        }
+
+        .separator {
+            width: 100%;
+            height: 2px;
+            background: #2371D4;
+        }
+
+        .social-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: white;
+            background: #2462B2;
+            padding: 10px;
+        }
+
+        .image-section {
+            width:100vh;
+            max-width: 800px;
+            height: auto;
+            color:#fff;         
+        }
+
+
+        #slider {
+            width: 100%;
+            height: 350px;
+            position: relative;
+            overflow: hidden;
+            float: left;
+            padding: 0;
+            border: #666 solid 2px;
+            border-radius: 5px;
+        }
+
+        .img {
+            width: 100%;
+            height: 350px;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .description{
+            margin:0;
+            padding:0 35px 0 0;
+        }
+
+
+        .slide-copy {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 10px 20px 20px 20px;
+            background: 7f7f7f;
+            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-height: 32%;
+        }
+
+        #prev,
+        #next {
+            cursor: pointer;
+            z-index: 100;
+            background: #666;
+            height: 50px;
+            width: 50px;
+            display: inline-block;
+            position: relative;
+            top: 197px;
+            margin: 0;
+            padding: 0;
+            opacity: 0.7;
+            filter: alpha(opacity=70);
+        }
+
+        #next {
+            float: right;
+            right: -2px;
+        }
+
+        #prev {
+            float: left;
+            left: 0;
+        }
+
+        .arrow-right {
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid #fff;
+            position: relative;
+            top: 20%;
+            right: -40%;
+        }
+
+        .arrow-left {
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-right: 15px solid #fff;
+            position: relative;
+            top: 20%;
+            left: 30%;
+        }
+    </style>
+
+    <div class="nosotros-container">
+
+        <div class="main-title">
+
+            <div class="title">Historia</div>
+            <div class="blue-line"></div>
         </div>
+
+        <div class="content-section">
+            <p class="text-content">
+                Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris
+                est parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus
+                netus sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin
+                eleifend hac pharetra. Tempor mus curabitur interdum interdum sociosqu.
+            </p>
+
+            <div class="subtitle">
+
+                <div class="sub-text">Subtitle 1</div>
+                <div class="blue-line"></div>
+            </div>
+
+            <p class="text-content">
+                Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris
+                est parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus
+                netus sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin
+                eleifend hac pharetra.
+            </p>
+
+            <div class="subtitle">
+
+                <div class="sub-text">Subtitle 1</div>
+                <div class="blue-line"></div>
+            </div>
+
+            <p class="text-content">
+                Lorem ipsum odor amet, consectetuer adipiscing elit. Felis eleifend nam convallis mus vehicula at. Ad mauris
+                est parturient varius molestie condimentum eleifend sit. Parturient phasellus augue auctor conubia lacus
+                netus sociosqu montes. Fusce mauris quisque nisl nisi nam per aenean. Aliquam montes euismod turpis in proin
+                eleifend hac pharetra.
+            </p>
+
+            <div class="separator"></div>
+        </div>
+
+        @if (!$sliders->isEmpty())
+
+            <div class="image-section">
+                <div id="next" alt="Next" title="Next">
+                    <div class="arrow-right"></div>
+                </div>
+                <div id="prev" alt="Prev" title="Prev">
+                    <div class="arrow-left"></div>
+                </div>
+                <div id="slider">
+                    @foreach ($sliders as $slider)
+                        <div class="slide">
+                            <div class="slide-copy">
+                                <p class="description"  >{!! $slider->descripcion !!}</p>
+                            </div>
+                            <img class="img" src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}"
+                                alt="imagegen {{ $slider->id }}">
+                        </div>
+                    @endforeach
+
+                </div>
+            </div>
+        @endif
     </div>
-    @endif
-  </div>
-  
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const speed = 500; // Velocidad de transition (ms)
+            const autoswitch = true; // Activar el cambio automatico
+            const autoswitchSpeed = 9000; // Intervalo de cambio slider automatico (ms)
 
-@endsection
+            const slides = document.querySelectorAll(".slide");
+            const nextButton = document.getElementById("next");
+            const prevButton = document.getElementById("prev");
+            let currentSlide = 0;
 
-@section('script')
-
-<script>
- /*   
-document.addEventListener("DOMContentLoaded", function () {
-    const radios = document.querySelectorAll('.slider input[type="radio"]');
-    const slides = document.querySelectorAll('.slider .slider-item');
-
-    function updateSlider(index) {
-        slides.forEach((slide, i) => {
-            if (i == index) {
-                slide.style.opacity = "1";
-                slide.style.visibility = "visible";
-            } else {
-                slide.style.opacity = "0";
-                slide.style.visibility = "hidden";
+            // Inicializar slider
+            function initSlider() {
+                slides.forEach((slide, index) => {
+                    slide.style.display = index === 0 ? "block" : "none";
+                });
             }
+
+            // Mostrar por indice
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? "block" : "none";
+                });
+            }
+
+            // Ir al siguiente
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // Ir al anterior
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+
+     
+            nextButton.addEventListener("click", nextSlide);
+            prevButton.addEventListener("click", prevSlide);
+
+            // Auto slider
+            if (autoswitch) {
+                setInterval(nextSlide, autoswitchSpeed);
+            }
+
+            // Initializar al cargar
+            initSlider();
         });
-    }
-
-  
-    radios.forEach((radio) => {
-        radio.addEventListener('change', function () {
-            updateSlider(this.dataset.index);
-        });
-    });
-
-   
-    updateSlider(0);
-});
-
-*/
-
-</script>
+    </script>
 
 
 
