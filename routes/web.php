@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion', [CapitalHumanoCotroller::class, 'direc_us'])->name('direccion');
+Route::get('/direccion',function () {return view('usuario.Organizacion.Direccion');})->name('direccion');
 
 Route::get('/capitales', [CapitalHumanoController::class, 'capHumano_us'])->name('capital_usuario');
 

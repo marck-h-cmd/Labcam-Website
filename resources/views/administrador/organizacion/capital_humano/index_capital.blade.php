@@ -105,7 +105,7 @@
                                             {{ $capital->correo }}
                                         </td>
                                         <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            <a href="/user/template/uploads/pdfs/{{ $capital->cv }}">CV</a>
+                                            <a href="/user/template/uploads/pdfs/{{ $capital->cv }}"><img width="40" height="40" src="https://img.icons8.com/ultraviolet/40/documents.png" alt="documents"/></a>
                                         </td>
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                             <form action="{{ route('capitales.destroy', $capital->id) }}" method="POST">
@@ -193,6 +193,13 @@
                             <label for="rol" class="block">Rol:</label>
                             <input type="text" id="rol" name="rol" class="w-full px-4 py-2 border rounded" required>
                         </div>
+                        <div id="tesistasTypeField" class="hidden">
+                            <label for="tesistas_type" class="block text-sm font-medium text-gray-700">Tipo de Tesista</label>
+                            <select id="tesistas_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                                <option value="Pregrado">Pregrado</option>
+                                <option value="Posgrado">Posgrado</option>
+                            </select>
+                        </div>
                     </div>
                     <!-- Columna derecha -->
                     <div class="w-full md:w-1/2">
@@ -270,22 +277,36 @@
                             <label for="edit_carrera" class="block">Grado Académico</label>
                             <input type="text" id="edit_carrera" name="edit_carrera" value="" class="w-full px-4 py-2 border rounded" required>
                         </div>
+                        <div class="mb-4">
+                            <label for="edit_rol" class="block">Rol</label>
+                            <input type="text" id="edit_rol" name="edit_rol" value="" class="w-full px-4 py-2 border rounded" required>
+                        </div>
+                        <!-- Select dinámico para Tesistas -->
+                        <div id="editTesistasTypeField" class="hidden">
+                            <label for="edit_tesistas_type" class="block text-sm font-medium text-gray-700">Tipo de Tesista</label>
+                            <select id="edit_tesistas_type" class="mt-4 block w-full rounded-md border-gray-300 shadow-sm">
+                                <option value="pregrado">Pregrado</option>
+                                <option value="posgrado">Posgrado</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="w-full md:w-1/2">
+                        <div class="relative flex justify-center items-center mb-4">
+                            <img id="previewImage" src="" alt="Vista previa" class="w-full h-auto rounded shadow max-w-[150px] object-cover">
+                            <button type="button" class="absolute top-1 right-1 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('imagen').click()">
+                                🖉
+                            </button>
+                            <input type="file" id="edit_img" name="edit_img" class="hidden" accept="image/*" onchange="mostrarVistaPrevia(event)">
+                        </div>
                         <div class="mb-4">
                             <label for="edit_cv" class="block">CV</label>
                             <input type="file" id="edit_cv" name="edit_cv" class="w-full px-4 py-2 border rounded">
-                            
                             <!-- Mostrar el enlace al CV actual -->
                             <div id="cvPreview" class="mt-2">
                                 <a id="cvLink" href="#" target="_blank" class="text-blue-600 hover:underline hidden">Ver CV Actual</a>
                             </div>
                         </div>
-                        
-                        <div class="mb-4">
-                            <label for="edit_rol" class="block">Rol</label>
-                            <input type="text" id="edit_rol" name="edit_rol" value="" class="w-full px-4 py-2 border rounded" required>
-                        </div>
+
                         <div class="mb-4">
                             <label for="edit_linkedin" class="block">Linkedin</label>
                             <input type="text" id="edit_linkedin" name="edit_linkedin" value="" class="w-full px-4 py-2 border rounded" required>
@@ -311,10 +332,22 @@
 
 
 
-
 <script>
+
+    let selectedRole = "Investigadores"; // Rol por defecto
+    
+
     function openCreateModal() {
+
         document.getElementById('createModal').classList.remove('hidden');
+        document.getElementById('rol').value = selectedRole; // Establece el rol automáticamente
+        // Si el rol es "Tesistas", muestra el select para elegir "Pregrado" o "Posgrado"
+        const tesistasField = document.getElementById('tesistasTypeField');
+        if (selectedRole === "Tesistas") {
+            tesistasField.classList.remove('hidden');
+        } else {
+            tesistasField.classList.add('hidden');
+        }
     }
 
     function closeCreateModal() {
@@ -345,18 +378,31 @@
 
     function openEditModal(button) {
         let capital = JSON.parse(button.getAttribute('data-capital'));
-        console.log(capital);
-        // Llenar los campos del modal con los valores de la variable capital
         document.getElementById('edit_nombre').value = capital.nombre;
-        document.getElementById('edit_area_investigacion').selectedIndex = capital.area_investigacion.id;
+        document.getElementById('edit_area_investigacion').value = capital.area_investigacion.id;
         document.getElementById('edit_correo').value = capital.correo;
         document.getElementById('edit_carrera').value = capital.carrera;
         document.getElementById('edit_rol').value = capital.rol;
+        document.getElementById('edit_rol').setAttribute('readonly', true); // Evita cambios en el rol
         document.getElementById('edit_linkedin').value = capital.linkedin;
         document.getElementById('edit_ctivitae').value = capital.ctivitae;
-
-        // Modificar la acción del formulario para actualizar el registro correcto
         document.getElementById('editForm').action = `/admin/capitales/${capital.id}`;
+
+        const editRolField = document.getElementById('edit_rol');
+        const editTesistasField = document.getElementById('editTesistasTypeField');
+        const editTesistasType = document.getElementById('edit_tesistas_type');
+
+        // Extrae el rol del objeto y verifica si incluye "Tesistas"
+        if (capital.rol.includes('Tesistas')) {
+            const [rol, tipoTesista] = capital.rol.split(' - ');
+
+            editRolField.value = rol; // Solo "Tesistas"
+            editTesistasType.value = tipoTesista || "Pregrado"; // Selecciona "Pregrado" por defecto si no hay valor
+            editTesistasField.classList.remove('hidden'); // Muestra el desplegable
+        } else {
+            editRolField.value = capital.rol; // Otros roles
+            editTesistasField.classList.add('hidden'); // Oculta el desplegable
+        }
 
         // Manejo del CV
         let cvLink = document.getElementById('cvLink');
@@ -368,7 +414,16 @@
             cvLink.classList.add('hidden'); // Ocultar enlace si no hay CV
         }
 
-        // Mostrar el modal
+        // Suponiendo que tienes la URL de la imagen guardada en una variable:
+        const imagenGuardada = '/user/template/images/'; // Sustituye esta ruta por la URL real de la imagen
+
+        // Establecer la ruta de la imagen guardada al cargar la página
+        window.onload = function() {
+            const previewImage = document.getElementById("previewImage");
+            previewImage.src = imagenGuardada; // La ruta de la imagen
+        };
+
+
         document.getElementById('editModal').classList.remove('hidden');
     }
 
@@ -376,34 +431,57 @@
         document.getElementById('editModal').classList.add('hidden');
     }
 
-    // Función para filtrar filas por rol
-    // function filterByRole(role, element) {
-    //     // Mostrar solo las filas que coincidan con el rol
-    //     const rows = document.querySelectorAll('#table-body tr');
-    //     rows.forEach(row => {
-    //         row.style.display = row.dataset.role === role ? '' : 'none';
-    //     });
-    //     // Cambiar el título dinámicamente
-    //     const title = document.querySelector('.main-title .title');
-    //     title.textContent = `Capital Humano: ${role}`;
+    function filterByRole(role, element) {
+        selectedRole = role;   // ¡Importante! Guarda el rol seleccionado
+        const rows = document.querySelectorAll('#table-body tr');
+        rows.forEach(row => {
+            row.style.display = row.dataset.role === role ? '' : 'none';
+        });
 
-    //     // Quitar la clase activa de todos los botones
-    //     const menuItems = document.querySelectorAll('.grid .cursor-pointer a');
-    //     menuItems.forEach(item => {
-    //         item.classList.remove('bg-blue-600', 'text-white');
-    //         item.classList.add('text-gray-700'); // Restaurar el color original
-    //     });
+        // Remueve la selección de todos los botones
+        const menuItems = document.querySelectorAll('.grid .cursor-pointer a');
+        menuItems.forEach(item => {
+            item.classList.remove('bg-blue-600', 'text-white');
+            item.classList.add('text-gray-700');
+        });
 
-    //     // Activar el botón seleccionado
-    //     element.classList.add('bg-blue-600', 'text-white');
-    //     element.classList.remove('text-gray-700');
+        // Activa el botón seleccionado
+        element.classList.add('bg-blue-600', 'text-white');
+        element.classList.remove('text-gray-700');
+    }
+
+    function saveEditForm() {
+        const editRolField = document.getElementById('edit_rol');
+        const editTesistasTypeField = document.getElementById('edit_tesistas_type');
+
+        // Si el rol es "Tesistas", concatena el tipo y actualiza el valor del rol
+        if (editRolField.value === "Tesistas") {
+            editRolField.value = `tesistas ${editTesistasTypeField.value.toLowerCase()}`; // Ejemplo: "tesistas pregrado"
+        }
+
+        // Envía el formulario
+        document.getElementById('editForm').submit();
+    }
+
+    // function saveEditForm() {
+    //     const editRolField = document.getElementById('edit_rol');
+    //     const editTesistasTypeField = document.getElementById('edit_tesistas_type');
+
+    //     // Si el rol es "Tesistas", ajusta el valor del campo rol
+    //     if (editRolField.value === "Tesistas") {
+    //         editRolField.value = `Tesistas - ${editTesistasTypeField.value}`;
+    //     }
+
+    //     // Aquí puedes proceder a enviar el formulario
+    //     document.getElementById('editForm').submit();
     // }
 
-    // // Mostrar Investigadores por defecto al cargar la página
-    // document.addEventListener('DOMContentLoaded', () => {
-    //     const defaultButton = document.querySelector('#menu-investigadores a');
-    //     filterByRole('Investigadores', defaultButton);
-    // });
-
+    // Muestra "Investigadores" por defecto
+    document.addEventListener('DOMContentLoaded', () => {
+        const defaultButton = document.querySelector('#menu-investigadores a');
+        filterByRole('Investigadores', defaultButton);
+    });
+    
 </script>
+
 @endsection

@@ -83,18 +83,12 @@ class CapitalHumanoController extends Controller
         return redirect()->route('capital_index')->with('success', 'Registro creado con éxito.');
     }
 
-    // public function edit($id)
-    // {
-    //     $capital = Capital::findOrFail($id);
-    //     return view('administrador.organizacion.capital_humano.edit', compact('capital'));
-    // }
-
     public function update(Request $request, $id)
     {
 
         $capital = Capital::findOrFail($id);
 
-        // Ruta donde se guardarán las imágenes
+        // Ruta donde se guardarán laos cv's
         $cvPath = public_path('/user/template/uploads/pdfs');
         // Manejar la actualización de cada imagen
         if ($request->hasFile('edit_cv')) {
@@ -107,10 +101,24 @@ class CapitalHumanoController extends Controller
             $cv1Name = $capital->cv;
         }
 
+        // Ruta donde se guardarán las imágenes
+        $imagePath = public_path('/user/template/images/');
+        // Manejar la actualización de cada imagen
+        if ($request->hasFile('edit_img')) {
+            // Obtener la nueva imagen y moverla a la carpeta
+            $foto1 = $request->file('edit_img');
+            $image1Name = 'img' . Str::random(10) . '.' . $foto1->getClientOriginalExtension();
+            $foto1->move($imagePath, $image1Name);
+        }else{
+            $image1Name = $capital->foto;
+        }
+
+
         $capital->nombre = $request ->edit_nombre;
         $capital->carrera = $request ->edit_carrera;
         $capital->area_investigacion = $request->edit_area_investigacion;
         $capital->cv = $cv1Name;
+        $capital->foto = $image1Name;
         $capital->correo = $request ->edit_correo;
         $capital->rol = $request->edit_rol;
         $capital->linkedin = $request->edit_linkedin;
