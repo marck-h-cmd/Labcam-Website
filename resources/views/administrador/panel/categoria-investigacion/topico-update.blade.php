@@ -14,11 +14,11 @@
                 data-tabs-inactive-classes=" text-gray-500 hover:text-gray-600  border-gray-100 hover:border-gray-300 "
                 role="tablist">
                 <li class="me-2" role="presentation">
-                    <a class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 cursor-pointer" id="area-styled-tab" role="tab"
+                    <a href="{{ route('areas-panel') }}" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 cursor-pointer" id="area-styled-tab" role="tab"
                         aria-controls="area" aria-selected="false" data-tabs-target="#styled-area">Areas</a>
                 </li>
                 <li class="me-2" role="presentation">
-                    <a class="inline-block p-4 border-b-2 rounded-t-lg  cursor-pointer border-[#64d423]"
+                    <a href="{{ route('topic-panel') }}" class="inline-block p-4 border-b-2 rounded-t-lg  cursor-pointer border-[#64d423]"
                         data-tabs-target="#styled-topic" id="topic-styled-tab" role="tab" aria-controls="topic"
                         aria-selected="true">Topicos</a>
                 </li>

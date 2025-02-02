@@ -207,7 +207,7 @@
             Swal.fire({
                 icon: 'success',
                 title: '¡Creado exitosamente!',
-                text: 'Nuevo paper ha sido publicado.',
+                text: "{{ session('success') }}",
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
                 customClass: {
@@ -220,7 +220,7 @@
             Swal.fire({
                 icon: 'error',
                 title: '¡Hubo un error!',
-                text: 'Vuelve a intentar.',
+                html: "{!! session('error') !!}",
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
                 customClass: {

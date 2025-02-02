@@ -183,6 +183,19 @@
                 }
             });
         </script>
+         @elseif (session('error'))
+         <script>
+             Swal.fire({
+                 icon: 'error',
+                 title: '¡Hubo un error!',
+                 text: "{!! session('error') !!}",
+                 showConfirmButton: true,
+                 confirmButtonText: 'Aceptar',
+                 customClass: {
+                     confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
+                 }
+             });
+         </script>
     @endif
 
 @endsection
