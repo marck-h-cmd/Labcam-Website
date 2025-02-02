@@ -211,7 +211,7 @@
             Swal.fire({
                 icon: 'error',
                 title: '¡Hubo un error!',
-                text: 'Vuelve a intentar.',
+                text: "{{ session('error') }}",
                 showConfirmButton: true,
                 confirmButtonText: 'OK',
                 customClass: {

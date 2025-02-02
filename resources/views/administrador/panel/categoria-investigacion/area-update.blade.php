@@ -14,13 +14,13 @@
                 data-tabs-inactive-classes=" text-gray-500 hover:text-gray-600  border-gray-100 hover:border-gray-300 "
                 role="tablist">
                 <li class="me-2" role="presentation">
-                    <a href="{{route('areas-panel')}}" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 cursor-pointer" id="area-styled-tab" role="tab"
+                    <a href="{{route('areas-panel')}}" class="inline-block p-4 rounded-t-lg border-b-2 border-[#64d423] cursor-pointer" id="area-styled-tab" role="tab"
                         aria-controls="area" aria-selected="false" data-tabs-target="#styled-area">Areas</a>
                 </li>
                 <li class="me-2" role="presentation">
-                    <a href="{{route('topic-panel')}}" class="inline-block p-4 border-b-2 rounded-t-lg  cursor-pointer border-[#64d423]"
+                    <a href="{{route('topic-panel')}}" class="inline-block p-4 border-b-2 rounded-t-lg  hover:text-gray-600 hover:border-gray-300  cursor-pointer"
                         data-tabs-target="#styled-topic" id="topic-styled-tab" role="tab" aria-controls="topic"
-                        aria-selected="true">Areas</a>
+                        aria-selected="true">Topicos</a>
                 </li>
             </ul>
         </div>
@@ -32,7 +32,7 @@
                         <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                             <div class="w-full">
                                 <div class="main-title flex flex-col items-center gap-3 mb-8">
-                                    <div class="title text-2xl font-semibold text-[#2e5382]">Topicos</div>
+                                    <div class="title text-2xl font-semibold text-[#2e5382]">Areas</div>
                                     <div class="blue-line w-1/5 h-0 bg-[#64d423]"></div>
                                   </div>
 

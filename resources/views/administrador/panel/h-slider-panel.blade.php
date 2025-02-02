@@ -131,6 +131,18 @@
                 }
             });
         </script>
+    @elseif(session('error'))
+    <script>
+        Swal.fire({
+            title: "Error!",
+            text: "{{ session('error') }}",
+            icon: "success",
+            customClass: {
+                confirmButton: 'bg-red-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+            }
+        });
+    </script>
     @endif
+
 
 @endsection
