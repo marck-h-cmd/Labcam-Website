@@ -20,7 +20,7 @@
                         Momento</label>
                     <textarea
                         class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                        id="descripcion" name="descripcion" rows="3" placeholder="Message"></textarea>
+                        id="descripcion" name="descripcion" rows="3" placeholder="Message" required></textarea>
                     <p class="block w-full text-sm text-green-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2 mt-2"
                         id="char-count">200 caracteres restantes </p>
 

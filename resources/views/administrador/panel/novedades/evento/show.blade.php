@@ -51,7 +51,7 @@
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $evento->titulo }}</td>
                             <td class="px-4 py-3">{{ $evento->subtitulo }}</td>
-                            <td class="px-4 py-3">{!! Str::limit($evento->descripcion, 50) !!}</td>
+                            <td class="px-4 py-3"> {{ Str::limit(strip_tags($evento->descripcion ?? ''), 50) }}</td>
                             <td class="px-4 py-3">{{ $evento->autor }}</td>
                             <td class="px-4 py-3">{{ $evento->fecha }}</td>
                             <td class="px-4 py-2">{{ $evento->categoria }}</td> 

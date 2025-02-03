@@ -1,7 +1,8 @@
 @foreach ($papers as $paper)
     <div
-        class="flex flex-col md:flex-row overflow-hidden
+        class="flex flex-col md:flex-row overflow-hidden relative
                                              rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">
+        <p class="absolute right-6 px-2 md:top-2   font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm"> {{ $paper->area->nombre }}</p>
         <!-- información del paper -->
         <div class="max-h-96 max-w-[400px] overflow-hidden  md:w-1/2 p-4">
             <a href="{{ route('biblioteca.papers.show', $paper->id) }}"
@@ -14,11 +15,11 @@
                 <p class="autores italic text-base mb-3">
                     {{ $paper->formatted_autores }}</p>
             </div>
-            <p class="doi text-sm mt-3"><span class="text-gray-600">
+            <p class="doi mt-3"><span class="text-gray-600">
                     Publisher: </span><span
-                    class="doi-link underline text-gray-500 text-base">{{ $paper->publisher }}</span>
+                    class="doi-link  text-gray-500 text-base">{{ $paper->publisher }}</span>
             </p>
-            <p class="text-base  mt-4">
+            <p class="text-base  mt-3">
                 <span class="text-gray-600  ">Publicado: </span>
                 <strong class="text-gray-700 uppercase font-semibold text-sm ">
                     {{ $paper->fecha_publicacion }} </strong>
@@ -38,12 +39,12 @@
                 <p class=" text-[#98c560] text-base">Redirigir</p>
             </a>
         </div>
-        <div class="w-full p-6 max-md:py-2 text-gray-800 flex flex-col justify-between relative  ">
-            <p class="absolute right-2 bottom-1 px-2   font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm"> {{ $paper->area->nombre }}</p>
+        <div class="w-full p-6 max-md:py-2 text-gray-800 flex flex-col justify-between  ">
+          
             <p class="mt-4  text-justify text-gray-500 text-sm ">
                 {{ $paper->descripcion }}
             </p>
         </div>
-
+       
     </div>
 @endforeach

@@ -107,7 +107,7 @@
                                                 <td class="whitespace-nowrap px-3 py-8 text-sm text-gray-500">
                                                     {{ $paper->fecha_publicacion }}</td>
                                                 <td class="whitespace-nowrap px-3 py-8 text-sm text-gray-500 ">
-                                                    <a href="/storage/uploads/paper_img/{{ $paper->img_filename }}"
+                                                    <button type="button"  onclick="openModal('{{ Storage::url('uploads/paper_img/' . $paper->img_filename) }}')" 
                                                         target="blank" class="flex hover:text-green-500 ease-in-out "><svg
                                                             width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -123,7 +123,7 @@
                                                                     stroke-linejoin="round"></circle>
                                                             </g>
                                                         </svg>
-                                                        <span class="ml-2"> Ver imagen</span></a>
+                                                        <span class="ml-2"> Ver imagen</span></button>
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-8 text-sm text-gray-500">
                                                     <a href="/storage/uploads/pdf/{{ $paper->pdf_filename }}"
@@ -208,6 +208,13 @@
         </div>
     </div>
 
+    <div id="archivoModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-7 rounded shadow-lg max-w-7xl w-full relative">
+            <button class="absolute top-0.5 right-0.5 text-gray-500 hover:text-black text-3xl p-2" onclick="closeModal()">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
 
     @if (session('success'))
         <script>
@@ -233,6 +240,24 @@
         </script>
     @endif
 
+    <script>
+        function openModal(fileUrl) {
+            const modal = document.getElementById('archivoModal');
+            const modalContent = document.getElementById('modalContent');
+
+                modalContent.innerHTML = `<img src="${fileUrl}" alt="imagen" class="w-full max-h-[80vh] object-contain rounded">`;
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('archivoModal');
+            modal.classList.add('hidden');
+        }
+
+
+
+</script>
 
 @endsection
 

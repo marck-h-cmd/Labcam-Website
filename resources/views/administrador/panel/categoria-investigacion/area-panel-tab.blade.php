@@ -188,7 +188,7 @@
              Swal.fire({
                  icon: 'error',
                  title: '¡Hubo un error!',
-                 text: "{!! session('error') !!}",
+                 html: "{!! session('error') !!}",
                  showConfirmButton: true,
                  confirmButtonText: 'Aceptar',
                  customClass: {

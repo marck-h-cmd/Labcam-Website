@@ -94,7 +94,7 @@
         }
 
         .abstract-container strong {
-            color: #555;
+            color: #2e5382;
             font-family: "Garamond", "Times New Roman", serif;
         }
 
@@ -102,6 +102,7 @@
             font-style: italic;
             font-weight: 200;
             margin: 10px 0;
+            color: rgb(119, 119, 119);
 
         }
 
@@ -427,12 +428,12 @@
             <p class="abstract-text">
                 {{ $paper->descripcion }}
             </p>
-            <p><strong>Autores: </strong> {{ $paper->formatted_autores }}</p>
-            <p><strong>Área: </strong> {{ $paper->area->nombre }}</p>
-            <p><strong>Fecha Publicación: </strong>{{ $paper->fecha_publicacion }}</p>
-            <p><strong>Publisher: </strong> {{ $paper->publisher }}</p>
+            <p><strong>Autores: </strong><span class=" ml-2"> {{ $paper->formatted_autores }} </span></p>
+            <p><strong>Área: </strong><span class=" ml-2"> {{ $paper->area->nombre }} </span></p>
+            <p><strong>Fecha Publicación: </strong><span class=" ml-2">{{ $paper->fecha_publicacion }}</span></p>
+            <p><strong>Publisher: </strong><span class=" ml-2"> {{ $paper->publisher }}</span></p>
             <div class="doi">
-                <p><strong>DOI: </strong> <a href="{{ $paper->doi }}" target="_blank">{{ $paper->doi }}</a></p>
+                <p><strong>DOI: </strong> <a class=" ml-2" href="{{ $paper->doi }}" target="_blank">{{ $paper->doi }}</a></p>
             </div>
         </div>
 
