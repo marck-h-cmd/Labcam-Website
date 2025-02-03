@@ -5,13 +5,14 @@ use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use App\Http\Controllers\AreaInvestigacionController;
 use App\Http\Controllers\TopicoController;
+use App\Http\Controllers\DireccionController;
 use Illuminate\Support\Facades\Route;
 
 // -----------------------------------------------------USUARIO--------------------------------------------------------------------------------------
 Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion', function () {return view('usuario.Organizacion.Direccion');})->name('direccion');
+Route::get('/direccion',[DireccionController::class, 'direc_us'])->name('direccion');
 
 Route::get('/capitales', [CapitalHumanoController::class, 'capHumano_us'])->name('capital_usuario');
 
@@ -240,10 +241,19 @@ Route::get('/admin/eventos/buscar', [EventoController::class, 'showEvento'])->na
 Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
 
 
+
+
 Route::post('/admin/capitales', [CapitalHumanoController::class, 'store'])->name('capitales.store');
 Route::get('/admin/capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
 Route::put('/admin/capitales/{id}', [CapitalHumanoController::class, 'update'])->name('capitales.update');
 Route::delete('/admin/capitales/{id}', [CapitalHumanoController::class, 'destroy'])->name('capitales.destroy');
+
+//-------Direccion-------//
+Route::get('/admin/direccion', [DireccionController::class, 'index'])->name('direccion_index');
+Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direccion.store');
+Route::put('/admin/direccion/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
+// Route::delete('/admin/direccion/{id}', [DireccionController::class, 'destroy'])->name('direccion.destroy');
+ 
 
 
 

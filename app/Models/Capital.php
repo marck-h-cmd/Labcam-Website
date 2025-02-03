@@ -18,6 +18,8 @@ class Capital extends Model
         'cv',
         'foto',
         'rol',
+        'linkedin',
+        'ctivitae'
     ];
 
     /**

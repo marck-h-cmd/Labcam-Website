@@ -19,7 +19,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'juan.perez@correo.com', 
             'cv' => 'cv_juan_perez.pdf', 
             'rol' => 'investigadores', 
-            'foto' => 'juan_perez.jpg'],
+            'foto' => 'juan_perez.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'María López', 
             'carrera' => 'Ciencias Biológicas', 
@@ -27,7 +29,9 @@ class CapitalSeeder extends Seeder
             'maria.lopez@correo.com', 
             'cv' => 'cv_maria_lopez.pdf', 
             'rol' => 'egresados', 
-            'foto' => 'maria_lopez.jpg'],
+            'foto' => 'maria_lopez.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Carlos García', 
             'carrera' => 'Ingeniería Química', 
@@ -35,15 +39,19 @@ class CapitalSeeder extends Seeder
             'correo' => 'carlos.garcia@correo.com', 
             'cv' => 'cv_carlos_garcia.pdf', 
             'rol' => 'tesistas', 
-            'foto' => 'carlos_garcia.jpg'],
+            'foto' => 'carlos_garcia.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Ana Rodríguez', 
             'carrera' => 'Medicina Humana', 
             'area_investigacion' => 4, 'correo' => 
             'ana.rodriguez@correo.com', 
             'cv' => 'cv_ana_rodriguez.pdf', 
-            'rol' => 'pasantes', 'foto' => 
-            'ana_rodriguez.jpg'],
+            'rol' => 'pasantes', 
+            'foto' => 'ana_rodriguez.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Luis Martínez', 
             'carrera' => 'Tecnología de Información', 
@@ -51,7 +59,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'luis.martinez@correo.com', 
             'cv' => 'cv_luis_martinez.pdf', 
             'rol' => 'aliados', 
-            'foto' => 'luis_martinez.jpg'],
+            'foto' => 'luis_martinez.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Sofía Gómez', 
             'carrera' => 'Ingeniería Ambiental', 
@@ -59,7 +69,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'sofia.gomez@correo.com', 
             'cv' => 'cv_sofia_gomez.pdf', 
             'rol' => 'investigadores', 
-            'foto' => 'sofia_gomez.jpg'],
+            'foto' => 'sofia_gomez.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Miguel Torres', 
             'carrera' => 'Ciencias de la Comunicación', 
@@ -67,7 +79,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'miguel.torres@correo.com', 
             'cv' => 'cv_miguel_torres.pdf', 
             'rol' => 'egresados', 
-            'foto' => 'miguel_torres.jpg'],
+            'foto' => 'miguel_torres.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
             
             ['nombre' => 'Elena Ruiz', 
             'carrera' => 'Pedagogía', 
@@ -75,7 +89,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'elena.ruiz@correo.com', 
             'cv' => 'cv_elena_ruiz.pdf', 
             'rol' => 'tesistas', 
-            'foto' => 'elena_ruiz.jpg'],
+            'foto' => 'elena_ruiz.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Roberto Sánchez', 
             'carrera' => 'Economía', 
@@ -83,7 +99,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'roberto.san@correo.com', 
             'cv' => 'cv_roberto_sanchez.pdf', 
             'rol' => 'pasantes', 
-            'foto' => 'roberto_sanchez.jpg'],
+            'foto' => 'roberto_sanchez.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe'],
 
             ['nombre' => 'Claudia Díaz', 
             'carrera' => 'Física', 
@@ -91,7 +109,9 @@ class CapitalSeeder extends Seeder
             'correo' => 'claudia.diaz@correo.com', 
             'cv' => 'cv_claudia_diaz.pdf', 
             'rol' => 'aliados', 
-            'foto' => 'claudia_diaz.jpg']
+            'foto' => 'claudia_diaz.jpg',
+            'linkedin' => 'llllllajjdjdjdjd.com',
+            'ctivitae' => 'trtruiweoaoa.unitru.pe']
         ];
 
         foreach ($capitalData as $data) {

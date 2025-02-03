@@ -15,8 +15,10 @@ class DireccionController extends Controller
     public function index()
     {
 
-        $direccion = Direccion::All();
-        return view('administrador.organizacion.direccion.index_direccion', compact('direccion'));
+
+        $direcciones = Direccion::All();
+        return view('administrador.organizacion.direccion.index_direccion', compact('direcciones'));
+
     }
 
     /**
@@ -85,5 +87,15 @@ class DireccionController extends Controller
 
         return redirect()->route('direccion_index')->with('success', 'Registro actualizado!');
     }
+
+
+    //Usuario
+    public function direc_us(){
+        $jefe = Direccion::where('rol', 'Jefe')->get();
+        $tecnico = Direccion::where('rol', 'Tecnico')->get();
+        $invP = Direccion::where('rol', 'Investigador Principal')->get();
+        return view('usuario.Organizacion.Direccion', compact('jefe', 'tecnico', 'invP'));
+    }
+
 
 }

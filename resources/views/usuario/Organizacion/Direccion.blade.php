@@ -1,14 +1,36 @@
 @extends('usuario.layout.plantilla')
 
 @section('contenido')
+
     <section class="px-16 mb-16">
         <!-- Encabezado -->
-        <section class="py-10">
-            <div class="flex flex-col items-center gap-3 mb-4">
-                <h2 class="text-blue-800 font-semibold text-4xl mb-1">Dirección</h2>
-                <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
-            </div>
-        </section>
+        <div class="flex items-center justify-center pt-8">
+            <!-- Botón de mes anterior -->
+            <a href="{{ route('areas') }}"
+                class="text-gray-500 hover:text-gray-800 transition mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+
+            <!-- Mostrar mes y año actual -->
+            <span class="text-lg font-semibold text-gray-700 uppercase">
+                <div class="text-center">
+                    <h2 class="text-blue-800 font-semibold text-5xl mb-1">DIRECCION</h2>
+                    <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+                </div>
+            </span>
+
+            <!-- Botón de mes siguiente -->
+            <a href="{{ route('capital_usuario') }}"
+                class="text-gray-500 hover:text-gray-800 transition ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
+        </div>
 
         <!-- Contenido principal -->
         <section class="flex flex-wrap justify-center items-center gap-12 h-full">
@@ -35,8 +57,7 @@
                 <!-- General -->
                 <div id="general" class="flex flex-col items-center gap-10">
                     <!-- Jefe -->
-                    <div
-                        class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
+                    <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
                         <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
                             src="/user/template/images/team-02.png" alt="Jefe">
                         <h3 class="text-black font-semibold text-base mt-3">JEFE</h3>
@@ -45,15 +66,13 @@
                     <!-- Técnico e Investigador Principal -->
                     <div class="flex flex-wrap justify-center gap-16 w-full">
                         <!-- Técnico -->
-                        <div
-                            class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
+                        <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
                             <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
                                 src="/user/template/images/team-01.png" alt="Técnico">
                             <h3 class="text-black font-semibold text-sm mt-3">TÉCNICO</h3>
                         </div>
                         <!-- Investigador Principal -->
-                        <div
-                            class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
+                        <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
                             <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
                                 src="/user/template/images/test.png" alt="Investigador Principal">
                             <h3 class="text-black font-semibold text-base mt-3">INVESTIGADOR PRINCIPAL</h3>
