@@ -205,9 +205,9 @@
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('direccion_index') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('direccion_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Dirección
                         </a>
                     </li>

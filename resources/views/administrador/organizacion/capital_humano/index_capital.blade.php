@@ -1,5 +1,5 @@
 @extends('administrador.dashboard.plantilla')
-
+@section('title', 'Capital Humano')
 @section('contenido')
 <div class="main-title flex flex-col items-center gap-3 mb-8">
     <div class="title text-2xl font-semibold text-[#2e5382]">Capital Humano</div>
@@ -195,7 +195,7 @@
                         </div>
                         <div id="tesistasTypeField" class="hidden">
                             <label for="tesistas_type" class="block text-sm font-medium text-gray-700">Tipo de Tesista</label>
-                            <select id="tesistas_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <select id="tesistas_type" name="tesistas_type" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                                 <option value="Pregrado">Pregrado</option>
                                 <option value="Posgrado">Posgrado</option>
                             </select>
@@ -284,7 +284,7 @@
                         <!-- Select dinámico para Tesistas -->
                         <div id="editTesistasTypeField" class="hidden">
                             <label for="edit_tesistas_type" class="block text-sm font-medium text-gray-700">Tipo de Tesista</label>
-                            <select id="edit_tesistas_type" class="mt-4 block w-full rounded-md border-gray-300 shadow-sm">
+                            <select id="edit_tesistas_type" name="edit_tesistas_type" class="mt-4 block w-full rounded-md border-gray-300 shadow-sm">
                                 <option value="pregrado">Pregrado</option>
                                 <option value="posgrado">Posgrado</option>
                             </select>
@@ -292,11 +292,11 @@
                     </div>
                     <div class="w-full md:w-1/2">
                         <div class="relative flex justify-center items-center mb-4">
-                            <img id="previewImage" src="" alt="Vista previa" class="w-full h-auto rounded shadow max-w-[150px] object-cover">
-                            <button type="button" class="absolute top-1 right-1 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('imagen').click()">
+                            <img id="previewImg" alt="Vista previa" class="w-full h-auto rounded shadow max-w-[150px] object-cover">
+                            <button type="button" class="absolute top-1 right-1 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('edit_img').click()">
                                 🖉
                             </button>
-                            <input type="file" id="edit_img" name="edit_img" class="hidden" accept="image/*" onchange="mostrarVistaPrevia(event)">
+                            <input type="file" id="edit_img" name="edit_img" class="hidden" accept="image/*" onchange="previewImage(event)">
                         </div>
                         <div class="mb-4">
                             <label for="edit_cv" class="block">CV</label>
@@ -345,6 +345,7 @@
         const tesistasField = document.getElementById('tesistasTypeField');
         if (selectedRole === "Tesistas") {
             tesistasField.classList.remove('hidden');
+            tesistasField.disabled = false;
         } else {
             tesistasField.classList.add('hidden');
         }
@@ -361,6 +362,7 @@
         if (previewImage) {
             previewImage.src = ''; // Reinicia la imagen a su estado inicial
         }
+
     }
 
     function mostrarVistaPrevia(event) {
@@ -376,6 +378,19 @@
         }
     }
 
+    function previewImage(event) {
+        const input1 = event.target;
+        const previewImg = document.getElementById("previewImg");
+
+        if (input1.files && input1.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImg.src = e.target.result;
+            };
+            reader.readAsDataURL(input1.files[0]);
+        }
+    }
+
     function openEditModal(button) {
         let capital = JSON.parse(button.getAttribute('data-capital'));
         document.getElementById('edit_nombre').value = capital.nombre;
@@ -386,6 +401,7 @@
         document.getElementById('edit_rol').setAttribute('readonly', true); // Evita cambios en el rol
         document.getElementById('edit_linkedin').value = capital.linkedin;
         document.getElementById('edit_ctivitae').value = capital.ctivitae;
+        document.getElementById('previewImg').src = `/user/template/images/${capital.foto}`;
         document.getElementById('editForm').action = `/admin/capitales/${capital.id}`;
 
         const editRolField = document.getElementById('edit_rol');
@@ -414,15 +430,16 @@
             cvLink.classList.add('hidden'); // Ocultar enlace si no hay CV
         }
 
-        // Suponiendo que tienes la URL de la imagen guardada en una variable:
-        const imagenGuardada = '/user/template/images/'; // Sustituye esta ruta por la URL real de la imagen
-
-        // Establecer la ruta de la imagen guardada al cargar la página
-        window.onload = function() {
-            const previewImage = document.getElementById("previewImage");
-            previewImage.src = imagenGuardada; // La ruta de la imagen
-        };
-
+        // function previewImage(event, imageId) {
+        //     const file = event.target.files[0];
+        //     if (file) {
+        //         const reader = new FileReader();
+        //         reader.onload = function(e) {
+        //             document.getElementById(imageId).src = e.target.result;
+        //         };
+        //         reader.readAsDataURL(file);
+        //     }
+        // }
 
         document.getElementById('editModal').classList.remove('hidden');
     }
@@ -432,10 +449,11 @@
     }
 
     function filterByRole(role, element) {
-        selectedRole = role;   // ¡Importante! Guarda el rol seleccionado
+        selectedRole = role;  // ¡Importante! Guarda el rol seleccionado
+
         const rows = document.querySelectorAll('#table-body tr');
         rows.forEach(row => {
-            row.style.display = row.dataset.role === role ? '' : 'none';
+            row.style.display = row.dataset.role.includes(role) ? '' : 'none';
         });
 
         // Remueve la selección de todos los botones

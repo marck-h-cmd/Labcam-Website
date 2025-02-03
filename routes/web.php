@@ -5,6 +5,7 @@ use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use App\Http\Controllers\AreaInvestigacionController;
 use App\Http\Controllers\TopicoController;
+use App\Http\Controllers\DireccionController;
 use Illuminate\Support\Facades\Route;
 
 // -----------------------------------------------------USUARIO--------------------------------------------------------------------------------------
@@ -199,6 +200,12 @@ Route::post('/admin/capitales', [CapitalHumanoController::class, 'store'])->name
 Route::get('/admin/capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
 Route::put('/admin/capitales/{id}', [CapitalHumanoController::class, 'update'])->name('capitales.update');
 Route::delete('/admin/capitales/{id}', [CapitalHumanoController::class, 'destroy'])->name('capitales.destroy');
+
+//-------Direccion-------//
+Route::get('/admin/direccion', [DireccionController::class, 'index'])->name('direccion_index');
+Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direccion.store');
+// Route::delete('/admin/direccion/{id}', [DireccionController::class, 'destroy'])->name('direccion.destroy');
+ 
 
 
 

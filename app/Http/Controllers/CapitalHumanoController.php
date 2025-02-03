@@ -20,19 +20,12 @@ class CapitalHumanoController extends Controller
         $capitales = Capital::paginate(8);
         $areasInvestigacion = AreaInvestigacion::All();
         return view('administrador.organizacion.capital_humano.index_capital', compact('capitales' ,'areasInvestigacion'))
-               ->with('i', ($request->input('buscarpor', 1) - 1) * $capitales->perPage());
+               ->with('i', ($request->input('page', 1) - 1) * $capitales->perPage());
     }
-
-    // public function create()
-    // {
-    //     // Se trae las áreas de investigación
-    //     $areasInvestigacion = AreaInvestigacion::all();
-    //     return view('administrador.organizacion.capital_humano.create', compact('areasInvestigacion'));
-    // }
-
 
     public function store(Request $request)
     {
+        // dd($request->tesistas_type);
         $request->validate([
             'nombres' => 'required|string|max:255',
             'carrera' => 'required|string|max:255',
@@ -65,7 +58,18 @@ class CapitalHumanoController extends Controller
                 $image1Name = 'img' . Str::random(10) . '.' . $foto1->getClientOriginalExtension();
                 $foto1->move($imagePath, $image1Name);
             }
-
+            
+            if ($request->rol === 'Tesistas'){
+                if($request -> tesistas_type == 'Pregrado'){
+                    $rol_b ='Tesistas Pregrado';
+                    
+                }
+                if($request->tesistas_type === 'Posgrado'){
+                    $rol_b='Tesistas Posgrado';
+                }
+            }else{
+                $rol_b = $request->rol;
+            }
 
         Capital::create([
             'nombre' => $request->nombres,
@@ -74,7 +78,7 @@ class CapitalHumanoController extends Controller
             'correo' => $request->correo,
             'cv' => $cv1Name,
             'foto' => $image1Name,
-            'rol' => $request->rol,
+            'rol'=> $rol_b,
             'linkedin' =>$request->linkedin,
             'ctivitae' =>$request->ctivitae
         ]);
@@ -143,19 +147,13 @@ class CapitalHumanoController extends Controller
     public function capHumano_us()
     {
         $investigadores = Capital::where('rol','investigadores')->get();
-        $tesistas_pre = Capital::where('rol','tesistas pregrado')->get();
-        $tesistas_pos = Capital::where('rol','tesistas posgrado')->get();
+        $tesistas_pre = Capital::where('rol','Tesistas Pregrado')->get();
+        $tesistas_pos = Capital::where('rol','Tesistas Posgrado')->get();
         $egresados = Capital::where('rol','egresados')->get();
         $pasantes = Capital::where('rol','pasantes')->get();
         $aliados = Capital::where('rol','aliados')->get();
 
         return view('usuario.Organizacion.CapitalHumano', compact('investigadores','tesistas_pre','tesistas_pos','egresados','pasantes','aliados'));
-    }
-
-    public function direc_us()
-    {
-        $direccion = Direccion::All();
-        return view('usuario.Organizacion.Direccion',compact('direccion'));
     }
 
 }
