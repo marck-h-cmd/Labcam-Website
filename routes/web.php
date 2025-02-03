@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion',function () {return view('usuario.Organizacion.Direccion');})->name('direccion');
+Route::get('/direccion',[DireccionController::class, 'direc_us'])->name('direccion');
 
 Route::get('/capitales', [CapitalHumanoController::class, 'capHumano_us'])->name('capital_usuario');
 
@@ -204,6 +204,7 @@ Route::delete('/admin/capitales/{id}', [CapitalHumanoController::class, 'destroy
 //-------Direccion-------//
 Route::get('/admin/direccion', [DireccionController::class, 'index'])->name('direccion_index');
 Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direccion.store');
+Route::put('/admin/direccion/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
 // Route::delete('/admin/direccion/{id}', [DireccionController::class, 'destroy'])->name('direccion.destroy');
  
 
