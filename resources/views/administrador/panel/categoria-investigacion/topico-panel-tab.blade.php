@@ -14,12 +14,14 @@
                 data-tabs-inactive-classes=" text-gray-500 hover:text-gray-600  border-gray-100 hover:border-gray-300 "
                 role="tablist">
                 <li class="me-2" role="presentation">
-                    <a href="{{route('areas-panel')}}" class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 cursor-pointer"
+                    <a href="{{ route('areas-panel') }}"
+                        class="inline-block p-4 rounded-t-lg hover:text-gray-600 hover:border-gray-300 cursor-pointer"
                         id="area-styled-tab" role="tab" aria-controls="area" aria-selected="false"
                         data-tabs-target="#styled-area">Areas</a>
                 </li>
                 <li class="me-2" role="presentation">
-                    <a href="{{route('topic-panel')}}" class="inline-block p-4 border-b-2 rounded-t-lg  cursor-pointer border-[#64d423]"
+                    <a href="{{ route('topic-panel') }}"
+                        class="inline-block p-4 border-b-2 rounded-t-lg  cursor-pointer border-[#64d423]"
                         data-tabs-target="#styled-topic" id="topic-styled-tab" role="tab" aria-controls="topic"
                         aria-selected="true">Topicos</a>
                 </li>
@@ -152,8 +154,19 @@
     @if (session('success'))
         <script>
             Swal.fire({
-                title: "Eliminado!",
+                title: "Exito!",
                 text: "{{ session('success') }}",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @elseif (session('destroyed'))
+        <script>
+            Swal.fire({
+                title: "Eliminado!",
+                text: "{{ session('destroyed') }}",
                 icon: "success",
                 customClass: {
                     confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
@@ -171,6 +184,19 @@
                 }
             });
         </script>
+     @elseif (session('error'))
+     <script>
+         Swal.fire({
+             icon: 'error',
+             title: '¡Hubo un error!',
+             html: "{!! session('error') !!}",
+             showConfirmButton: true,
+             confirmButtonText: 'Aceptar',
+             customClass: {
+                 confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
+             }
+         });
+    </script>
     @endif
 
 @endsection
@@ -180,17 +206,17 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
 
-                    const inputName = document.getElementById("nombre")
-                    const cancelBtn = document.getElementById("cancel-btn")
+            const inputName = document.getElementById("nombre")
+            const cancelBtn = document.getElementById("cancel-btn")
 
-                    cancelBtn.addEventListener("click", () => {
-                        inputName.value = " "
-                    })
-
-
+            cancelBtn.addEventListener("click", () => {
+                inputName.value = " "
+            })
 
 
-                });
+
+
+        });
     </script>
 
 @endsection

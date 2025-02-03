@@ -124,10 +124,12 @@
 
                     </div>
                     <div class="mt-4">
-                        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 ">Abstract</label>
+                        <label for="descripcion" class="block mb-2 text-sm font-medium text-gray-900 ">Abstract (<span
+                                class="text-sm text-green-500 border    focus:outline-none p-2 mt-2" id="char-count">1000
+                                caracteres restantes</span>)</label>
                         <textarea
                             class="block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
-                            id="descripcion" name="descripcion" rows="5" placeholder="Message"></textarea>
+                            id="descripcion" name="descripcion" rows="5" placeholder="Descripción" required></textarea>
                     </div>
                     <div class="my-4">
                         <label class="block mb-2 text-sm font-medium text-gray-900 " for="file_input">Imagen Paper</label>
@@ -194,7 +196,7 @@
                 <a href="{{ route('papers.create') }}"
                     class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">Cancelar</a>
 
-                <a href="{{ route('paper-panel') }}"
+                <a href="{{ route('papers.index') }}"
                     class="focus:outline-none text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 cursor-pointer ">
                     Volver</a>
 
@@ -207,7 +209,7 @@
             Swal.fire({
                 icon: 'success',
                 title: '¡Creado exitosamente!',
-                text: 'Nuevo paper ha sido publicado.',
+                text: "{{ session('success') }}",
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
                 customClass: {
@@ -220,7 +222,7 @@
             Swal.fire({
                 icon: 'error',
                 title: '¡Hubo un error!',
-                text: 'Vuelve a intentar.',
+                html: "{!! session('error') !!}",
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
                 customClass: {
@@ -275,22 +277,17 @@
             });
 
             document.addEventListener("click", function(event) {
-                if (!showAuthorsBtn.contains(event.target) && !dropdownSearch.contains(event.target)) {
-                    dropdownSearch.add("hidden");
+                if (!dropdownSearch.contains(event.target) && !showAuthorsBtn.contains(event.target)) {
+                    dropdownSearch.classList.add("hidden");
                 }
             });
 
 
             showAuthorsBtn.addEventListener("click", () => {
 
-                if (Array.from(addedAuthors).length > 0)
+                if (addedAuthors.size > 0)
                     dropdownSearch.classList.toggle("hidden");
             });
-
-            /*    showAuthorsBtn.addEventListener("click", () => {
-                    dropdownSearch.classList.toggle("hidden");
-                });   */
-
 
             removeAuthorsBtn.addEventListener("click", () => {
                 const checkboxes = document.querySelectorAll(".author-checkbox:checked");
@@ -317,7 +314,7 @@
             });
 
             function fileDisplay(event, container) {
-                const fileInput = event.target; 
+                const fileInput = event.target;
                 const file = fileInput.files[0];
                 if (file) {
 
@@ -329,7 +326,7 @@
                     } else {
                         container.innerHTML =
                             ` <label  class="block w-full text-sm text-red-500 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  focus:outline-none p-2" id="file_display_error" >El archivo seleccionado excede de los 10MB permitido</label>`;
-                            fileInput.value = "";
+                        fileInput.value = "";
                     }
                 }
             }
@@ -338,8 +335,64 @@
             form.addEventListener("submit", (event) => {
 
                 const authorsArray = Array.from(addedAuthors);
-                autoresJsonInput.value = JSON.stringify(authorsArray);
+                if (!authorsArray) {
+                    autoresJsonInput.value = document.querySelector(".author-input").value
+                } else {
+                    autoresJsonInput.value = JSON.stringify(authorsArray);
+                }
+
             });
+            const textarea = document.getElementById('descripcion');
+            const charCount = document.getElementById('char-count');
+            const maxChars = 1000;
+
+            // Actualizar contador
+            const updateCount = () => {
+
+                const content = textarea.value;
+
+                const remainingChars = maxChars - content.length;
+
+                charCount.textContent = `${remainingChars} caracteres restantes`;
+
+                if (remainingChars < 20) {
+                    charCount.classList.add("text-red-500")
+                } else {
+                    charCount.classList.remove("text-red-500")
+                }
+
+            };
+
+
+            textarea.addEventListener('input', updateCount);
+
+            // Prevenir seguir escribiendo si se alcanza el limite
+            textarea.addEventListener('keydown', (event) => {
+                const content = textarea.value;
+
+                // Bloquear si se alcanza el limite (salvo backspace y delete)
+                if (content.length >= maxChars && !['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight',
+                        'ArrowUp', 'ArrowDown'
+                    ].includes(event.key)) {
+                    event.preventDefault();
+                }
+            });
+
+            // Prevenir seguir escribiendo si se alcanza el limite cuando se pega texto
+            textarea.addEventListener('paste', (event) => {
+                const content = textarea.value;
+                const clipboardText = (event.clipboardData || window.clipboardData).getData('text');
+                const remainingChars = maxChars - content.length;
+
+                // Si el texto copiado sobrepasa, truncar solo hasta el maximo
+                if (clipboardText.length > remainingChars) {
+                    event.preventDefault();
+                    const truncatedText = clipboardText.substring(0, remainingChars);
+                    textarea.value += truncatedText;
+                    updateCount();
+                }
+            });
+            updateCount();
         });
     </script>
 

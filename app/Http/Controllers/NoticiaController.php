@@ -16,13 +16,16 @@ class NoticiaController extends Controller
         return view('usuario.novedades.noticias', compact('noticias'));
     }
 
-    public function showNoticia()
+    public function showNoticia(Request $request)
     {
-        $noticias = Noticia::all(); // Obtener todos los contactos
-        $noticias = Noticia::paginate(10);
+        $query = $request->input('search'); // Obtener el término de búsqueda
 
-        // Retornar la vista con los datos
-        return view('administrador.panel.novedades.noticia.show', compact('noticias'));
+        $notici = Noticia::when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->where('titulo', 'like', '%' . $query . '%')
+                         ->orWhere('autor', 'like', '%' . $query . '%');
+        })->paginate(10);
+
+        return view('administrador.panel.novedades.noticia.show', compact('notici'));
     }
 
     /**
@@ -31,7 +34,7 @@ class NoticiaController extends Controller
     public function create()
     {
         //
-        return view('noticias.create');
+        return view('notici.create');
     }
 
     /**
@@ -46,10 +49,15 @@ class NoticiaController extends Controller
             'contenido' => 'required',
             'autor' => 'required|string|max:255',
             'fecha' => 'required|date',
-            'imagen' => 'required|image',
+            'imagen' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
         ]);
 
-        $imagenPath = $request->file('imagen')->store('noticias', 'public');
+        $rutaImagen = null;
+        if ($request->hasFile('imagen')) {
+            $imagen = $request->file('imagen');
+            $rutaImagen = $imagen->store('imagenes', 'public'); // Guardar imagen en el directorio public
+        }
+
 
         Noticia::create([
             'titulo' => $request->titulo,
@@ -57,10 +65,10 @@ class NoticiaController extends Controller
             'contenido' => $request->contenido,
             'autor' => $request->autor,
             'fecha' => $request->fecha,
-            'imagen' => $imagenPath,
+            'imagen' => $rutaImagen,
         ]);
 
-        return redirect()->route('noticias')->with('success', 'Noticia creada con éxito');
+        return redirect()->route('notici')->with('success', 'Noticia creada con éxito');
     //usuario.Investigacion.noticias
     }
 
@@ -81,8 +89,8 @@ class NoticiaController extends Controller
     public function edit($id)
     {
 
-        $noticia = Noticia::findOrFail($id);
-        return view('administrador.panel.novedades.noticia.edit', compact('noticia'));
+        $notici = Noticia::findOrFail($id);
+        return view('administrador.panel.novedades.noticia.edit', compact('notici'));
     }
 
 
@@ -97,7 +105,7 @@ class NoticiaController extends Controller
             'contenido' => 'required',
             'autor' => 'required|string|max:255',
             'fecha' => 'required|date',
-            'imagen' => 'nullable|image',
+            'imagen' => 'nullable|image|mimes:jpg,png',
         ]);
 
         $noticia = Noticia::findOrFail($id);
@@ -116,7 +124,7 @@ class NoticiaController extends Controller
             'fecha' => $request->fecha,
         ]);
 
-        return redirect()->route('noticias')->with('success', 'Noticia actualizada con éxito');
+        return redirect()->route('notici')->with('success', 'Noticia actualizada con éxito');
 
     }
 
@@ -128,7 +136,7 @@ class NoticiaController extends Controller
         $noticia = Noticia::findOrFail($id);
         $noticia->delete();
 
-        return redirect()->route('noticias')->with('success', 'Noticia eliminada con éxito');
+        return redirect()->route('notici')->with('success', 'Noticia eliminada con éxito');
     }
 
 

@@ -7,9 +7,9 @@
             <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
         </div>
 
-        <!-- Mes, Año y Navegación -->
+      
         <div class="flex items-center justify-center">
-            <!-- Botón de mes anterior -->
+           
             <a href="{{ route('eventos', ['month' => $month == 1 ? 12 : $month - 1, 'year' => $month == 1 ? $year - 1 : $year]) }}"
                 class="text-gray-500 hover:text-gray-800 transition mr-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -18,12 +18,12 @@
                 </svg>
             </a>
 
-            <!-- Mostrar mes y año actual -->
+            
             <span class="text-lg font-semibold text-gray-700 uppercase">
                 {{ \Carbon\Carbon::createFromDate($year, $month, 1)->locale('es')->translatedFormat('F, Y') }}
             </span>
 
-            <!-- Botón de mes siguiente -->
+            
             <a href="{{ route('eventos', ['month' => $month == 12 ? 1 : $month + 1, 'year' => $month == 12 ? $year + 1 : $year]) }}"
                 class="text-gray-500 hover:text-gray-800 transition ml-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -33,17 +33,17 @@
             </a>
         </div>
 
-        <!-- Botones de categoría -->
+      
         <div class="flex justify-center mt-4 mb-14 space-x-4">
-            <!-- Botón de categoría "Todo" -->
+           
             <a href="{{ route('eventos', ['category' => 'todo', 'month' => $month, 'year' => $year]) }}"
                 class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white transition">Todo</a>
 
-            <!-- Botón de categoría "Pasados" -->
+           
             <a href="{{ route('eventos', ['category' => 'pasado', 'month' => $month, 'year' => $year]) }}"
                 class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white transition">Pasados</a>
 
-            <!-- Botón de categoría "Futuros" -->
+            
             <a href="{{ route('eventos', ['category' => 'futuro', 'month' => $month, 'year' => $year]) }}"
                 class="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-blue-500 hover:text-white transition">Futuros</a>
         </div>
@@ -53,7 +53,7 @@
                 <div
                     class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
                     <a href="#" class="w-full h-full block">
-                        <img src="/user/template/{{ $evento->imagen }}" alt="{{ $evento->titulo }}"
+                        <img src="{{ Storage::url($evento->imagen) }}" alt="{{ $evento->titulo }}"
                             class="w-full h-[200px] object-cover rounded-t-xl" />
                         <div class="px-4 pt-6 w-full min-h-[150px]">
                             <span class="text-gray-600 mr-3 uppercase text-base">
@@ -72,7 +72,7 @@
                             </p>
                         </div>
                     </a>
-                    <!-- Texto de hover con animación desde abajo y fondo difuminado -->
+                 
                     <div
                         class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                         <a href="{{ route('eventos.show', $evento->id) }}"
@@ -84,7 +84,7 @@
             @endforeach
         </div>
 
-        <!-- Paginación -->
+       
         <div class="flex justify-center mt-8">
             {{ $eventos->links() }}
         </div>

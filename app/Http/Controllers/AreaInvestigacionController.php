@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AreaInvestigacion;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 use Exception;
+
 
 class AreaInvestigacionController extends Controller
 {
@@ -23,11 +25,16 @@ class AreaInvestigacionController extends Controller
     {
 
         try {
+
+            $messages = [
+                'nombre.unique' => 'El nombre ya esta registrado.',
+            ];
+
             // validar campos
             $request->validate([
-                'nombre' => 'required|string|max:70',
+                'nombre' => 'required|unique|string|max:70',
 
-            ]);
+            ],$messages);
 
             $area = AreaInvestigacion::create($request->all());
 
@@ -35,10 +42,16 @@ class AreaInvestigacionController extends Controller
 
             return redirect()->route('areas-panel')
                 ->with('success', 'Nueva Area de Investigación creado exitosamente.');
+
+        } catch (ValidationException $e) {
+                $errorMessage = implode('<br>', $e->validator->errors()->all());
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $errorMessage);
         } catch (Exception $e) {
             Log::error("Error storing: " . $e->getMessage());
 
-            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Hubo un error!');
         }
 
     }
@@ -76,7 +89,7 @@ class AreaInvestigacionController extends Controller
 
         $area->delete();
         return redirect()->route('areas-panel')
-            ->with('success', 'Area de Investigación eliminado exitosamente');
+            ->with('destroyed', 'Area de Investigación eliminado exitosamente');
     }
 
     public function edit($id,Request $request)

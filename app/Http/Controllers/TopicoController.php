@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Topico;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Validation\ValidationException;
 use Exception;
 
 class TopicoController extends Controller
@@ -26,11 +26,16 @@ class TopicoController extends Controller
     {
 
         try {
+
+            $messages = [
+                'nombre.unique' => 'El nombre ya esta registrado.',
+            ];
+
             // validar campos
             $request->validate([
                 'nombre' => 'required|string|max:40',
 
-            ]);
+            ],$messages);
 
 
 
@@ -40,6 +45,11 @@ class TopicoController extends Controller
 
             return redirect()->route('topic-panel')
                 ->with('success', 'Nuevo Topico creado exitosamente.');
+            } catch (ValidationException $e) {
+                $errorMessage = implode('<br>', $e->validator->errors()->all());
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', $errorMessage);
         } catch (Exception $e) {
             Log::error("Error storing: " . $e->getMessage());
 
@@ -81,7 +91,7 @@ class TopicoController extends Controller
 
         $topico->delete();
         return redirect()->route('topic-panel')
-            ->with('success', 'Topico eliminado exitosamente');
+            ->with('destroyed', 'Topico eliminado exitosamente');
     }
 
     public function edit($id,Request $request)
