@@ -135,6 +135,7 @@ class PaperController extends Controller
       // mensajes de error
       $messages = [
         'titulo.required' => 'El titulo es requerido.',
+        'autores.required' => 'El nombre de los autores es requerido.',
         'titulo.unique' => 'El titulo de esta paper ya esta registrado.',
         'doi.unique' => 'Este DOI ya esta en uso',
         'pdf_filename.mimes' => 'El archivo debe ser PDF.',
@@ -217,6 +218,7 @@ class PaperController extends Controller
       $messages = [
         'titulo.required' => 'El titulo es requerido.',
         'titulo.unique' => 'El titulo de esta paper ya esta registrado.',
+        'autores.required' => 'El nombre de los autores es requerido.',
         'doi.unique' => 'Este DOI ya esta en uso',
         'pdf_filename.mimes' => 'El archivo debe ser PDF.',
         'pdf_filename.max' => 'El PDF no debe exceder 10MB.',
