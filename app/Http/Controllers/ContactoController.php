@@ -8,7 +8,7 @@ use App\Models\Contacto;
 
 class ContactoController extends Controller
 {
-    // Método para mostrar la vista de contacto
+    
     public function index()
     {
         return view('usuario.contacto');
@@ -17,17 +17,17 @@ class ContactoController extends Controller
 
     public function showContacts()
     {
-        $contactos = Contacto::all(); // Obtener todos los contactos
+        $contactos = Contacto::all(); 
         $contactos = Contacto::paginate(10);
 
-        // Retornar la vista con los datos
+        
         return view('administrador.panel.contacto.show', compact('contactos'));
     }
 
-    // Método para manejar el envío del formulario
+   
     public function store(Request $request)
     {
-        // Validar los datos del formulario
+        
         $request->validate([
             'nombres' => 'required|string|max:255',
             'apellidos' => 'required|string|max:255',
@@ -36,7 +36,7 @@ class ContactoController extends Controller
             'required',
             'string',
             'max:20',
-            'regex:/^\+?[0-9]+$/', // Permite solo números o "+" al inicio seguido de números
+            'regex:/^\+?[0-9]+$/',
             ],
             'pais' => 'required|string|max:100',
             'departamento' => 'required|string|max:100',
@@ -46,14 +46,14 @@ class ContactoController extends Controller
             'telefono.regex' => 'El teléfono solo puede contener números y un "+" opcional al inicio.',
         ]);
 
-        // Procesar el archivo adjunto si existe
+      
         $rutaArchivo = null;
         if ($request->hasFile('archivo')) {
             $archivo = $request->file('archivo');
-            $rutaArchivo = $archivo->store('archivos', 'public'); // Guardar en storage/app/public/archivos_adjuntos
+            $rutaArchivo = $archivo->store('archivos', 'public'); 
         }
 
-        // Guardar en la base de datos
+   
         Contacto::create([
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,

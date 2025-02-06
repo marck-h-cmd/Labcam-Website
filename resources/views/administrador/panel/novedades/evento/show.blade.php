@@ -3,8 +3,11 @@
 @section('title', 'Vista Evento')
 
 @section('contenido')
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
     <div class="max-w-screen-2xl mx-auto my-8 px-4">
-         <!-- Sección de detalles de contacto -->
+        
         <div class="text-center mb-6">
             <h1 class="text-2xl font-bold text-[#2e5382]">Evento</h1>
             <div class="w-1/4 mx-auto h-0.5 bg-[#64d423]"></div>
@@ -48,11 +51,11 @@
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $evento->titulo }}</td>
                             <td class="px-4 py-3">{{ $evento->subtitulo }}</td>
-                            <td class="px-4 py-3">{{ Str::limit($evento->descripcion, 50) }}</td>
+                            <td class="px-4 py-3"> {{ Str::limit(strip_tags($evento->descripcion ?? ''), 50) }}</td>
                             <td class="px-4 py-3">{{ $evento->autor }}</td>
                             <td class="px-4 py-3">{{ $evento->fecha }}</td>
                             <td class="px-4 py-2">{{ $evento->categoria }}</td> 
-                            <!-- Fila de la imagen -->
+                            
                             <td class="px-4 py-3">
                             @if ($evento->imagen)
                                     <div class="px-8 py-0.1 text-center">
@@ -83,7 +86,7 @@
                             </td>
 
                             <td class="px-4 py-3 flex items-center justify-center space-x-4">
-                                <!-- Editar -->
+                                
                                 <a
                                     href="{{ route('event.edit', $evento->id) }}"
                                     class="text-yellow-500 hover:text-yellow-700 flex items-center justify-center mt-2"
@@ -92,7 +95,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 3l3 3-8 8H3v-3l8-8z" />
                                     </svg>
                                  </a>
-                                <!-- Botón de Eliminar -->
+                                
                                <button onclick="openDeleteModal({{ $evento->id }}, '{{ $evento->titulo }}')" class="text-red-500 hover:text-red-700 flex items-center justify-center">
                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 6h18M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2M10 11v6M14 11v6M5 6h14l1 16a1 1 0 01-1 1H5a1 1 0 01-1-1L5 6z" />
@@ -105,13 +108,13 @@
             </table>
         </div>
 
-        <!-- Paginación -->
+      
         <div class="flex justify-end text-sm mt-4">
             {{ $event->links('pagination::tailwind') }}
         </div>
     </div>
 
-    <!-- Modal Crear -->
+  
     <div
         id="createModal"
         class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50"
@@ -135,9 +138,10 @@
                     <input type="text" id="subtitulo" name="subtitulo" class="w-full px-4 py-2 border rounded">
                 </div>
                 <div class="mb-4">
-                    <label for="descripcion" class="block">Descripcion</label>
-                    <textarea id="descripcion" name="descripcion" class="w-full px-4 py-2 border rounded" required></textarea>
-                </div>
+                    <label for="descripcion" class="block">Descripción</label>
+                    <div id="editor" class="w-full px-4 py-2 border rounded"></div>
+                    <input type="hidden" id="descripcion" name="descripcion" />
+                </div>   
                 <div class="mb-4">
                     <label for="autor" class="block">Autor</label>
                     <input type="text" id="autor" name="autor" class="w-full px-4 py-2 border rounded" required>
@@ -154,14 +158,14 @@
             </form>
         </div>
     </div>
-<!-- Modal Eliminar -->
+
 <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
     <div class="bg-white p-7 rounded shadow-lg max-w-md w-full relative">
         <button class="absolute top-0.5 right-0.5 text-gray-500 hover:text-black text-3xl p-2" onclick="closeDeleteModal()">&times;</button>
         <h2 class="text-xl font-bold mb-4">Eliminar Evento</h2>
         <p>¿Estás seguro de que deseas eliminar la evento "<span id="eventoTitulo"></span>"?</p>
 
-        <!-- Formulario de eliminación -->
+      
         <form id="deleteForm" method="POST" action="{{ route('event.destroy', '') }}" class="mt-4">
             @csrf
             @method('DELETE')
@@ -171,7 +175,6 @@
     </div>
 </div>
 
-<!-- Modal para mostrar imágenes -->
 <div id="archivoModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
         <div class="bg-white p-7 rounded shadow-lg max-w-7xl w-full relative">
             <button class="absolute top-0.5 right-0.5 text-gray-500 hover:text-black text-3xl p-2" onclick="closeModal()">×</button>
@@ -231,5 +234,33 @@
             const modal = document.getElementById('archivoModal');
             modal.classList.add('hidden');
         }
-    </script>
+
+  
+
+    var quill = new Quill('#editor', { 
+        theme: 'snow',
+        modules: {
+            toolbar: [
+                [{ 'size': ['small', false, 'large', 'huge'] }], 
+                ['bold', 'italic', 'underline'], 
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }], 
+                [{ 'color': [] }, { 'background': [] }], 
+                [{ 'align': [] }], 
+                ['link'], 
+                ['clean'] 
+            ]
+        }
+    });
+
+  
+    document.querySelector('form').addEventListener('submit', function() {
+            document.querySelector('#descripcion').value = quill.root.innerHTML;
+            
+    });
+
+
+</script>
+
+
+
 @endsection

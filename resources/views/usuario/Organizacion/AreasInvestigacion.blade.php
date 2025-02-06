@@ -4,9 +4,32 @@
   
     <!-- Main Content -->
     <div class="container mx-auto mt-8 py-10 w-95">
-        <div class="text-center">
-            <h2 class="text-blue-800 font-semibold text-5xl mb-1">ÁREAS DE INVESTIGACIÓN</h2>
-            <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        <div class="flex items-center justify-center pt-1">
+            <!-- Botón de mes anterior -->
+            <a href="{{ route('capital_usuario') }}"
+                class="text-gray-500 hover:text-gray-800 transition mr-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+            </a>
+
+            <!-- Mostrar mes y año actual -->
+            <span class="text-lg font-semibold text-gray-700 uppercase">
+                <div class="text-center">
+                    <h2 class="text-blue-800 font-semibold text-5xl mb-1">ÁREAS DE INVESTIGACION</h2>
+                    <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+                </div>
+            </span>
+
+            <!-- Botón de mes siguiente -->
+            <a href="{{ route('direccion') }}"
+                class="text-gray-500 hover:text-gray-800 transition ml-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </a>
         </div>
   
         <div class="sm:flex sm:justify-center sm:items-start flex-col sm:flex-row gap-4">

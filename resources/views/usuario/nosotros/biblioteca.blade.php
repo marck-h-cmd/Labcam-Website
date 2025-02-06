@@ -242,10 +242,10 @@
                                         </svg>
                                     </button>
                                     <p class="text-gray-50 ">Mostrando <span class="text-gray-100"
-                                            id="paper-count">{{ count($papers) }}</span> resultados , Pag. <span
-                                            class=" text-slate-200"
-                                            id="current-page">{{ $papers->currentPage() }}</span>-<span
-                                            id="pages">{{ $papers->lastPage() }}</span></p>
+                                            id="paper-count">{{ count($papers) }}</span> resultados <span class=" ml-2 text-sm"> Pag. <span
+                                            class=" text-white"
+                                            id="current-page">{{ $papers->currentPage() }}</span>-<span class="text-white"
+                                            id="pages">{{ $papers->lastPage() }}</span></span></p>
 
                                 </div>
                             </div>
@@ -559,5 +559,25 @@
         });
     </script>
 
+<script>
+    /*
+    // Initialize search inputs from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const searchInput = document.getElementById('search-dropdown');
+    const checkboxes = document.querySelectorAll('.checkbox-topico');
 
+    if (urlParams.has('query') && searchInput) {
+        searchInput.value = urlParams.get('query');
+    }
+
+    if (urlParams.has('topics')) {
+        const selectedTopics = urlParams.get('topics').split(',');
+        checkboxes.forEach(checkbox => {
+            if (selectedTopics.includes(checkbox.value)) {
+                checkbox.checked = true;
+            }
+        });
+    }
+    */
+</script>
 @endsection

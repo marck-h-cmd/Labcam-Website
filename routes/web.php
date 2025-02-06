@@ -5,13 +5,14 @@ use App\Http\Controllers\HistoriaSliderController;
 use App\Http\Controllers\PestañaHomeController;
 use App\Http\Controllers\AreaInvestigacionController;
 use App\Http\Controllers\TopicoController;
+use App\Http\Controllers\DireccionController;
 use Illuminate\Support\Facades\Route;
 
 // -----------------------------------------------------USUARIO--------------------------------------------------------------------------------------
 Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');
 
 
-Route::get('/direccion', function () {return view('usuario.Organizacion.Direccion');})->name('direccion');
+Route::get('/direccion',[DireccionController::class, 'direc_us'])->name('direccion');
 
 Route::get('/capitales', [CapitalHumanoController::class, 'capHumano_us'])->name('capital_usuario');
 
@@ -37,24 +38,6 @@ use App\Http\Controllers\ContactoController;
 Route::get('/contacto', [ContactoController::class, 'index'])->name('contacto');
 Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.store');
 
-//RUTA LOGIN
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PrincipalController;
-
-Route::get('/login', [AuthController::class, 'index'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-//RUTA REGISTRO
-use App\Http\Controllers\CustomAuthController;
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
-Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 
 //RUTA NOTICIA
 Route::get('/noticias', function () {
@@ -107,11 +90,54 @@ Route::prefix('biblioteca/papers')->name('biblioteca.papers.')->group(function (
 });
 
 
+
+// -------------------------RUTA LOGIN ---------------------------------------------
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PrincipalController;
+
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// -------------------------RUTA REGISTRO ----------------------------------------------------------------------------------------
+
+use App\Http\Controllers\CustomAuthController;
+
+Route::get('registration', [CustomAuthController::class, 'registration'])->name('register-user');
+Route::post('custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
+
+
+
+// ------------------------- RUTAS PARA PERFIL --------------------------------------------- 
+// Route::middleware('auth')->group(function () {
+    Route::get('/admin/user', [CustomAuthController::class, 'edit_user'])->name('user.edit_user'); 
+    Route::put('/admin/user/{id}', [CustomAuthController::class, 'update_user'])->name('user.update_user');
+    Route::put('/admin/user/{id}/photo', [CustomAuthController::class, 'update_photo'])->name('user.update_photo'); 
+    Route::put('/admin/user/{id}/password', [CustomAuthController::class, 'update_password'])->name('user.update_password');
+
+// });
+
+// ------------------------- CRUD USUARIOS---------------------------------------------
+Route::get('/admin/users', [CustomAuthController::class, 'showUser'])->name('users');
+Route::get('/admin/users/{id}/edit', [CustomAuthController::class, 'edit'])->name('users.edit');
+Route::put('/admin/users/{id}', [CustomAuthController::class, 'update'])->name('users.update');
+
+Route::post('/admin/users', [CustomAuthController::class, 'store'])->name('users.store');
+Route::delete('/admin/users/{id}', [CustomAuthController::class, 'destroy'])->name('users.destroy');
+Route::get('/admin/users/buscar', [CustomAuthController::class, 'showUser'])->name('users.buscar');
+
+// ------------------------- VERIFICACION DE PERSONAS---------------------------------------------
+Route::get('/admin/person', [CustomAuthController::class, 'showPerson'])->name('person');
+Route::post('/admin/person/{id}/approve', [CustomAuthController::class, 'approveUser'])->name('person.approve');
+Route::delete('/admin/person/{id}', [CustomAuthController::class, 'destroy_person'])->name('person.destroy_person');
+
+
 // ---------------------------------------------------ADMINISTRADOR-----------------------------------------------------------------------------------
 // ------------------------- PRINCIPAL ---------------------------------------------
-//Route::middleware('auth')->group(function () {
- Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
-//});
+
+Route::get('/admin', [PrincipalController::class, 'vista_principal_admin'])->name('admin-principal');
+Route::get('/admin', [PrincipalController::class, 'vista_admin'])->name('admin-principal')->middleware('auth');
+
 
 // ------------------------- HOME SLIDER ---------------------------------------------
 Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
@@ -214,10 +240,21 @@ Route::get('/admin/eventos/buscar', [EventoController::class, 'showEvento'])->na
 
 Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
 
+
+
+
 Route::post('/admin/capitales', [CapitalHumanoController::class, 'store'])->name('capitales.store');
 Route::get('/admin/capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
 Route::put('/admin/capitales/{id}', [CapitalHumanoController::class, 'update'])->name('capitales.update');
 Route::delete('/admin/capitales/{id}', [CapitalHumanoController::class, 'destroy'])->name('capitales.destroy');
+
+//-------Direccion-------//
+Route::get('/admin/direccion', [DireccionController::class, 'index'])->name('direccion_index');
+Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direccion.store');
+Route::put('/admin/direccion/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
+// Route::delete('/admin/direccion/{id}', [DireccionController::class, 'destroy'])->name('direccion.destroy');
+ 
+
 
 
 
