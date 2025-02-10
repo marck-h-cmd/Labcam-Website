@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('carrera');
             $table->string('foto');
             $table->string('rol');
+            $table->string('cv');
+            $table->string('linkedin');
+            $table->string('ctivitae');
             $table->text('descripcion');
             $table->timestamps();
         });

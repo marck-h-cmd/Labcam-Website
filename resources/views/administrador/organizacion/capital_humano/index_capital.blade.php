@@ -40,26 +40,30 @@
     <div class="max-w-[1200px] mx-auto sm:px-6 lg:px-8 space-y-6">
         <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
             <div class="w-full">
-                <form class="sm:flex sm:items-center sm:justify-between flex-col sm:flex-row gap-4" action="{{route('capitales.store')}}" method="POST" id="form1">
-                    @csrf
-                    <div class="sm:flex-none flex justify-center sm:justify-start">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <!-- Botón Crear Nuevo -->
+                    <form action="{{ route('capitales.store') }}" method="POST" id="form1">
+                        @csrf
                         <button type="button" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700 w-full sm:w-auto" onclick="openCreateModal()">
                             + Nuevo
                         </button>
-                    </div>
-                    <form class="flex items-center max-w-lg mx-auto">   
+                    </form>
+                
+                    <!-- Formulario de Búsqueda -->
+                    <form class="flex items-center max-w-lg" method="GET">   
                         <label for="default-search" class="mb-2 text-sm font-medium text-gray-400 sr-only dark:text-white">Search</label>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-700 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <div class="relative w-full max-w-xs">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-4 h-4 text-gray-700 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                                 </svg>
                             </div>
-                            <input type="search" id="default-search" class="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-400 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Nombre..." required />
-                            <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-300 dark:focus:ring-blue-800">Buscar</button>
+                            <input type="search" id="default-search" name="buscarpor" value="{{ $buscarpor }}" class="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg bg-gray-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:placeholder-gray-400 dark:text-black" placeholder="Nombre..."/>
+                            <button type="submit" class="absolute right-2.5 bottom-2.5 bg-blue-700 text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
                         </div>
-                    </form>                    
-                </form>
+                    </form>
+                </div>
+                
 
                 <div class="flow-root">
                     <div class="mt-10 overflow-x-auto">
@@ -71,7 +75,7 @@
                                             Nombre
                                         </th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
-                                            Grado Academico
+                                            Grado Académico
                                         </th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                                             Área de Investigación
@@ -82,7 +86,6 @@
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                                             CV
                                         </th>
-
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                                             Opciones
                                         </th>
@@ -109,10 +112,8 @@
                                         </td>
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
                                             <form action="{{ route('capitales.destroy', $capital->id) }}" method="POST">
-                                                <button type="button" onclick="openEditModal(this)" 
-                                                data-capital='@json($capital)'
-                                                class="text-blue-600 font-bold hover:text-blue-900">
-                                                Editar
+                                                <button type="button" onclick="openEditModal(this)" data-capital='@json($capital)'class="text-blue-600 font-bold hover:text-blue-900">
+                                                    <img width="35" height="35" src="https://img.icons8.com/stickers/50/multi-edit.png" alt="multi-edit"/>
                                                 </button>
                                                 @csrf
                                                 @method('DELETE')
@@ -130,7 +131,7 @@
                                                             this.closest('form').submit();
                                                         }
                                                     });">
-                                                    Eliminar
+                                                    <img width="35" height="35" src="https://img.icons8.com/stickers/50/delete-trash.png" alt="delete-trash"/>
                                                 </a>
                                             </form>
                                         </td>
@@ -140,7 +141,7 @@
                             </table>
 
                             <div class="mt-4 px-4">
-                                {!! $capitales->withQueryString()->links() !!}
+                                {{$capitales->links()}}
                             </div>
                         </div>
                     </div>
@@ -238,8 +239,6 @@
     </div>
 </div>
 
-
-
 {{-- --------------------MODAL DE EDITAR DE REGISTRO---------------------- --}}
 
 <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
@@ -336,7 +335,6 @@
 
     let selectedRole = "Investigadores"; // Rol por defecto
     
-
     function openCreateModal() {
 
         document.getElementById('createModal').classList.remove('hidden');
@@ -430,17 +428,6 @@
             cvLink.classList.add('hidden'); // Ocultar enlace si no hay CV
         }
 
-        // function previewImage(event, imageId) {
-        //     const file = event.target.files[0];
-        //     if (file) {
-        //         const reader = new FileReader();
-        //         reader.onload = function(e) {
-        //             document.getElementById(imageId).src = e.target.result;
-        //         };
-        //         reader.readAsDataURL(file);
-        //     }
-        // }
-
         document.getElementById('editModal').classList.remove('hidden');
     }
 
@@ -480,19 +467,6 @@
         // Envía el formulario
         document.getElementById('editForm').submit();
     }
-
-    // function saveEditForm() {
-    //     const editRolField = document.getElementById('edit_rol');
-    //     const editTesistasTypeField = document.getElementById('edit_tesistas_type');
-
-    //     // Si el rol es "Tesistas", ajusta el valor del campo rol
-    //     if (editRolField.value === "Tesistas") {
-    //         editRolField.value = `Tesistas - ${editTesistasTypeField.value}`;
-    //     }
-
-    //     // Aquí puedes proceder a enviar el formulario
-    //     document.getElementById('editForm').submit();
-    // }
 
     // Muestra "Investigadores" por defecto
     document.addEventListener('DOMContentLoaded', () => {

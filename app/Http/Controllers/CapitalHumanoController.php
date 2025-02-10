@@ -11,16 +11,14 @@ use App\Models\AreaInvestigacion;
 
 class CapitalHumanoController extends Controller
 {
+    const PAGINATION = 10;
     //área de administrador
     public function index(Request $request)
     {
-        // $buscarPor = $request->input('buscarpor');
-        // $resultados = resultado::where('nombre', 'LIKE', "%".$buscarPor."%")->get();
-
-        $capitales = Capital::paginate(8);
+        $buscarpor = $request->get('buscarpor');
+        $capitales = Capital::where('nombre', 'LIKE', "%".$buscarpor."%")->paginate($this::PAGINATION);
         $areasInvestigacion = AreaInvestigacion::All();
-        return view('administrador.organizacion.capital_humano.index_capital', compact('capitales' ,'areasInvestigacion'))
-               ->with('i', ($request->input('page', 1) - 1) * $capitales->perPage());
+        return view('administrador.organizacion.capital_humano.index_capital', compact('capitales' ,'areasInvestigacion','buscarpor'));
     }
 
     public function store(Request $request)
@@ -84,7 +82,7 @@ class CapitalHumanoController extends Controller
         ]);
 
             //error en ruta
-        return redirect()->route('capital_index')->with('success', 'Registro creado con éxito.');
+        return redirect()->route('capital_index')->with('success', 'Registro éxitoso.');
     }
 
     public function update(Request $request, $id)
@@ -154,6 +152,16 @@ class CapitalHumanoController extends Controller
         $aliados = Capital::where('rol','aliados')->get();
 
         return view('usuario.Organizacion.CapitalHumano', compact('investigadores','tesistas_pre','tesistas_pos','egresados','pasantes','aliados'));
+    }
+
+    public function area_us()
+    {
+        $investigadores = Capital::where('rol','investigadores')->get();
+        $egresados = Capital::where('rol','egresados')->get();
+        $pasantes = Capital::where('rol','pasantes')->get();
+        $aliados = Capital::where('rol','aliados')->get();
+
+        return view('usuario.Organizacion.AreasInvestigacion', compact('investigadores','egresados','pasantes','aliados'));
     }
 
 }

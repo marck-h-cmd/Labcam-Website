@@ -16,7 +16,7 @@ Route::get('/direccion',[DireccionController::class, 'direc_us'])->name('direcci
 
 Route::get('/capitales', [CapitalHumanoController::class, 'capHumano_us'])->name('capital_usuario');
 
-Route::get('/areas', function () {return view('usuario.Organizacion.AreasInvestigacion');})->name('areas');
+Route::get('/areas', [CapitalHumanoController::class, 'area_us'])->name('areas');
 
 // RUTAS DE SECCIÓN NOSOTROS
 use App\Http\Controllers\PaperController;
@@ -197,15 +197,15 @@ Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->na
 
 Route::get('/admin/capital_humano', [CapitalHumanoController::class, 'index'])->name('capital_index');
 Route::post('/admin/capitales', [CapitalHumanoController::class, 'store'])->name('capitales.store');
-Route::get('/admin/capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
+// Route::get('/admin/capitales/{id}/edit', [CapitalHumanoController::class, 'edit'])->name('capitales.edit');
 Route::put('/admin/capitales/{id}', [CapitalHumanoController::class, 'update'])->name('capitales.update');
 Route::delete('/admin/capitales/{id}', [CapitalHumanoController::class, 'destroy'])->name('capitales.destroy');
 
 //-------Direccion-------//
 Route::get('/admin/direccion', [DireccionController::class, 'index'])->name('direccion_index');
-Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direccion.store');
+Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direcciones.store');
 Route::put('/admin/direccion/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
-// Route::delete('/admin/direccion/{id}', [DireccionController::class, 'destroy'])->name('direccion.destroy');
+
  
 
 

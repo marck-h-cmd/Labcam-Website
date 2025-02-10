@@ -2,131 +2,149 @@
 
 @section('contenido')
 
-    <section class="px-16 mb-16">
-        <!-- Encabezado -->
-        <div class="flex items-center justify-center pt-8">
-            <!-- Botón de mes anterior -->
-            <a href="{{ route('areas') }}"
-                class="text-gray-500 hover:text-gray-800 transition mr-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-            </a>
-
-            <!-- Mostrar mes y año actual -->
-            <span class="text-lg font-semibold text-gray-700 uppercase">
-                <div class="text-center">
-                    <h2 class="text-blue-800 font-semibold text-5xl mb-1">DIRECCION</h2>
-                    <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
-                </div>
-            </span>
-
-            <!-- Botón de mes siguiente -->
-            <a href="{{ route('capital_usuario') }}"
-                class="text-gray-500 hover:text-gray-800 transition ml-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-            </a>
+<div class="px-16 mb-16 mt-8 py-10">
+    <div class="flex items-center justify-end -scroll-mr-px md:mr-80 mb-10 flex-wrap">
+        <a href="{{ route('areas') }}"
+            class="text-gray-500 hover:text-gray-800 transition mr-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+        </a>
+        <div class="text-center">
+            <h2 class="text-blue-800 font-semibold text-5xl mb-1">DIRECCION</h2>
+            <div class="w-72 h-[1.1px] bg-green-400 mx-auto mt-1"></div>
+        </div>
+        <a href="{{ route('capital_usuario') }}"
+            class="text-gray-500 hover:text-gray-800 transition ml-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+        </a>
+    </div>
+    <section class="flex flex-wrap justify-center items-center gap-12 h-full">
+        <!-- Columna izquierda (Menú) -->
+        <div class="bg-gray-200 px-4 py-8 w-max md:w-56 shadow-md rounded-lg flex md:flex-col h-auto">
+            <div class="flex flex-col gap-4 w-full">
+                <button
+                    class="bloque-d text-center text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
+                    onclick="mostrarContenido('general',this)">Organigrama General</button>
+                <button
+                    class="bloque-d text-center text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
+                    onclick="mostrarContenido('jefe',this)">Jefe</button>
+                <button
+                    class="bloque-d text-center text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
+                    onclick="mostrarContenido('tecnico',this)">Técnico</button>
+                <button
+                    class="bloque-d text-center text-base font-semibold w-full rounded-lg py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
+                    onclick="mostrarContenido('investigador',this)">Investigador Principal</button>
+            </div>
         </div>
 
-        <!-- Contenido principal -->
-        <section class="flex flex-wrap justify-center items-center gap-12 h-full">
-            <!-- Columna izquierda (Menú) -->
-            <div class="bg-gray-200 px-4 py-8 w-max md:w-56 shadow-md rounded-lg flex md:flex-col h-auto">
-                <div class="flex flex-col gap-4 w-full">
-                    <button
-                        class="bloque-d text-center text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
-                        onclick="mostrarContenido('general',this)">Organigrama General</button>
-                    <button
-                        class="bloque-d text-center text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
-                        onclick="mostrarContenido('jefe',this)">Jefe</button>
-                    <button
-                        class="bloque-d text-center text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
-                        onclick="mostrarContenido('tecnico',this)">Técnico</button>
-                    <button
-                        class="bloque-d text-center text-base font-semibold w-full rounded-lg py-2 hover:bg-blue-600 hover:text-white focus:outline-none"
-                        onclick="mostrarContenido('investigador',this)">Investigador Principal</button>
-                </div>
-            </div>
-
-            <!-- Columna derecha (Contenido dinámico) -->
-            <div id="contenido-dinamico" class="flex-1 p-4 w-full">
-                <!-- General -->
-                <div id="general" class="flex flex-col items-center gap-10">
-                    <!-- Jefe -->
+        <div id="contenido-dinamico" class="flex-1 p-4 w-full">
+            <div id="general" class="flex flex-col items-center gap-10">
+                @foreach($jefes as $jefe)
                     <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
                         <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
-                            src="/user/template/images/team-02.png" alt="Jefe">
+                            src="/user/template/images/{{$jefe->foto}}" alt="{{$jefe->foto}}">
                         <h3 class="text-black font-semibold text-base mt-3">JEFE</h3>
+                        <span class="text-gray-600 text-lg font-bold">{{ $jefe->nombre }}</span>
                     </div>
+                @endforeach
 
-                    <!-- Técnico e Investigador Principal -->
-                    <div class="flex flex-wrap justify-center gap-16 w-full">
-                        <!-- Técnico -->
+                <div class="flex flex-wrap justify-center gap-16 w-full">
+                    <!-- Técnico -->
+                    @foreach($tecnicos as $tecnico)
+                    <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
+                        <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
+                            src="/user/template/images/{{$tecnico->foto}}" alt="{{$tecnico->foto}}">
+                        <h3 class="text-black font-semibold text-sm mt-3">TÉCNICO</h3>
+                        <span class="text-gray-600 text-lg font-bold">{{ $tecnico->nombre }}</span>
+                    </div>
+                    @endforeach
+                    <!-- Investigador Principal -->
+                    @foreach($invPs as $invP)
                         <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
                             <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
-                                src="/user/template/images/team-01.png" alt="Técnico">
-                            <h3 class="text-black font-semibold text-sm mt-3">TÉCNICO</h3>
-                        </div>
-                        <!-- Investigador Principal -->
-                        <div class="text-center bg-white shadow-xl rounded-lg p-4 w-full max-w-[17rem] aspect-square flex flex-col justify-center items-center">
-                            <img class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-full border-2 border-gray-300"
-                                src="/user/template/images/test.png" alt="Investigador Principal">
+                                src="/user/template/images/{{$invP->foto}}" alt="{{$invP->foto}}">
                             <h3 class="text-black font-semibold text-base mt-3">INVESTIGADOR PRINCIPAL</h3>
+                            <span class="text-gray-600 text-lg font-bold">{{ $invP->nombre }}</span>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Jefe -->
-                <div id="jefe" class="hidden">
-                    <div class="text-center">
-                        <img src="/user/template/images/team-02.png" alt="Profile"
-                            class="mx-auto mb-4 w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-2 border-gray-300">
-                        <h3 class="text-black font-semibold text-xl mb-2">Jose Alberto Gómez</h3>
-                        <p class="text-gray-700 text-sm md:text-base">
-                            Ingeniero Mecatrónico<br>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae sapiente ipsum repellat!
-                            Recusandae ea earum iusto reiciendis accusamus magni illo error possimus voluptas ipsam, nam
-                            eaque iste maiores totam id.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Técnico -->
-                <div id="tecnico" class="hidden">
-                    <div class="text-center">
-                        <img src="/user/template/images/team-01.png" alt="Profile"
-                            class="mx-auto mb-4 w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-2 border-gray-300">
-                        <h3 class="text-black font-semibold text-xl mb-2">Patricia Barreto</h3>
-                        <p class="text-gray-700 text-sm md:text-base">
-                            Ingeniera Agroindustrial<br>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, nemo pariatur
-                            itaque rem qui aspernatur impedit illum repellendus omnis! Sunt nemo debitis nihil
-                            perferendis temporibus, repellendus libero similique ratione commodi.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Investigador Principal -->
-                <div id="investigador" class="hidden">
-                    <div class="text-center">
-                        <img src="/user/template/images/team-02.png" alt="Investigador Principal"
-                            class="mx-auto mb-4 w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-2 border-gray-300">
-                        <h3 class="text-black font-semibold text-xl mb-2">Sergio Fernandez</h3>
-                        <p class="text-gray-700 text-sm md:text-base">
-                            Biólogo<br>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat nostrum reiciendis a unde
-                            vitae! Provident id facere molestiae eum tempora, eius eaque fugiat eligendi. Rem commodi
-                            nam exercitationem quibusdam dolore.
-                        </p>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-        </section>
+
+
+            <div id="jefe" class="hidden">
+                @foreach($jefes as $jefe)
+                <div class="text-center">
+                    <img src="/user/template/images/{{$jefe->foto}}" alt="{{$jefe->foto}}"
+                        class="mx-auto mb-4 w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-2 border-gray-300">
+                    <h3 class="text-black font-semibold text-xl mb-2">{{$jefe->nombre}}</h3>
+                    <p class="text-gray-700 text-sm md:text-base">{{$jefe->carrera}}</p>
+                    <p class="text-gray-700 text-sm md:text-base">{{$jefe->descripcion}}</p>
+                    <div class="flex justify-center items-center gap-4 w-full mt-4">
+                        <a href="/user/template/uploads/pdfs/{{$jefe->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            CV
+                        </a>
+                        <a href="{{$jefe->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Linkedin
+                        </a>
+                        <a href="{{ $jefe->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Cti Vitae
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            
+            <div id="tecnico" class="hidden">
+                @foreach($tecnicos as $tecnico)
+                <div class="text-center">
+                    <img src="/user/template/images/{{$tecnico->foto}}" alt="{{$tecnico->foto}}" class="mx-auto mb-4 w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-2 border-gray-300">
+                    <h3 class="text-black font-semibold text-xl mb-2">{{$tecnico->nombre}}</h3>
+                    <p class="text-gray-700 text-sm md:text-base">{{$tecnico->carrera}}</p>
+                    <p class="text-gray-700 text-sm md:text-base">{{$tecnico->descripcion}}</p>
+                    <div class="flex justify-center items-center gap-4 w-full mt-4">
+                        <a href="/user/template/uploads/pdfs/{{$jefe->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            CV
+                        </a>
+                        <a href="{{$jefe->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Linkedin
+                        </a>
+                        <a href="{{ $jefe->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Cti Vitae
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div id="investigador" class="hidden">
+                @foreach($invPs as $invP)
+                <div class="text-center">
+                    <img src="/user/template/images/{{$invP->foto}}" alt="{{$invP->foto}}"
+                        class="mx-auto mb-4 w-40 h-40 md:w-48 md:h-48 object-cover rounded-full border-2 border-gray-300">
+                    <h3 class="text-black font-semibold text-xl mb-2">{{$invP->nombre}}</h3>
+                    <p class="text-gray-700 text-sm md:text-base">{{$invP->carrera}}</p>
+                    <p class="text-gray-700 text-sm md:text-base">{{$invP->descripcion}}</p>
+                    <div class="flex justify-center items-center gap-4 w-full mt-4">
+                        <a href="/user/template/uploads/pdfs/{{$invP->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            CV
+                        </a>
+                        <a href="{{$invP->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Linkedin
+                        </a>
+                        <a href="{{ $invP->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Cti Vitae
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
     </section>
+</div>
 
     <script>
         function mostrarContenido(seccionId, button) {

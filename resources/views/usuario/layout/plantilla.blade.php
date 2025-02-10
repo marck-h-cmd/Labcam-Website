@@ -13,6 +13,7 @@
     <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
 </head>
 
 <body>
@@ -186,7 +187,9 @@
                 <!-- Primera Columna -->
                 <div class="flex flex-col items-center text-justify px-5">
                     <a href="https://www.unitru.edu.pe/">
-                        <img src="/user/template/images/logo_unt.png" class="w-full h-16 mb-4" alt="FlowBite Logo" />
+                        <div class="flex justify-center">
+                            <img src="/user/template/images/logo_unt.png" class="w-full max-w-xs mb-4" alt="FlowBite Logo" />
+                        </div>
                         <p class="text-white text-base font-normal mb-4">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad provident nostrum praesentium
                             itaque, quisquam blanditiis unde sapiente odit
@@ -242,7 +245,7 @@
                 <!-- Tercera Columna (Duplicado de la Primera) -->
                 <div class="flex flex-col items-center text-justify px-5">
                     <a href="{{ route('home') }}">
-                        <img src="/user/template/images/logoLabCam.png" class="w-full h-16 mb-4" alt="Logo LabCam" />
+                        <img src="/user/template/images/logoLabCam.png" class="w-full max-w-md  mb-4" alt="Logo LabCam" />
                         <p class="text-white text-base font-normal mb-4">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad provident nostrum praesentium
                             itaque, quisquam blanditiis unde sapiente odit
@@ -250,7 +253,7 @@
                     </a>
                     <div class="flex mt-4 sm:justify-center sm:mt-0 gap-4">
                         <a href="" class="text-white border-2 rounded p-1">
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            <svg class="w-5 h-5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor" viewBox="0 0 8 19">
                                 <path fill-rule="evenodd"
                                     d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z"
