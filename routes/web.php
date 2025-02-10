@@ -86,7 +86,8 @@ Route::prefix('biblioteca/papers')->name('biblioteca.papers.')->group(function (
     Route::get('/paper/{paper}', [PaperController::class, 'show'])->name('show'); 
     Route::get('/area/{area}', [PaperController::class, 'fetchByArea'])->name('area'); 
     Route::get('/search', [PaperController::class, 'index'])->name('search'); 
-    Route::get('/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('fetchMore'); 
+    Route::get('/fetch-more', [PaperController::class, 'fetchMorePapers'])->name('fetchMore');
+    Route::get('/paper/download-pdf/{pdf_fileName}', [PaperController::class, 'downloadPdf'])->name('download.pdf');  
 });
 
 
@@ -109,13 +110,13 @@ Route::post('custom-registration', [CustomAuthController::class, 'customRegistra
 
 
 // ------------------------- RUTAS PARA PERFIL --------------------------------------------- 
-// Route::middleware('auth')->group(function () {
+ Route::middleware('auth')->group(function () {
     Route::get('/admin/user', [CustomAuthController::class, 'edit_user'])->name('user.edit_user'); 
     Route::put('/admin/user/{id}', [CustomAuthController::class, 'update_user'])->name('user.update_user');
     Route::put('/admin/user/{id}/photo', [CustomAuthController::class, 'update_photo'])->name('user.update_photo'); 
     Route::put('/admin/user/{id}/password', [CustomAuthController::class, 'update_password'])->name('user.update_password');
 
-// });
+
 
 // ------------------------- CRUD USUARIOS---------------------------------------------
 Route::get('/admin/users', [CustomAuthController::class, 'showUser'])->name('users');
@@ -254,7 +255,7 @@ Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('di
 Route::put('/admin/direccion/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
 // Route::delete('/admin/direccion/{id}', [DireccionController::class, 'destroy'])->name('direccion.destroy');
  
-
+});
 
 
 
