@@ -181,7 +181,7 @@
                                 {{ $evento->titulo }}
                             </p>
                             <p class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
-                                {{ Str::limit($evento->descripcion, 120, '...') }}
+                                {{ Str::limit(strip_tags($evento->descripcion ?? ''), 120, '...') }}
                             </p>
                         </div>
                     </a>
