@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Topico;
 use App\Models\AreaInvestigacion;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Response;
 use Exception;
 
 
@@ -18,7 +19,7 @@ class PaperController extends Controller
   public function index(Request $request)
   {
     // inicializar 10 o menos papers
-    $papers = Paper::paginate(5);
+    $papers = Paper::paginate(10);
 
 
     // Dar formato a cada atributo de autores del paper para la view
@@ -87,7 +88,7 @@ class PaperController extends Controller
       $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
       $area = $request->input('area');
       $page = $request->input('page', 1);
-      $perPage = 5;
+      $perPage = 10;
 
       $papers = Paper::query();
       // buscar por titulo
@@ -324,20 +325,20 @@ class PaperController extends Controller
       ->with('success', 'Paper eliminado exitosamente');
   }
 
-  public function fetchByArea($areaId)
+  public function downloadPdf($pdf_fileName)
   {
 
-    $papers = Paper::where('area_id', $areaId)->paginate(10);
-    $papers->each(function ($paper) {
-      $paper->formatted_autores = $this->formatAutores($paper->autores);
-    });
+    $path = storage_path('app/public/uploads/pdf/' . $pdf_fileName);
 
-    $topicos = Topico::has('papers')->get();
-    $areas = AreaInvestigacion::has('papers')->get();
+    if (!file_exists($path)) {
+      abort(404);
+    }
 
+    $defaultName = 'download.pdf';
 
-
-    return view('usuario.nosotros.biblioteca', compact('papers', 'topicos', 'areas'));
+    return Response::download($path, $defaultName, [
+      'Content-Type' => 'application/pdf',
+    ]);
   }
 
 
