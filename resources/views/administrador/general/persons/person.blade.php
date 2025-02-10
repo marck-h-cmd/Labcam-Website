@@ -94,6 +94,30 @@
         </div>
     </div>
 
+    @if (session('success-approve'))
+    <script>
+        Swal.fire({
+            title: "Aprobado Exitosamente!",
+            text: "{{ session('success-approve') }}",
+            icon: "success",
+            customClass: {
+                confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+            }
+        });
+    </script>
+      @elseif (session('success-destroy'))
+      <script>
+          Swal.fire({
+              title: "Eliminado!",
+              text: "{{ session('success-destroy') }}",
+              icon: "success",
+              customClass: {
+                  confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+              }
+          });
+      </script>
+@endif
+
 <script>
 
     function openModal(imageUrl, type) {

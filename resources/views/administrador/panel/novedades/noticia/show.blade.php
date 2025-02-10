@@ -143,7 +143,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="imagen" class="block">Imagen</label>
-                    <input type="file" id="imagen" name="imagen" class="w-full px-2 py-1 border rounded" required>
+                    <input type="file" id="imagen" name="imagen" class="w-full px-2 py-1 border rounded" required accept="image/jpeg,image/png">
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-700">Guardar</button>
             </form>
@@ -175,6 +175,54 @@
             <div id="modalContent"></div>
         </div>
     </div>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Creado!",
+                text: "{{ session('success') }}",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @elseif(session('edit'))
+        <script>
+            Swal.fire({
+                title: "Actualizado!",
+                text: "{{ session('edit') }}",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @elseif (session('destroy'))
+        <script>
+            Swal.fire({
+                title: "Eliminado!",
+                text: "{{ session('destroy') }}",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+     @elseif (session('error'))
+     <script>
+         Swal.fire({
+             icon: 'error',
+             title: '¡Hubo un error!',
+             html: "{!! session('error') !!}",
+             showConfirmButton: true,
+             confirmButtonText: 'Aceptar',
+             customClass: {
+                 confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
+             }
+         });
+     </script>
+    @endif
 
 
     <script>

@@ -27,11 +27,11 @@ class CustomAuthController extends Controller
     public function customRegistration(Request $request)
     {
         $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:100',
+            'lastname' => 'required|string|max:100',
             'phone' => 'required|string|max:15',
-            'address' => 'required|string|max:255',
-            'career' => 'required|string|max:255',
+            'address' => 'required|string|max:200',
+            'career' => 'required|string|max:70',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|regex:/[A-Z]/|regex:/[a-z]/',
             'photo' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
@@ -82,12 +82,12 @@ class CustomAuthController extends Controller
         $user = User::findOrFail($id);
     
         $request->validate([
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:100',
+            'lastname' => 'required|string|max:100',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'phone' => 'required|string|max:15',
-            'address' => 'required|string|max:255',
-            'career' => 'required|string|max:255',
+            'address' => 'required|string|max:200',
+            'career' => 'required|string|max:70',
             'password' => 'nullable|min:6|same:password_confirmation',
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ]);
@@ -109,7 +109,7 @@ class CustomAuthController extends Controller
 
     
         // return redirect()->back()->with('success', 'Perfil actualizado correctamente.');
-        return redirect()->back()->with('success', 'Evento actualizada con éxito');
+        return redirect()->back()->with('success-user', 'Datos actualizado con éxito');
     
     }
     
@@ -136,7 +136,7 @@ public function update_photo(Request $request, $id)
         $user->update(['photo' => $photoPath]);
     }
 
-    return redirect()->back()->with('success', 'Perfil actualizado correctamente');
+    return redirect()->back()->with('success-photo', 'Perfil actualizado correctamente');
 }
 
 
@@ -153,7 +153,7 @@ public function update_password(Request $request, $id)
         'password' => bcrypt($request->input('password')), 
     ]);
 
-    return redirect()->back()->with('success', 'Contraseña actualizada correctamente');
+    return redirect()->back()->with('success-password', 'Contraseña actualizada correctamente');
 }
 
 
@@ -178,11 +178,11 @@ public function store(Request $request)
 {
     
     $request->validate([
-        'firstname' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
+        'firstname' => 'required|string|max:100',
+        'lastname' => 'required|string|max:100',
         'phone' => 'required|string|max:15',
-        'address' => 'required|string|max:255',
-        'career' => 'required|string|max:255',
+        'address' => 'required|string|max:200',
+        'career' => 'required|string|max:70',
         'email' => 'required|email|unique:users',
         'password' => 'required|min:6|regex:/[A-Z]/|regex:/[a-z]/',
         'photo' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
@@ -226,12 +226,12 @@ public function update(Request $request, $id)
     $user = User::findOrFail($id);
 
     $request->validate([
-        'firstname' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
+        'firstname' => 'required|string|max:100',
+        'lastname' => 'required|string|max:100',
         'email' => 'required|email|unique:users,email,' . $user->id,
         'phone' => 'required|string|max:15',
-        'address' => 'required|string|max:255',
-        'career' => 'required|string|max:255',
+        'address' => 'required|string|max:200',
+        'career' => 'required|string|max:70',
         'password' => 'nullable|min:6|same:password_confirmation',
         'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
     ]);
@@ -252,7 +252,7 @@ public function update(Request $request, $id)
     ]);
 
 
-    return redirect()->route('users')->with('success', 'Usuario actualizada con éxito');
+    return redirect()->route('users')->with('success-update', 'Usuario actualizada con éxito');
 
 }
 
@@ -268,7 +268,7 @@ public function destroy($id)
 
     $user->delete();
 
-    return redirect()->route('users')->with('success', 'Usuario eliminado exitosamente.');
+    return redirect()->route('users')->with('success-destroy', 'Usuario eliminado exitosamente.');
 }
 
 
@@ -288,7 +288,7 @@ public function approveUser($id)
     $user->is_approved = true;
     $user->save();
 
-    return redirect()->route('person')->with('success', 'Usuario aprobado correctamente.');
+    return redirect()->route('person')->with('success-approve', 'Usuario aprobado correctamente.');
 }
 
 public function destroy_person($id)
@@ -306,7 +306,7 @@ public function destroy_person($id)
 
     $user->delete();
 
-    return redirect()->route('person')->with('success', 'Usuario eliminado exitosamente.');
+    return redirect()->route('person')->with('success-destroy', 'Usuario eliminado exitosamente.');
 }
 
 }
