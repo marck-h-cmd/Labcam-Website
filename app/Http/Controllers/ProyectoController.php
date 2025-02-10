@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
 
 class ProyectoController extends Controller
 {
@@ -20,7 +22,7 @@ class ProyectoController extends Controller
 
         $proyect = Proyecto::when($query, function ($queryBuilder) use ($query) {
             $queryBuilder->where('titulo', 'like', '%' . $query . '%')
-                         ->orWhere('autor', 'like', '%' . $query . '%');
+                ->orWhere('autor', 'like', '%' . $query . '%');
         })->paginate(10);
 
         return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
@@ -37,31 +39,59 @@ class ProyectoController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'titulo' => 'required|string|max:255',
-            'subtitulo' => 'required|string|max:1000',
-            'descripcion' => 'required',
-            'autor' => 'required|string|max:255',
-            'fecha_publicacion' => 'required|date',
-            'imagen' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
-        ]);
+        try {
+            $messages = [
+                'titulo.required' => 'El campo título es obligatorio.',
+                'titulo.string' => 'El título debe ser una cadena de texto.',
+                'titulo.max' => 'El título no debe exceder los 255 caracteres.',
+                'subtitulo.required' => 'El campo subtítulo es obligatorio.',
+                'subtitulo.string' => 'El subtítulo debe ser una cadena de texto.',
+                'subtitulo.max' => 'El subtítulo no debe exceder los 1000 caracteres.',
+                'descripcion.required' => 'El campo descripción es obligatorio.',
+                'autor.required' => 'El campo autor es obligatorio.',
+                'autor.string' => 'El autor debe ser una cadena de texto.',
+                'autor.max' => 'El nombre del autor no debe exceder los 255 caracteres.',
+                'fecha_publicacion.required' => 'El campo fecha de publicación es obligatorio.',
+                'fecha_publicacion.date' => 'El campo fecha de publicación debe ser una fecha válida.',
+                'imagen.image' => 'El archivo debe ser una imagen.',
+                'imagen.max' => 'La imagen no debe exceder los 4MB.',
+                'imagen.mimes' => 'La imagen debe ser de tipo JPG, PNG o JPEG.',
+            ];
 
-        $rutaImagen = null;
-        if ($request->hasFile('imagen')) {
-            $imagen = $request->file('imagen');
-            $rutaImagen = $imagen->store('proyectos', 'public'); // Guardar imagen en el directorio public
+            $request->validate([
+                'titulo' => 'required|string|max:255',
+                'subtitulo' => 'required|string|max:1000',
+                'descripcion' => 'required',
+                'autor' => 'required|string|max:255',
+                'fecha_publicacion' => 'required|date',
+                'imagen' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
+            ], $messages);
+
+            $rutaImagen = null;
+            if ($request->hasFile('imagen')) {
+                $imagen = $request->file('imagen');
+                $rutaImagen = $imagen->store('proyectos', 'public'); // Guardar imagen en el directorio public
+            }
+
+            Proyecto::create([
+                'titulo' => $request->titulo,
+                'subtitulo' => $request->subtitulo,
+                'descripcion' => $request->descripcion,
+                'autor' => $request->autor,
+                'fecha_publicacion' => $request->fecha_publicacion,
+                'imagen' => $rutaImagen,
+            ]);
+
+            return redirect()->route('proyect')->with('success', 'Proyecto creado con éxito');
+        } catch (ValidationException $e) {
+            $errorMessage = implode('<br>', $e->validator->errors()->all());
+            return redirect()->back()
+                ->withInput()
+                ->with('error', $errorMessage);
+        } catch (Exception $e) {
+
+            return redirect()->back()->with('error', 'Error: ' . 'Hubo un error. Porfavor, pruebe denuevo');
         }
-
-        Proyecto::create([
-            'titulo' => $request->titulo,
-            'subtitulo' => $request->subtitulo,
-            'descripcion' => $request->descripcion,
-            'autor' => $request->autor,
-            'fecha_publicacion' => $request->fecha_publicacion,
-            'imagen' => $rutaImagen,
-        ]);
-
-        return redirect()->route('proyect')->with('success', 'Proyecto creado con éxito');
     }
     /**
      * Show the form for editing the specified resource.
@@ -77,7 +107,7 @@ class ProyectoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'titulo' => 'required|string|max:255',
@@ -104,7 +134,7 @@ class ProyectoController extends Controller
             'fecha_publicacion' => $request->fecha_publicacion,
         ]);
 
-        return redirect()->route('proyect')->with('success', 'Proyecto actualizada con éxito');
+        return redirect()->route('proyect')->with('edit', 'Proyecto actualizada con éxito');
 
     }
 
@@ -116,7 +146,7 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findOrFail($id);
         $proyecto->delete();
 
-        return redirect()->route('proyect')->with('success', 'Proyecto eliminada con éxito');
+        return redirect()->route('proyect')->with('destroy', 'Proyecto eliminada con éxito');
     }
 
 
