@@ -254,13 +254,13 @@
             <ul class="ml-auto flex items-center">
                 <li class="dropdown ml-3">
                     <button type="button"
-                        class="dropdown-toggle flex items-center gap-x-2 hover:text-[#98C560] group">
+                        class="dropdown-toggle flex items-center gap-x-2 hover:text-[#98C560] group">              
                         <div
                             class="relative inline-block bg-white p-[2.5px] rounded-full border-[1px] border-black group-hover:border-[#98C560]">
-                                @if(Auth::user()->photo)
-                                   <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil"
+                                @if(Auth::check() && Auth::user()->photo)
+                                   <img src="{{ Storage::url('' . Auth::user()->photo) }}" alt="Foto de perfil"
                                         class="w-12 h-12 rounded-full block object-cover">
-                                @else
+                                @elseif(Auth::check())
                                    <div class="w-12 h-12 bg-gray-300 text-gray-700 flex items-center justify-center rounded-full text-xl font-bold uppercase">
                                    {{ substr(Auth::user()->firstname, 0, 1) }}
                                    </div>
