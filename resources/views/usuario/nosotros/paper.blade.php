@@ -164,7 +164,7 @@
             ;
             cursor: pointer;
             font-family: "Lato", "Helvetica", sans-serif;
-            transition: background-color 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
             border-radius: 10px;
             position: relative;
         }
@@ -194,6 +194,7 @@
         .card-item:hover {
             background-color: #ebebeb;
             color: #1b79c7;
+            border:#1b79c7 solid 0.5px;
         }
 
 
@@ -208,7 +209,11 @@
 
             .card-item {
                 font-size: 11px;
-                padding: 8px;
+                padding: 16px 8px;
+            }
+            .card-item p{
+              display: none;
+
             }
 
             .pdf-frame {
@@ -454,8 +459,8 @@
                 <p><strong>DOI: </strong> <a class=" ml-2" href="{{ $paper->doi }}"
                         target="_blank">{{ $paper->doi }}</a></p>
             </div>
-            <button type="button"
-                class="text-white absolute bottom-4 right-6 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center me-2 ">
+            <a href="{{ route('biblioteca.papers.download.pdf', ['pdf_fileName' => $paper->pdf_filename]) }}"
+                class="text-white absolute bottom-4 right-6 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-400 font-medium rounded-lg text-sm p-1.5 text-center inline-flex items-center me-2 ">
                 <svg class="w-8 h-8" viewBox="-4 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -465,13 +470,13 @@
                             fill="#ffffff"></path>
                     </g>
                 </svg>
-                <span class="sr-only">Icon description</span>
-            </button>
+                <span class="sr-only">Download pdf</span>
+            </a>
         </div>
 
 
         <!-- PDF FRAME --->
-        <iframe class="pdf-frame" src="{{ Storage::url('uploads/pdf/' . $paper->pdf_filename) }}" alt="PDF">
+        <iframe class="pdf-frame" src="{{ Storage::url('uploads/pdf/' . $paper->pdf_filename) }}" alt="PDF" >
         </iframe>
 
         @if ($previousPaper || $nextPaper)
@@ -479,8 +484,9 @@
 
                 @if ($previousPaper)
                     <a class="card-item r" href="{{ route('biblioteca.papers.show', $previousPaper->id) }}">
+                           <p>Paper anterior</p>
                         <h3>{{ $previousPaper->titulo }}</h3>
-                    <!--    <p>Paper anterior</p> -->
+                  
                         <svg width="24px" height="24px" class="icon fill-current text-gray-500 "  viewBox="0 0 1024 1024" class="icon" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" >
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -494,8 +500,9 @@
                 @endif
                 @if ($nextPaper)
                     <a class="card-item l" href="{{ route('biblioteca.papers.show', $nextPaper->id) }}">
+                            <p> Paper siguiente</p> 
                         <h3>{{ $nextPaper->titulo }}</h3>
-                    <!--    <p> Paper siguiente</p> -->
+                    
                         <svg width="24px" height="24px"  class="icon fill-current text-gray-500 " viewBox="0 0 1024 1024" class="icon" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" >
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
