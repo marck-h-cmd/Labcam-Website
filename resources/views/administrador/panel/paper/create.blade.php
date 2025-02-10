@@ -334,12 +334,14 @@
             // transformar el formato de autores json a array de strings
             form.addEventListener("submit", (event) => {
 
+                if (!addedAuthors) {
+                    const authorName = document.getElementById("new-author").value.trim();
+                    addedAuthors.add(authorName);
+                } 
                 const authorsArray = Array.from(addedAuthors);
-                if (!authorsArray) {
-                    autoresJsonInput.value = document.querySelector(".author-input").value
-                } else {
-                    autoresJsonInput.value = JSON.stringify(authorsArray);
-                }
+                autoresJsonInput.value = JSON.stringify(authorsArray);
+                console.log("val ",autoresJsonInput.value)
+                
 
             });
             const textarea = document.getElementById('descripcion');

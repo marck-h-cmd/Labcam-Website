@@ -38,7 +38,7 @@
             </div>
             <div class="mb-4">
                     <label for="photo" class="block">Foto (opcional)</label>
-                    <input type="file" id="photo" name="photo" class="w-full px-2 py-1 border rounded">
+                    <input type="file" id="photo" name="photo" class="w-full px-2 py-1 border rounded" accept="image/*">
             </div>
          
             <div class="flex space-x-4">
