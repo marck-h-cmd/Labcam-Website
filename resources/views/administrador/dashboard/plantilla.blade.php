@@ -41,13 +41,13 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('person') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span class="w-1.5 h-1.5 rounded-full mr-3 bg-gray-300"></span>
                             Lista de Usuarios
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('users') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span class="w-1.5 h-1.5 rounded-full mr-3 bg-gray-300"></span>
                             Registrar Usuario
                         </a>
@@ -56,27 +56,13 @@
             </li>
 
             <li class="mb-1 group cursor-pointer">
-                <a
-                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
+                <a href="{{ route('user.edit_user') }}"
+                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('user.edit_user') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Mi cuenta</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                    <span class="text-sm">Mi Cuenta</span>
                 </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 bg-gray-300"></span>
-                            Ver mi perfil
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 bg-gray-300"></span>
-                            Editar mi perfil
-                        </a>
-                    </li>
-                </ul>
-            </li>
+           </li>
+
 
             <h4 class="text-[#98C560] text-sm font-bold uppercase mb-3 mt-8">Pestañas</h4>
 
@@ -136,7 +122,7 @@
             </li>
 
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'paper-panel']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'papers.index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -145,10 +131,10 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('paper-panel') }}"
+                        <a href="{{ route('papers.index') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('paper-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('papers.index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Lista de Papers</a>
                     </li>
                     <li class="mb-4">
@@ -213,25 +199,8 @@
                     </li>
                 </ul>
             </li>
-
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-contactos']) ? 'active' : '' }}">
-                <a
-                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
-                    <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Contacto</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
-                </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="{{ route('admin-contactos') }}"
-                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-contactos') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
-                            Ver</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-noticias', '']) ? 'active' : '' }}">
+            <li
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['notici', 'proyect', 'event']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -240,22 +209,36 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{route('admin-noticias')}}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('notici') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-noticias') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Noticias</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('notici') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Noticias</a>
                     </li>
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('proyect') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Proyectos</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('proyect') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Proyectos</a>
                     </li>
                     <li class="mb-4">
-                        <a href="" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                        <a href="{{ route('event') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Eventos</a>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('event') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Eventos</a>
                     </li>
                 </ul>
             </li>
+            <li class="mb-1 group cursor-pointer"> 
+                <a href="{{ route('contactos') }}"
+                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('contactos') ? 'bg-[#98C560]' : 'bg-transparent' }}">
+                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    <span class="text-sm">Contacto</span>
+                </a>
+            </li>
+
 
         </ul>
         <div class="fixed top-0 left-[300px] w-full h-full z-40 md:hidden sidebar-overlay backdrop-blur-sm"></div>
@@ -274,21 +257,29 @@
                         class="dropdown-toggle flex items-center gap-x-2 hover:text-[#98C560] group">
                         <div
                             class="relative inline-block bg-white p-[2.5px] rounded-full border-[1px] border-black group-hover:border-[#98C560]">
-                            <img src="https://placehold.co/32x32" alt=""
-                                class="w-12 h-12 rounded-full block object-cover">
+                                @if(Auth::user()->photo)
+                                   <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil"
+                                        class="w-12 h-12 rounded-full block object-cover">
+                                @else
+                                   <div class="w-12 h-12 bg-gray-300 text-gray-700 flex items-center justify-center rounded-full text-xl font-bold uppercase">
+                                   {{ substr(Auth::user()->firstname, 0, 1) }}
+                                   </div>
+                                @endif
                         </div>
-                        <div>
-                            <h4 class="text-[14.5px] font-medium">Nombre_admin</h4>
-                            <h4 class="text-[12.5px] font-normal">user_admin</h4>
+                        @if(Auth::check())
+                        <div> 
+                            <h4 class="text-[14.5px] font-medium">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
+                            <h4 class="text-[12.5px] font-normal">{{ Auth::user()->email }}</h4>
                         </div>
+                        @endif
                     </button>
                     <ul
                         class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-2 rounded-md bg-white border border-gray-100 w-[140px] text-black text-[15px]">
                         <li>
-                            <a href="" class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Mi Perfil</a>
+                            <a href="{{ route('user.edit_user')}}" class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Mi Perfil</a>
                         </li>
                         <li>
-                            <a href="" class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Cerrar
+                            <a  href="#" onclick="confirmLogout()" class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Cerrar
                                 Sesión</a>
                         </li>
                     </ul>
@@ -303,6 +294,25 @@
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="/admin_dash/dist/js/script.js"></script>
+    <script>
+    function confirmLogout() {
+        Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Se cerrará tu sesión",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sí, salir",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "{{ route('logout') }}"; 
+            }
+        });
+    }
+</script>
+
     @yield('script')
 </body>
 

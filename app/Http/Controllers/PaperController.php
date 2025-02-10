@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 use App\Models\Topico;
 use App\Models\AreaInvestigacion;
+use Illuminate\Validation\ValidationException;
 use Exception;
 
 
@@ -16,104 +17,134 @@ class PaperController extends Controller
 {
   public function index(Request $request)
   {
-    // inicializar 3 o menos papers
-    $amount = $request->query('count', 4);
+    // inicializar 10 o menos papers
+    $papers = Paper::paginate(5);
 
-    $papers = Paper::take($amount)->get();
 
     // Dar formato a cada atributo de autores del paper para la view
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
 
-    $totalPapers = Paper::count();
+    // Obtener áreas de investigación y topicos relacionadas con almenos un paper
+    $topicos = Topico::has('papers')->get();
+    $areas = AreaInvestigacion::has('papers')->get();
 
-    // Conteo de papers restantes
-    $displayCount = $totalPapers - $amount;
 
-     // Obtener áreas de investigación y topicos relacionadas con almenos un paper
-    $topicos = Topico::has('papers', '>', 0)->get();  
-    $areas = AreaInvestigacion::has('papers', '>', 0)->get();
-
-    return view('usuario.nosotros.biblioteca', compact('papers', 'displayCount','topicos','areas'));
+    if ($request->ajax()) {
+      return response()->json([
+        'papers' => $papers,
+        'total' => $papers->count(),
+        'html' => view('usuario.nosotros.partials.papers', compact('papers'))->render(),
+        'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
+        'last_page' => $papers->lastPage(),
+      ]);
+    }
+    return view('usuario.nosotros.biblioteca', compact('papers', 'topicos', 'areas'));
   }
 
   public function fetchMorePapers(Request $request)
   {
-    // data inicial
-    $offset = $request->input('offset', 0);
-    $limit = $request->input('limit', 3);
+    try {
 
+      $page = $request->input('page', 1);
+      $perPage = $request->input('per_page', 5); // Papers por pagina
 
-    // recibir 3 papers más
-    $papers = Paper::skip($offset)->take($limit)->get();
-    $papers->each(function ($paper) {
-      $paper->formatted_autores = $this->formatAutores($paper->autores);
-    });
+      // Fecth papers
+      $papers = Paper::query()
+        ->orderBy('created_at', 'desc')
+        ->paginate($perPage, ['*'], 'page', $page);
 
-    $totalPapers = Paper::count();
+      // Format autores 
+      $papers->each(function ($paper) {
+        $paper->formatted_autores = $this->formatAutores($paper->autores);
+      });
 
-    // retornar la información en json
-    return response()->json([
-      'papers' => $papers,
-      'total' => $totalPapers,
-      'remaining' => max(0, $totalPapers - ($offset + $limit)),
-    ]);
+      return response()->json([
+        'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
+        'links' => $papers->links('vendor.pagination.simple-without-buttons')->toHtml(),
+        'next_page_url' => $papers->nextPageUrl(),
+        'total' => $papers->count(),
+        'current_count' => $papers->count(),
+        'papers' => $papers,
+        'current_page' => $papers->currentPage(),
+        'last_page' => $papers->lastPage(),
+      ]);
 
+    } catch (Exception $e) {
+      Log::error("Fetch More Error: " . $e->getMessage());
+      return response()->json([
+        'error' => 'An error occurred while loading more papers'
+      ], 500);
+    }
   }
 
   public function search(Request $request)
-{
-  /*
-    $query = $request->input('query', '');
-    $topics = $request->input('topics', []);
+  {
+    try {
+      // recibir el query y topicos desde la vista
+      $query = $request->input('query');
+      $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
+      $area = $request->input('area');
+      $page = $request->input('page', 1);
+      $perPage = 5;
 
-    // Iniciar la consulta de los papers
-    $papers = Paper::query();
-
-    // Filtrar por título si hay una consulta de búsqueda
-    if (!empty($query)) {
-        $papers->where('titulo', 'like', "%{$query}%");
-    }
-
-    // Filtrar por tópicos si hay checkboxes seleccionados
-    if (!empty($topics)) {
-        $topicsArray = explode(',', $topics); // Convertir string en array
-        $papers->whereHas('topicos', function ($q) use ($topicsArray) {
-            $q->whereIn('nombre', $topicsArray);
-        });
-    }
-
-    // Obtener los resultados
-    $results = $papers->get();
-
-    return response()->json([
-        'papers' => $results
-    ]);
-    */
-    $query = $request->input('query');
-    $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
-
-    $papers = Paper::query();
-
-    if ($query) {
+      $papers = Paper::query();
+      // buscar por titulo
+      if ($query) {
         $papers->where('titulo', 'like', "%$query%");
-    }
-
-    if (!empty($topics)) {
+      }
+      // buscar por topicos seleccionados
+      if (!empty($topics)) {
         $papers->whereHas('topicos', function ($q) use ($topics) {
-            $q->whereIn('id', $topics);
+          $q->whereIn('topicos.id', $topics);
         });
-    }
+      }
 
-    return response()->json(['papers' => $papers->get()], 200);
-}
+      if ($area && is_numeric($area)) {
+        $papers->where('area_id', $area);
+      }
+
+      $papers = $papers->paginate($perPage, ['*'], 'page', $page);
+      // formato a los autores
+      $papers->each(function ($paper) {
+        $paper->formatted_autores = $this->formatAutores($paper->autores);
+      });
+
+      return response()->json([
+        'papers' => $papers,
+        'total' => $papers->count(),
+        'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
+        'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
+        'show_load_more' => $papers->isEmpty(),
+        'next_page_url' => $papers->nextPageUrl(),
+        'last_page' => $papers->lastPage(),
+        'current_page' => $papers->currentPage(),
+      ]);
+    } catch (Exception $e) {
+      Log::error("Error: " . $e->getMessage());
+      return response()->json(['error' => 'An error occurred during the search process.'], 500);
+    }
+  }
 
 
   public function storePaper(Request $request)
   {
 
     try {
+      // mensajes de error
+      $messages = [
+        'titulo.required' => 'El titulo es requerido.',
+        'autores.required' => 'El nombre de los autores es requerido.',
+        'titulo.unique' => 'El titulo de esta paper ya esta registrado.',
+        'doi.unique' => 'Este DOI ya esta en uso',
+        'pdf_filename.mimes' => 'El archivo debe ser PDF.',
+        'pdf_filename.max' => 'El PDF no debe exceder 10MB.',
+        'img_filename.mimes' => 'La imagen debe ser bJPEG, PNG, o JPG.',
+        'img_filename.max' => 'La imagen no debe exceder 5MB.',
+
+      ];
+
       // validar campos
       $request->validate([
         'autores' => 'required|json',
@@ -128,7 +159,7 @@ class PaperController extends Controller
         'topicos' => 'required|string',
         'topicos.*' => 'exists:topicos,id',
 
-      ]);
+      ], $messages);
 
       $topicoIds = explode(',', $request->topicos);
 
@@ -166,10 +197,15 @@ class PaperController extends Controller
 
       return redirect()->route('papers.create')
         ->with('success', 'Nuevo paper creado exitosamente.');
+    } catch (ValidationException $e) {
+      $errorMessage = implode('<br>', $e->validator->errors()->all());
+      return redirect()->back()
+        ->withInput()
+        ->with('error', $errorMessage);
     } catch (Exception $e) {
       Log::error("Error storing paper: " . $e->getMessage());
 
-      return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+      return redirect()->back()->with('error', 'Error: ' . 'Hubo un error. Porfavor, pruebe denuevo');
     }
 
   }
@@ -177,6 +213,19 @@ class PaperController extends Controller
   public function update(Request $request, $id)
   {
     try {
+
+      // mensajes de error
+      $messages = [
+        'titulo.required' => 'El titulo es requerido.',
+        'titulo.unique' => 'El titulo de esta paper ya esta registrado.',
+        'autores.required' => 'El nombre de los autores es requerido.',
+        'doi.unique' => 'Este DOI ya esta en uso',
+        'pdf_filename.mimes' => 'El archivo debe ser PDF.',
+        'pdf_filename.max' => 'El PDF no debe exceder 10MB.',
+        'img_filename.mimes' => 'La imagen debe ser bJPEG, PNG, o JPG.',
+        'img_filename.max' => 'La imagen no debe exceder 5MB.',
+
+      ];
       // validar campos
       $request->validate([
         'titulo' => 'required|max:100',
@@ -191,7 +240,7 @@ class PaperController extends Controller
         'topicos' => 'string',
         'topicos.*' => 'exists:topicos,id',
 
-      ]);
+      ], $messages);
       $paper = Paper::findOrFail($id);
 
       $topicoIds = explode(',', $request->topicos);
@@ -238,8 +287,13 @@ class PaperController extends Controller
 
       $paper->topicos()->sync($topicoIds);
 
-      return redirect()->route('paper-panel')
+      return redirect()->route('papers.index')
         ->with('edited', 'Paper actualizado exitosamente.');
+    } catch (ValidationException $e) {
+      $errorMessage = implode('<br>', $e->validator->errors()->all());
+      return redirect()->back()
+        ->withInput()
+        ->with('error', $errorMessage);
     } catch (Exception $e) {
       Log::error("Error updating paper: " . $e->getMessage());
 
@@ -252,7 +306,7 @@ class PaperController extends Controller
     $paper = Paper::find($id);
 
     if (!$paper) {
-      return redirect()->route('paper-panel')
+      return redirect()->route('papers.index')
         ->with('error', 'Paper no encontrado');
     }
 
@@ -266,30 +320,39 @@ class PaperController extends Controller
       Storage::disk('paper_img')->delete($paper->img_filename);
     }
     $paper->delete();
-    return redirect()->route('paper-panel')
+    return redirect()->route('papers.index')
       ->with('success', 'Paper eliminado exitosamente');
   }
 
   public function fetchByArea($areaId)
   {
 
-    $papers = Paper::all()->where('area_id', $areaId);
+    $papers = Paper::where('area_id', $areaId)->paginate(10);
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
 
-    $topicos = Topico::has('papers', '>', 0)->get();  
-    $areas = AreaInvestigacion::has('papers', '>', 0)->get();
+    $topicos = Topico::has('papers')->get();
+    $areas = AreaInvestigacion::has('papers')->get();
 
 
-    return view('usuario.nosotros.biblioteca', compact('papers','topicos','areas'));
 
+    return view('usuario.nosotros.biblioteca', compact('papers', 'topicos', 'areas'));
   }
+
 
   // Función para mostrar papers en el panel
   public function adminIndex(Request $request): View
   {
-    $papers = Paper::paginate(10);
+    $query = $request->input('search');
+    // $papers = Paper::paginate(10);
+    $papers = Paper::when($query, function ($queryBuilder) use ($query) {
+      $queryBuilder->where('titulo', 'like', '%' . $query . '%')
+        ->orWhereHas('area', function ($q) use ($query) {
+          $q->where('nombre', 'like', '%' . $query . '%');
+        });
+    })->paginate(10);
+
     $papers->each(function ($paper) {
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
@@ -300,10 +363,10 @@ class PaperController extends Controller
 
   public function create()
   {
-    return view('administrador.panel.paper.create',[
+    return view('administrador.panel.paper.create', [
       'areas' => AreaInvestigacion::all(),
       'topicos' => Topico::all()
-  ]);
+    ]);
   }
 
   public function show($id)
@@ -335,17 +398,17 @@ class PaperController extends Controller
     $paper = Paper::find($id);
 
     if (!$paper) {
-      return redirect()->route('paper-panel')
+      return redirect()->route('papers.index')
         ->with('error', 'Paper no encontrado');
     }
 
-    $areas= AreaInvestigacion::where('id', '!=', $paper->area->id)->get('*');
+    $areas = AreaInvestigacion::where('id', '!=', $paper->area->id)->get('*');
 
     return view('administrador.panel.paper.edit', [
       'paper' => $paper,
       'areas' => $areas,
       'topicos' => Topico::all()
-  ]);
+    ]);
   }
 
 

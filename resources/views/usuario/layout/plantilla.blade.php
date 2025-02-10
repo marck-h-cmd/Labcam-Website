@@ -13,7 +13,6 @@
     <script defer src="/user/template/bundle.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
-
 </head>
 
 <body>
@@ -78,7 +77,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('biblioteca') }}"
+                                    <a href="{{ route('biblioteca.papers.index') }}"
                                         class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca') ? 'text-[#98C560]' : 'text-black' }}">
                                         Biblioteca
                                     </a>

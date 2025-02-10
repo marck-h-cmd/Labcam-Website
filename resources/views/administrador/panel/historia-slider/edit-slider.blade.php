@@ -3,13 +3,13 @@
 @section('title', 'Crear Slider historia')
 
 @section('contenido')
-    <div class="slider-container max-w-screen-2xl flex flex-col items-center ">
+    <div class="slider-container max-w-screen-2xl flex flex-col items-center justify-center ">
 
         <div class="main-title flex flex-col items-center gap-3 mb-8">
             <div class="title text-2xl font-semibold text-[#2e5382]">Crear Slider de Momentos Importantes</div>
             <div class="blue-line w-1/5 h-0.5 bg-[#64d423]"></div>
         </div>
-        <form class="md:px-20 px-40 py-10 " action="{{ route('h-slider.update',$slider->id) }}" method="post" id="form"
+        <form class="md:px-20 px-30 py-10 " action="{{ route('h-slider.update',$slider->id) }}" method="post" id="form"
             enctype="multipart/form-data">
             @csrf
             @method('PUT')
@@ -33,7 +33,7 @@
                             class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50"> -->
                             <div class="relative">
                                 <img id="img-preview" src="{{ Storage::url('uploads/imgs/' . $slider->historia_img) }}" alt="Foto 1"
-                                    class="w-auto  h-auto object-cover rounded-md border border-gray-300" />
+                                    class="w-[800px]  h-auto object-cover rounded-md border border-gray-300" />
                                 <input type="file" name="historia_img" id="dropzone-file"
                                     class="absolute z-20 bottom-0 w-full opacity-0 cursor-pointer" accept="image/png,image/jpg,image/jpeg"
                                    />
