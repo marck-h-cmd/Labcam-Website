@@ -40,7 +40,7 @@
             </div>
             <div class="mb-4">
                 <label for="imagen" class="block">Imagen (opcional)</label>
-                <input type="file" id="imagen" name="imagen" class="w-full px-4 py-2 border rounded">
+                <input type="file" id="imagen" name="imagen" class="w-full px-4 py-2 border rounded" accept="image/jpeg,image/png">
             </div>
             <!-- Contenedor de botones alineados -->
             <div class="flex space-x-4">

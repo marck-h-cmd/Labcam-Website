@@ -24,34 +24,6 @@
                             <ul class="hor--nav flex space-x-12">
                                 <li><a href="{{ route('biblioteca.papers.index') }}"
                                         class="text-gray-300 hover:text-white">Biblioteca</a></li>
-                                <li><button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
-                                        class="text-white font-bold flex justify-between">Áreas de Investigación <span
-                                            class="py-2"> <svg class="w-2.5 h-2.5 ms-3" aria-hidden="false"
-                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                                            </svg></span></button>
-                                    <div id="mega-menu-dropdown"
-                                        class="absolute z-20  hidden w-auto grid grid-cols-2  text-sm bg-white border border-gray-100 rounded-md shadow-md  ">
-                                        @foreach ($areas->chunk(4) as $chunk)
-                                            <div class="p-4 pb-0 text-gray-900 md:pb-4">
-                                                <ul class="space-y-4">
-                                                    @foreach ($chunk as $area)
-                                                        <li>
-                                                            <button type="button" value="{{ $area->id }}"
-                                                                class="area-btn text-gray-500 hover:text-blue-600 p-2 rounded-lg ">
-                                                                {{ $area->nombre }}
-                                                            </button>
-                                                        </li>
-                                                    @endforeach
-                                                </ul>
-                                            </div>
-                                        @endforeach
-
-                                    </div>
-                                </li>
-                                <!--
-                                                                                                <li><a href="#" class="text-gray-300 hover:text-white">Topicos</a></li>  -->
 
                             </ul>
                         </nav>
@@ -242,10 +214,11 @@
                                         </svg>
                                     </button>
                                     <p class="text-gray-50 ">Mostrando <span class="text-gray-100"
-                                            id="paper-count">{{ count($papers) }}</span> resultados <span class=" ml-2 text-sm"> Pag. <span
-                                            class=" text-white"
-                                            id="current-page">{{ $papers->currentPage() }}</span>-<span class="text-white"
-                                            id="pages">{{ $papers->lastPage() }}</span></span></p>
+                                            id="paper-count">{{ count($papers) }}</span> resultados <span
+                                            class=" ml-2 text-sm"> Pag. <span class=" text-white"
+                                                id="current-page">{{ $papers->currentPage() }}</span>-<span
+                                                class="text-white" id="pages">{{ $papers->lastPage() }}</span></span>
+                                    </p>
 
                                 </div>
                             </div>
@@ -367,6 +340,37 @@
             const API_BASE = '/api/biblioteca/papers';
             const UI_BASE = '/biblioteca/papers';
 
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Initializar los parametros url
+            if (urlParams.has('query') && searchInput) {
+                searchInput.value = urlParams.get('query');
+            }
+
+
+            if (urlParams.has('topics')) {
+                const selectedTopics = urlParams.get('topics').split(',');
+                checkboxes.forEach(checkbox => {
+                    if (selectedTopics.includes(checkbox.value)) {
+                        checkbox.checked = true;
+                    }
+                });
+            }
+
+            // Initialize area buttons
+            if (urlParams.has('area')) {
+                selectedAreaId = urlParams.get('area');
+                areaBtns.forEach(btn => {
+                    if (btn.value === selectedAreaId) {
+                        btn.classList.add('bg-gray-100', 'text-gray-700');
+                    }
+                });
+            }
+
+            // Fetch papers basado en los URL
+            if (urlParams.toString()) {
+                loadPage(urlParams);
+            }
             // links de paginación
             if (paginationLinks) {
                 paginationLinks.addEventListener('click', function(e) {
@@ -385,8 +389,13 @@
                         parseInt(currentSearchParams.get('page')) :
                         1;
                     console.log("page", page)
-
+                    currentSearchParams.delete('query');
+                    currentSearchParams.delete('topics');
+                    currentSearchParams.delete('area');
                     currentSearchParams.set('page', page);
+                    checkboxes.forEach(checkbox => (checkbox.checked = false));
+                    areaBtns.forEach(btn => btn.classList.remove('bg-gray-100', 'text-gray-700'));
+
                     console.log(`${API_BASE}/fetch-more?${currentSearchParams}`)
                     fetch(`${API_BASE}/fetch-more?${currentSearchParams}`)
                         .then(handleResponse)
@@ -494,13 +503,13 @@
             }
 
             function updatePaperCount(count) {
-                if (paperCount) 
+                if (paperCount)
                     paperCount.textContent = count
             }
 
             function updatePageInfo(data) {
-                    pageInfo.textContent = data.current_page
-                    pagesInfo.textContent = data.last_page;
+                pageInfo.textContent = data.current_page
+                pagesInfo.textContent = data.last_page;
             }
 
             function updateHistory(params) {
@@ -540,7 +549,7 @@
             }
 
             // Debounce helper
-            function debounce(func, timeout = 300) {
+            function debounce(func, timeout = 100) {
                 let timer;
                 return (...args) => {
                     clearTimeout(timer);
@@ -559,25 +568,4 @@
         });
     </script>
 
-<script>
-    /*
-    // Initialize search inputs from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const searchInput = document.getElementById('search-dropdown');
-    const checkboxes = document.querySelectorAll('.checkbox-topico');
-
-    if (urlParams.has('query') && searchInput) {
-        searchInput.value = urlParams.get('query');
-    }
-
-    if (urlParams.has('topics')) {
-        const selectedTopics = urlParams.get('topics').split(',');
-        checkboxes.forEach(checkbox => {
-            if (selectedTopics.includes(checkbox.value)) {
-                checkbox.checked = true;
-            }
-        });
-    }
-    */
-</script>
 @endsection

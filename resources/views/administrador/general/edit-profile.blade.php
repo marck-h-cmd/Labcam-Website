@@ -115,7 +115,7 @@
                     @method('PUT')
                     <div class="mt-4 flex items-center space-x-4">
                         <input type="file" id="photo" name="photo"
-                            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100">
+                            class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100" accept="image/jpeg,image/png">
                     </div>
                     <div class="flex justify-end mt-6 space-x-4">
                         <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-700">
@@ -185,6 +185,42 @@
                     </div>
                 </form>
             </div>
+
+            @if (session('success-photo'))
+        <script>
+            Swal.fire({
+                title: "Actualizado!",
+                text: "{{ session('success-photo') }}",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+          @elseif (session('success-password'))
+          <script>
+              Swal.fire({
+                  title: "Actualizado!",
+                  text: "{{ session('success-password') }}",
+                  icon: "success",
+                  customClass: {
+                      confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                  }
+              });
+          </script>
+    @elseif(session('success-user'))
+        <script>
+            Swal.fire({
+                title: "Actualizado!",
+                text: "{{ session('success-user') }}",
+                icon: "success",
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @endif
+
 <script>
         
     document.querySelectorAll('.tab').forEach(button => {

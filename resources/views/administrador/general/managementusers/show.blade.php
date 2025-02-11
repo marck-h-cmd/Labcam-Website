@@ -163,7 +163,7 @@
                 </div>
                 <div class="mb-4">
                     <label for="photo" class="block">Foto</label>
-                    <input type="file" id="photo" name="photo" class="w-full px-2 py-1 border rounded">
+                    <input type="file" id="photo" name="photo" class="w-full px-2 py-1 border rounded" accept="image/jpeg,image/png">
                 </div>
                 <button type="submit" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-700">Guardar</button>
             </form>
@@ -195,6 +195,30 @@
         </div>
     </div>
 
+    @if (session('success-update'))
+    <script>
+        Swal.fire({
+            title: "Actualizado!",
+            text: "{{ session('success-update') }}",
+            icon: "success",
+            customClass: {
+                confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+            }
+        });
+    </script>
+      @elseif (session('success-destroy'))
+      <script>
+          Swal.fire({
+              title: "Eliminado!",
+              text: "{{ session('success-destroy') }}",
+              icon: "success",
+              customClass: {
+                  confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+              }
+          });
+      </script>
+
+@endif
 
 
 <script>
