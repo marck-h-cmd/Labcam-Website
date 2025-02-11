@@ -131,6 +131,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
         }
 
         .description{
@@ -144,7 +145,7 @@
             bottom: 0;
             left: 0;
             padding: 10px 20px 20px 20px;
-            background: 7f7f7f;
+            background: rgba(0, 0, 0, 0.5);
             background: rgba(0, 0, 0, 0.5);
             width: 100%;
             max-height: 32%;
