@@ -112,51 +112,44 @@
     </section>
 
 
-{{-- Seccion de proyectos --}}
-<section class="bg-blue-900 text-white py-20 relative overflow-hidden">
-    <div class="mx-auto px-5 relative">
-        <!-- Contenido principal -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative">
-            <div class="ml-10">
-                <!-- Título -->
-                <div class="mb-12">
-                    <h2 class="text-5xl font-bold border-b-4 border-blue-300 inline-block pb-2 px-12">
-                        Proyectos
-                    </h2>
+    {{-- Seccion de proyectos --}}
+    <section class="bg-blue-900 text-white py-20 relative overflow-hidden">
+        <div class="mx-auto px-5 relative">
+            <!-- Contenido principal -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative">
+                <div class="ml-10">
+                    <!-- Título -->
+                    <div class="mb-7">
+                        <h2 class="text-5xl font-bold border-b-4 border-blue-300 inline-block pb-2 px-12">
+                            Proyectos
+                        </h2>
+                    </div>
+                    <!-- Texto descriptivo -->
+                    <div>
+                        <div class="mb-7 text-lg">
+                            {{ new \Illuminate\Support\HtmlString($topProyecto->descripcion) }}
+                        </div>
+                        <button
+                            class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+                            VER TODOS LOS PROYECTOS
+                        </button>
+                    </div>
                 </div>
-                <!-- Texto descriptivo -->
-                <div>
-                    <p class="text-lg leading-relaxed mb-6">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis orci orci, sed convallis
-                        ligula
-                        ornare vel.
-                    </p>
-                    <p class="text-lg leading-relaxed mb-8">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis orci orci, sed convallis
-                        ligula
-                        ornare vel.
-                    </p>
-                    <button
-                        class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
-                        VER TODOS LOS PROYECTOS
-                    </button>
+
+                <!-- Contenedor de imágenes -->
+                <div class="relative w-full h-[600px] flex items-center justify-center">
+                    <!-- Imagen inferior -->
+                    <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-40 left-4 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 hover:translate-x-16 hover:translate-y-8"
+                        src="/user/template/images/proyectos/{{ $topProyecto->img2 }}">
+
+                    <!-- Imagen superior -->
+                    <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-2 left-40 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 hover:-translate-x-16 hover:-translate-y-8"
+                        src="/user/template/images/proyectos/{{ $topProyecto->img1 }}">
                 </div>
+
             </div>
-
-            <!-- Contenedor de imágenes -->
-            <div class="relative w-full h-[600px] flex items-center justify-center">
-                <!-- Imagen inferior -->
-                <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-40 left-4 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 hover:translate-x-16 hover:translate-y-8"
-                    src="/user/template/images/proyectos/proyecto_01.jpg">
-
-                <!-- Imagen superior -->
-                <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-2 left-40 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 hover:-translate-x-16 hover:-translate-y-8"
-                    src="/user/template/images/proyectos/proyecto_02.jpg">
-            </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
     {{-- Sección eventos --}}
     <section class="py-12">
