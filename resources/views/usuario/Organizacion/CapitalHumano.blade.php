@@ -251,42 +251,42 @@
     </div>
 </section>
 
-    <script>
-        function showSection(sectionId,button) {
-        // Oculta todas las secciones
-        document.querySelectorAll('.dynamic-section').forEach(section => {
-            section.classList.add('hidden');
-        });
-        // Muestra la sección seleccionada
-        document.getElementById(sectionId).classList.remove('hidden');
+<script>
+    function showSection(sectionId,button) {
+    // Oculta todas las secciones
+    document.querySelectorAll('.dynamic-section').forEach(section => {
+        section.classList.add('hidden');
+    });
+    // Muestra la sección seleccionada
+    document.getElementById(sectionId).classList.remove('hidden');
+    // Resalta la pestaña activa
+    document.querySelectorAll('.bloque').forEach(tab => {
+        tab.classList.remove('bg-blue-600', 'text-white', 'active');
+        tab.classList.add('bg-gray-200', 'hover:bg-gray-400');
+    });
+    //Resaltar botón seleccionado
+    button.classList.add('bg-blue-600', 'text-white', 'active');
+    }
+
+
+    function showTesistas(tesistaId, button) {
+        // Oculta todos los contenidos de tesistas
+        document.querySelectorAll('.tesistas-content').forEach(content => {content.classList.add('hidden');});
+
+        // Muestra el contenido seleccionado
+        document.getElementById(tesistaId).classList.remove('hidden');
+
         // Resalta la pestaña activa
-        document.querySelectorAll('.bloque').forEach(tab => {
+        document.querySelectorAll('.tesistas-tab').forEach(tab => {
             tab.classList.remove('bg-blue-600', 'text-white', 'active');
-            tab.classList.add('bg-gray-200', 'hover:bg-gray-400');
+            tab.classList.add('bg-gray-300', 'hover:bg-gray-400');
         });
-        //Resaltar botón seleccionado
         button.classList.add('bg-blue-600', 'text-white', 'active');
-        }
-
-
-        function showTesistas(tesistaId, button) {
-            // Oculta todos los contenidos de tesistas
-            document.querySelectorAll('.tesistas-content').forEach(content => {content.classList.add('hidden');});
-
-            // Muestra el contenido seleccionado
-            document.getElementById(tesistaId).classList.remove('hidden');
-
-            // Resalta la pestaña activa
-            document.querySelectorAll('.tesistas-tab').forEach(tab => {
-                tab.classList.remove('bg-blue-600', 'text-white', 'active');
-                tab.classList.add('bg-gray-300', 'hover:bg-gray-400');
-            });
-            button.classList.add('bg-blue-600', 'text-white', 'active');
-        }
-        
-        document.addEventListener('DOMContentLoaded', function () {
-            // Mostrar la sección de investigadores y resaltar el botón
-            showSection('investigadores', document.querySelector('[onclick="showSection(\'investigadores\',this)"]'));
-        });   
-    </script>
+    }
+    
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mostrar la sección de investigadores y resaltar el botón
+        showSection('investigadores', document.querySelector('[onclick="showSection(\'investigadores\',this)"]'));
+    });   
+</script>
 @endsection
