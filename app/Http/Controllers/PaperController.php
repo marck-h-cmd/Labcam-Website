@@ -27,7 +27,7 @@ class PaperController extends Controller
       $paper->formatted_autores = $this->formatAutores($paper->autores);
     });
 
-    // Obtener áreas de investigación y topicos relacionadas con almenos un paper
+    // Obtener áreas de investigación y topicos relacionadas con al menos un paper
     $topicos = Topico::has('papers')->get();
     $areas = AreaInvestigacion::has('papers')->get();
 
@@ -80,53 +80,100 @@ class PaperController extends Controller
     }
   }
 
+  // public function search(Request $request)
+  // {
+  //   try {
+  //     // recibir el query y topicos desde la vista
+  //     $query = $request->input('query');
+  //     $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
+  //     $area = $request->input('area');
+  //     $page = $request->input('page', 1);
+  //     $perPage = 10;
+
+  //     $papers = Paper::query();
+  //     // buscar por titulo
+  //     if ($query) {
+  //       $papers->where('titulo', 'like', "%$query%");
+  //     }
+  //     // buscar por topicos seleccionados
+  //     if (!empty($topics)) {
+  //       $papers->whereHas('topicos', function ($q) use ($topics) {
+  //         $q->whereIn('topicos.id', $topics);
+  //       });
+  //     }
+
+  //     if ($area && is_numeric($area)) {
+  //       $papers->where('area_id', $area);
+  //     }
+
+  //     $papers = $papers->paginate($perPage, ['*'], 'page', $page);
+  //     // formato a los autores
+  //     $papers->each(function ($paper) {
+  //       $paper->formatted_autores = $this->formatAutores($paper->autores);
+  //     });
+
+  //     return response()->json([
+  //       'papers' => $papers,
+  //       'total' => $papers->count(),
+  //       'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
+  //       'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
+  //       'show_load_more' => $papers->isEmpty(),
+  //       'next_page_url' => $papers->nextPageUrl(),
+  //       'last_page' => $papers->lastPage(),
+  //       'current_page' => $papers->currentPage(),
+  //     ]);
+  //   } catch (Exception $e) {
+  //     Log::error("Error: " . $e->getMessage());
+  //     return response()->json(['error' => 'An error occurred during the search process.'], 500);
+  //   }
+  // }
+
   public function search(Request $request)
-  {
+{
     try {
-      // recibir el query y topicos desde la vista
-      $query = $request->input('query');
-      $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
-      $area = $request->input('area');
-      $page = $request->input('page', 1);
-      $perPage = 10;
+        $query = $request->input('query');
+        $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
+        $area = $request->input('area');
+        $page = $request->input('page', 1);
+        $perPage = 10;
 
-      $papers = Paper::query();
-      // buscar por titulo
-      if ($query) {
-        $papers->where('titulo', 'like', "%$query%");
-      }
-      // buscar por topicos seleccionados
-      if (!empty($topics)) {
-        $papers->whereHas('topicos', function ($q) use ($topics) {
-          $q->whereIn('topicos.id', $topics);
+        $papersQuery = Paper::query();
+
+        if ($query) {
+            $papersQuery->where('titulo', 'like', "%$query%");
+        }
+
+        if (!empty($topics)) {
+            $papersQuery->whereHas('topicos', function ($q) use ($topics) {
+                $q->whereIn('topicos.id', $topics);
+            });
+        }
+
+        if ($area && is_numeric($area)) {
+            $papersQuery->where('area_id', $area);
+        }
+
+        $papers = $papersQuery->paginate($perPage, ['*'], 'page', $page);
+
+        $formattedPapers = collect($papers->items())->each(function ($paper) {
+            $paper->formatted_autores = $this->formatAutores($paper->autores);
         });
-      }
 
-      if ($area && is_numeric($area)) {
-        $papers->where('area_id', $area);
-      }
-
-      $papers = $papers->paginate($perPage, ['*'], 'page', $page);
-      // formato a los autores
-      $papers->each(function ($paper) {
-        $paper->formatted_autores = $this->formatAutores($paper->autores);
-      });
-
-      return response()->json([
-        'papers' => $papers,
-        'total' => $papers->count(),
-        'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
-        'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
-        'show_load_more' => $papers->isEmpty(),
-        'next_page_url' => $papers->nextPageUrl(),
-        'last_page' => $papers->lastPage(),
-        'current_page' => $papers->currentPage(),
-      ]);
+        return response()->json([
+            'papers' => $formattedPapers,
+            'total' => $papers->total(),
+            'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
+            'links' => $papers->appends($request->query())->render('vendor.pagination.simple-without-buttons'),
+            'show_load_more' => $papers->isEmpty(),
+            'next_page_url' => $papers->nextPageUrl(),
+            'last_page' => $papers->lastPage(),
+            'current_page' => $papers->currentPage(),
+        ]);
     } catch (Exception $e) {
-      Log::error("Error: " . $e->getMessage());
-      return response()->json(['error' => 'An error occurred during the search process.'], 500);
+        Log::error("Error: " . $e->getMessage());
+        return response()->json(['error' => 'An error occurred during the search process.'], 500);
     }
-  }
+}
 
 
   public function storePaper(Request $request)
