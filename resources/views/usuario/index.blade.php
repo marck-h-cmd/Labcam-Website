@@ -111,53 +111,52 @@
         </div>
     </section>
 
-    {{-- Seccion de proyectos --}}
-    <section class="bg-blue-900 text-white py-20 relative overflow-hidden">
-        <div class="container-fluid mx-auto px-9 md:px-16">
-            <!-- Contenido principal -->
-            <div
-                class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative transition-all duration-500 ease-in-out">
-                <!-- Texto -->
-                <div class="flex flex-col items-center lg:items-start text-center lg:text-left">
-                    <!-- Título -->
-                    <div class="mb-6">
-                        <h2 class="font-semibold text-4xl mb-1">Proyectos</h2>
-                        <div class="blue-line w-full h-0.5 bg-blue-300"></div>
-                    </div>
-                    <!-- Texto descriptivo -->
-                    <div class="mb-6">
-                        <div class="my-6 flex flex-col space-y-4">
-                            
-                           
 
-                        </div>
-                        <a href="{{ route('proyectos') }}">
-                            <button
-                                class="bg-[#98C560] text-blue-900 font-bold text-sm px-8 py-4 rounded-lg hover:bg-[#a6d073] transition duration-300">
-                                VER TODOS LOS PROYECTOS
-                            </button>
-                        </a>
-                    </div>
+{{-- Seccion de proyectos --}}
+<section class="bg-blue-900 text-white py-20 relative overflow-hidden">
+    <div class="mx-auto px-5 relative">
+        <!-- Contenido principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center relative">
+            <div class="ml-10">
+                <!-- Título -->
+                <div class="mb-12">
+                    <h2 class="text-5xl font-bold border-b-4 border-blue-300 inline-block pb-2 px-12">
+                        Proyectos
+                    </h2>
                 </div>
-                <!-- Contenedor de imágenes -->
-                <div class="h-[450px] flex items-center justify-center relative w-full mt-5 sm:mt-16 lg:mt-28">
-                    <!-- Imagen inferior -->
-
-                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)]
-        absolute top-1/2 left-[calc(50%-70px)] lg:left-[calc(50%-10px)] xl:left-[calc(50%-30px)] transform -translate-x-1/2 -translate-y-1/2
-        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20
-        hover:translate-x-6 hover:translate-y-8"
-
-                    <!-- Imagen superior -->
-                    <img class="w-[calc(100%-130px)] md:w-[500px] h-auto shadow-[0_20px_40px_rgba(0,0,0,0.3)]
-        absolute top-1/4 left-[calc(50%+70px)] lg:left-[calc(50%+45px)] xl:left-[calc(50%+60px)] transform -translate-x-1/2 -translate-y-1/2
-        rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10
-        hover:-translate-x-6 hover:-translate-y-8"
-
+                <!-- Texto descriptivo -->
+                <div>
+                    <p class="text-lg leading-relaxed mb-6">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis orci orci, sed convallis
+                        ligula
+                        ornare vel.
+                    </p>
+                    <p class="text-lg leading-relaxed mb-8">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed iaculis orci orci, sed convallis
+                        ligula
+                        ornare vel.
+                    </p>
+                    <button
+                        class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+                        VER TODOS LOS PROYECTOS
+                    </button>
                 </div>
             </div>
+
+            <!-- Contenedor de imágenes -->
+            <div class="relative w-full h-[600px] flex items-center justify-center">
+                <!-- Imagen inferior -->
+                <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-40 left-4 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-20 hover:translate-x-16 hover:translate-y-8"
+                    src="/user/template/images/proyectos/proyecto_01.jpg">
+
+                <!-- Imagen superior -->
+                <img class="w-[450px] h-[400px] shadow-[0_20px_40px_rgba(0,0,0,0.3)] absolute top-2 left-40 rounded-lg transition-all duration-500 ease-in-out hover:scale-110 hover:z-10 hover:-translate-x-16 hover:-translate-y-8"
+                    src="/user/template/images/proyectos/proyecto_02.jpg">
+            </div>
+
         </div>
-    </section>
+    </div>
+</section>
 
     {{-- Sección eventos --}}
     <section class="py-12">
