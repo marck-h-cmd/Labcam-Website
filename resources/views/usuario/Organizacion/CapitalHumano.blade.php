@@ -62,14 +62,16 @@
                             </div>
                             <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                 <div class="flex flex-col gap-4">
-                                    <a href="/user/template/uploads/pdfs/{{$investigador->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
-                                        CV
+                                    <a href="/user/template/uploads/pdfs/{{$investigador->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg flex justify-center">
+                                        <img width="35" height="35" src="https://img.icons8.com/dusk/64/contract-job.png" alt="contract-job"/>
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{$investigador->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        Linkedin
+                                    <a href="{{$investigador->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg flex justify-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 40 40">
+                                            <path fill="#8bb7f0" d="M2.5 2.5H37.5V37.5H2.5z"></path><path fill="#4e7ab5" d="M37,3v34H3V3H37 M38,2H2v36h36V2L38,2z"></path><path fill="#fff" d="M8 16.077L13.538 16.077 13.538 27.085 13.538 32 8 32zM10.769 14.462L10.769 14.462C9.108 14.462 8 13.285 8 11.831s1.108-2.562 2.769-2.562 2.7 1.108 2.769 2.562C13.538 13.285 12.5 14.462 10.769 14.462zM32.027 32h-5.468c0 0 0-8.27 0-8.885s-.068-2.734-2.392-2.734c-2.05 0-2.392 1.982-2.392 2.734s0 8.885 0 8.885h-5.468V16.281h5.468v2.119c0 0 1.094-2.119 4.306-2.119 3.281 0 5.946 2.255 5.946 6.834V32z"></path>
+                                            </svg>
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $investigador->ctiVitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        CTI Vitae
+                                    <a href="{{ $investigador->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        Cti Vitae
                                     </a>
                                 </div>
                             </div>
@@ -96,11 +98,11 @@
                                     <a href="/user/template/uploads/pdfs/{{ $egresado->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
                                         CV
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $egresado->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                    <a href="{{ $egresado->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $egresado->ctiVitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        CTI Vitae
+                                    <a href="{{ $egresado->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        Cti Vitae
                                     </a>
                                 </div>
                             </div>
@@ -137,11 +139,11 @@
                                         <a href="/user/template/uploads/pdfs/{{ $tesista_pre->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
                                             CV
                                         </a>
-                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pre->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        <a href="{{ $tesista_pre->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                             Linkedin
                                         </a>
-                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pre->ctiVitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                            CTI Vitae
+                                        <a href="{{ $tesista_pre->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                            Cti Vitae
                                         </a>
                                     </div>
                                 </div>
@@ -166,10 +168,10 @@
                                         <a href="/user/template/uploads/pdfs/{{ $tesista_pos->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
                                             CV
                                         </a>
-                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pos->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        <a href="{{ $tesista_pos->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                             Linkedin
                                         </a>
-                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pos->ctiVitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        <a href="{{ $tesista_pos->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                             CTI Vitae
                                         </a>
                                     </div>
@@ -201,11 +203,11 @@
                                     <a href="/user/template/uploads/pdfs/{{ $pasante->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
                                         CV
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $pasante->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                    <a href="{{ $pasante->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $pasante->ctiVitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        CTI Vitae
+                                    <a href="{{ $pasante->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        Cti Vitae
                                     </a>
                                 </div>
                             </div>
@@ -234,11 +236,11 @@
                                     <a href="/user/template/uploads/pdfs/{{ $aliado->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
                                         CV
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $aliado->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                    <a href="{{ $aliado->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
                                     </a>
-                                    <a href="/user/template/uploads/pdfs/{{ $aliado->ctiVitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        CTI Vitae
+                                    <a href="{{ $aliado->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                        Cti Vitae
                                     </a>
                                 </div>
                             </div>
@@ -266,6 +268,9 @@
     });
     //Resaltar botón seleccionado
     button.classList.add('bg-blue-600', 'text-white', 'active');
+    if (sectionId === 'tesistas') {
+            showTesistas('pregrado', document.querySelector('.tesistas-tab'));
+        }
     }
 
 

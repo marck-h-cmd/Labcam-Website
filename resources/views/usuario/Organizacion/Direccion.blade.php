@@ -64,7 +64,6 @@
                         <h3 class="text-black font-semibold text-base mt-3">{{$jefe->nombre}}</h3>
                     </div>
                     @endforeach
-
                     <!-- Técnico e Investigador Principal -->
                     <div class="flex flex-wrap justify-center gap-16 w-full">
                         @foreach($tecnicos as $tecnico)
@@ -95,6 +94,17 @@
                         <h3 class="text-black font-semibold text-xl mb-2">{{$jefe->nombre}}</h3>
                         <p class="text-gray-700 text-sm md:text-base">{{$jefe->carrera}}</p>
                         <p class="text-wrap break-words max-w-5xl mx-auto text-gray-800">{{$jefe->descripcion}}</p>
+                        <div class="flex justify-center items-center gap-4 w-full mt-4">
+                            <a href="/user/template/uploads/pdfs/{{ $jefe->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                CV
+                            </a>
+                            <a href="{{ $jefe->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                Linkedin
+                            </a>
+                            <a href="{{ $jefe->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                CTI Vitae
+                            </a>
+                        </div>
                     </div>
                 </div>
                 @endforeach
@@ -108,6 +118,17 @@
                     <h3 class="text-black font-semibold text-xl mb-2">{{$tecnico->nombre}}</h3>
                     <p class="text-gray-700 text-sm md:text-base">{{$tecnico->carrera}}</p>
                     <p class="text-wrap break-words max-w-5xl mx-auto text-gray-800">{{$tecnico->descripcion}}</p>
+                    <div class="flex justify-center items-center gap-4 w-full mt-4">
+                        <a href="/user/template/uploads/pdfs/{{ $tecnico->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                            CV
+                        </a>
+                        <a href="{{ $tecnico->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            Linkedin
+                        </a>
+                        <a href="{{ $tecnico->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                            CTI Vitae
+                        </a>
+                    </div>
                 </div>
                 @endforeach
                 </div>
@@ -121,6 +142,17 @@
                         <h3 class="text-black font-semibold text-xl mb-2">{{$invP->nombre}}</h3>
                         <p class="text-gray-700 text-sm md:text-base">{{$invP->carrera}}</p>
                         <p class="text-wrap break-words max-w-5xl mx-auto text-gray-800">{{$invP->descripcion}}</p>
+                        <div class="flex justify-center items-center gap-4 w-full mt-4">
+                            <a href="/user/template/uploads/pdfs/{{ $invP->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                CV
+                            </a>
+                            <a href="{{ $invP->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                Linkedin
+                            </a>
+                            <a href="{{ $invP->ctivitae }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
+                                CTI Vitae
+                            </a>
+                        </div>
                     </div>
                     @endforeach
                 </div>

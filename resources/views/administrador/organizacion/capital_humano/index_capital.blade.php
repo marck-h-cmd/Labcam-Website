@@ -48,8 +48,6 @@
                             + Nuevo
                         </button>
                     </form>
-                
-                    <!-- Formulario de Búsqueda -->
                     <form class="flex items-center max-w-lg" method="GET">   
                         <label for="default-search" class="mb-2 text-sm font-medium text-gray-400 sr-only dark:text-white">Search</label>
                         <div class="relative w-full max-w-xs">
@@ -59,11 +57,9 @@
                                 </svg>
                             </div>
                             <input type="search" id="default-search" name="buscarpor" value="{{ $buscarpor }}" class="block w-full p-4 pl-10 text-sm border border-gray-300 rounded-lg bg-gray-500 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:placeholder-gray-400 dark:text-black" placeholder="Nombre..."/>
-                            <button type="submit" class="absolute right-2.5 bottom-2.5 bg-blue-700 text-white hover:bg-blue-800 font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
                         </div>
                     </form>
                 </div>
-                
 
                 <div class="flow-root">
                     <div class="mt-10 overflow-x-auto">
@@ -72,7 +68,7 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
-                                            Nombre
+                                            Nombres Y Apellidos
                                         </th>
                                         <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">
                                             Grado Académico
@@ -111,9 +107,9 @@
                                             <a href="/user/template/uploads/pdfs/{{ $capital->cv }}"><img width="40" height="40" src="https://img.icons8.com/ultraviolet/40/documents.png" alt="documents"/></a>
                                         </td>
                                         <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                                            <form action="{{ route('capitales.destroy', $capital->id) }}" method="POST">
-                                                <button type="button" onclick="openEditModal(this)" data-capital='@json($capital)'class="text-blue-600 font-bold hover:text-blue-900">
-                                                    <img width="35" height="35" src="https://img.icons8.com/stickers/50/multi-edit.png" alt="multi-edit"/>
+                                            <form action="{{ route('capitales.destroy', $capital->id) }}" method="POST" class="flex items-center space-x-2 ">
+                                                <button type="button" onclick="openEditModal(this)" data-capital='@json($capital)' class="text-blue-600 font-bold hover:text-blue-900">
+                                                    <img width="40" height="40" src="https://img.icons8.com/stickers/50/multi-edit.png" alt="multi-edit"/>
                                                 </button>
                                                 @csrf
                                                 @method('DELETE')
@@ -131,7 +127,7 @@
                                                             this.closest('form').submit();
                                                         }
                                                     });">
-                                                    <img width="35" height="35" src="https://img.icons8.com/stickers/50/delete-trash.png" alt="delete-trash"/>
+                                                    <img width="40" height="40" src="https://img.icons8.com/stickers/50/delete-trash.png" alt="delete-trash"/>
                                                 </a>
                                             </form>
                                         </td>
@@ -139,7 +135,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
                             <div class="mt-4 px-4">
                                 {{$capitales->links()}}
                             </div>
@@ -170,7 +165,7 @@
                     <!-- Columna izquierda -->
                     <div class="w-full md:w-1/2">
                         <div class="mb-4">
-                            <label for="nombres" class="block">Nombres:</label>
+                            <label for="nombres" class="block">Nombres y Apellidos:</label>
                             <input type="text" id="nombres" name="nombres" class="w-full px-4 py-2 border rounded" required>
                         </div>
                         <div class="mb-4">
@@ -254,7 +249,7 @@
                 <div class="flex felx-col md:flex-row gap-6">
                     <div class="w-full md:w-1/2">
                         <div class="mb-4">
-                            <label for="edit_nombre" class="block">Nombres</label>
+                            <label for="edit_nombre" class="block">Nombres y Apellidos</label>
                             <input type="text" id="edit_nombre" name="edit_nombre" value="" class="w-full px-4 py-2 border rounded" required>
                         </div>
                         <div class="mb-4">
@@ -473,7 +468,6 @@
         const defaultButton = document.querySelector('#menu-investigadores a');
         filterByRole('Investigadores', defaultButton);
     });
-    
+ 
 </script>
-
 @endsection
