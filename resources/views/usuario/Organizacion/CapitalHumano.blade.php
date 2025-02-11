@@ -54,18 +54,16 @@
                         @foreach($investigadores as $investigador)
                         <div class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
                             <img src="/user/template/images/{{ $investigador->foto }}" alt="{{ $investigador->foto }}" class="w-full h-[200px] object-cover rounded-t-xl">
-                            
                             <div class="px-4 py-6">
                                 <span class="text-gray-600 text-lg font-bold">{{ $investigador->nombre }}</span>
                                 <p class="text-sm text-black">Grado Académico: {{ $investigador->carrera }}</p>
                                 <p class="text-sm text-black">Área de Investigación: {{ $investigador->areaInvestigacion->nombre }}</p>
                                 <p class="text-sm text-black">Correo: {{ $investigador->correo }}</p>
                             </div>
-                
                             <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                 <div class="flex flex-col gap-4">
-                                    <a href="/user/template/uploads/pdfs/{{$investigador->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        Ver CV
+                                    <a href="/user/template/uploads/pdfs/{{$investigador->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                        CV
                                     </a>
                                     <a href="/user/template/uploads/pdfs/{{$investigador->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
@@ -95,8 +93,8 @@
                             </div>
                             <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                 <div class="flex flex-col gap-4">
-                                    <a href="/user/template/uploads/pdfs/{{ $egresado->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        Ver CV
+                                    <a href="/user/template/uploads/pdfs/{{ $egresado->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                        CV
                                     </a>
                                     <a href="/user/template/uploads/pdfs/{{ $egresado->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
@@ -136,8 +134,8 @@
                                 </div>
                                 <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                     <div class="flex flex-col gap-4">
-                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pre->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                            Ver CV
+                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pre->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                            CV
                                         </a>
                                         <a href="/user/template/uploads/pdfs/{{ $tesista_pre->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                             Linkedin
@@ -165,8 +163,8 @@
                                 </div>
                                 <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                     <div class="flex flex-col gap-4">
-                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pos->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                            Ver CV
+                                        <a href="/user/template/uploads/pdfs/{{ $tesista_pos->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                            CV
                                         </a>
                                         <a href="/user/template/uploads/pdfs/{{ $tesista_pos->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                             Linkedin
@@ -200,8 +198,8 @@
                             </div>
                             <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                 <div class="flex flex-col gap-4">
-                                    <a href="/user/template/uploads/pdfs/{{ $pasante->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        Ver CV
+                                    <a href="/user/template/uploads/pdfs/{{ $pasante->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                        CV
                                     </a>
                                     <a href="/user/template/uploads/pdfs/{{ $pasante->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
@@ -233,8 +231,8 @@
                             </div>
                             <div class="absolute inset-0 bg-[#1E5397] bg-opacity-35 flex items-center justify-center opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-in-out rounded-xl backdrop-blur-md">
                                 <div class="flex flex-col gap-4">
-                                    <a href="/user/template/uploads/pdfs/{{ $aliado->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
-                                        Ver CV
+                                    <a href="/user/template/uploads/pdfs/{{ $aliado->cv }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg text-center">
+                                        CV
                                     </a>
                                     <a href="/user/template/uploads/pdfs/{{ $aliado->linkedin }}" class="text-white text-base bg-[#98C560] hover:bg-[#a6d073] px-3 py-2 rounded-lg">
                                         Linkedin
@@ -289,8 +287,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             // Mostrar la sección de investigadores y resaltar el botón
             showSection('investigadores', document.querySelector('[onclick="showSection(\'investigadores\',this)"]'));
-        });
-
-        
+        });   
     </script>
 @endsection
