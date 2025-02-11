@@ -25,8 +25,8 @@ class CapitalSeeder extends Seeder
 
             ['nombre' => 'María López', 
             'carrera' => 'Ciencias Biológicas', 
-            'area_investigacion' => 2, 'correo' => 
-            'maria.lopez@correo.com', 
+            'area_investigacion' => 2, 
+            'correo' => 'maria.lopez@correo.com', 
             'cv' => 'cv_maria_lopez.pdf', 
             'rol' => 'egresados', 
             'foto' => 'maria_lopez.jpg',

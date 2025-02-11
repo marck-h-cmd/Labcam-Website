@@ -10,5 +10,5 @@ class Direccion extends Model
     use HasFactory;
     protected $table = 'direccion';
     protected $primaryKey = 'id';
-    protected $fillable = ['nombre','carrera','foto','rol', 'descripcion'];
+    protected $fillable = ['nombre','carrera','foto','rol','cv','linkedin','ctivitae', 'descripcion'];
 }

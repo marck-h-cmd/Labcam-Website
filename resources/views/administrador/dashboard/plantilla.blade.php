@@ -19,7 +19,7 @@
     <aside
         class="fixed left-0 top-0 w-[300px] h-full bg-[#1E5397] p-4 z-50 sidebar-menu transition-transform overflow-y-auto shadow-2xl">
         <a href="{{ route('admin-principal') }}" class="flex items-center py-8 border-b border-b-[#98C560]">
-            <img src="/user/template/images/logoLabCam.png" alt="logo_labcam" class="w-[260px] h-16">
+            <img src="/user/template/images/logoLabCam.png" alt="logo_labcam" class="max-w-full">
         </a>
         <ul class="mt-8">
             <h4 class="text-[#98C560] text-sm font-bold uppercase mb-3">Administración general</h4>
