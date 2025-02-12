@@ -24,19 +24,17 @@ class CapitalHumanoController extends Controller
     public function store(Request $request)
     {
         // dd($request->tesistas_type);
-        $request->validate([
-            'nombres' => 'required|string|max:255',
-            'carrera' => 'required|string|max:255',
-            'area_investigacion' => 'required|exists:areas_investigacion,id',
-            'correo' => 'required|email|max:255',
-            'cv' => 'required|file|mimes:pdf|max:10248',
-            'rol' => 'required|string|max:50',
-            'imagen' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
-            'linkedin' => 'required|string',
-            'ctivitae' => 'required|string'
-
-        ]);
-
+        // $request->validate([
+        //     'nombres' => 'required|string|max:255',
+        //     'carrera' => 'required|string|max:255',
+        //     'area_investigacion' => 'required|exists:areas_investigacion,id',
+        //     'correo' => 'required|email|max:255',
+        //     'cv' => 'required|file|mimes:pdf|max:10248',
+        //     'rol' => 'required|string|max:50',
+        //     'imagen' => 'required|file|mimes:jpeg,png,jpg,gif|max:2048',
+        //     'linkedin' => 'required|string',
+        //     'ctivitae' => 'required|string'
+        // ]);
             // Ruta donde se guardarán las imágenes
             $cvPath = public_path('/user/template/uploads/pdfs');
             // Manejar la actualización de cada imagen
