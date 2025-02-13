@@ -154,13 +154,10 @@ class CapitalHumanoController extends Controller
 
     public function area_us()
     {
-        $investigadores = Capital::where('rol','investigadores')->get();
-        $egresados = Capital::where('rol','egresados')->get();
-        $tesistas = Capital::where('rol','tesistas')->get();
-        $pasantes = Capital::where('rol','pasantes')->get();
-        $aliados = Capital::where('rol','aliados')->get();
+        $capitales = Capital::All();
+        $areasInvestigacion = AreaInvestigacion::All();
 
-        return view('usuario.Organizacion.AreasInvestigacion', compact('investigadores','egresados','tesistas','pasantes','aliados'));
+        return view('usuario.Organizacion.AreasInvestigacion', compact('capitales','areasInvestigacion'));
     }
 
 }
