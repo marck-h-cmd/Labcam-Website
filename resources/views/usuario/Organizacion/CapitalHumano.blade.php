@@ -3,7 +3,7 @@
 @section('contenido')
     <section class="flex flex-wrap justify-center gap-12 w-full px-16 pb-12 relative">
         <!-- Columna izquierda (Menú) -->
-        <div class="bg-gray-200 mt-36 top-36 sticky px-4 py-8 w-max md:w-56 shadow-md rounded-lg flex md:flex-col h-fit">
+        <div class="bg-gray-200 mt-36 md:sticky md:top-36 px-4 py-8 w-max md:w-56 shadow-md rounded-lg flex md:flex-col h-fit">
             <div class="flex flex-col gap-4 w-full">
                 <button onclick="showSection('investigadores',this)"
                     class="bloque text-base font-semibold w-full rounded-md py-2 hover:bg-blue-600 hover:text-white focus:outline-none">Investigadores</button>

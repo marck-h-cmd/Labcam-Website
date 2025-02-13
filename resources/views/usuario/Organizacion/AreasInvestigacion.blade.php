@@ -3,7 +3,7 @@
 @section('contenido')
     <section class="flex flex-wrap justify-center gap-12 h-full w-full px-16 pb-12">
         <!-- Menú de áreas de investigación -->
-        <div class="bg-gray-200 mt-36 w-max md:w-56 shadow-md rounded-lg flex md:flex-col max-h-[310px]">
+        <div class="bg-gray-200 mt-36 md:sticky md:top-36 w-max md:w-56 shadow-md rounded-lg flex md:flex-col max-h-[310px]">
             <div class="flex flex-col px-4 py-8 gap-4 w-full h-full overflow-y-auto">
                 @foreach ($areasInvestigacion as $area)
                     <button onclick="showSection('capital_area', this, '{{ $area->id }}')"
