@@ -22,9 +22,9 @@
             </div>
         </div>
 
-        <!-- Imagen destacada -->
+        <!-- Imagen destacada "{{ asset('storage/' . $proyecto->imagen) }} -->
         <div class="flex-shrink-0 w-3/3">
-            <img src="{{ asset('storage/' . $proyecto->imagen) }}" alt="Imagen del proyecto" class="w-full rounded-lg shadow-md">
+            <img src="/user/template/{{ $proyecto->imagen }}" alt="Imagen del proyecto" class="w-full rounded-lg shadow-md">
         </div>
 
         <!-- Contenido del proyecto -->

@@ -20,9 +20,9 @@
                 </div>
             </div>
 
-            <!-- Imagen destacada -->
+            <!-- Imagen destacada  "{{ Storage::url($noticia->imagen) }}"-->
             <div class="flex-shrink-0 w-3/3">
-                <img src="{{ Storage::url($noticia->imagen) }}" alt="Imagen de la noticia"
+                <img src="/user/template/{{ $noticia->imagen }}" alt="Imagen de la noticia"
                     class="w-full rounded-lg shadow-md">
             </div>
 
