@@ -162,13 +162,16 @@ public function showUser(Request $request)
 {
         $query = $request->input('search'); 
 
-        $users = User::when($query, function ($queryBuilder) use ($query) {
-             $queryBuilder->where('firstname', 'like', '%' . $query . '%')
-                          ->orWhere('lastname', 'like', '%' . $query . '%')
-                          ->orWhere('email', 'like', '%' . $query . '%');
+        $users = User::where('is_approved', true) 
+        ->when($query, function ($queryBuilder) use ($query) {
+            $queryBuilder->where(function ($q) use ($query) {
+                $q->where('firstname', 'like', '%' . $query . '%')
+                  ->orWhere('lastname', 'like', '%' . $query . '%')
+                  ->orWhere('email', 'like', '%' . $query . '%');
+            });
         })
-        ->where('is_approved', true)
         ->paginate(10);
+        
 
          return view('administrador.general.managementusers.show', compact('users'));
 }

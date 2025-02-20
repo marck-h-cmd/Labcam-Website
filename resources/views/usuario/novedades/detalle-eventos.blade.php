@@ -30,16 +30,17 @@
                 </p>
             </div>
         </div>
-
+       
+        <!-- "{{ asset('storage/' . $evento->imagen) }}" -->
             
             <div class="flex-shrink-0 w-3/3">
-                <img src="{{ asset('storage/' . $evento->imagen) }}" alt="Imagen de la noticia" class="w-full rounded-lg shadow-md">
+                <img src="/user/template/{{ $evento->imagen }}" alt="Imagen de la noticia" class="w-full rounded-lg shadow-md">
             </div>
 
-        <!-- <div class="flex mb-8"> -->
+        <!-- <div class="flex mb-8">  -->
            
         <div style="max-width: 100%; margin-top: 1rem;">
-            <article  id="descripcion-articulo" class="descripcion-estilo">
+            <article  id="descripcion-articulo" style="font-size: 1rem; color: #4A5568; line-height: 1.5; word-wrap: break-word;">
                 {!! $evento->descripcion !!}
             </article>
         </div>
