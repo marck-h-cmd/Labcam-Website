@@ -53,7 +53,7 @@
                                 <div class="px-8 py-0.1 text-center">
                                         <button 
                                             class="w-8 h-8 flex items-center justify-start rounded shadow cursor-pointer"
-                                            onclick="openModal('{{ Storage::url($usuario->photo) }}', 'image')"
+                                            onclick="openModal('{{ Storage::url(''. $usuario->photo) }}', 'image')"
                                         >
                                             <svg 
                                                 xmlns="http://www.w3.org/2000/svg" 
