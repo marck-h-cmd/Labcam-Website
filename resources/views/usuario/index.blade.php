@@ -129,10 +129,11 @@
                         <div class="mb-7 text-lg">
                             {{ new \Illuminate\Support\HtmlString($topProyecto->descripcion) }}
                         </div>
-                        <button
-                            class="bg-[#98C560] text-blue-900 font-bold text-lg px-8 py-4 rounded-lg hover:bg-green-500 transition duration-300">
+
+                        <a href="{{ route('proyectos') }}"
+                            class="bg-[#98C560] p-4 rounded-xl text-sm text-white hover:bg-[#a6d073] cursor-pointer">
                             VER TODOS LOS PROYECTOS
-                        </button>
+                        </a>
                     </div>
                 </div>
 
