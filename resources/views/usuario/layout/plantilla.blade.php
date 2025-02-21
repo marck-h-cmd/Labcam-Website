@@ -49,7 +49,7 @@
                     <!-- Dropdown Nosotros -->
                     <li class="relative">
                         <button id="dropdownNavbarLink"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['about', 'historia', 'biblioteca']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['about', 'historia', 'biblioteca.papers.index']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'">
                             Nosotros
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('biblioteca.papers.index') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca') ? 'text-[#98C560]' : 'text-black' }}">
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca.papers.index') ? 'text-[#98C560]' : 'text-black' }}">
                                         Biblioteca
                                     </a>
                                 </li>
@@ -89,7 +89,7 @@
                     <!-- Dropdown Organización -->
                     <li class="relative">
                         <button id="dropdownNavbarLink2"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['direccion', 'capital']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['direccion', 'capital_usuario', 'areas']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar2' ? null : 'dropdownNavbar2'">
                             Organización
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

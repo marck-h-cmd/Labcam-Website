@@ -32,7 +32,7 @@
                 </a>
             </li>
 
-            <li class="mb-1 group cursor-pointer">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['person', 'users']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -42,13 +42,13 @@
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
                         <a href="{{ route('person') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 bg-gray-300"></span>
+                            <span class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('person') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Lista de Usuarios
                         </a>
                     </li>
                     <li class="mb-4">
                         <a href="{{ route('users') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 bg-gray-300"></span>
+                            <span class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('users') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Registrar Usuario
                         </a>
                     </li>
@@ -174,7 +174,7 @@
                 </ul>
             </li>
 
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['', 'capital_index']) ? 'active' : '' }}">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['capital_index', 'direccion_index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
