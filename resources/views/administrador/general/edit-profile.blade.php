@@ -10,9 +10,8 @@
             <div class="space-y-4">
                 <div>
                     <h3 class="text-sm text-gray-700 font-medium">FOTO</h3>
-                    <!-- <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-50 h-50 object-cover"> -->
                     @if(Auth::user()->photo)
-                      <img src="{{ asset('storage/' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-50 h-30 object-cover">
+                      <img src="{{ Storage::url('' . Auth::user()->photo) }}" alt="Foto de perfil" class="w-50 h-30 object-cover">
                     @else
                       <div class="w-20 h-20 bg-gray-300 text-gray-700 flex items-center justify-center rounded-full text-xl font-bold uppercase">
                           {{ substr(Auth::user()->firstname, 0, 1) }}

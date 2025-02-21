@@ -49,7 +49,7 @@
                     <!-- Dropdown Nosotros -->
                     <li class="relative">
                         <button id="dropdownNavbarLink"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['about', 'historia', 'biblioteca.papers.index']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs('about', 'historia', 'biblioteca.papers.*') ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'">
                             Nosotros
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +78,7 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('biblioteca.papers.index') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca.papers.index') ? 'text-[#98C560]' : 'text-black' }}">
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca.papers.*') ? 'text-[#98C560]' : 'text-black' }}">
                                         Biblioteca
                                     </a>
                                 </li>
@@ -129,7 +129,7 @@
                     <!-- Dropdown Novedades -->
                     <li class="relative">
                         <button id="dropdownNavbarLink3"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['noticias', 'proyectos', 'eventos']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['noticias', 'noticias.show', 'proyectos', 'proyectos.show', 'eventos', 'eventos.show']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'">
                             Novedades
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -146,19 +146,19 @@
                             <ul class="py-2 text-sm">
                                 <li>
                                     <a href="{{ route('noticias') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias') ? 'text-[#98C560]' : 'text-black' }}">
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias', 'noticias.show') ? 'text-[#98C560]' : 'text-black' }}">
                                         Noticias
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('proyectos') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos') ? 'text-[#98C560]' : 'text-black' }}">
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos', 'proyectos.show') ? 'text-[#98C560]' : 'text-black' }}">
                                         Proyectos
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('eventos') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos') ? 'text-[#98C560]' : 'text-black' }}">
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('eventos', 'eventos.show') ? 'text-[#98C560]' : 'text-black' }}">
                                         Eventos
                                     </a>
                                 </li>

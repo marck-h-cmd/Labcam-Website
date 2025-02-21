@@ -40,45 +40,21 @@ Route::post('/contacto', [ContactoController::class, 'store'])->name('contacto.s
 
 
 //RUTA NOTICIA
-Route::get('/noticias', function () {
-    return view('usuario.novedades.noticias');
-})->name('noticias');
-
 use App\Http\Controllers\NoticiaController;
 
 Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias');
 Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias.show');
-Route::get('/detalle-noticias', function () {
-    return view('usuario.novedades.detalle-noticias');
-})->name('detalle-noticias');
 
 //RUTA PROYECTO
-Route::get('/proyectos', function () {
-    return view('usuario.novedades.proyectos');
-})->name('proyectos');
-
 use App\Http\Controllers\ProyectoController;
 Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos');
 Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 
-Route::get('/detalle-proyectos', function () {
-    return view('usuario.novedades.detalle-proyectos');
-})->name('detalle-proyectos');
-
 //RUTA EVENTO
-Route::get('/eventos', function () {
-    return view('usuario.novedades.eventos');
-})->name('eventos');
-
 use App\Http\Controllers\EventoController;
 
 Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
 Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.show');
-
-
-Route::get('/detalle-eventos', function () {
-    return view('usuario.novedades.detalle-eventos');
-})->name('detalle-eventos');
 
 // ------------------------- SECCION BIBLIOTECA ---------------------------------------------
 Route::prefix('biblioteca/papers')->name('biblioteca.papers.')->group(function () {
