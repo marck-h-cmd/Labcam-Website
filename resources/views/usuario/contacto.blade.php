@@ -19,7 +19,7 @@
 @endif
 
 <!-- Imagen de fondo ocupando el ancho completo -->
-<div class="w-full bg-cover bg-center" style="background-image: url('{{ asset('images/imagen.png') }}'); height: 300px;">
+<div class="w-full bg-cover bg-center" style="background-image: url('images/imagen.png'); height: 300px;">
     <div class="flex flex-col items-center justify-center h-full bg-black bg-opacity-50">
         <h2 class="text-4xl font-bold text-white mt-20">Contacto</h2>
         <p class="text-white mt-8 max-md:p-2">Para todas las consultas, envíenos un correo electrónico utilizando el siguiente formulario.</p>
