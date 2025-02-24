@@ -9,39 +9,40 @@
     <div
         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 bg-gray-200 mx-4 sm:mx-6 md:mx-8 lg:mx-14 mb-6 gap-4">
         <div id="menu-investigadores" class="cursor-pointer">
-            <a onclick="filterByRole('Investigadores', this)"
-                class="flex justify-center py-4 px-4 w-full h-full text-gray-700 font-medium hover:bg-blue-600 hover:text-white rounded-md">
+            <a href="{{ route('capital_index', ['role' => 'Investigadores', 'buscarpor' => $buscarpor]) }}"
+                class="flex justify-center py-4 px-4 w-full h-full font-medium rounded-md {{ $role == 'Investigadores' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-600 hover:text-white' }}">
                 <span class="text-sm">Investigadores</span>
             </a>
         </div>
         <div id="menu-egresados" class="cursor-pointer">
-            <a onclick="filterByRole('Egresados', this)"
-                class="flex justify-center py-4 px-4 w-full h-full text-gray-700 font-medium hover:bg-blue-600 hover:text-white rounded-md">
+            <a href="{{ route('capital_index', ['role' => 'Egresados', 'buscarpor' => $buscarpor]) }}"
+                class="flex justify-center py-4 px-4 w-full h-full font-medium rounded-md {{ $role == 'Egresados' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-600 hover:text-white' }}">
                 <span class="text-sm">Egresados</span>
             </a>
         </div>
         <div id="menu-tesistas" class="cursor-pointer">
-            <a onclick="filterByRole('Tesistas', this)"
-                class="flex justify-center py-4 px-4 w-full h-full text-gray-700 font-medium hover:bg-blue-600 hover:text-white rounded-md">
+            <a href="{{ route('capital_index', ['role' => 'Tesistas', 'buscarpor' => $buscarpor]) }}"
+                class="flex justify-center py-4 px-4 w-full h-full font-medium rounded-md {{ $role == 'Tesistas' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-600 hover:text-white' }}">
                 <span class="text-sm">Tesistas</span>
             </a>
         </div>
         <div id="menu-pasantes" class="cursor-pointer">
-            <a onclick="filterByRole('Pasantes', this)"
-                class="flex justify-center py-4 px-4 w-full h-full text-gray-700 font-medium hover:bg-blue-600 hover:text-white rounded-md">
+            <a href="{{ route('capital_index', ['role' => 'Pasantes', 'buscarpor' => $buscarpor]) }}"
+                class="flex justify-center py-4 px-4 w-full h-full font-medium rounded-md {{ $role == 'Pasantes' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-600 hover:text-white' }}">
                 <span class="text-sm">Pasantes</span>
             </a>
         </div>
         <div id="menu-aliados" class="cursor-pointer">
-            <a onclick="filterByRole('Aliados', this)"
-                class="flex justify-center py-4 px-4 w-full h-full text-gray-700 font-medium hover:bg-blue-600 hover:text-white rounded-md">
+            <a href="{{ route('capital_index', ['role' => 'Aliados', 'buscarpor' => $buscarpor]) }}"
+                class="flex justify-center py-4 px-4 w-full h-full font-medium rounded-md {{ $role == 'Aliados' ? 'bg-blue-600 text-white' : 'text-gray-700 hover:bg-blue-600 hover:text-white' }}">
                 <span class="text-sm">Aliados</span>
             </a>
         </div>
     </div>
 
 
-    {{-- -----------CAMBIOS------- --}}
+
+    {{-- -----------TABLA------- --}}
     <div class="p-2">
         <div class="max-w-[1200px] mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
@@ -168,7 +169,7 @@
                                     </tbody>
                                 </table>
                                 <div class="mt-4 px-4">
-                                    {{ $capitales->links() }}
+                                    {{ $capitales->appends(request()->all())->links() }}
                                 </div>
                             </div>
                         </div>
@@ -182,91 +183,166 @@
 
     <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
-            <div class="bg-slate-200 p-7 rounded shadow-lg max-w-4xl w-full relative max-h-screen overflow-y-auto">
-                <!-- Título centrado en todo el modal -->
-                <div class="main-title flex flex-col items-center gap-3 mb-8">
-                    <div class="title text-2xl font-semibold text-[#2e5382]">Nuevo Registro</div>
-                    <div class="blue-line w-2/5 h-0.5 bg-[#64d423]"></div>
+            <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-4xl w-full relative max-h-screen overflow-y-auto">
+                <!-- Título centrado -->
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold text-blue-800">Nuevo Registro</h2>
+                    <div class="mx-auto mt-2 w-1/5 h-1 bg-green-400"></div>
                 </div>
-                <!-- Contenido del modal -->
+
+                <!-- Formulario -->
                 <form id="form" action="{{ route('capitales.store') }}" method="POST"
-                    enctype="multipart/form-data" class="flex flex-col gap-6">
-                    @method('POST')
+                    enctype="multipart/form-data" class="space-y-6">
                     @csrf
-                    <!-- Contenedor de columnas -->
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <!-- Columna izquierda -->
-                        <div class="w-full md:w-1/2">
-                            <div class="mb-4">
-                                <label for="nombres" class="block">Nombres y Apellidos:</label>
+                    @method('POST')
+
+                    <!-- Contenedor principal con Grid (2 columnas en md+) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                        <!-- Columna Izquierda -->
+                        <div class="space-y-4">
+                            <div>
+                                <label for="nombres" class="block text-gray-700">Nombres y Apellidos:</label>
                                 <input type="text" id="nombres" name="nombres"
-                                    class="w-full px-4 py-2 border rounded" required>
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="area_investigacion" class="block">Área de Investigación:</label>
+                            <div>
+                                <label for="area_investigacion" class="block text-gray-700">Área de Investigación:</label>
                                 <select id="area_investigacion" name="area_investigacion"
-                                    class="w-full px-4 py-2 border rounded" required>
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                                     <option value="">Seleccione un área</option>
                                     @foreach ($areasInvestigacion as $area)
                                         <option value="{{ $area->id }}">{{ $area->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-4">
-                                <label for="correo" class="block">Correo:</label>
+                            <div>
+                                <label for="correo" class="block text-gray-700">Correo:</label>
                                 <input type="email" id="correo" name="correo"
-                                    class="w-full px-4 py-2 border rounded" required>
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="carrera" class="block">Grado Académico:</label>
+                            <div>
+                                <label for="carrera" class="block text-gray-700">Grado Académico:</label>
                                 <input type="text" id="carrera" name="carrera"
-                                    class="w-full px-4 py-2 border rounded" required>
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="rol" class="block">Rol:</label>
-                                <input type="text" id="rol" name="rol"
-                                    class="w-full px-4 py-2 border rounded" readonly>
+                            <div>
+                                <label for="rol" class="block text-gray-700">Rol:</label>
+                                <input type="text" id="rol" name="rol" value="{{ $role }}"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100" readonly>
                             </div>
-                            <div id="tesistasTypeField" class="hidden">
-                                <label for="tesistas_type" class="block text-sm font-medium text-gray-700">Tipo de
-                                    Tesista</label>
-                                <select id="tesistas_type" name="tesistas_type" class="w-full block px-4 py-2 border rounded">
+                        </div>
+
+                        <!-- Columna Derecha -->
+                        <div class="space-y-4">
+                            <!-- Imagen Upload -->
+                            <div>
+                                <label class="block text-gray-700 mb-1">Imagen de Perfil:</label>
+                                <div id="image-upload"
+                                    class="border-2 border-dashed border-gray-300 w-full h-52
+                                            flex flex-col items-center justify-center cursor-pointer relative text-center rounded-md"
+                                    onclick="document.getElementById('imagen').click()" ondragover="handleDragOver(event)"
+                                    ondrop="handleDrop(event, 'imagen')">
+                                    <!-- Placeholder (solo se ve si no hay imagen) -->
+                                    <span id="image-placeholder" class="text-gray-500">
+                                        Selecciona o arrastra una imagen (png, jpeg, jpg, gif)
+                                    </span>
+                                    <!-- Vista previa -->
+                                    <img id="previewImage" src="" alt="Vista previa"
+                                        class="hidden w-52 h-full object-cover rounded shadow mx-auto">
+                                    <!-- Botón eliminar imagen -->
+                                    <button type="button" id="remove-image"
+                                        class="hidden absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition cursor-pointer"
+                                        onclick="removeImage(event)">
+                                        <!-- Icono papelera -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0
+                                                                                                                                     0116.138 21H7.862a2 2 0
+                                                                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                        </svg>
+                                    </button>
+                                    <input type="file" id="imagen" name="imagen" class="hidden"
+                                        accept="image/png, image/jpeg, image/jpg, image/gif"
+                                        onchange="mostrarVistaPrevia(event)">
+                                </div>
+                            </div>
+
+                            <!-- CV Upload -->
+                            <div>
+                                <label class="block text-gray-700 mb-1">CV:</label>
+                                <div id="cv-upload"
+                                    class="border-2 border-dashed border-gray-300 w-full h-11
+                                            flex flex-col items-center justify-center cursor-pointer relative text-center rounded-md"
+                                    onclick="document.getElementById('cv').click()" ondragover="handleDragOver(event)"
+                                    ondrop="handleDrop(event, 'cv')">
+                                    <!-- Placeholder CV -->
+                                    <span id="cv-placeholder" class="text-gray-500">
+                                        Selecciona o arrastra un archivo PDF
+                                    </span>
+                                    <!-- Nombre de archivo CV -->
+                                    <div id="cv-file-info" class="hidden text-sm"></div>
+                                    <!-- Botón eliminar CV -->
+                                    <button type="button" id="remove-cv"
+                                        class="hidden absolute top-1 right-2 bg-red-500 text-white p-1 
+                                                   rounded-full hover:bg-red-600 transition cursor-pointer"
+                                        onclick="removeCV(event)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0
+                                                                                                                                     0116.138 21H7.862a2 2 0
+                                                                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                        </svg>
+                                    </button>
+                                    <input type="file" id="cv" name="cv" class="hidden"
+                                        accept="application/pdf" onchange="mostrarCV(event)">
+                                </div>
+                            </div>
+
+                            <!-- LinkedIn -->
+                            <div>
+                                <label for="linkedin" class="block text-gray-700">LinkedIn:</label>
+                                <input type="text" id="linkedin" name="linkedin"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md 
+                                              focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
+                            </div>
+                        </div>
+
+                        <!-- Fila para Tipo de Tesista y Cti Vitae -->
+                        <!-- Ocupa 2 columnas en md+ (para que estén en la misma fila) -->
+                        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+                            <!-- Campo Tipo de Tesista (oculto por defecto) -->
+                            <div class="hidden" id="tesistasTypeField">
+                                <label for="tesistas_type" class="block text-gray-700">Tipo de Tesista:</label>
+                                <select id="tesistas_type" name="tesistas_type"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md 
+                                               focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <option value="">Seleccione un tipo</option>
                                     <option value="Pregrado">Pregrado</option>
                                     <option value="Posgrado">Posgrado</option>
                                 </select>
                             </div>
-                        </div>
-                        <!-- Columna derecha -->
-                        <div class="w-full md:w-1/2">
-                            <div class="relative flex justify-center items-center mb-4">
-                                <img id="previewImage" src="" alt="Vista previa"
-                                    class="w-full h-auto rounded shadow max-w-[150px] object-cover">
-                                <button type="button"
-                                    class="absolute top-1 right-1 bg-white p-2 rounded-full shadow hover:bg-gray-100"
-                                    onclick="document.getElementById('imagen').click()">
-                                    🖉
-                                </button>
-                                <input type="file" id="imagen" name="imagen" class="hidden" accept="image/*"
-                                    onchange="mostrarVistaPrevia(event)">
-                            </div>
-                            <div class="mb-4">
-                                <label for="cv" class="block">CV:</label>
-                                <input type="file" id="cv" name="cv"
-                                    class="w-full px-4 py-2 border rounded" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="linkedin" class="block">LinkedIn:</label>
-                                <input type="text" id="linkedin" name="linkedin"
-                                    class="w-full px-4 py-2 border rounded" required>
-                            </div>
-                            <div class="mb-4">
-                                <label for="ctivitae" class="block">Cti Vitae:</label>
+
+                            <!-- Campo Cti Vitae (por defecto col-span-2, si Tesistas oculto) -->
+                            <div class="md:col-span-2" id="ctiVitaeContainer">
+                                <label for="ctivitae" class="block text-gray-700">Cti Vitae:</label>
                                 <input type="text" id="ctivitae" name="ctivitae"
-                                    class="w-full px-4 py-2 border rounded" required>
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md 
+                                              focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
                         </div>
                     </div>
+
                     <!-- Botones de acción -->
                     <div class="flex justify-center gap-4 mt-6">
                         <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-700">
@@ -281,6 +357,39 @@
             </div>
         </div>
     </div>
+
+    @if (session('create_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Registro exitoso',
+                text: '{{ session('create_success') }}',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @endif
+
+
+    @if (session('delete_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Eliminado',
+                text: '{{ session('delete_success') }}',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @endif
+
+
 
     {{-- --------------------MODAL DE EDITAR DE REGISTRO---------------------- --}}
 
@@ -331,7 +440,8 @@
                             </div>
                             <!-- Select dinámico para Tesistas -->
                             <div id="editTesistasTypeField" class="hidden">
-                                <label for="edit_tesistas_type" class="block text-sm font-medium text-gray-700">Tipo de
+                                <label for="edit_tesistas_type" class="block text-sm font-medium text-gray-700">Tipo
+                                    de
                                     Tesista</label>
                                 <select id="edit_tesistas_type" name="edit_tesistas_type"
                                     class="mt-4 block w-full rounded-md border-gray-300 shadow-sm">
@@ -389,64 +499,172 @@
         </div>
     </div>
 
-
-
     <script>
+        // Variable global para el rol seleccionado
         let selectedRole = "Investigadores"; // Rol por defecto
 
-        function openCreateModal() {
+        // Cuando el DOM cargue
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lee el rol actual que viene del controlador (URL)
+            let currentRole = "{{ $role ?? 'Investigadores' }}";
+            // Normaliza, por ejemplo, si "Tesistas Pregrado" se debe mostrar como "Tesistas"
+            if (currentRole.toLowerCase().includes('tesistas')) {
+                currentRole = 'Tesistas';
+            }
+            // Busca el botón de menú correspondiente (suponiendo que el id está en minúscula)
+            const menuItem = document.querySelector(`#menu-${currentRole.toLowerCase()} a`);
+            if (menuItem) {
+                // Marca el botón seleccionado
+                menuItem.classList.add('bg-blue-600', 'text-white');
+                menuItem.classList.remove('text-gray-700');
+            }
+        });
 
+
+        // ---------- FUNCIONES DE MODAL ----------
+        function openCreateModal() {
             document.getElementById('createModal').classList.remove('hidden');
-            document.getElementById('rol').value = selectedRole; // Establece el rol automáticamente
-            // Si el rol es "Tesistas", muestra el select para elegir "Pregrado" o "Posgrado"
+            // Usa el valor del rol actual que viene del controlador (por URL)
+            const rolValor = "{{ $role }}";
+            document.getElementById('rol').value = rolValor;
+            selectedRole = rolValor;
             const tesistasField = document.getElementById('tesistasTypeField');
+            const ctiVitaeContainer = document.getElementById('ctiVitaeContainer');
             if (selectedRole === "Tesistas") {
                 tesistasField.classList.remove('hidden');
-                tesistasField.disabled = false;
+                ctiVitaeContainer.classList.remove('md:col-span-2');
+                ctiVitaeContainer.classList.add('md:col-span-1');
             } else {
                 tesistasField.classList.add('hidden');
+                ctiVitaeContainer.classList.remove('md:col-span-1');
+                ctiVitaeContainer.classList.add('md:col-span-2');
             }
         }
 
         function closeCreateModal() {
             document.getElementById('createModal').classList.add('hidden');
-
-            // Limpia todos los campos del formulario
             document.getElementById('form').reset();
-
-            // Limpia la vista previa de la imagen
-            const previewImage = document.getElementById('previewImage');
-            if (previewImage) {
-                previewImage.src = ''; // Reinicia la imagen a su estado inicial
-            }
-
+            removeImage();
+            removeCV();
         }
 
+        // ---------- FUNCIONES DE VISTA PREVIA (IMAGEN) ----------
         function mostrarVistaPrevia(event) {
             const input = event.target;
             const previewImage = document.getElementById("previewImage");
+            const imagePlaceholder = document.getElementById("image-placeholder");
+            const removeBtn = document.getElementById("remove-image");
 
             if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert("Tipo de archivo no permitido. Solo se permiten png, jpeg, jpg, gif.");
+                    input.value = "";
+                    return;
+                }
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     previewImage.src = e.target.result;
+                    previewImage.classList.remove('hidden');
+                    imagePlaceholder.classList.add('hidden');
+                    removeBtn.classList.remove('hidden');
                 };
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(file);
             }
         }
 
-        function previewImage(event) {
-            const input1 = event.target;
-            const previewImg = document.getElementById("previewImg");
+        function removeImage(event) {
+            if (event) event.stopPropagation();
+            const imageInput = document.getElementById("imagen");
+            imageInput.value = "";
+            const previewImage = document.getElementById("previewImage");
+            previewImage.src = "";
+            previewImage.classList.add('hidden');
+            document.getElementById("image-placeholder").classList.remove('hidden');
+            document.getElementById("remove-image").classList.add('hidden');
+        }
 
-            if (input1.files && input1.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    previewImg.src = e.target.result;
-                };
-                reader.readAsDataURL(input1.files[0]);
+        // ---------- FUNCIONES DE VISTA PREVIA (CV) ----------
+        function mostrarCV(event) {
+            const input = event.target;
+            const cvPlaceholder = document.getElementById("cv-placeholder");
+            const cvFileInfo = document.getElementById("cv-file-info");
+            const removeBtn = document.getElementById("remove-cv");
+
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                if (file.type !== 'application/pdf') {
+                    alert("Tipo de archivo no permitido. Solo se permite PDF.");
+                    input.value = "";
+                    return;
+                }
+                cvFileInfo.textContent = file.name;
+                cvFileInfo.classList.remove('hidden');
+                cvPlaceholder.classList.add('hidden');
+                removeBtn.classList.remove('hidden');
             }
         }
+
+        function removeCV(event) {
+            if (event) event.stopPropagation();
+            const cvInput = document.getElementById("cv");
+            cvInput.value = "";
+            document.getElementById("cv-file-info").textContent = "";
+            document.getElementById("cv-file-info").classList.add('hidden');
+            document.getElementById("cv-placeholder").classList.remove('hidden');
+            document.getElementById("remove-cv").classList.add('hidden');
+        }
+
+        // ---------- DRAG & DROP ----------
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        function handleDrop(event, inputId) {
+            event.preventDefault();
+            const inputElement = document.getElementById(inputId);
+            if (event.dataTransfer.files && event.dataTransfer.files[0]) {
+                inputElement.files = event.dataTransfer.files;
+                if (inputId === 'imagen') {
+                    mostrarVistaPrevia({
+                        target: inputElement
+                    });
+                } else if (inputId === 'cv') {
+                    mostrarCV({
+                        target: inputElement
+                    });
+                }
+            }
+        }
+
+        // ---------- FILTRAR POR ROL ----------
+        function filterByRole(role, element) {
+            // 1) Actualiza la variable global
+            selectedRole = role;
+
+            // 2) Filtra las filas de la tabla
+            const rows = document.querySelectorAll('#table-body tr');
+            rows.forEach(row => {
+                // row.dataset.role, p.e. "Investigadores", "Tesistas Pregrado", etc.
+                // Muestra si coincide con "role"
+                row.style.display = row.dataset.role.includes(role) ? '' : 'none';
+            });
+
+            // 3) Resalta el botón del menú
+            const menuItems = document.querySelectorAll('.grid .cursor-pointer a');
+            menuItems.forEach(item => {
+                item.classList.remove('bg-blue-600', 'text-white');
+                item.classList.add('text-gray-700');
+            });
+            element.classList.add('bg-blue-600', 'text-white');
+            element.classList.remove('text-gray-700');
+        }
+
+
+
+
+
 
         function openEditModal(button) {
             let capital = JSON.parse(button.getAttribute('data-capital'));
@@ -493,45 +711,5 @@
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
         }
-
-        function filterByRole(role, element) {
-            selectedRole = role; // ¡Importante! Guarda el rol seleccionado
-
-            const rows = document.querySelectorAll('#table-body tr');
-            rows.forEach(row => {
-                row.style.display = row.dataset.role.includes(role) ? '' : 'none';
-            });
-
-            // Remueve la selección de todos los botones
-            const menuItems = document.querySelectorAll('.grid .cursor-pointer a');
-            menuItems.forEach(item => {
-                item.classList.remove('bg-blue-600', 'text-white');
-                item.classList.add('text-gray-700');
-            });
-
-            // Activa el botón seleccionado
-            element.classList.add('bg-blue-600', 'text-white');
-            element.classList.remove('text-gray-700');
-        }
-
-        function saveEditForm() {
-            const editRolField = document.getElementById('edit_rol');
-            const editTesistasTypeField = document.getElementById('edit_tesistas_type');
-
-            // Si el rol es "Tesistas", concatena el tipo y actualiza el valor del rol
-            if (editRolField.value === "Tesistas") {
-                editRolField.value =
-                    `tesistas ${editTesistasTypeField.value.toLowerCase()}`; // Ejemplo: "tesistas pregrado"
-            }
-
-            // Envía el formulario
-            document.getElementById('editForm').submit();
-        }
-
-        // Muestra "Investigadores" por defecto
-        document.addEventListener('DOMContentLoaded', () => {
-            const defaultButton = document.querySelector('#menu-investigadores a');
-            filterByRole('Investigadores', defaultButton);
-        });
     </script>
 @endsection
