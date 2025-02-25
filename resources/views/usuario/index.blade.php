@@ -77,7 +77,7 @@
                 <div
                     class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
                     <a href="#" class="w-full h-full block">
-                        <img src="/user/template/{{ $noticia->imagen }}" alt="{{ $noticia->titulo }}"
+                        <img src="{{ url('storage/' . $noticia->imagen) }}" alt="{{ $noticia->titulo }}"
                             class="w-full h-[200px] object-cover rounded-t-xl" />
                         <div class="px-4 py-6 w-full min-h-[150px]">
                             <span class="text-gray-600 mr-3 uppercase text-base">
@@ -110,7 +110,6 @@
             </a>
         </div>
     </section>
-
 
     {{-- Seccion de proyectos --}}
     <section class="bg-blue-900 text-white py-20 relative overflow-hidden">
@@ -164,7 +163,7 @@
                 <div
                     class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
                     <a href="#" class="w-full h-full block">
-                        <img src="/user/template/{{ $evento->imagen }}" alt="{{ $evento->titulo }}"
+                        <img src="{{ url('storage/' . $evento->imagen) }}" alt="{{ $evento->titulo }}"
                             class="w-full h-[200px] object-cover rounded-t-xl" />
                         <div class="px-4 py-6 w-full min-h-[150px]">
                             <span class="text-gray-600 mr-3 uppercase text-base">

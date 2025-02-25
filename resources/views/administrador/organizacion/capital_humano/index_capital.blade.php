@@ -180,7 +180,6 @@
     </div>
 
     {{-- --------------------Modal de create------------------------ --}}
-
     <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
             <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-4xl w-full relative max-h-screen overflow-y-auto">
@@ -263,9 +262,9 @@
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0
-                                                                                                                                     0116.138 21H7.862a2 2 0
-                                                                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                                                                                                                                                 0116.138 21H7.862a2 2 0
+                                                                                                                                                                                 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                                                                                                                 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="imagen" name="imagen" class="hidden"
@@ -297,9 +296,9 @@
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0
-                                                                                                                                     0116.138 21H7.862a2 2 0
-                                                                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                                                                                                                                                 0116.138 21H7.862a2 2 0
+                                                                                                                                                                                 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                                                                                                                 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="cv" name="cv" class="hidden"
@@ -373,12 +372,11 @@
         </script>
     @endif
 
-
     @if (session('delete_success'))
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'Eliminado',
+                title: 'Eliminación exitosa',
                 text: '{{ session('delete_success') }}',
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
@@ -390,107 +388,165 @@
     @endif
 
 
-
     {{-- --------------------MODAL DE EDITAR DE REGISTRO---------------------- --}}
-
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
-            <div class="bg-slate-200 p-7 rounded shadow-lg max-w-4xl w-full relative">
-                <div class="main-title flex flex-col items-center gap-3 mb-8">
-                    <div class="title text-2xl font-semibold text-[#2e5382]">Editar Registro</div>
-                    <div class="blue-line w-2/5 h-0.5 bg-[#64d423]"></div>
+            <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-4xl w-full relative max-h-screen overflow-y-auto">
+                <!-- Título centrado -->
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-semibold text-blue-800">Editar Registro</h2>
+                    <div class="mx-auto mt-2 w-1/5 h-1 bg-green-400"></div>
                 </div>
-                <form id="editForm" action="" method="POST" enctype="multipart/form-data"
-                    class="flex flex-col gap-6">
+
+                <!-- Formulario -->
+                <form id="editForm" action="" method="POST" enctype="multipart/form-data" class="space-y-6">
                     @csrf
                     @method('PUT')
-                    <div class="flex felx-col md:flex-row gap-6">
-                        <div class="w-full md:w-1/2">
-                            <div class="mb-4">
-                                <label for="edit_nombre" class="block">Nombres y Apellidos</label>
-                                <input type="text" id="edit_nombre" name="edit_nombre" value=""
-                                    class="w-full px-4 py-2 border rounded" required>
+
+                    <!-- Contenedor principal con Grid (2 columnas en md+) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Columna Izquierda -->
+                        <div class="space-y-4">
+                            <div>
+                                <label for="edit_nombre" class="block text-gray-700">Nombres y Apellidos:</label>
+                                <input type="text" id="edit_nombre" name="edit_nombre"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="edit_area_investigacion" class="block">Área de Investigación</label>
+                            <div>
+                                <label for="edit_area_investigacion" class="block text-gray-700">Área de
+                                    Investigación:</label>
                                 <select id="edit_area_investigacion" name="edit_area_investigacion"
-                                    class="w-full px-4 py-2 border rounded" required>
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                                     <option value="">Seleccione una opción</option>
                                     @foreach ($areasInvestigacion as $area)
-                                        <option value="{{ $area->id }}">
-                                            {{ $area->nombre }}
-                                        </option>
+                                        <option value="{{ $area->id }}">{{ $area->nombre }}</option>
                                     @endforeach
                                 </select>
                             </div>
-                            <div class="mb-4">
-                                <label for="edit_correo" class="block">Correo</label>
-                                <input type="email" id="edit_correo" name="edit_correo" value=""
-                                    class="w-full px-4 py-2 border rounded" required>
+                            <div>
+                                <label for="edit_correo" class="block text-gray-700">Correo:</label>
+                                <input type="email" id="edit_correo" name="edit_correo"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="edit_carrera" class="block">Grado Académico</label>
-                                <input type="text" id="edit_carrera" name="edit_carrera" value=""
-                                    class="w-full px-4 py-2 border rounded" required>
+                            <div>
+                                <label for="edit_carrera" class="block text-gray-700">Grado Académico:</label>
+                                <input type="text" id="edit_carrera" name="edit_carrera"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="edit_rol" class="block">Rol</label>
-                                <input type="text" id="edit_rol" name="edit_rol" value=""
-                                    class="w-full px-4 py-2 border rounded" readonly>
-                            </div>
-                            <!-- Select dinámico para Tesistas -->
-                            <div id="editTesistasTypeField" class="hidden">
-                                <label for="edit_tesistas_type" class="block text-sm font-medium text-gray-700">Tipo
-                                    de
-                                    Tesista</label>
-                                <select id="edit_tesistas_type" name="edit_tesistas_type"
-                                    class="mt-4 block w-full rounded-md border-gray-300 shadow-sm">
-                                    <option value="pregrado">Pregrado</option>
-                                    <option value="posgrado">Posgrado</option>
-                                </select>
+                            <div>
+                                <label for="edit_rol" class="block text-gray-700">Rol:</label>
+                                <input type="text" id="edit_rol" name="edit_rol"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100" readonly>
                             </div>
                         </div>
-                        <div class="w-full md:w-1/2">
-                            <div class="relative flex justify-center items-center mb-4">
-                                <img id="previewImg" alt="Vista previa"
-                                    class="w-full h-auto rounded shadow max-w-[150px] object-cover">
-                                <button type="button"
-                                    class="absolute top-1 right-1 bg-white p-2 rounded-full shadow hover:bg-gray-100"
-                                    onclick="document.getElementById('edit_img').click()">
-                                    🖉
-                                </button>
-                                <input type="file" id="edit_img" name="edit_img" class="hidden" accept="image/*"
-                                    onchange="previewImage(event)">
+
+                        <!-- Columna Derecha -->
+                        <div class="space-y-4">
+                            <!-- Imagen Upload -->
+                            <div>
+                                <label class="block text-gray-700 mb-1">Imagen de Perfil:</label>
+                                <div id="edit-image-upload"
+                                    class="border-2 border-dashed border-gray-300 w-full h-52 flex flex-col items-center justify-center cursor-pointer relative text-center rounded-md"
+                                    onclick="document.getElementById('edit_imagen').click()"
+                                    ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'edit_imagen')">
+                                    <!-- Placeholder -->
+                                    <span id="edit-image-placeholder" class="text-gray-500">
+                                        Selecciona o arrastra una imagen (png, jpeg, jpg, gif)
+                                    </span>
+                                    <!-- Vista previa -->
+                                    <img id="edit_previewImage" src="" alt="Vista previa"
+                                        class="hidden w-52 h-full object-cover rounded shadow mx-auto">
+                                    <!-- Botón eliminar imagen -->
+                                    <button type="button" id="edit_remove_image"
+                                        class="hidden absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition cursor-pointer"
+                                        onclick="removeImageEdit(event)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                        </svg>
+                                    </button>
+                                    <input type="file" id="edit_imagen" name="edit_imagen" class="hidden"
+                                        accept="image/png, image/jpeg, image/jpg, image/gif"
+                                        onchange="mostrarVistaPreviaEdit(event)">
+                                </div>
                             </div>
-                            <div class="mb-4">
-                                <label for="edit_cv" class="block">CV</label>
-                                <input type="file" id="edit_cv" name="edit_cv"
-                                    class="w-full px-4 py-2 border rounded">
-                                <!-- Mostrar el enlace al CV actual -->
-                                <div id="cvPreview" class="mt-2">
-                                    <a id="cvLink" href="#" target="_blank"
+
+                            <!-- CV Upload -->
+                            <div>
+                                <label class="block text-gray-700 mb-1">CV:</label>
+                                <div id="edit-cv-upload"
+                                    class="border-2 border-dashed border-gray-300 w-full h-11 flex flex-col items-center justify-center cursor-pointer relative text-center rounded-md"
+                                    onclick="document.getElementById('edit_cv').click()"
+                                    ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'edit_cv')">
+                                    <!-- Placeholder -->
+                                    <span id="edit-cv-placeholder" class="text-gray-500">
+                                        Selecciona o arrastra un archivo PDF
+                                    </span>
+                                    <!-- Nombre de archivo -->
+                                    <div id="edit-cv-file-info" class="hidden text-sm"></div>
+                                    <!-- Botón eliminar CV -->
+                                    <button type="button" id="edit_remove_cv"
+                                        class="hidden absolute top-1 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition cursor-pointer"
+                                        onclick="removeCVEdit(event)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                        </svg>
+                                    </button>
+                                    <input type="file" id="edit_cv" name="edit_cv" class="hidden"
+                                        accept="application/pdf" onchange="mostrarCVEdit(event)">
+                                </div>
+                                <!-- Enlace al CV actual (opcional) -->
+                                <div id="edit-cvPreview" class="mt-2">
+                                    <a id="edit-cvLink" href="#" target="_blank"
                                         class="text-blue-600 hover:underline hidden">Ver CV Actual</a>
                                 </div>
                             </div>
 
-                            <div class="mb-4">
-                                <label for="edit_linkedin" class="block">Linkedin</label>
-                                <input type="text" id="edit_linkedin" name="edit_linkedin" value=""
-                                    class="w-full px-4 py-2 border rounded" required>
+                            <!-- LinkedIn -->
+                            <div>
+                                <label for="edit_linkedin" class="block text-gray-700">LinkedIn:</label>
+                                <input type="text" id="edit_linkedin" name="edit_linkedin"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
-                            <div class="mb-4">
-                                <label for="edit_ctivitae" class="block">CtiVitae</label>
-                                <input type="text" id="edit_ctivitae" name="edit_ctivitae" value=""
-                                    class="w-full px-4 py-2 border rounded" required>
+                        </div>
+
+                        <!-- Fila para Tipo de Tesista y Cti Vitae -->
+                        <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+                            <!-- Campo Tipo de Tesista (oculto por defecto) -->
+                            <div class="hidden" id="edit_tesistasTypeField">
+                                <label for="edit_tesistas_type" class="block text-gray-700">Tipo de Tesista:</label>
+                                <select id="edit_tesistas_type" name="edit_tesistas_type"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Seleccione un tipo</option>
+                                    <option value="Pregrado">Pregrado</option>
+                                    <option value="Posgrado">Posgrado</option>
+                                </select>
+                            </div>
+                            <!-- Campo Cti Vitae (envuelto en contenedor para layout) -->
+                            <div class="md:col-span-2" id="edit_ctiVitaeContainer">
+                                <label for="edit_ctivitae" class="block text-gray-700">Cti Vitae:</label>
+                                <input type="text" id="edit_ctivitae" name="edit_ctivitae"
+                                    class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Botones de acción -->
                     <div class="flex justify-center gap-4 mt-6">
-                        <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700">
+                        <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-700">
                             Actualizar
                         </button>
                         <button type="button" onclick="closeEditModal()"
-                            class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700 ml-4">
+                            class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700">
                             Cancelar
                         </button>
                     </div>
@@ -498,6 +554,22 @@
             </div>
         </div>
     </div>
+
+    @if (session('update_success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Actualización exitosa',
+                text: '{{ session('update_success') }}',
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
+    @endif
+
 
     <script>
         // Variable global para el rol seleccionado
@@ -626,90 +698,177 @@
             const inputElement = document.getElementById(inputId);
             if (event.dataTransfer.files && event.dataTransfer.files[0]) {
                 inputElement.files = event.dataTransfer.files;
-                if (inputId === 'imagen') {
-                    mostrarVistaPrevia({
-                        target: inputElement
-                    });
-                } else if (inputId === 'cv') {
-                    mostrarCV({
-                        target: inputElement
-                    });
+                if (inputId === 'imagen' || inputId === 'edit_imagen') {
+                    if (inputId === 'imagen') {
+                        mostrarVistaPrevia({
+                            target: inputElement
+                        });
+                    } else {
+                        mostrarVistaPreviaEdit({
+                            target: inputElement
+                        });
+                    }
+                } else if (inputId === 'cv' || inputId === 'edit_cv') {
+                    if (inputId === 'cv') {
+                        mostrarCV({
+                            target: inputElement
+                        });
+                    } else {
+                        mostrarCVEdit({
+                            target: inputElement
+                        });
+                    }
                 }
             }
         }
 
-        // ---------- FILTRAR POR ROL ----------
-        function filterByRole(role, element) {
-            // 1) Actualiza la variable global
-            selectedRole = role;
 
-            // 2) Filtra las filas de la tabla
-            const rows = document.querySelectorAll('#table-body tr');
-            rows.forEach(row => {
-                // row.dataset.role, p.e. "Investigadores", "Tesistas Pregrado", etc.
-                // Muestra si coincide con "role"
-                row.style.display = row.dataset.role.includes(role) ? '' : 'none';
-            });
+        // MODAL EDITAR
 
-            // 3) Resalta el botón del menú
-            const menuItems = document.querySelectorAll('.grid .cursor-pointer a');
-            menuItems.forEach(item => {
-                item.classList.remove('bg-blue-600', 'text-white');
-                item.classList.add('text-gray-700');
-            });
-            element.classList.add('bg-blue-600', 'text-white');
-            element.classList.remove('text-gray-700');
-        }
-
-
-
-
-
-
+        // Abre el modal de editar y precarga los datos del registro
         function openEditModal(button) {
             let capital = JSON.parse(button.getAttribute('data-capital'));
+            // Configura la acción del formulario (por ejemplo: /admin/capitales/ID)
+            document.getElementById('editForm').action = `/admin/capitales/${capital.id}`;
+
+            // Precargar datos en los campos
             document.getElementById('edit_nombre').value = capital.nombre;
             document.getElementById('edit_area_investigacion').value = capital.area_investigacion.id;
             document.getElementById('edit_correo').value = capital.correo;
             document.getElementById('edit_carrera').value = capital.carrera;
-            document.getElementById('edit_rol').value = capital.rol;
-            document.getElementById('edit_rol').setAttribute('readonly', true); // Evita cambios en el rol
+            // Si el rol es Tesistas, forzamos a "Tesistas" sin tipo adicional
+            if (capital.rol.toLowerCase().includes('tesistas')) {
+                document.getElementById('edit_rol').value = "Tesistas";
+                // Asumimos que si existe, el tipo se puede obtener (por ejemplo, de capital.tesistas_type) o bien se extrae del rol
+                let tesistasType = "Pregrado"; // valor por defecto
+                let parts = capital.rol.split(' ');
+                if (parts.length > 1) {
+                    tesistasType = parts[1];
+                }
+                document.getElementById('edit_tesistas_type').value = tesistasType;
+                document.getElementById('edit_tesistasTypeField').classList.remove('hidden');
+                // Ajusta el layout: si es Tesistas, "Cti Vitae" ocupará 1 columna
+                document.getElementById('edit_ctiVitaeContainer').classList.remove('md:col-span-2');
+                document.getElementById('edit_ctiVitaeContainer').classList.add('md:col-span-1');
+            } else {
+                document.getElementById('edit_rol').value = capital.rol;
+                document.getElementById('edit_tesistasTypeField').classList.add('hidden');
+                document.getElementById('edit_ctiVitaeContainer').classList.remove('md:col-span-1');
+                document.getElementById('edit_ctiVitaeContainer').classList.add('md:col-span-2');
+            }
             document.getElementById('edit_linkedin').value = capital.linkedin;
             document.getElementById('edit_ctivitae').value = capital.ctivitae;
-            document.getElementById('previewImg').src = `/user/template/images/${capital.foto}`;
-            document.getElementById('editForm').action = `/admin/capitales/${capital.id}`;
 
-            const editRolField = document.getElementById('edit_rol');
-            const editTesistasField = document.getElementById('editTesistasTypeField');
-            const editTesistasType = document.getElementById('edit_tesistas_type');
-
-            // Extrae el rol del objeto y verifica si incluye "Tesistas"
-            if (capital.rol.includes('Tesistas')) {
-                const [rol, tipoTesista] = capital.rol.split(' - ');
-
-                editRolField.value = rol; // Solo "Tesistas"
-                editTesistasType.value = tipoTesista || "Pregrado"; // Selecciona "Pregrado" por defecto si no hay valor
-                editTesistasField.classList.remove('hidden'); // Muestra el desplegable
+            // Imagen: cargar vista previa si existe
+            const editPreviewImage = document.getElementById('edit_previewImage');
+            const editImagePlaceholder = document.getElementById('edit-image-placeholder');
+            const editRemoveBtn = document.getElementById('edit_remove_image');
+            if (capital.foto) {
+                editPreviewImage.src = `/user/template/images/${capital.foto}`;
+                editPreviewImage.classList.remove('hidden');
+                editImagePlaceholder.classList.add('hidden');
+                editRemoveBtn.classList.remove('hidden');
             } else {
-                editRolField.value = capital.rol; // Otros roles
-                editTesistasField.classList.add('hidden'); // Oculta el desplegable
+                editPreviewImage.src = "";
+                editPreviewImage.classList.add('hidden');
+                editImagePlaceholder.classList.remove('hidden');
+                editRemoveBtn.classList.add('hidden');
             }
 
-            // Manejo del CV
-            let cvLink = document.getElementById('cvLink');
+            // CV: si existe, mostrar información (o enlace, según prefieras)
+            const editCVFileInfo = document.getElementById('edit-cv-file-info');
+            const editCVPlaceholder = document.getElementById('edit-cv-placeholder');
+            const editRemoveCVBtn = document.getElementById('edit_remove_cv');
             if (capital.cv) {
-                cvLink.href = `/user/template/uploads/pdfs/${capital.cv}`;
-                cvLink.classList.remove('hidden'); // Mostrar enlace
-                cvLink.innerText = "Ver CV Actual";
+                editCVFileInfo.textContent = capital.cv;
+                editCVFileInfo.classList.remove('hidden');
+                editCVPlaceholder.classList.add('hidden');
+                editRemoveCVBtn.classList.remove('hidden');
             } else {
-                cvLink.classList.add('hidden'); // Ocultar enlace si no hay CV
+                editCVFileInfo.textContent = "";
+                editCVFileInfo.classList.add('hidden');
+                editCVPlaceholder.classList.remove('hidden');
+                editRemoveCVBtn.classList.add('hidden');
             }
 
+            // Mostrar el modal
             document.getElementById('editModal').classList.remove('hidden');
         }
 
+        // Cierra el modal de editar y reinicia los campos
         function closeEditModal() {
             document.getElementById('editModal').classList.add('hidden');
+            document.getElementById('editForm').reset();
+            removeImageEdit();
+            removeCVEdit();
+        }
+
+        // ---------- FUNCIONES DE VISTA PREVIA (IMAGEN) para Editar ----------
+        function mostrarVistaPreviaEdit(event) {
+            const input = event.target;
+            const previewImage = document.getElementById("edit_previewImage");
+            const imagePlaceholder = document.getElementById("edit-image-placeholder");
+            const removeBtn = document.getElementById("edit_remove_image");
+
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                const allowedTypes = ['image/png', 'image/jpeg', 'image/jpg', 'image/gif'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert("Tipo de archivo no permitido. Solo se permiten png, jpeg, jpg, gif.");
+                    input.value = "";
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('hidden');
+                    imagePlaceholder.classList.add('hidden');
+                    removeBtn.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeImageEdit(event) {
+            if (event) event.stopPropagation();
+            const imageInput = document.getElementById("edit_imagen");
+            imageInput.value = "";
+            const previewImage = document.getElementById("edit_previewImage");
+            previewImage.src = "";
+            previewImage.classList.add('hidden');
+            document.getElementById("edit-image-placeholder").classList.remove('hidden');
+            document.getElementById("edit_remove_image").classList.add('hidden');
+        }
+
+        // ---------- FUNCIONES DE VISTA PREVIA (CV) para Editar ----------
+        function mostrarCVEdit(event) {
+            const input = event.target;
+            const cvPlaceholder = document.getElementById("edit-cv-placeholder");
+            const cvFileInfo = document.getElementById("edit-cv-file-info");
+            const removeBtn = document.getElementById("edit_remove_cv");
+
+            if (input.files && input.files[0]) {
+                const file = input.files[0];
+                if (file.type !== 'application/pdf') {
+                    alert("Tipo de archivo no permitido. Solo se permite PDF.");
+                    input.value = "";
+                    return;
+                }
+                cvFileInfo.textContent = file.name;
+                cvFileInfo.classList.remove('hidden');
+                cvPlaceholder.classList.add('hidden');
+                removeBtn.classList.remove('hidden');
+            }
+        }
+
+        function removeCVEdit(event) {
+            if (event) event.stopPropagation();
+            const cvInput = document.getElementById("edit_cv");
+            cvInput.value = "";
+            document.getElementById("edit-cv-file-info").textContent = "";
+            document.getElementById("edit-cv-file-info").classList.add('hidden');
+            document.getElementById("edit-cv-placeholder").classList.remove('hidden');
+            document.getElementById("edit_remove_cv").classList.add('hidden');
         }
     </script>
 @endsection

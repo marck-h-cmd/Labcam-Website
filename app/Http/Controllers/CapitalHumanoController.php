@@ -85,14 +85,11 @@ class CapitalHumanoController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $capital = Capital::findOrFail($id);
 
-        // Ruta donde se guardarán laos cv's
+        // Ruta donde se guardarán los CV's
         $cvPath = public_path('/user/template/uploads/pdfs');
-        // Manejar la actualización de cada imagen
         if ($request->hasFile('edit_cv')) {
-            // Obtener la nueva imagen y moverla a la carpeta
             $cv1 = $request->file('edit_cv');
             $cv1Name = 'cvs' . Str::random(10) . '.' . $cv1->getClientOriginalExtension();
             $cv1->move($cvPath, $cv1Name);
@@ -102,9 +99,7 @@ class CapitalHumanoController extends Controller
 
         // Ruta donde se guardarán las imágenes
         $imagePath = public_path('/user/template/images/');
-        // Manejar la actualización de cada imagen
         if ($request->hasFile('edit_img')) {
-            // Obtener la nueva imagen y moverla a la carpeta
             $foto1 = $request->file('edit_img');
             $image1Name = 'img' . Str::random(10) . '.' . $foto1->getClientOriginalExtension();
             $foto1->move($imagePath, $image1Name);
@@ -112,20 +107,35 @@ class CapitalHumanoController extends Controller
             $image1Name = $capital->foto;
         }
 
+        // Definir rol con tesistas pregrado/posgrado
+        if ($request->edit_rol === 'Tesistas') {
+            if ($request->edit_tesistas_type == 'Pregrado') {
+                $rol_b = 'Tesistas Pregrado';
+            } elseif ($request->edit_tesistas_type === 'Posgrado') {
+                $rol_b = 'Tesistas Posgrado';
+            }
+        } else {
+            $rol_b = $request->edit_rol;
+        }
 
+        // Actualiza los demás campos
         $capital->nombre = $request->edit_nombre;
         $capital->carrera = $request->edit_carrera;
         $capital->area_investigacion = $request->edit_area_investigacion;
+        $capital->correo = $request->edit_correo;
         $capital->cv = $cv1Name;
         $capital->foto = $image1Name;
-        $capital->correo = $request->edit_correo;
-        $capital->rol = $request->edit_rol;
+        $capital->rol = $rol_b;
         $capital->linkedin = $request->edit_linkedin;
         $capital->ctivitae = $request->edit_ctivitae;
         $capital->save();
 
-        return redirect()->route('capital_index')->with('success', 'Registro actualizado!');
+        // Redirige a la página de listado, pasando el rol actualizado y el mensaje de éxito
+        return redirect()
+            ->route('capital_index', ['role' => $rol_b])
+            ->with('update_success', 'Registro actualizado con éxito');
     }
+
 
 
 
@@ -141,7 +151,7 @@ class CapitalHumanoController extends Controller
 
         return redirect()
             ->route('capital_index', ['role' => $role])
-            ->with('delete_success', 'Registro eliminado con éxito.');
+            ->with('delete_success', 'Registro eliminado con éxito');
     }
 
     // área de usuario

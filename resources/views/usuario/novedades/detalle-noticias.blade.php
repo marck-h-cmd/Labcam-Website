@@ -22,7 +22,7 @@
 
             <!-- Imagen destacada  "{{ Storage::url($noticia->imagen) }}"-->
             <div class="flex-shrink-0 w-3/3">
-                <img src="/user/template/{{ $noticia->imagen }}" alt="Imagen de la noticia"
+                <img src="{{ url('storage/' . $noticia->imagen) }}" alt="{{ $noticia->titulo }}"
                     class="w-full rounded-lg shadow-md">
             </div>
 
