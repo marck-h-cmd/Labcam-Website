@@ -17,7 +17,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\CustomAuthController;
 
-Route::middleware(['auth', UpdateEventosMiddleware::class])->group(function () {
+Route::middleware([UpdateEventosMiddleware::class])->group(function () {
 
     // -----------------------------------------------------USUARIO--------------------------------------------------------------------------------------
     Route::get('/', [PestañaHomeController::class, 'vista_home_user'])->name('home');

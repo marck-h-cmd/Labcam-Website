@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Paper;
 use Illuminate\View\View;
@@ -71,7 +72,6 @@ class PaperController extends Controller
         'current_page' => $papers->currentPage(),
         'last_page' => $papers->lastPage(),
       ]);
-
     } catch (Exception $e) {
       Log::error("Fetch More Error: " . $e->getMessage());
       return response()->json([
@@ -141,7 +141,7 @@ class PaperController extends Controller
         'doi.unique' => 'Este DOI ya esta en uso',
         'pdf_filename.mimes' => 'El archivo debe ser PDF.',
         'pdf_filename.max' => 'El PDF no debe exceder 10MB.',
-        'img_filename.mimes' => 'La imagen debe ser bJPEG, PNG, o JPG.',
+        'img_filename.mimes' => 'La imagen debe ser JPEG, PNG, JPG o GIF.',
         'img_filename.max' => 'La imagen no debe exceder 5MB.',
 
       ];
@@ -156,7 +156,7 @@ class PaperController extends Controller
         'fecha_publicacion' => 'required|date',
         'doi' => 'required|string|max:100|unique:papers,doi',
         'pdf_filename' => 'required|file|mimes:pdf|max:10240',
-        'img_filename' => 'required|file|mimes:jpeg,png,jpg|max:5120',
+        'img_filename' => 'required|file|mimes:jpeg,png,jpg, gif|max:5120',
         'topicos' => 'required|string',
         'topicos.*' => 'exists:topicos,id',
 
@@ -208,84 +208,81 @@ class PaperController extends Controller
 
       return redirect()->back()->with('error', 'Error: ' . 'Hubo un error. Porfavor, pruebe denuevo');
     }
-
   }
 
   public function update(Request $request, $id)
   {
     try {
-
-      // mensajes de error
+      // Mensajes de error personalizados
       $messages = [
-        'titulo.required' => 'El titulo es requerido.',
-        'titulo.unique' => 'El titulo de esta paper ya esta registrado.',
-        'autores.required' => 'El nombre de los autores es requerido.',
-        'doi.unique' => 'Este DOI ya esta en uso',
-        'pdf_filename.mimes' => 'El archivo debe ser PDF.',
-        'pdf_filename.max' => 'El PDF no debe exceder 10MB.',
-        'img_filename.mimes' => 'La imagen debe ser bJPEG, PNG, o JPG.',
-        'img_filename.max' => 'La imagen no debe exceder 5MB.',
-
+        'titulo.required'      => 'El titulo es requerido.',
+        'titulo.unique'        => 'El titulo de este paper ya está registrado.',
+        'autores.required'     => 'El nombre de los autores es requerido.',
+        'doi.unique'           => 'Este DOI ya está en uso',
+        'pdf_filename.mimes'   => 'El archivo debe ser PDF.',
+        'pdf_filename.max'     => 'El PDF no debe exceder 10MB.',
+        'img_filename.mimes'   => 'La imagen debe ser JPEG, PNG, o JPG.',
+        'img_filename.max'     => 'La imagen no debe exceder 5MB.',
       ];
-      // validar campos
-      $request->validate([
-        'titulo' => 'required|max:100',
-        'autores' => 'required|json',
-        'publisher' => 'required|max:50',
-        'descripcion' => 'required',
-        'area_id' => 'required|exists:areas_investigacion,id',
-        'doi' => 'required|max:100',
-        'fecha_publicacion' => 'required|date',
-        'pdf_filename' => 'file|mimes:pdf|max:10240',
-        'img_filename' => 'file|mimes:jpeg,png,jpg|max:5120',
-        'topicos' => 'string',
-        'topicos.*' => 'exists:topicos,id',
 
+      // Validación de campos
+      $request->validate([
+        'titulo'            => 'required|max:100',
+        'autores'           => 'required|json',
+        'publisher'         => 'required|max:50',
+        'descripcion'       => 'required',
+        'area_id'           => 'required|exists:areas_investigacion,id',
+        'doi'               => 'required|max:100',
+        'fecha_publicacion' => 'required|date',
+        'pdf_filename'      => 'file|mimes:pdf|max:10240',
+        'img_filename'      => 'file|mimes:jpeg,png,jpg|max:5120',
+        // Se valida como string ya que se envían los tópicos como una cadena separada por comas
+        'topicos'           => 'nullable|string',
+        // Se elimina la regla 'topicos.*' ya que no se envía un arreglo directamente
       ], $messages);
+
       $paper = Paper::findOrFail($id);
 
-      $topicoIds = explode(',', $request->topicos);
+      // Convertir la cadena de tópicos en un arreglo, eliminando valores vacíos
+      $topicoIds = $request->topicos ? array_filter(explode(',', $request->topicos)) : [];
 
       $pdf_fileName = $paper->pdf_filename;
       $img_fileName = $paper->img_filename;
 
+      // Procesar archivo PDF
       if ($request->hasFile('pdf_filename')) {
-        // Borrar antiguo PDF si existe
         if ($paper->pdf_filename && Storage::disk('pdfs')->exists($pdf_fileName)) {
           Storage::disk('pdfs')->delete($pdf_fileName);
         }
-
-        // Remplazar por nuevo pdf
         $pdf = $request->file('pdf_filename');
         $pdf_fileName = Str::uuid() . '.' . $pdf->getClientOriginalExtension();
         Storage::disk('pdfs')->putFileAs('', $pdf, $pdf_fileName);
       }
 
-
+      // Procesar imagen
       if ($request->hasFile('img_filename')) {
-        // Borrar antigua imagen si existe
         if ($paper->img_filename && Storage::disk('paper_img')->exists($img_fileName)) {
           Storage::disk('paper_img')->delete($img_fileName);
         }
-
-        // Remplazar por nueva imagen
         $img = $request->file('img_filename');
         $img_fileName = Str::uuid() . '.' . $img->getClientOriginalExtension();
         Storage::disk('paper_img')->putFileAs('', $img, $img_fileName);
       }
 
+      // Actualizar datos del paper
       $paper->update([
-        'titulo' => $request->titulo,
-        'autores' => $request->autores,
-        'publisher' => $request->publisher,
-        'descripcion' => $request->descripcion,
-        'area_id' => $request->area_id,
-        'doi' => $request->doi,
+        'titulo'            => $request->titulo,
+        'autores'           => $request->autores,
+        'publisher'         => $request->publisher,
+        'descripcion'       => $request->descripcion,
+        'area_id'           => $request->area_id,
+        'doi'               => $request->doi,
         'fecha_publicacion' => $request->fecha_publicacion,
-        'pdf_filename' => $pdf_fileName,
-        'img_filename' => $img_fileName,
+        'pdf_filename'      => $pdf_fileName,
+        'img_filename'      => $img_fileName,
       ]);
 
+      // Sincronizar los tópicos con el arreglo obtenido
       $paper->topicos()->sync($topicoIds);
 
       return redirect()->route('papers.index')
@@ -297,10 +294,10 @@ class PaperController extends Controller
         ->with('error', $errorMessage);
     } catch (Exception $e) {
       Log::error("Error updating paper: " . $e->getMessage());
-
       return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
     }
   }
+
 
   public function destroy($id)
   {
@@ -411,7 +408,4 @@ class PaperController extends Controller
       'topicos' => Topico::all()
     ]);
   }
-
-
-
 }
