@@ -23,7 +23,9 @@ class ProyectoController extends Controller
         $proyect = Proyecto::when($query, function ($queryBuilder) use ($query) {
             $queryBuilder->where('titulo', 'like', '%' . $query . '%')
                 ->orWhere('autor', 'like', '%' . $query . '%');
-        })->paginate(10);
+        })
+            ->orderBy('fecha_publicacion', 'desc') // Ordena por fecha descendente
+            ->paginate(10);
 
         return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
     }
@@ -34,7 +36,6 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findOrFail($id);
 
         return view('usuario.novedades.detalle-proyectos', compact('proyecto'));
-
     }
     public function store(Request $request)
     {
@@ -93,15 +94,6 @@ class ProyectoController extends Controller
             return redirect()->back()->with('error', 'Error: ' . 'Hubo un error. Porfavor, pruebe denuevo');
         }
     }
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-
-        $proyect = Proyecto::findOrFail($id);
-        return view('administrador.panel.novedades.proyecto.edit', compact('proyect'));
-    }
 
 
     /**
@@ -110,32 +102,31 @@ class ProyectoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titulo' => 'required|string|max:255',
-            'subtitulo' => 'required|string|max:1000',
-            'descripcion' => 'required',
-            'autor' => 'required|string|max:255',
-            'fecha_publicacion' => 'required|date',
-            'imagen' => 'nullable|image|mimes:jpg,png',
+            'edit_titulo' => 'required|string|max:255',
+            'edit_subtitulo' => 'required|string|max:1000',
+            'edit_descripcion' => 'required',
+            'edit_autor' => 'required|string|max:255',
+            'edit_fecha_publicacion' => 'required|date',
+            'edit_imagen' => 'nullable|image|mimes:jpg,png',
         ]);
 
         $proyecto = Proyecto::findOrFail($id);
 
         // Actualizar la imagen si se sube una nueva
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('proyectos', 'public');
+        if ($request->hasFile('edit_imagen')) {
+            $imagenPath = $request->file('edit_imagen')->store('proyectos', 'public');
             $proyecto->imagen = $imagenPath;
         }
 
         $proyecto->update([
-            'titulo' => $request->titulo,
-            'subtitulo' => $request->subtitulo,
-            'descripcion' => $request->descripcion,
-            'autor' => $request->autor,
-            'fecha_publicacion' => $request->fecha_publicacion,
+            'titulo' => $request->edit_titulo,
+            'subtitulo' => $request->edit_subtitulo,
+            'descripcion' => $request->edit_descripcion,
+            'autor' => $request->edit_autor,
+            'fecha_publicacion' => $request->edit_fecha_publicacion,
         ]);
 
-        return redirect()->route('proyect')->with('edit', 'Proyecto actualizada con éxito');
-
+        return redirect()->route('proyect')->with('edit', 'Proyecto actualizado con éxito');
     }
 
     /**
@@ -146,9 +137,6 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findOrFail($id);
         $proyecto->delete();
 
-        return redirect()->route('proyect')->with('destroy', 'Proyecto eliminada con éxito');
+        return redirect()->route('proyect')->with('destroy', 'Proyecto eliminado con éxito');
     }
-
-
-
 }

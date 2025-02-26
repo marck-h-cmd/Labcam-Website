@@ -63,7 +63,7 @@
                                                     {{ $direccion->rol }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    <a href="{{ $direccion->linkedin }}"><svg
+                                                    <a href="{{ $direccion->linkedin }}" target="_blank"><svg
                                                             xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                                                             width="40" height="40" viewBox="0 0 64 64">
                                                             <rect width="50" height="50" x="7" y="7" fill="#58b5e8"
@@ -86,19 +86,21 @@
                                                         </svg></a>
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    <a href="{{ $direccion->ctivitae }}"><img width="40" height="40"
-                                                            src="https://img.icons8.com/fluency/48/link.png"
+                                                    <a href="{{ $direccion->ctivitae }}" target="_blank"><img width="40"
+                                                            height="40" src="https://img.icons8.com/fluency/48/link.png"
                                                             alt="link" /></a>
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    <a href="/user/template/images/{{ $direccion->foto }}"><img
-                                                            width="40" height="40"
+                                                    <button
+                                                        onclick='openModal("/user/template/images/{{ $direccion->foto }}", "image")'>
+                                                        <img width="40" height="40"
                                                             src="https://img.icons8.com/stickers/50/image.png"
-                                                            alt="image" /></a>
+                                                            alt="image" />
+                                                    </button>
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    <a href="/user/template/uploads/pdfs/{{ $direccion->cv }}"><img
-                                                            width="40" height="40"
+                                                    <a href="/user/template/uploads/pdfs/{{ $direccion->cv }}"
+                                                        target="_blank"><img width="40" height="40"
                                                             src="https://img.icons8.com/ultraviolet/40/documents.png"
                                                             alt="documents" /></a>
                                                 </td>
@@ -125,73 +127,6 @@
 
 
     {{-- --------------------MODAL DE EDITAR DE REGISTRO---------------------- --}}
-    {{-- <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
-    <div class="flex items-center justify-center w-full h-full">
-        <div class="bg-slate-200 p-7 rounded shadow-lg max-w-4xl w-full relative">
-            <div class="main-title flex flex-col items-center gap-3 mb-8">
-                <div class="title text-2xl font-semibold text-[#2e5382]">Editar</div>
-                <div class="blue-line w-2/5 h-0.5 bg-[#64d423]"></div>
-            </div>
-            <form id="editForm" action="" method="POST" enctype="multipart/form-data" class="flex flex-col gap-6">
-                @csrf
-                @method('PUT')
-                <div class="flex felx-col md:flex-row gap-6">
-                    <div class="w-full md:w-1/2">
-                        <div class="mb-4">
-                            <label for="edit_nombre" class="block">Nombres y Apellidos</label>
-                            <input type="text" id="edit_nombre" name="edit_nombre" value="" class="w-full px-4 py-2 border rounded" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="edit_carrera" class="block">Grado Académico</label>
-                            <input type="text" id="edit_carrera" name="edit_carrera" value="" class="w-full px-4 py-2 border rounded" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="edit_rol" class="block">Rol</label>
-                            <input type="text" id="edit_rol" name="edit_rol" value="" class="w-full px-4 py-2 border rounded" readonly>
-                        </div>
-                        <div class="mb-4">
-                            <label for="edit_descripcion" class="block">Descripción</label>
-                            <textarea type="text" id="edit_descripcion" name="edit_descripcion" value="" class="w-full px-4 py-2 border rounded" rows=8 required></textarea>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2">
-                        <div class="relative flex justify-center items-center mb-4">
-                            <img id="previewImg" alt="Vista previa" class="w-full h-auto rounded shadow max-w-[150px] object-cover">
-                            <button type="button" class="absolute top-1 right-1 bg-white p-2 rounded-full shadow hover:bg-gray-100" onclick="document.getElementById('edit_img').click()">
-                                🖉
-                            </button>
-                            <input type="file" id="edit_img" name="edit_img" class="hidden" accept="image/*" onchange="previewImage(event)">
-                        </div>
-                        <div class="mb-4">
-                            <label for="edit_cv" class="block">CV</label>
-                            <input type="file" id="edit_cv" name="edit_cv" class="w-full px-4 py-2 border rounded">
-                            <div id="cvPreview" class="mt-2">
-                                <a id="cvLink" href="#" target="_blank" class="text-blue-600 hover:underline hidden">Ver CV Actual</a>
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <label for="edit_linkedin" class="block">Linkedin</label>
-                            <input type="text" id="edit_linkedin" name="edit_linkedin" value="" class="w-full px-4 py-2 border rounded" required>
-                        </div>
-                        <div class="mb-4">
-                            <label for="edit_ctivitae" class="block">CtiVitae</label>
-                            <input type="text" id="edit_ctivitae" name="edit_ctivitae" value="" class="w-full px-4 py-2 border rounded" required>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex justify-center gap-4 mt-6">
-                    <button type="submit" class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-700">
-                        Actualizar
-                    </button>
-                    <button type="button" onclick="closeEditModal()" class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-700 ml-4">
-                        Cancelar
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> --}}
-
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
             <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-4xl w-full relative max-h-screen overflow-y-auto">
@@ -258,7 +193,13 @@
                                     ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'edit_img')">
 
                                     <!-- Placeholder -->
-                                    <span id="edit-image-placeholder" class="text-gray-500">
+                                    <span id="edit-image-placeholder" class="text-gray-500 flex flex-col items-center">
+                                        <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 20 16" aria-hidden="true">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
                                         Selecciona o arrastra una imagen (png, jpeg, jpg, gif)
                                     </span>
 
@@ -274,9 +215,9 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0
-                                                             0116.138 21H7.862a2 2 0
-                                                             01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                             0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                                                     0116.138 21H7.862a2 2 0
+                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="edit_img" name="edit_img" class="hidden"
@@ -308,9 +249,9 @@
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0
-                                                             0116.138 21H7.862a2 2 0
-                                                             01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                             0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                                                     0116.138 21H7.862a2 2 0
+                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="edit_cv" name="edit_cv" class="hidden"
@@ -352,6 +293,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal para mostrar imágenes -->
+    <div id="archivoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
+        <div class="flex items-center justify-center w-full h-full">
+            <div class="bg-white p-7 rounded shadow-lg max-w-7xl w-full relative">
+                <button class="absolute top-0.5 right-0.5 text-gray-500 hover:text-black text-3xl p-2"
+                    onclick="closeModal()">×</button>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+    </div>
+
 
     @if (session('update_success'))
         <script>
@@ -519,6 +472,23 @@
             document.getElementById("cvPreview").classList.add('hidden');
             document.getElementById("edit-cv-placeholder").classList.remove('hidden');
             document.getElementById("edit_remove_cv").classList.add('hidden');
+        }
+
+        function openModal(fileUrl, fileType) {
+            const modal = document.getElementById('archivoModal');
+            const modalContent = document.getElementById('modalContent');
+
+            if (fileType === 'image') {
+                modalContent.innerHTML =
+                    `<img src="${fileUrl}" alt="Archivo" class="w-full max-h-[80vh] object-contain rounded">`;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('archivoModal');
+            modal.classList.add('hidden');
         }
     </script>
 @endsection

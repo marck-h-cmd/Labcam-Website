@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="/admin_dash/dist/css/style.css">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -41,14 +41,18 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
-                        <a href="{{ route('person') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('person') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                        <a href="{{ route('person') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('person') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Lista de Usuarios
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="{{ route('users') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('users') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                        <a href="{{ route('users') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('users') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Registrar Usuario
                         </a>
                     </li>
@@ -61,7 +65,7 @@
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Mi Cuenta</span>
                 </a>
-           </li>
+            </li>
 
 
             <h4 class="text-[#98C560] text-sm font-bold uppercase mb-3 mt-8">Pestañas</h4>
@@ -96,7 +100,7 @@
             </li>
 
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['h-slider.create', 'h-sliders-panel']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['h-slider.create', 'h-sliders-panel', 'h-slider.edit']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -105,24 +109,24 @@
                 </a>
                 <ul class="pl-7 mt-2 hidden group-[.selected]:block">
                     <li class="mb-4">
+                        <a href="{{ route('h-sliders-panel') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs(['h-sliders-panel', 'h-slider.edit']) ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Panel Historia Slider</a>
+                    </li>
+                    <li class="mb-4">
                         <a href="{{ route('h-slider.create') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-slider.create') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Crear Historia Slider</a>
                     </li>
-                    <li class="mb-4">
-                        <a href="{{ route('h-sliders-panel') }}"
-                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('h-sliders-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
-                            Panel Historia Slider</a>
-                    </li>
                 </ul>
             </li>
 
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'papers.index']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['papers.create', 'papers.index', 'papers.edit']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -134,7 +138,7 @@
                         <a href="{{ route('papers.index') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('papers.index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs(['papers.index', 'papers.edit']) ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Lista de Papers</a>
                     </li>
                     <li class="mb-4">
@@ -148,7 +152,7 @@
             </li>
 
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['areas-panel', 'topic-panel']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['areas-panel', 'areas.edit', 'topic-panel', 'topics.edit']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -160,21 +164,22 @@
                         <a href="{{ route('areas-panel') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('areas-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Áreas
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs(['areas-panel', 'areas.edit']) ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Áreas
                             de Investigación</a>
                     </li>
                     <li class="mb-4">
                         <a href="{{ route('topic-panel') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
                             <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('topic-panel') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Tópicos
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs(['topic-panel', 'topics.edit']) ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Tópicos
                             Paper</a>
 
                     </li>
                 </ul>
             </li>
 
-            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['capital_index', 'direccion_index']) ? 'active' : '' }}">
+            <li
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['capital_index', 'direccion_index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -185,13 +190,16 @@
                     <li class="mb-4">
                         <a href="{{ route('capital_index') }}"
                             class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('capital_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('capital_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Capital Humano
                         </a>
                     </li>
                     <li class="mb-4">
-                        <a href="{{ route('direccion_index') }}" class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('direccion_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                        <a href="{{ route('direccion_index') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('direccion_index') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Dirección
                         </a>
                     </li>
@@ -229,7 +237,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="mb-1 group cursor-pointer"> 
+            <li class="mb-1 group cursor-pointer">
                 <a href="{{ route('contactos') }}"
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('contactos') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -252,32 +260,36 @@
             <ul class="ml-auto flex items-center">
                 <li class="dropdown ml-3">
                     <button type="button"
-                        class="dropdown-toggle flex items-center gap-x-2 hover:text-[#98C560] group">              
+                        class="dropdown-toggle flex items-center gap-x-2 hover:text-[#98C560] group">
                         <div
                             class="relative inline-block bg-white p-[2.5px] rounded-full border-[1px] border-black group-hover:border-[#98C560]">
-                                @if(Auth::check() && Auth::user()->photo)
-                                   <img src="{{ Storage::url('' . Auth::user()->photo) }}" alt="Foto de perfil"
-                                        class="w-12 h-12 rounded-full block object-cover">
-                                @elseif(Auth::check())
-                                   <div class="w-12 h-12 bg-gray-300 text-gray-700 flex items-center justify-center rounded-full text-xl font-bold uppercase">
-                                   {{ substr(Auth::user()->firstname, 0, 1) }}
-                                   </div>
-                                @endif
+                            @if (Auth::check() && Auth::user()->photo)
+                                <img src="{{ Storage::url('' . Auth::user()->photo) }}" alt="Foto de perfil"
+                                    class="w-12 h-12 rounded-full block object-cover">
+                            @elseif(Auth::check())
+                                <div
+                                    class="w-12 h-12 bg-gray-300 text-gray-700 flex items-center justify-center rounded-full text-xl font-bold uppercase">
+                                    {{ substr(Auth::user()->firstname, 0, 1) }}
+                                </div>
+                            @endif
                         </div>
-                        @if(Auth::check())
-                        <div> 
-                            <h4 class="text-[14.5px] font-medium">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</h4>
-                            <h4 class="text-[12.5px] font-normal">{{ Auth::user()->email }}</h4>
-                        </div>
+                        @if (Auth::check())
+                            <div>
+                                <h4 class="text-[14.5px] font-medium">{{ Auth::user()->firstname }}
+                                    {{ Auth::user()->lastname }}</h4>
+                                <h4 class="text-[12.5px] font-normal">{{ Auth::user()->email }}</h4>
+                            </div>
                         @endif
                     </button>
                     <ul
                         class="dropdown-menu shadow-md shadow-black/5 z-30 hidden py-2 rounded-md bg-white border border-gray-100 w-[140px] text-black text-[15px]">
                         <li>
-                            <a href="{{ route('user.edit_user')}}" class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Mi Perfil</a>
+                            <a href="{{ route('user.edit_user') }}"
+                                class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Mi Perfil</a>
                         </li>
                         <li>
-                            <a  href="#" onclick="confirmLogout()" class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Cerrar
+                            <a href="#" onclick="confirmLogout()"
+                                class="flex items-center py-1.5 px-4 hover:text-[#98C560]">Cerrar
                                 Sesión</a>
                         </li>
                     </ul>
@@ -293,23 +305,23 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="/admin_dash/dist/js/script.js"></script>
     <script>
-    function confirmLogout() {
-        Swal.fire({
-            title: "¿Estás seguro?",
-            text: "Se cerrará tu sesión",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#d33",
-            cancelButtonColor: "#3085d6",
-            confirmButtonText: "Sí, salir",
-            cancelButtonText: "Cancelar"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "{{ route('logout') }}"; 
-            }
-        });
-    }
-</script>
+        function confirmLogout() {
+            Swal.fire({
+                title: "¿Estás seguro?",
+                text: "Se cerrará tu sesión",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#d33",
+                cancelButtonColor: "#3085d6",
+                confirmButtonText: "Sí, salir",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = "{{ route('logout') }}";
+                }
+            });
+        }
+    </script>
 
     @yield('script')
 </body>

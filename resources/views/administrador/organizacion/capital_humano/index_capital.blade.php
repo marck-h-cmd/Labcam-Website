@@ -124,8 +124,8 @@
                                                     {{ $capital->correo }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    <a href="/user/template/uploads/pdfs/{{ $capital->cv }}"><img
-                                                            width="40" height="40"
+                                                    <a href="/user/template/uploads/pdfs/{{ $capital->cv }}"
+                                                        target="_blank"><img width="40" height="40"
                                                             src="https://img.icons8.com/ultraviolet/40/documents.png"
                                                             alt="documents" /></a>
                                                 </td>
@@ -247,7 +247,13 @@
                                     onclick="document.getElementById('imagen').click()" ondragover="handleDragOver(event)"
                                     ondrop="handleDrop(event, 'imagen')">
                                     <!-- Placeholder (solo se ve si no hay imagen) -->
-                                    <span id="image-placeholder" class="text-gray-500">
+                                    <span id="image-placeholder" class="text-gray-500 flex flex-col items-center">
+                                        <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 20 16" aria-hidden="true">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                        </svg>
                                         Selecciona o arrastra una imagen (png, jpeg, jpg, gif)
                                     </span>
                                     <!-- Vista previa -->
@@ -262,9 +268,9 @@
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0
-                                                                                                                                                                                 0116.138 21H7.862a2 2 0
-                                                                                                                                                                                 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                                                                                                                                                 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                                                                                                                                                     0116.138 21H7.862a2 2 0
+                                                                                                                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                                                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="imagen" name="imagen" class="hidden"
@@ -296,9 +302,9 @@
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 7l-.867 12.142A2 2 0
-                                                                                                                                                                                 0116.138 21H7.862a2 2 0
-                                                                                                                                                                                 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                                                                                                                                                 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                                                                                                                                                     0116.138 21H7.862a2 2 0
+                                                                                                                                                                                     01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
+                                                                                                                                                                                     0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="cv" name="cv" class="hidden"
@@ -454,7 +460,13 @@
                                     onclick="document.getElementById('edit_imagen').click()"
                                     ondragover="handleDragOver(event)" ondrop="handleDrop(event, 'edit_imagen')">
                                     <!-- Placeholder -->
-                                    <span id="edit-image-placeholder" class="text-gray-500">
+                                    <span id="edit-image-placeholder" class="text-gray-500 flex flex-col items-center">
+                                        <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
+                                        fill="none" viewBox="0 0 20 16" aria-hidden="true">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+                                    </svg>
                                         Selecciona o arrastra una imagen (png, jpeg, jpg, gif)
                                     </span>
                                     <!-- Vista previa -->

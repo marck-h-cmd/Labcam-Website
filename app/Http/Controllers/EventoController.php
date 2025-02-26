@@ -41,26 +41,18 @@ class EventoController extends Controller
 
     public function showEvento(Request $request)
     {
-        $query = $request->input('search');
+        $search = $request->input('search');
 
-        $event = Evento::when($query, function ($queryBuilder) use ($query) {
-            $queryBuilder->where('titulo', 'like', '%' . $query . '%')
-                ->orWhere('autor', 'like', '%' . $query . '%');
-        })->paginate(10);
+        $event = Evento::when($search, function ($queryBuilder) use ($search) {
+            $queryBuilder->where('titulo', 'like', '%' . $search . '%')
+                ->orWhere('autor', 'like', '%' . $search . '%');
+        })
+            ->orderBy('fecha', 'desc') // Ordena por fecha descendente
+            ->paginate(10);
 
         return view('administrador.panel.novedades.evento.show', compact('event'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-        $categoria = Carbon::now()->isPast() ? 'pasado' : 'futuro';
-
-        return view('usuario.crear-evento', compact('categoria'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -88,18 +80,17 @@ class EventoController extends Controller
             ];
 
             $request->validate([
-                'titulo' => 'required|string|max:255',
-                'subtitulo' => 'required|string|max:1000',
+                'titulo'      => 'required|string|max:255',
+                'subtitulo'   => 'required|string|max:1000',
                 'descripcion' => 'required',
-                'autor' => 'required|string|max:255',
-                'fecha' => 'required|date|after_or_equal:today',
-                'imagen' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+                'autor'       => 'required|string|max:255',
+                // Usamos date_format para forzar el formato YYYY-MM-DD y luego after_or_equal con la fecha actual
+                'fecha'       => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d'),
+                'imagen'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ], $messages);
 
-            $evento = new Evento;
-            $evento->fecha = $request->fecha;
-            $evento->categoria = Carbon::parse($evento->fecha)->isPast() ? 'pasado' : 'futuro';
-
+            // Siempre se crea con categoría "futuro"
+            $categoria = 'futuro';
 
             $rutaImagen = null;
             if ($request->hasFile('imagen')) {
@@ -107,30 +98,28 @@ class EventoController extends Controller
                 $rutaImagen = $imagen->store('eventos', 'public');
             }
 
+            // Limpiar la descripción permitiendo algunas etiquetas
             $descripcion = strip_tags($request->descripcion, '<p><a><strong><em><ul><ol><li><br><u>');
-            $evento->descripcion = $descripcion;
 
             Evento::create([
                 'titulo' => $request->titulo,
                 'subtitulo' => $request->subtitulo,
-                'descripcion' => $request->descripcion,
+                'descripcion' => $descripcion,
                 'autor' => $request->autor,
                 'fecha' => $request->fecha,
-                'categoria' => Carbon::parse($request->fecha)->isPast() ? 'pasado' : 'futuro',
+                'categoria' => $categoria,
                 'imagen' => $rutaImagen,
             ]);
 
             return redirect()->route('event')->with('success', 'Evento creado con éxito.');
         } catch (ValidationException $e) {
             $errorMessage = implode('<br>', $e->validator->errors()->all());
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $errorMessage);
+            return redirect()->back()->withInput()->with('error', $errorMessage);
         } catch (Exception $e) {
-
-            return redirect()->back()->with('error', 'Error: ' . 'Hubo un error. Porfavor, pruebe denuevo');
+            return redirect()->back()->with('error', 'Error: Hubo un error. Por favor, pruebe de nuevo');
         }
     }
+
 
     /**
      * Display the specified resource.
@@ -140,17 +129,6 @@ class EventoController extends Controller
         //
         $evento = Evento::findOrFail($id);
         return view('usuario.novedades.detalle-eventos', compact('evento'));
-
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-        $event = Evento::findOrFail($id);
-        return view('administrador.panel.novedades.evento.edit', compact('event'));
     }
 
     /**
@@ -159,36 +137,34 @@ class EventoController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'titulo' => 'required|string|max:255',
-            'subtitulo' => 'required|string|max:1000',
-            'descripcion' => 'required',
-            'autor' => 'required|string|max:255',
-            'fecha' => 'required|date',
-            'imagen' => 'nullable|image|mimes:jpg,png',
+            'edit_titulo' => 'required|string|max:255',
+            'edit_subtitulo' => 'required|string|max:1000',
+            'edit_descripcion' => 'required',
+            'edit_autor' => 'required|string|max:255',
+            'edit_fecha'       => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d'),
+            'edit_imagen' => 'nullable|image|mimes:jpg,png',
         ]);
 
 
         $evento = Evento::findOrFail($id);
         $evento->fecha = $request->fecha;
-        $evento->categoria = Carbon::parse($evento->fecha)->isPast() ? 'pasado' : 'futuro';
+        $evento->categoria = 'futuro';
 
 
-
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('eventos', 'public');
+        if ($request->hasFile('edit_imagen')) {
+            $imagenPath = $request->file('edit_imagen')->store('eventos', 'public');
             $evento->imagen = $imagenPath;
         }
 
         $evento->update([
-            'titulo' => $request->titulo,
-            'subtitulo' => $request->subtitulo,
-            'descripcion' => $request->descripcion,
-            'autor' => $request->autor,
-            'fecha' => $request->fecha,
+            'titulo' => $request->edit_titulo,
+            'subtitulo' => $request->edit_subtitulo,
+            'descripcion' => $request->edit_descripcion,
+            'autor' => $request->edit_autor,
+            'fecha' => $request->edit_fecha,
         ]);
 
-        return redirect()->route('event')->with('edit', 'Evento actualizada con éxito');
-
+        return redirect()->route('event')->with('edit', 'Evento actualizado con éxito');
     }
 
     /**
@@ -199,6 +175,6 @@ class EventoController extends Controller
         $evento = Evento::findOrFail($id);
         $evento->delete();
 
-        return redirect()->route('event')->with('destroy', 'Evento eliminada con éxito');
+        return redirect()->route('event')->with('destroy', 'Evento eliminado con éxito');
     }
 }
