@@ -21,12 +21,12 @@
         </div>
 
         <div class="overflow-x-auto bg-white rounded-lg shadow">
-            <table class="min-w-full text-sm text-left text-gray-600">
+            <table class="min-w-full text-sm text-left text-gray-600 table-fixed">
                 <thead class="bg-gray-200 text-gray-700 uppercase">
                     <tr>
                         <th class="px-4 py-3">Título</th>
                         <th class="px-4 py-3">Subtítulo</th>
-                        <th class="px-4 py-3">Contenido</th>
+                        <th class="px-4 py-3 w-60">Contenido</th>
                         <th class="px-4 py-3">Autor</th>
                         <th class="px-4 py-3">Fecha</th>
                         <th class="px-4 py-3">Imagen</th>
@@ -35,19 +35,24 @@
                 </thead>
                 <tbody>
                     @foreach ($notici as $noticia)
+                        @php
+                            // Instancia la clase TruncateService usando el namespace completo
+                            $truncateService = new \Urodoz\Truncate\TruncateService();
+                            // Trunca la contenido a 100 caracteres y agrega '...'
+                            $htmlSnippet = $truncateService->truncate($noticia->contenido, 100, '...');
+                        @endphp
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $noticia->titulo }}</td>
                             <td class="px-4 py-3">{{ $noticia->subtitulo }}</td>
-                            <td class="px-4 py-3">{{ Str::limit($noticia->contenido, 50) }}</td>
+                            <td class="px-4 py-3 w-full whitespace-normal break-all">{!! $htmlSnippet !!}</td>
                             <td class="px-4 py-3">{{ $noticia->autor }}</td>
                             <td class="px-4 py-3">{{ $noticia->fecha }}</td>
-                            <!-- Fila de la imagen -->
                             <td class="px-4 py-3">
                                 @if ($noticia->imagen)
                                     <div class="px-8 py-0.1 text-center">
                                         <button
                                             class="w-8 h-8 flex items-center justify-start rounded shadow cursor-pointer"
-                                            onclick='openModal(@json(Storage::url($noticia->imagen)), "image")'>
+                                            onclick="openModal('{{ Storage::url($noticia->imagen) }}', 'image')">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                                 class="w-6 h-6" viewBox="0 0 24 24">
@@ -97,7 +102,8 @@
     <!-- Modal Crear -->
     <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
-            <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-4xl w-full relative max-h-screen overflow-y-auto">
+            <!-- Se aumentó el ancho máximo a max-w-5xl para que el modal sea más ancho -->
+            <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-6xl w-full relative max-h-screen overflow-y-auto">
                 <!-- Título centrado -->
                 <div class="text-center mb-8">
                     <h2 class="text-2xl font-semibold text-blue-800">Crear Noticia</h2>
@@ -111,15 +117,13 @@
 
                     <!-- Contenedor principal con Grid (2 columnas en md+) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
                         <!-- Columna Izquierda -->
                         <div class="space-y-4">
                             <!-- Título -->
                             <div>
                                 <label for="titulo" class="block text-gray-700">Título</label>
                                 <input type="text" id="titulo" name="titulo"
-                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md
-                                              focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
 
@@ -127,49 +131,44 @@
                             <div>
                                 <label for="subtitulo" class="block text-gray-700">Subtítulo</label>
                                 <input type="text" id="subtitulo" name="subtitulo"
-                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md
-                                              focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
 
                             <!-- Autor -->
                             <div>
                                 <label for="autor" class="block text-gray-700">Autor</label>
                                 <input type="text" id="autor" name="autor"
-                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md
-                                              focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
 
                             <!-- Fecha -->
                             <div>
                                 <label for="fecha" class="block text-gray-700">Fecha</label>
-                                <input type="date" id="fecha" name="fecha"
-                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md
-                                              focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                <input type="date" id="fecha" name="fecha" min="{{ date('Y-m-d') }}"
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
                         </div>
 
                         <!-- Columna Derecha -->
                         <div class="space-y-4">
-                            <!-- Contenido -->
+                            <!-- Contenido con TinyMCE -->
                             <div>
                                 <label for="contenido" class="block text-gray-700">Contenido</label>
                                 <textarea id="contenido" name="contenido" rows="7"
-                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md
-                                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required></textarea>
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </textarea>
                             </div>
 
                             <!-- Imagen (Drag & Drop) -->
                             <div>
                                 <label class="block text-gray-700 mb-1">Imagen</label>
                                 <div id="image-upload"
-                                    class="border-2 border-dashed border-gray-300 w-full h-48
-                                            flex flex-col items-center justify-center cursor-pointer relative text-center rounded-md"
+                                    class="border-2 border-dashed border-gray-300 w-full h-48 flex flex-col items-center justify-center cursor-pointer relative text-center rounded-md"
                                     onclick="document.getElementById('imagen').click()" ondragover="handleDragOver(event)"
                                     ondrop="handleDrop(event, 'imagen')">
-                                    <!-- Placeholder (se ve si no hay imagen) -->
+                                    <!-- Placeholder -->
                                     <span id="image-placeholder" class="text-gray-500 flex flex-col items-center">
                                         <svg class="w-8 h-8 mb-4 text-gray-500" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 20 16" aria-hidden="true">
@@ -186,14 +185,10 @@
                                     <button type="button" id="remove-image"
                                         class="hidden absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition cursor-pointer"
                                         onclick="removeImage(event)">
-                                        <!-- Icono papelera -->
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 7l-.867 12.142A2 2 0
-                                                                                                             0116.138 21H7.862a2 2 0
-                                                                                                             01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2
-                                                                                                             0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V5a2 2 0 00-2-2H9a2 2 0 00-2 2v2m3 0h4" />
                                         </svg>
                                     </button>
                                     <input type="file" id="imagen" name="imagen" class="hidden"
@@ -219,10 +214,36 @@
         </div>
     </div>
 
-    <!-- Modal Editar Noticia -->
+    <script>
+        tinymce.init({
+            selector: '#contenido',
+            language: 'es_MX',
+            branding: false,
+            menubar: false,
+            height: 240,
+            relative_urls: false,
+            remove_script_host: false,
+            plugins: 'autolink lists link image charmap preview anchor code',
+            toolbar: 'undo redo | formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | removeformat | code',
+            statusbar: false,
+            link_title: false, // No se mostrará el campo de título en el diálogo de enlace
+            link_target_list: [{
+                    title: 'Misma ventana',
+                    value: '_self'
+                },
+                {
+                    title: 'Nueva ventana',
+                    value: '_blank'
+                }
+            ]
+        });
+    </script>
+
+    <!-- Modal Editar -->
     <div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
-            <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-4xl w-full relative max-h-screen overflow-y-auto">
+            <!-- Se aumentó el ancho máximo a max-w-6xl para que el modal sea más ancho, igual que en el modal crear -->
+            <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-6xl w-full relative max-h-screen overflow-y-auto">
                 <!-- Título centrado -->
                 <div class="text-center mb-8">
                     <h2 class="text-2xl font-semibold text-blue-800">Editar Noticia</h2>
@@ -234,9 +255,8 @@
                     @csrf
                     @method('PUT')
 
-                    <!-- Grid principal (2 columnas en md+) -->
+                    <!-- Contenedor principal con Grid (2 columnas en md+) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
                         <!-- Columna Izquierda -->
                         <div class="space-y-4">
                             <!-- Título -->
@@ -262,7 +282,7 @@
                             <!-- Fecha -->
                             <div>
                                 <label for="edit_fecha" class="block text-gray-700">Fecha</label>
-                                <input type="date" id="edit_fecha" name="edit_fecha"
+                                <input type="date" id="edit_fecha" name="edit_fecha" min="{{ date('Y-m-d') }}"
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
@@ -270,12 +290,11 @@
 
                         <!-- Columna Derecha -->
                         <div class="space-y-4">
-                            <!-- Contenido -->
+                            <!-- Contenido con TinyMCE (si se usa en el editar, se inicializará igual) -->
                             <div>
                                 <label for="edit_contenido" class="block text-gray-700">Contenido</label>
                                 <textarea id="edit_contenido" name="edit_contenido" rows="7"
-                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    required></textarea>
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                             </div>
                             <!-- Imagen (Drag & Drop y selector) -->
                             <div>
@@ -295,9 +314,9 @@
                                                 stroke-width="2"
                                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                                         </svg>
-                                        Selecciona o arrastra una
-                                        imagen (png, jpeg, jpg)</span>
-                                    <!-- Botón eliminar imagen (muestra icono de papelera) -->
+                                        Selecciona o arrastra una imagen (png, jpeg, jpg)
+                                    </span>
+                                    <!-- Botón eliminar imagen -->
                                     <button type="button" id="edit_remove_image"
                                         class="hidden absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full hover:bg-red-600 transition cursor-pointer"
                                         onclick="removeImageEdit(event)">
@@ -328,6 +347,31 @@
             </div>
         </div>
     </div>
+
+    <script>
+        tinymce.init({
+            selector: '#edit_contenido',
+            language: 'es_MX',
+            branding: false,
+            menubar: false,
+            height: 240,
+            relative_urls: false,
+            remove_script_host: false,
+            plugins: 'autolink lists link image charmap preview anchor code',
+            toolbar: 'undo redo | formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | removeformat | code',
+            statusbar: false,
+            link_title: false, // No se mostrará el campo de título en el diálogo de enlace
+            link_target_list: [{
+                    title: 'Misma ventana',
+                    value: '_self'
+                },
+                {
+                    title: 'Nueva ventana',
+                    value: '_blank'
+                }
+            ]
+        });
+    </script>
 
     <!-- Modal Eliminar -->
     <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
@@ -491,17 +535,19 @@
 
         // Abre el modal de editar y precarga los datos
         function openEditModal(button) {
-            // Se espera que el botón tenga data-noticia con el JSON de la noticia
+            // Se espera que el botón tenga data-noticia con el JSON del noticia
             let noticia = JSON.parse(button.getAttribute('data-noticia'));
 
             // Precargar datos en los campos
             document.getElementById('edit_titulo').value = noticia.titulo;
             document.getElementById('edit_subtitulo').value = noticia.subtitulo;
-            document.getElementById('edit_contenido').value = noticia.contenido;
             document.getElementById('edit_autor').value = noticia.autor;
             document.getElementById('edit_fecha').value = noticia.fecha;
 
-            // Configura la acción del formulario (por ejemplo, /notici/{id})
+            // Precargar la contenido en TinyMCE
+            tinymce.get('edit_contenido').setContent(noticia.contenido || ''); // Evita valores nulos
+
+            // Configura la acción del formulario
             document.getElementById('editForm').action = `/admin/noticias/${noticia.id}`;
 
             // Precargar imagen
@@ -615,5 +661,30 @@
             const modal = document.getElementById('archivoModal');
             modal.classList.add('hidden');
         }
+
+        document.getElementById('form').addEventListener('submit', function(e) {
+            // Obtén el contenido de TinyMCE
+            let content = tinymce.get('contenido').getContent({
+                format: 'text'
+            }).trim();
+            if (content === '') {
+                e.preventDefault();
+                alert('El campo contenido es obligatorio.');
+                tinymce.get('contenido').focus();
+            }
+        });
+
+
+        document.getElementById('edit_form').addEventListener('submit', function(e) {
+            // Obtén el contenido de TinyMCE
+            let content = tinymce.get('edit_contenido').getContent({
+                format: 'text'
+            }).trim();
+            if (content === '') {
+                e.preventDefault();
+                alert('El campo contenido es obligatorio.');
+                tinymce.get('edit_contenido').focus();
+            }
+        });
     </script>
 @endsection

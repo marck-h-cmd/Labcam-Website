@@ -1,10 +1,12 @@
 @extends('usuario.layout.plantilla')
 
 @section('contenido')
-    <section class="flex flex-wrap justify-center gap-12 h-full w-full px-16 pb-12">
+    <!-- Contenedor principal: en mobile se muestra en columna, en md+ en fila -->
+    <section class="flex flex-col md:flex-row gap-12 w-full px-4 md:px-16 pb-12 relative">
         <!-- Menú de áreas de investigación -->
-        <div class="bg-gray-200 mt-36 md:sticky md:top-36 w-max md:w-56 shadow-md rounded-lg flex md:flex-col max-h-[310px]">
-            <div class="flex flex-col px-4 py-8 gap-4 w-full h-full overflow-y-auto">
+        <div
+            class="bg-gray-200 mt-4 md:mt-[182px] md:top-[182px] md:sticky xl:mt-36 xl:top-36 px-4 pt-6 pb-5 w-56 shadow-md rounded-lg flex flex-col h-fit mx-auto md:mx-0 max-h-[320px]">
+            <div class="flex flex-col gap-4 w-full h-full overflow-y-auto">
                 @foreach ($areasInvestigacion as $area)
                     <button onclick="showSection('capital_area', this, '{{ $area->id }}')"
                         data-area-id="{{ $area->id }}"
@@ -15,6 +17,7 @@
             </div>
         </div>
 
+        <!-- Contenedor de la derecha -->
         <section class="flex-1 w-full">
             <!-- Encabezado -->
             <div class="grid grid-cols-3 items-center justify-center pt-8">
@@ -29,7 +32,7 @@
                 </div>
 
                 <div class="flex flex-col items-center mb-12">
-                    <h2 class="text-blue-800 font-medium text-4xl mb-1">Áreas de Investigación</h2>
+                    <h2 class="text-blue-800 font-medium text-4xl text-center mb-1">Áreas de Investigación</h2>
                     <div class="blue-line w-full h-0.5 bg-[#64d423]"></div>
                 </div>
 
@@ -45,11 +48,11 @@
             </div>
 
             <!-- Sección de capitales filtrados por área -->
-            <div id="capital_area" class="dynamic-section hidden flex-1 p-4 w-full">
+            <div id="capital_area" class="dynamic-section hidden flex-1 p-4 w-full overflow-x-hidden">
                 @foreach ($areasInvestigacion as $area)
                     <!-- Cada contenedor tendrá un id único basado en el id del área -->
                     <div id="capital_area_{{ $area->id }}" class="capital-area-group hidden">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-lg">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 text-lg">
                             @forelse ($capitales->where('area_investigacion', $area->id) as $capital)
                                 <div
                                     class="relative w-full bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl group overflow-hidden">
@@ -79,8 +82,8 @@
                                     </div>
                                 </div>
                             @empty
-                                <p class="text-gray-500 col-span-full text-center">No se encontraron personas en el
-                                    área {{ $area->nombre }}.</p>
+                                <p class="text-gray-500 col-span-full text-center">No se encontraron personas en el área
+                                    {{ $area->nombre }}.</p>
                             @endforelse
                         </div>
                     </div>
@@ -108,7 +111,7 @@
                 target.classList.remove('hidden');
             }
 
-            // Resaltar el botón activo: quitar el estilo activo a todos y agregarlo al botón clickeado
+            // Resaltar el botón activo
             document.querySelectorAll('.bloque').forEach(tab => {
                 tab.classList.remove('bg-blue-600', 'text-white');
             });

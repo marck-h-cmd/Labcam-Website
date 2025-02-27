@@ -61,22 +61,22 @@ class EventoController extends Controller
     {
         try {
             $messages = [
-                'titulo.required' => 'El campo título es obligatorio.',
-                'titulo.string' => 'El título debe ser una cadena de texto.',
-                'titulo.max' => 'El título no debe exceder los 255 caracteres.',
-                'subtitulo.required' => 'El campo subtítulo es obligatorio.',
-                'subtitulo.string' => 'El subtítulo debe ser una cadena de texto.',
-                'subtitulo.max' => 'El subtítulo no debe exceder los 1000 caracteres.',
+                'titulo.required'      => 'El campo título es obligatorio.',
+                'titulo.string'        => 'El título debe ser una cadena de texto.',
+                'titulo.max'           => 'El título no debe exceder los 255 caracteres.',
+                'subtitulo.required'   => 'El campo subtítulo es obligatorio.',
+                'subtitulo.string'     => 'El subtítulo debe ser una cadena de texto.',
+                'subtitulo.max'        => 'El subtítulo no debe exceder los 1000 caracteres.',
                 'descripcion.required' => 'El campo descripción es obligatorio.',
-                'autor.required' => 'El campo autor es obligatorio.',
-                'autor.string' => 'El autor debe ser una cadena de texto.',
-                'autor.max' => 'El nombre del autor no debe exceder los 255 caracteres.',
-                'fecha.required' => 'El campo fecha es obligatorio.',
-                'fecha.date' => 'El campo fecha debe ser una fecha válida.',
+                'autor.required'       => 'El campo autor es obligatorio.',
+                'autor.string'         => 'El autor debe ser una cadena de texto.',
+                'autor.max'            => 'El nombre del autor no debe exceder los 255 caracteres.',
+                'fecha.required'       => 'El campo fecha es obligatorio.',
+                'fecha.date'           => 'El campo fecha debe ser una fecha válida.',
                 'fecha.after_or_equal' => 'La fecha debe ser igual o posterior a hoy.',
-                'imagen.image' => 'El archivo debe ser una imagen.',
-                'imagen.mimes' => 'La imagen debe ser de tipo JPEG, PNG o JPG.',
-                'imagen.max' => 'La imagen no debe exceder los 2MB.',
+                'imagen.image'         => 'El archivo debe ser una imagen.',
+                'imagen.mimes'         => 'La imagen debe ser de tipo JPEG, PNG o JPG.',
+                'imagen.max'           => 'La imagen no debe exceder los 2MB.',
             ];
 
             $request->validate([
@@ -84,12 +84,11 @@ class EventoController extends Controller
                 'subtitulo'   => 'required|string|max:1000',
                 'descripcion' => 'required',
                 'autor'       => 'required|string|max:255',
-                // Usamos date_format para forzar el formato YYYY-MM-DD y luego after_or_equal con la fecha actual
                 'fecha'       => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d'),
                 'imagen'      => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             ], $messages);
 
-            // Siempre se crea con categoría "futuro"
+            // Se asigna la categoría "futuro" siempre
             $categoria = 'futuro';
 
             $rutaImagen = null;
@@ -98,17 +97,17 @@ class EventoController extends Controller
                 $rutaImagen = $imagen->store('eventos', 'public');
             }
 
-            // Limpiar la descripción permitiendo algunas etiquetas
-            $descripcion = strip_tags($request->descripcion, '<p><a><strong><em><ul><ol><li><br><u>');
+            // Guardar la descripción con todas sus etiquetas HTML
+            $descripcion = $request->descripcion;
 
             Evento::create([
-                'titulo' => $request->titulo,
-                'subtitulo' => $request->subtitulo,
+                'titulo'      => $request->titulo,
+                'subtitulo'   => $request->subtitulo,
                 'descripcion' => $descripcion,
-                'autor' => $request->autor,
-                'fecha' => $request->fecha,
-                'categoria' => $categoria,
-                'imagen' => $rutaImagen,
+                'autor'       => $request->autor,
+                'fecha'       => $request->fecha,
+                'categoria'   => $categoria,
+                'imagen'      => $rutaImagen,
             ]);
 
             return redirect()->route('event')->with('success', 'Evento creado con éxito.');
@@ -139,33 +138,32 @@ class EventoController extends Controller
         $request->validate([
             'edit_titulo' => 'required|string|max:255',
             'edit_subtitulo' => 'required|string|max:1000',
-            'edit_descripcion' => 'required',
+            'edit_descripcion' => 'required|string',
             'edit_autor' => 'required|string|max:255',
-            'edit_fecha'       => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d'),
+            'edit_fecha' => 'required|date_format:Y-m-d|after_or_equal:' . date('Y-m-d'),
             'edit_imagen' => 'nullable|image|mimes:jpg,png',
         ]);
-
-
+    
         $evento = Evento::findOrFail($id);
-        $evento->fecha = $request->fecha;
+        $evento->fecha = $request->edit_fecha;
         $evento->categoria = 'futuro';
-
-
+    
         if ($request->hasFile('edit_imagen')) {
             $imagenPath = $request->file('edit_imagen')->store('eventos', 'public');
             $evento->imagen = $imagenPath;
         }
-
+    
         $evento->update([
-            'titulo' => $request->edit_titulo,
-            'subtitulo' => $request->edit_subtitulo,
-            'descripcion' => $request->edit_descripcion,
-            'autor' => $request->edit_autor,
+            'titulo' => strip_tags($request->edit_titulo),
+            'subtitulo' => strip_tags($request->edit_subtitulo),
+            'descripcion' => $request->edit_descripcion, // Permite HTML
+            'autor' => strip_tags($request->edit_autor),
             'fecha' => $request->edit_fecha,
         ]);
-
+    
         return redirect()->route('event')->with('edit', 'Evento actualizado con éxito');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -12,7 +12,7 @@ class ProyectoController extends Controller
     public function index()
     {
 
-        $proyectos = Proyecto::paginate(6);
+        $proyectos = Proyecto::orderBy('fecha_publicacion', 'desc')->paginate(6);
         return view('usuario.novedades.proyectos', compact('proyectos'));
     }
 

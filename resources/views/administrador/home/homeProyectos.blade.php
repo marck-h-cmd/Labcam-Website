@@ -73,7 +73,7 @@
         <script>
             Swal.fire({
                 icon: 'success',
-                title:'Actualización exitosa',
+                title: 'Actualización exitosa',
                 text: 'Los datos han sido actualizados correctamente en el sistema',
                 showConfirmButton: true,
                 confirmButtonText: 'Aceptar',
@@ -134,8 +134,21 @@
                 language: 'es_MX',
                 branding: false,
                 menubar: false,
-                toolbar: 'undo redo | forecolor | bold italic | alignleft aligncenter alignright alignjustify | outdent indent',
+                relative_urls: false,
+                remove_script_host: false,
+                plugins: 'autolink lists link image charmap preview anchor code',
+                toolbar: 'undo redo | formatselect | bold italic underline forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | removeformat | code',
                 statusbar: false,
+                link_title: false, // No se mostrará el campo de título en el diálogo de enlace
+                link_target_list: [{
+                        title: 'Misma ventana',
+                        value: '_self'
+                    },
+                    {
+                        title: 'Nueva ventana',
+                        value: '_blank'
+                    }
+                ],
                 forced_root_block: 'p',
                 forced_root_block_attrs: {
                     style: 'margin-bottom: 1em;'

@@ -29,10 +29,9 @@
             <!-- <div class="flex mb-8"> -->
             <!-- Contenido de la noticia -->
             <div style="max-width: 100%; margin-top: 1rem;">
-                <article style="font-size: 1rem; color: #4A5568; line-height: 1.5; word-wrap: break-word;">
-                    <p>
-                        {{ $noticia->contenido }}
-                    </p>
+                <article id="descripcion-articulo"
+                    style="font-size: 1rem; color: #4A5568; line-height: 1.5; word-wrap: break-word;">
+                    {!! $noticia->contenido !!}
                 </article>
             </div>
             <!-- </div> -->

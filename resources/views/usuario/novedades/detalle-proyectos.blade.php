@@ -28,10 +28,9 @@
 
             <!-- Contenido del proyecto -->
             <div style="max-width: 100%; margin-top: 1rem;">
-                <article style="font-size: 1rem; color: #4A5568; line-height: 1.5; word-wrap: break-word;">
-                    <p>
-                        {{ $proyecto->descripcion }}
-                    </p>
+                <article id="descripcion-articulo"
+                    style="font-size: 1rem; color: #4A5568; line-height: 1.5; word-wrap: break-word;">
+                    {!! $proyecto->descripcion !!}
                 </article>
             </div>
 
