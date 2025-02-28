@@ -21,7 +21,7 @@ Esta guía proporciona los comandos necesarios para configurar y ejecutar la apl
 
 ## Instalación
 
-### Instalar Módulos de Node
+### Instalar modules de Node
 
 Para instalar los módulos de Node.js requeridos, ejecuta el siguiente comando:
 
