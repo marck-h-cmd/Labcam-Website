@@ -26,13 +26,14 @@ class AreaInvestigacionController extends Controller
 
         try {
 
+         
             $messages = [
                 'nombre.unique' => 'El nombre ya esta registrado.',
             ];
 
             // validar campos
             $request->validate([
-                'nombre' => 'required|unique|string|max:70',
+                'nombre' => 'required|string|max:40',
 
             ],$messages);
 
