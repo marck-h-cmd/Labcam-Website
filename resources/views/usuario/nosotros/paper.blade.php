@@ -452,7 +452,7 @@
                 {{ $paper->descripcion }}
             </p>
             <p><strong>Autores: </strong><span class=" ml-2"> {{ $paper->formatted_autores }} </span></p>
-            <p><strong>Área: </strong><span class=" ml-2"> {{ $paper->area->nombre }} </span></p>
+            <p><strong>Área: </strong><span class=" ml-2"> {{ $paper->area ? $paper->area->nombre : 'No hay área asociada' }} </span></p>
             <p><strong>Fecha Publicación: </strong><span class=" ml-2">{{ $paper->fecha_publicacion }}</span></p>
             <p><strong>Publisher: </strong><span class=" ml-2"> {{ $paper->publisher }}</span></p>
             <div class="doi">

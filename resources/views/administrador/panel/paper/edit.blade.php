@@ -46,7 +46,7 @@
                                     <ul id="authors-list" class="h-auto px-3 pb-3 overflow-y-auto text-sm text-gray-700">
                                         {{-- Si deseas precargar visualmente los autores, podrías iterar acá --}}
                                     </ul>
-                                    <button id="remove-authors-btn"
+                                    <button type="button" id="remove-authors-btn"
                                         class="flex items-center p-3 px-10 text-sm font-medium text-red-600 border-t border-gray-200 rounded-b-lg bg-gray-50 hover:bg-gray-100">
                                         <svg class="w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                             fill="currentColor" viewBox="0 0 20 18">
@@ -93,14 +93,15 @@
                                 <div id="topicos-menu"
                                     class="absolute z-10 w-full bg-white border border-gray-300 shadow-md rounded-lg hidden">
                                     <div class="max-h-48 overflow-y-auto p-2">
-                                        @if (!$topicos->isEmpty())
+                                        @if ($topicos && !$topicos->isEmpty())
                                             @foreach ($topicos as $topico)
-                                                <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
-                                                    <input type="checkbox" value="{{ $topico->id }}"
-                                                        class="checkbox-topico"
-                                                        {{ in_array($topico->id, $paper->topicos->pluck('id')->toArray()) ? 'checked' : '' }}>
-                                                    <span>{{ $topico->nombre }}</span>
-                                                </label>
+                                                    <label
+                                                        class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
+                                                        <input type="checkbox" value="{{ $topico->id }}"
+                                                            class="checkbox-topico"
+                                                            {{ in_array($topico->id, $paper->topicos->pluck('id')->toArray()) ? 'checked' : '' }}>
+                                                        <span>{{ $topico->nombre }}</span>
+                                                    </label>
                                             @endforeach
                                         @else
                                             <label class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded-md">
@@ -160,8 +161,10 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg 
                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                 required>
-                                <option value="" disabled>Selecciona un Área de Investigación</option>
-                                @if (!$areas->isEmpty())
+                                <option value="" @if (old('area_id', $paper->area_id) === '') selected @endif>
+                                    Selecciona un Área de Investigación
+                                </option>
+                                @if ($areas && !$areas->isEmpty())
                                     @foreach ($areas as $area)
                                         <option value="{{ $area->id }}"
                                             @if (old('area_id', $paper->area_id) == $area->id) selected @endif>
@@ -169,7 +172,7 @@
                                         </option>
                                     @endforeach
                                 @else
-                                    <option value="none">No hay áreas Registradas</option>
+                                    <option value="none" disabled>No hay áreas Registradas</option>
                                 @endif
                             </select>
                         </div>

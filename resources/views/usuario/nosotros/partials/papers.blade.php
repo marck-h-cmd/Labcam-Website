@@ -1,8 +1,7 @@
 @foreach ($papers as $paper)
     <div
-        class="flex flex-col md:flex-row overflow-hidden relative
-                                             rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">
-        <p class="absolute right-6 px-2 md:top-2   font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm"> {{ $paper->area->nombre }}</p>
+        class="flex flex-col md:flex-row overflow-hidden relative                                          rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">                                 
+        <p class="absolute right-6 px-2 md:top-2   font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm"> {{ $paper->area ? $paper->area->nombre : 'N.A' }}</p>
         <!-- información del paper -->
         <div class="max-h-96 max-w-[400px] overflow-hidden  md:w-1/2 p-4">
             <a href="{{ route('biblioteca.papers.show', $paper->id) }}"

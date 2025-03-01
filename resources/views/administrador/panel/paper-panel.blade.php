@@ -40,6 +40,7 @@
                         </div>
                     </div>
 
+                    <!-- TABLA PAPERS -->
                     <div class="flow-root">
                         <div class="mt-8 overflow-x-auto">
                             <div class="inline-block min-w-full py-2 align-middle">
@@ -93,8 +94,9 @@
 
                                                 <td class="whitespace-nowrap px-3 py-8 text-sm text-gray-600">
                                                     {{ $paper->titulo }}</td>
-                                                <td class="whitespace-nowrap px-3 py-8 text-sm text-gray-500">
-                                                    {{ $paper->area->nombre }}</td>
+
+                                                <td class="whitespace-nowrap px-3 py-8 text-sm text-gray-500">      
+                                                    {{ $paper->area ? $paper->area->nombre : 'No hay área asociada' }}</td>
                                                 <td
                                                     class="whitespace-nowrap px-3 py-8 text-sm text-gray-600 overflow-hidden max-w-96">
                                                     {{ $paper->descripcion }}</td>

@@ -20,6 +20,7 @@
 
 
 
+                                  <!-- TABLA SLIDERS -->
                                 <div class="flow-root">
                                     <div class="mt-10 overflow-x-auto">
                                         <div class="inline-block min-w-full py-2 align-middle">
