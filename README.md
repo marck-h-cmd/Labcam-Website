@@ -62,4 +62,4 @@ Después de completar los pasos anteriores, puedes iniciar la aplicación utiliz
 php artisan serve
 ```
 
-Visita `http://localhost:8000` en tu navegador para ver la aplicación.
+
