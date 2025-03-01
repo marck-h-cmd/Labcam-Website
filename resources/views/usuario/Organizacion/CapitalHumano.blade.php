@@ -72,7 +72,7 @@
                                     <span class="text-gray-600 text-lg font-bold">{{ $investigador->nombre }}</span>
                                     <p class="text-sm text-black">Grado Académico: {{ $investigador->carrera }}</p>
                                     <p class="text-sm text-black">Área de Investigación:
-                                        {{ $investigador->areaInvestigacion->nombre }}</p>
+                                        {{ $investigador->areaInvestigacion->nombre ?? 'No asignado'}}</p>
                                     <p class="text-sm text-black">Correo: {{ $investigador->correo }}</p>
                                 </div>
                                 <div
@@ -109,7 +109,7 @@
                                     <span class="text-gray-600 text-lg font-bold">{{ $egresado->nombre }}</span>
                                     <p class="text-sm text-black">Grado Académico: {{ $egresado->carrera }}</p>
                                     <p class="text-sm text-black">Área de Investigación:
-                                        {{ $egresado->areaInvestigacion->nombre }}</p>
+                                        {{ $egresado->areaInvestigacion->nombre?? 'No asignado' }}</p>
                                     <p class="text-sm text-black">Correo: {{ $egresado->correo }}</p>
                                 </div>
                                 <div
@@ -162,7 +162,7 @@
                                         <span class="text-gray-600 text-lg font-bold">{{ $tesista_pre->nombre }}</span>
                                         <p class="text-sm text-black">Grado Académico: {{ $tesista_pre->carrera }}</p>
                                         <p class="text-sm text-black">Área de Investigación:
-                                            {{ $tesista_pre->areaInvestigacion->nombre }}</p>
+                                            {{ $tesista_pre->areaInvestigacion->nombre?? 'No asignado' }}</p>
                                         <p class="text-sm text-black">Correo: {{ $tesista_pre->correo }}</p>
                                     </div>
                                     <div
@@ -199,7 +199,7 @@
                                         <span class="text-gray-600 text-lg font-bold">{{ $tesista_pos->nombre }}</span>
                                         <p class="text-sm text-black">Grado Académico: {{ $tesista_pos->carrera }}</p>
                                         <p class="text-sm text-black">Área de Investigación:
-                                            {{ $tesista_pos->areaInvestigacion->nombre }}</p>
+                                            {{ $tesista_pos->areaInvestigacion->nombre?? 'No asignado' }}</p>
                                         <p class="text-sm text-black">Correo: {{ $tesista_pos->correo }}</p>
                                     </div>
                                     <div
@@ -238,7 +238,7 @@
                                     <span class="text-gray-600 text-lg font-bold">{{ $pasante->nombre }}</span>
                                     <p class="text-sm text-black">Grado Académico: {{ $pasante->carrera }}</p>
                                     <p class="text-sm text-black">Área de Investigación:
-                                        {{ $pasante->areaInvestigacion->nombre }}</p>
+                                        {{ $pasante->areaInvestigacion->nombre?? 'No asignado' }}</p>
                                     <p class="text-sm text-black">Correo: {{ $pasante->correo }}</p>
                                 </div>
                                 <div
@@ -276,7 +276,7 @@
                                     <span class="text-gray-600 text-lg font-bold">{{ $aliado->nombre }}</span>
                                     <p class="text-sm text-black">Grado Académico: {{ $aliado->carrera }}</p>
                                     <p class="text-sm text-black">Área de Investigación:
-                                        {{ $aliado->areaInvestigacion->nombre }}</p>
+                                        {{ $aliado->areaInvestigacion->nombre?? 'No asignado' }}</p>
                                     <p class="text-sm text-black">Correo: {{ $aliado->correo }}</p>
                                 </div>
                                 <div

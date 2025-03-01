@@ -118,7 +118,7 @@
                                                     {{ $capital->carrera }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                    {{ $capital->areaInvestigacion->nombre }}
+                                                    {{ $capital->areaInvestigacion->nombre?? 'No asignado' }}
                                                 </td>
                                                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                     {{ $capital->correo }}
@@ -213,7 +213,7 @@
                                     required>
                                     <option value="">Seleccione un área</option>
                                     @foreach ($areasInvestigacion as $area)
-                                        <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                        <option value="{{ $area->id }}">{{ $area->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -427,7 +427,7 @@
                                     required>
                                     <option value="">Seleccione una opción</option>
                                     @foreach ($areasInvestigacion as $area)
-                                        <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                                        <option value="{{ $area->id }}">{{ $area->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -745,7 +745,7 @@
 
             // Precargar datos en los campos
             document.getElementById('edit_nombre').value = capital.nombre;
-            document.getElementById('edit_area_investigacion').value = capital.area_investigacion.id;
+            document.getElementById('edit_area_investigacion').value = capital.area_investigacion ? capital.area_investigacion.id : "";
             document.getElementById('edit_correo').value = capital.correo;
             document.getElementById('edit_carrera').value = capital.carrera;
             // Si el rol es Tesistas, forzamos a "Tesistas" sin tipo adicional
