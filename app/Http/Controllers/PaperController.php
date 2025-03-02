@@ -400,7 +400,7 @@ class PaperController extends Controller
         ->with('error', 'Paper no encontrado');
     }
 
-    $areas = AreaInvestigacion::where('id', '!=', $paper->area->id)->get('*');
+    $areas = AreaInvestigacion::all();
 
     return view('administrador.panel.paper.edit', [
       'paper' => $paper,
