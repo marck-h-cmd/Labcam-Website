@@ -45,6 +45,25 @@ class PaperController extends Controller
     return view('usuario.nosotros.biblioteca', compact('papers', 'topicos', 'areas'));
   }
 
+  public function fetchByArea($area_id)
+  {
+    $area = AreaInvestigacion::find($area_id);
+    if ($area) {
+      $papers = Paper::where('area_id', $area_id)->paginate(6);
+        // Format autores 
+      $papers->each(function ($paper) {
+          $paper->formatted_autores = $this->formatAutores($paper->autores);
+        });
+      $topicos = Topico::has('papers')->get();
+      $areas = AreaInvestigacion::has('papers')->get();
+    }
+
+
+
+    return view('usuario.nosotros.papers-area', compact('papers', 'topicos', 'areas','area'));
+  }
+
+
   public function fetchMorePapers(Request $request)
   {
     try {
@@ -215,29 +234,29 @@ class PaperController extends Controller
     try {
       // Mensajes de error personalizados
       $messages = [
-        'titulo.required'      => 'El titulo es requerido.',
-        'titulo.unique'        => 'El titulo de este paper ya está registrado.',
-        'autores.required'     => 'El nombre de los autores es requerido.',
-        'doi.unique'           => 'Este DOI ya está en uso',
-        'pdf_filename.mimes'   => 'El archivo debe ser PDF.',
-        'pdf_filename.max'     => 'El PDF no debe exceder 10MB.',
-        'img_filename.mimes'   => 'La imagen debe ser JPEG, PNG, o JPG.',
-        'img_filename.max'     => 'La imagen no debe exceder 5MB.',
+        'titulo.required' => 'El titulo es requerido.',
+        'titulo.unique' => 'El titulo de este paper ya está registrado.',
+        'autores.required' => 'El nombre de los autores es requerido.',
+        'doi.unique' => 'Este DOI ya está en uso',
+        'pdf_filename.mimes' => 'El archivo debe ser PDF.',
+        'pdf_filename.max' => 'El PDF no debe exceder 10MB.',
+        'img_filename.mimes' => 'La imagen debe ser JPEG, PNG, o JPG.',
+        'img_filename.max' => 'La imagen no debe exceder 5MB.',
       ];
 
       // Validación de campos
       $request->validate([
-        'titulo'            => 'required|max:100',
-        'autores'           => 'required|json',
-        'publisher'         => 'required|max:50',
-        'descripcion'       => 'required',
-        'area_id'           => 'required|exists:areas_investigacion,id',
-        'doi'               => 'required|max:100',
+        'titulo' => 'required|max:100',
+        'autores' => 'required|json',
+        'publisher' => 'required|max:50',
+        'descripcion' => 'required',
+        'area_id' => 'required|exists:areas_investigacion,id',
+        'doi' => 'required|max:100',
         'fecha_publicacion' => 'required|date',
-        'pdf_filename'      => 'file|mimes:pdf|max:10240',
-        'img_filename'      => 'file|mimes:jpeg,png,jpg|max:5120',
+        'pdf_filename' => 'file|mimes:pdf|max:10240',
+        'img_filename' => 'file|mimes:jpeg,png,jpg|max:5120',
         // Se valida como string ya que se envían los tópicos como una cadena separada por comas
-        'topicos'           => 'nullable|string',
+        'topicos' => 'nullable|string',
         // Se elimina la regla 'topicos.*' ya que no se envía un arreglo directamente
       ], $messages);
 
@@ -271,15 +290,15 @@ class PaperController extends Controller
 
       // Actualizar datos del paper
       $paper->update([
-        'titulo'            => $request->titulo,
-        'autores'           => $request->autores,
-        'publisher'         => $request->publisher,
-        'descripcion'       => $request->descripcion,
-        'area_id'           => $request->area_id,
-        'doi'               => $request->doi,
+        'titulo' => $request->titulo,
+        'autores' => $request->autores,
+        'publisher' => $request->publisher,
+        'descripcion' => $request->descripcion,
+        'area_id' => $request->area_id,
+        'doi' => $request->doi,
         'fecha_publicacion' => $request->fecha_publicacion,
-        'pdf_filename'      => $pdf_fileName,
-        'img_filename'      => $img_fileName,
+        'pdf_filename' => $pdf_fileName,
+        'img_filename' => $img_fileName,
       ]);
 
       // Sincronizar los tópicos con el arreglo obtenido

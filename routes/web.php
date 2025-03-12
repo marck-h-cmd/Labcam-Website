@@ -128,10 +128,6 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
         Route::get('/admin/slider', [PestañaHomeController::class, 'vista_slider_admin'])->name('admin-homeSlider');
         Route::put('/admin/slider/update', [PestañaHomeController::class, 'update_slider_admin'])->name('admin-homeSliderUpdate');
 
-        // ------------------------- HOME TOP PROYECTOS ---------------------------------------------
-        Route::get('/admin/topProyectos', [PestañaHomeController::class, 'vista_topProyectos_admin'])->name('admin-homeProyectos');
-        Route::put('/admin/topProyectos/update', [PestañaHomeController::class, 'update_topProyectos_admin'])->name('admin-homeProyectosUpdate');
-
         // ------------------------- CRUD PAPERS ---------------------------------------------
         Route::prefix('admin/papers')->name('papers.')->group(function () {
             Route::get('/', [PaperController::class, 'adminIndex'])->name('index');

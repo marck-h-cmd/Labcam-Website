@@ -1,13 +1,27 @@
 @foreach ($papers as $paper)
     <div
-        class="flex flex-col md:flex-row overflow-hidden relative                                          rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">                                 
-        <p class="absolute right-6 px-2 md:top-2   font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm"> {{ $paper->area ? $paper->area->nombre : 'N.A' }}</p>
+        class="flex flex-col md:flex-row overflow-hidden relative                                          rounded-lg shadow-xl   mt-4  mx-2  bg-[#f4f4f4] max-w-6xl py-2 h-auto">
+        @php
+            // Instancia la clase TruncateService usando el namespace completo
+            $truncateService = new \Urodoz\Truncate\TruncateService();
+            // Trunca la descripción a 500 caracteres y agrega '...'
+            $htmlDescription = $truncateService->truncate($paper->descripcion, 500, '...');
+            $htmlTitle = $truncateService->truncate($paper->titulo, 50, '...');
+        @endphp
+        <p class="absolute right-6 px-2 md:top-2   font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm">
+            {{ $paper->area ? $paper->area->nombre : 'N.A' }}</p>
         <!-- información del paper -->
-        <div class="max-h-96 max-w-[400px] overflow-hidden  md:w-1/2 p-4">
+        <div class="max-h-96 max-w-[400px]   md:w-1/2 p-4">
             <a href="{{ route('biblioteca.papers.show', $paper->id) }}"
-                class=" cursor-pointer hover:underline max-md:text-center ">
+                class=" cursor-pointer hover:underline max-md:text-center relative group ">
                 <h3 class="font-semibold text-lg mt-4 text-blue-400 text-justify ">
-                    {{ $paper->titulo }}</h3>
+                    {!! $htmlTitle !!}</h3>
+                <!-- Titulo flotante completo -->
+                <div
+                    class="absolute z-30 left-0 mb-3 w-max max-w-xs bg-white text-black text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                    {{ $paper->titulo }}
+                </div>
+
             </a>
             <div class="mt-5">
                 <p class="text-gray-600 ">Autores:</p>
@@ -15,8 +29,7 @@
                     {{ $paper->formatted_autores }}</p>
             </div>
             <p class="doi mt-3"><span class="text-gray-600">
-                    Publisher: </span><span
-                    class="doi-link  text-gray-500 text-base">{{ $paper->publisher }}</span>
+                    Publisher: </span><span class="doi-link  text-gray-500 text-base">{{ $paper->publisher }}</span>
             </p>
             <p class="text-base  mt-3">
                 <span class="text-gray-600  ">Publicado: </span>
@@ -39,11 +52,10 @@
             </a>
         </div>
         <div class="w-full p-6 max-md:py-2 text-gray-800 flex flex-col justify-between  ">
-          
             <p class="mt-4  text-justify text-gray-500 text-sm ">
-                {{ $paper->descripcion }}
+                {!! $htmlDescription !!}
             </p>
         </div>
-       
+
     </div>
 @endforeach

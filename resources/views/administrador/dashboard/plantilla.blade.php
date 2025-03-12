@@ -70,33 +70,12 @@
 
             <h4 class="text-[#98C560] text-sm font-bold uppercase mb-3 mt-8">Pestañas</h4>
 
-            <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['admin-homeSlider', 'admin-homeProyectos']) ? 'active' : '' }}">
-                <a
-                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
+            <li class="mb-1 group cursor-pointer">
+                <a href="{{ route('admin-homeSlider') }}"
+                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('admin-homeSlider') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
-                    <span class="text-sm">Home</span>
-                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                    <span class="text-sm">Home Slider</span>
                 </a>
-                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
-                    <li class="mb-4">
-                        <a href="{{ route('admin-homeSlider') }}"
-                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-homeSlider') ? 'bg-[#98C560]' : 'bg-gray-300' }}">
-                            </span>
-                            Slider
-                        </a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="{{ route('admin-homeProyectos') }}"
-                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('admin-homeProyectos') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
-                            Home Proyectos
-                        </a>
-                    </li>
-                </ul>
             </li>
 
             <li
