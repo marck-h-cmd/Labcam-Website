@@ -24,8 +24,35 @@
                             <ul class="hor--nav flex space-x-12">
                                 <li><a href="{{ route('biblioteca.papers.index') }}"
                                         class="text-gray-300 hover:text-white">Biblioteca</a></li>
+                                <li><button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
+                                        class="text-white font-bold flex justify-between">Áreas de Investigación <span
+                                            class="py-2"> <svg class="w-2.5 h-2.5 ms-3" aria-hidden="false"
+                                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                                            </svg></span></button>
+                                    <div id="mega-menu-dropdown"
+                                        class="absolute z-20  hidden w-auto grid grid-cols-2  text-sm bg-white border border-gray-100 rounded-md shadow-md  ">
+                                        @foreach ($areas->chunk(4) as $chunk)
+                                            <div class="p-4 pb-0 text-gray-900 md:pb-4">
+                                                <ul class="space-y-4">
+                                                    @foreach ($chunk as $area)
+                                                        <li>
+                                                            <a href="{{ route('biblioteca.papers.area', $area->id) }}"
+                                                                class="area-btn text-gray-500 hover:text-blue-600 p-2 rounded-lg ">
+                                                                {{ $area->nombre }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                </li>
 
                             </ul>
+
                         </nav>
 
 
