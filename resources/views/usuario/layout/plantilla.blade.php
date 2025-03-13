@@ -49,7 +49,7 @@
                     <!-- Dropdown Nosotros -->
                     <li class="relative">
                         <button id="dropdownNavbarLink"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs('about', 'historia', 'biblioteca.papers.*') ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs('about', 'historia') ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar' ? null : 'dropdownNavbar'">
                             Nosotros
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -74,12 +74,6 @@
                                     <a href="{{ route('historia') }}"
                                         class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('historia') ? 'text-[#98C560]' : 'text-black' }}">
                                         Historia
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('biblioteca.papers.index') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca.papers.*') ? 'text-[#98C560]' : 'text-black' }}">
-                                        Biblioteca
                                     </a>
                                 </li>
                             </ul>
@@ -116,22 +110,16 @@
                                         Capital Humano
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="{{ route('areas') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('areas') ? 'text-[#98C560]' : 'text-black' }}">
-                                        Áreas de  Investigación
-                                    </a>
-                                </li>
                             </ul>
                         </div>
                     </li>
 
-                    <!-- Dropdown Novedades -->
+                    <!-- Dropdown Biblioteca -->
                     <li class="relative">
                         <button id="dropdownNavbarLink3"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['noticias', 'noticias.show', 'proyectos', 'proyectos.show', 'eventos', 'eventos.show']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['biblioteca.papers.*', 'proyectos', 'proyectos.show']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'">
-                            Novedades
+                            Biblioteca
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -145,15 +133,43 @@
                             x-transition:leave="transition ease-in duration-150">
                             <ul class="py-2 text-sm">
                                 <li>
-                                    <a href="{{ route('noticias') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias', 'noticias.show') ? 'text-[#98C560]' : 'text-black' }}">
-                                        Noticias
+                                    <a href="{{ route('biblioteca.papers.index') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca.papers.*') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Pappers
                                     </a>
                                 </li>
                                 <li>
                                     <a href="{{ route('proyectos') }}"
                                         class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos', 'proyectos.show') ? 'text-[#98C560]' : 'text-black' }}">
                                         Proyectos
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- Dropdown Novedades -->
+                    <li class="relative">
+                        <button id="dropdownNavbarLink4"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['noticias', 'noticias.show', 'eventos', 'eventos.show']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar4' ? null : 'dropdownNavbar4'">
+                            Novedades
+                            <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 10 6">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 4 4 4-4" />
+                            </svg>
+                        </button>
+                        <div id="dropdownNavbar4" x-show="openDropdown === 'dropdownNavbar4'"
+                            class="z-10 font-normal rounded shadow w-44 bg-white absolute top-full mt-1 left-0"
+                            @click="openDropdown = openDropdown === 'dropdownNavbar4' ? null : 'dropdownNavbar4'; if(openDropdown !== 'dropdownNavbar4') openDropdown = 'dropdownNavbar4'"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:leave="transition ease-in duration-150">
+                            <ul class="py-2 text-sm">
+                                <li>
+                                    <a href="{{ route('noticias') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('noticias', 'noticias.show') ? 'text-[#98C560]' : 'text-black' }}">
+                                        Noticias
                                     </a>
                                 </li>
                                 <li>
@@ -187,7 +203,8 @@
                 <div class="flex flex-col items-center text-justify px-5">
                     <a href="https://www.unitru.edu.pe/">
                         <div class="flex justify-center">
-                            <img src="/user/template/images/logo_unt.png" class="w-full max-w-xs mb-4" alt="FlowBite Logo" />
+                            <img src="/user/template/images/logo_unt.png" class="w-full max-w-xs mb-4"
+                                alt="FlowBite Logo" />
                         </div>
                         <p class="text-white text-base font-normal mb-4">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad provident nostrum praesentium
@@ -244,7 +261,8 @@
                 <!-- Tercera Columna (Duplicado de la Primera) -->
                 <div class="flex flex-col items-center text-justify px-5">
                     <a href="{{ route('home') }}">
-                        <img src="/user/template/images/logoLabCam.png" class="w-full max-w-md  mb-4" alt="Logo LabCam" />
+                        <img src="/user/template/images/logoLabCam.png" class="w-full max-w-md  mb-4"
+                            alt="Logo LabCam" />
                         <p class="text-white text-base font-normal mb-4">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad provident nostrum praesentium
                             itaque, quisquam blanditiis unde sapiente odit
