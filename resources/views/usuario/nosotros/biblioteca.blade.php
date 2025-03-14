@@ -15,7 +15,7 @@
                         <h1 class="text-6xl text-left">Biblioteca</h1>
                     </div>
                 </div>
-
+                    <!-- NAV DE Biblioteca -->
                 <div class="nav">
                     <div class="container mx-auto px-4 flex items-center justify-between">
 
@@ -23,7 +23,7 @@
                         <nav role="navigation mt-4">
                             <ul class="hor--nav flex space-x-12">
                                 <li><a href="{{ route('biblioteca.papers.index') }}"
-                                        class="text-gray-300 hover:text-white">Biblioteca</a></li>
+                                        class="text-gray-300 hover:text-white">Publicaciones</a></li>
                                 <li><button id="mega-menu-dropdown-button" data-dropdown-toggle="mega-menu-dropdown"
                                         class="text-white font-bold flex justify-between">Áreas de Investigación <span
                                             class="py-2"> <svg class="w-2.5 h-2.5 ms-3" aria-hidden="false"
@@ -64,11 +64,11 @@
 
         <div class="Nosotros max-w-screen-2xl max w-full px-5 mx-auto mt-36">
 
-            <div class="main-title flex flex-col items-center gap-3 mb-8">
-                <div class="title text-2xl font-semibold text-[#2e5382]">Publicaciones-papers</div>
-                <div class="blue-line w-1/5 h-0.5 bg-[#2371d4]"></div>
+            <div class="flex flex-col items-center gap-3 mb-12">
+                <h2 class="text-blue-800 font-semibold text-4xl mb-1">Publicaciones-Papers</h2>
+                <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
             </div>
-
+                  <!-- SIDEBAR PARA APLICAR FILTROS-->
             <div class="grid  grid-cols-10 gap-x-16 max-[1150px]:grid-cols-1 justify-center">
 
                 <aside
@@ -107,7 +107,7 @@
                                 <hr>
                                 <li>
                                     <button type="button"
-                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100  "
+                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 bg-gray-50 "
                                         aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">
                                         <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
                                             width="64px" height="64px" viewBox="0 0 32 32" id="i-options"
@@ -131,7 +131,7 @@
                                                 clip-rule="evenodd"></path>
                                         </svg>
                                     </button>
-                                    <ul id="dropdown-example-2" class=" py-2 space-y-2 overflow-y-auto max-h-52">
+                                    <ul id="dropdown-example-2" class=" hidden py-2 space-y-2 overflow-y-auto max-h-52">
                                         @forelse($topicos as $topico)
                                             <li>
 
@@ -154,8 +154,9 @@
                                 </li>
                                 <hr>
                                 <li>
+                                      <!-- FILTRO AREAS DE INVESTIGACION -->
                                     <button type="button"
-                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 "
+                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 bg-gray-50 "
                                         aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                                         <svg class="flex-shrink-0 w-6 h-6" viewBox="0 0 24 24" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -177,7 +178,7 @@
                                                 clip-rule="evenodd"></path>
                                         </svg>
                                     </button>
-                                    <ul id="dropdown-example" class=" py-2 space-y-2 overflow-y-auto max-h-36">
+                                    <ul id="dropdown-example" class=" py-2 space-y-2 overflow-y-auto max-h-52">
                                         @forelse($areas as $area)
                                             <li>
                                                 <button type="button" value="{{ $area->id }}"
@@ -220,6 +221,7 @@
                 <div class="pt-6 pb-12  col-span-7 ">
                     <div class=" w-auto mx-2 overflow-y-auto">
                         <div id="card" class="">
+                             <!-- BARRA PARA MOSTRAR PAGINA -->
                             <div class=" px-24 max-lg:px-2 ">
                                 <div
                                     class="p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
@@ -266,7 +268,7 @@
                             </div>
                         </div>
                     </div>
-
+                        <!-- BOTON DE VER MÁS PUBLICACIONES -->
                     <div class="flex justify-center mt-5 p-6 ">
                         <button id="load-more"
                             class="bg-[#98c560]  text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
@@ -427,17 +429,17 @@
                     fetch(`${API_BASE}/fetch-more?${currentSearchParams}`)
                         .then(handleResponse)
                         .then(data => {
-                            // Append new papers
+                            // Agregar más papers
                             papersContainer.innerHTML = ' '
                             searchInput.value = ' '
                             papersContainer.innerHTML += data.html;
 
-                            // Update counts
+                            // ACTUALIZAR CONTEO
                             generalPapersCount += data.total;
                             updatePaperCount(generalPapersCount);
 
 
-                            // Update UI state
+                            // ACTUALIZAR STADO DE LA INTERFAZ DE USUARIO
                             updateHistory(currentSearchParams);
                             toggleLoadMoreButton(data);
                         });
@@ -453,7 +455,7 @@
                                     </div>`;
             }
 
-            // Para mostrar más btones de carga
+            // Para mostrar más botones de carga
             function toggleLoadMoreButton(data) {
                 if (loadMoreButton) {
                     const showButton = data.total === 0;

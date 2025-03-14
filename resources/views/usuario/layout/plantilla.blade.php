@@ -135,7 +135,7 @@
                                 <li>
                                     <a href="{{ route('biblioteca.papers.index') }}"
                                         class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('biblioteca.papers.*') ? 'text-[#98C560]' : 'text-black' }}">
-                                        Pappers
+                                        Publicaciones
                                     </a>
                                 </li>
                                 <li>
