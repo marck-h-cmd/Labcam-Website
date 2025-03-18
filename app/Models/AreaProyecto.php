@@ -18,4 +18,5 @@ class AreaProyecto extends Model
     {
         return $this->hasMany(Proyecto::class, 'idAreaProyecto', 'id');
     }
+    //modificaciones
 }
