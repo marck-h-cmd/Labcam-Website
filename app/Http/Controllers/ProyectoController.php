@@ -15,6 +15,7 @@ class ProyectoController extends Controller
 
         $proyectos = Proyecto::orderBy('fecha_publicacion', 'desc')->paginate(6);
         return view('usuario.novedades.proyectos', compact('proyectos'));
+        
     }
 
     public function showProyecto(Request $request)
@@ -23,18 +24,17 @@ class ProyectoController extends Controller
 
         $proyect = Proyecto::when($query, function ($queryBuilder) use ($query) {
             $queryBuilder->where('titulo', 'like', '%' . $query . '%')
-<<<<<<< HEAD
                 ->orWhere('autor', 'like', '%' . $query . '%');
         })
             ->orderBy('fecha_publicacion', 'desc') // Ordena por fecha descendente
             ->paginate(10);
-=======
-                         ->orWhere('autor', 'like', '%' . $query . '%');
-        })->paginate(10);
+
         $areas = AreaProyecto::all();
->>>>>>> f54af44 (add)
+
 
         return view('administrador.panel.novedades.proyecto.show', compact('proyect','areas'));
+
+        // return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
     }
 
     public function show($id)
@@ -44,7 +44,7 @@ class ProyectoController extends Controller
 
         return view('usuario.novedades.detalle-proyectos', compact('proyecto'));
     }
-    
+
     public function showProyectosByArea($idArea)
     {
         $proyectos = Proyecto::where('idAreaProyecto', $idArea)->paginate(10);
@@ -54,10 +54,7 @@ class ProyectoController extends Controller
 
     public function store(Request $request)
     {
-<<<<<<< HEAD
         //
-=======
->>>>>>> f54af44 (add)
         try {
             $messages = [
                 'titulo.required' => 'El campo título es obligatorio.',
@@ -75,11 +72,8 @@ class ProyectoController extends Controller
                 'imagen.image' => 'El archivo debe ser una imagen.',
                 'imagen.max' => 'La imagen no debe exceder los 4MB.',
                 'imagen.mimes' => 'La imagen debe ser de tipo JPG, PNG o JPEG.',
-<<<<<<< HEAD
-=======
                 'idAreaProyecto.required' => 'Debe seleccionar un área de proyecto.',
                 'idAreaProyecto.exists' => 'El área de proyecto seleccionada no es válida.',
->>>>>>> f54af44 (add)
             ];
 
             $request->validate([
@@ -89,20 +83,13 @@ class ProyectoController extends Controller
                 'autor' => 'required|string|max:255',
                 'fecha_publicacion' => 'required|date',
                 'imagen' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
-<<<<<<< HEAD
-=======
                 'idAreaProyecto' => 'required|exists:areas_proyectos,id', // Validar existencia
->>>>>>> f54af44 (add)
             ], $messages);
 
             $rutaImagen = null;
             if ($request->hasFile('imagen')) {
                 $imagen = $request->file('imagen');
-<<<<<<< HEAD
                 $rutaImagen = $imagen->store('proyectos', 'public'); // Guardar imagen en el directorio public
-=======
-                $rutaImagen = $imagen->store('proyectos', 'public'); // Guardar imagen en storage/app/public/proyectos
->>>>>>> f54af44 (add)
             }
 
             Proyecto::create([
@@ -112,10 +99,7 @@ class ProyectoController extends Controller
                 'autor' => $request->autor,
                 'fecha_publicacion' => $request->fecha_publicacion,
                 'imagen' => $rutaImagen,
-<<<<<<< HEAD
-=======
                 'idAreaProyecto' => $request->idAreaProyecto, // Asignar el área de proyecto
->>>>>>> f54af44 (add)
             ]);
 
             return redirect()->route('proyect')->with('success', 'Proyecto creado con éxito');
@@ -125,24 +109,9 @@ class ProyectoController extends Controller
                 ->withInput()
                 ->with('error', $errorMessage);
         } catch (Exception $e) {
-<<<<<<< HEAD
 
             return redirect()->back()->with('error', 'Error: ' . 'Hubo un error. Porfavor, pruebe denuevo');
         }
-=======
-            return redirect()->back()->with('error', 'Error: Hubo un error. Por favor, pruebe de nuevo.');
-        }
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-
-        $proyect = Proyecto::findOrFail($id);
-        return view('administrador.panel.novedades.proyecto.edit', compact('proyect'));
->>>>>>> f54af44 (add)
     }
 
 
