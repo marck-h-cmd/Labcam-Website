@@ -50,12 +50,6 @@ class ProyectoController extends Controller
         return view('usuario.novedades.proyectos', compact('proyectos','area'));
     }
 
-    public function showProyectosByArea($idArea)
-    {
-        $proyectos = Proyecto::where('idAreaProyecto', $idArea)->paginate(10);
-        $area = AreaProyecto::findOrFail($idArea);
-        return view('usuario.novedades.proyectos', compact('proyectos','area'));
-    }
 
     public function store(Request $request)
     {
