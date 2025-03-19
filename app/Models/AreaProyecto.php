@@ -13,10 +13,4 @@ class AreaProyecto extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = ['nombreArea'];
-
-    public function proyectos()
-    {
-        return $this->hasMany(Proyecto::class, 'idAreaProyecto', 'id');
-    }
-    //modificaciones
 }

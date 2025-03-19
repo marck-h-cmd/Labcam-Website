@@ -216,7 +216,7 @@
                                 </button>
 
                                 <input type="file" id="img_filename" name="img_filename" class="hidden"
-                                    accept="image/png, image/jpeg, image/jpg, image/gif"
+                                    accept="image/png, image/jpeg, image/jpg"
                                     onchange="mostrarVistaPrevia(event)">
                             </div>
                         </div>

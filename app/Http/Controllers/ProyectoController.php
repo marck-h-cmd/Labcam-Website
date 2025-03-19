@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Proyecto;
-use App\Models\AreaProyecto;
 use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
@@ -13,7 +12,6 @@ class ProyectoController extends Controller
 
         $proyectos = Proyecto::paginate(6);
         return view('usuario.novedades.proyectos', compact('proyectos'));
-        
     }
 
     public function showProyecto(Request $request)
@@ -26,12 +24,7 @@ class ProyectoController extends Controller
         })->paginate(10);
         $areas = AreaProyecto::all();
 
-        $areas = AreaProyecto::all();
-
-
-        return view('administrador.panel.novedades.proyecto.show', compact('proyect','areas'));
-
-        // return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
+        return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
     }
 
     public function show($id)
@@ -41,6 +34,7 @@ class ProyectoController extends Controller
 
         return view('usuario.novedades.detalle-proyectos', compact('proyecto'));
 
+
     }
     
     public function showProyectosByArea($idArea)
@@ -49,6 +43,7 @@ class ProyectoController extends Controller
         $area = AreaProyecto::findOrFail($idArea);
         return view('usuario.novedades.proyectos', compact('proyectos','area'));
     }
+
 
 
     public function store(Request $request)
@@ -70,8 +65,6 @@ class ProyectoController extends Controller
                 'imagen.image' => 'El archivo debe ser una imagen.',
                 'imagen.max' => 'La imagen no debe exceder los 4MB.',
                 'imagen.mimes' => 'La imagen debe ser de tipo JPG, PNG o JPEG.',
-                'idAreaProyecto.required' => 'Debe seleccionar un área de proyecto.',
-                'idAreaProyecto.exists' => 'El área de proyecto seleccionada no es válida.',
             ];
 
             $request->validate([
@@ -81,7 +74,6 @@ class ProyectoController extends Controller
                 'autor' => 'required|string|max:255',
                 'fecha_publicacion' => 'required|date',
                 'imagen' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
-                'idAreaProyecto' => 'required|exists:areas_proyectos,id', // Validar existencia
             ], $messages);
 
             $rutaImagen = null;
@@ -97,7 +89,6 @@ class ProyectoController extends Controller
                 'autor' => $request->autor,
                 'fecha_publicacion' => $request->fecha_publicacion,
                 'imagen' => $rutaImagen,
-                'idAreaProyecto' => $request->idAreaProyecto, // Asignar el área de proyecto
             ]);
 
             return redirect()->route('proyect')->with('success', 'Proyecto creado con éxito');
