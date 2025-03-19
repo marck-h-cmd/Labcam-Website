@@ -13,6 +13,7 @@ class ProyectoController extends Controller
 
         $proyectos = Proyecto::paginate(6);
         return view('usuario.novedades.proyectos', compact('proyectos'));
+        
     }
 
     public function showProyecto(Request $request)
@@ -25,7 +26,12 @@ class ProyectoController extends Controller
         })->paginate(10);
         $areas = AreaProyecto::all();
 
+        $areas = AreaProyecto::all();
+
+
         return view('administrador.panel.novedades.proyecto.show', compact('proyect','areas'));
+
+        // return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
     }
 
     public function show($id)
@@ -37,6 +43,13 @@ class ProyectoController extends Controller
 
     }
     
+    public function showProyectosByArea($idArea)
+    {
+        $proyectos = Proyecto::where('idAreaProyecto', $idArea)->paginate(10);
+        $area = AreaProyecto::findOrFail($idArea);
+        return view('usuario.novedades.proyectos', compact('proyectos','area'));
+    }
+
     public function showProyectosByArea($idArea)
     {
         $proyectos = Proyecto::where('idAreaProyecto', $idArea)->paginate(10);
