@@ -61,6 +61,9 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
     Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos');
     Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 
+    Route::get('/proyectos/area/{idArea}', [ProyectoController::class, 'showProyectosByArea'])->name('proyectos.area');
+  
+
     //RUTA EVENTO
 
     Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
