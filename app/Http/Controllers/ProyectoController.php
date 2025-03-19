@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\AreaProyecto;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
