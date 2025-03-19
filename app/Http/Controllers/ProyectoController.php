@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use App\Models\AreaProyecto;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+use Exception;
+
 
 class ProyectoController extends Controller
 {
