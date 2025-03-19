@@ -20,7 +20,7 @@ class PaperController extends Controller
   public function index(Request $request)
   {
     // inicializar 10 o menos papers
-    $papers = Paper::paginate(10);
+    $papers = Paper::paginate(5);
 
 
     // Dar formato a cada atributo de autores del paper para la view
@@ -107,7 +107,7 @@ class PaperController extends Controller
       $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
       $area = $request->input('area');
       $page = $request->input('page', 1);
-      $perPage = 10;
+      $perPage = 5;
 
       $papers = Paper::query();
       // buscar por titulo

@@ -201,7 +201,7 @@
                                 </svg>
                             </button>
                             <input type="file" id="img_filename" name="img_filename" class="hidden"
-                                accept="image/png, image/jpeg, image/jpg, image/gif" onchange="mostrarVistaPrevia(event)">
+                                accept="image/png, image/jpeg, image/jpg" onchange="mostrarVistaPrevia(event)">
                         </div>
                     </div>
 
@@ -353,7 +353,6 @@
             form.addEventListener("submit", (event) => {
                 const authorsArray = Array.from(addedAuthors);
                 autoresJsonInput.value = JSON.stringify(authorsArray);
-                console.log("Autores enviados:", autoresJsonInput.value);
             });
 
             // Contador de caracteres para Abstract
