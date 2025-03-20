@@ -27,7 +27,7 @@ class ProyectoController extends Controller
         })->paginate(10);
         $areas = AreaProyecto::all();
 
-        return view('administrador.panel.novedades.proyecto.show', compact('proyect'));
+        return view('administrador.panel.novedades.proyecto.show', compact('proyect','areas'));
     }
 
     public function show($id)
