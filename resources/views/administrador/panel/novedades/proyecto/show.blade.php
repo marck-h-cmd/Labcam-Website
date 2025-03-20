@@ -48,6 +48,8 @@
                             <td class="px-4 py-3 w-full whitespace-normal break-all">{!! $htmlSnippet !!}</td>
                             <td class="px-4 py-3">{{ $proyecto->autor }}</td>
                             <td class="px-4 py-3">{{ $proyecto->fecha_publicacion }}</td>
+                            <td class="px-4 py-3">{{ optional($proyecto->areaProyecto)->nombreArea }}</td>
+
                             <td class="px-4 py-3">
                                 @if ($proyecto->imagen)
                                     <div class="px-8 py-0.1 text-center">
@@ -152,6 +154,22 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
+
+                            
+                            <!-- Área del Proyecto -->
+                            <div>
+                                <label for="area" class="block text-gray-700">Área del Proyecto</label>
+                                <select id="area" name="area" class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    <option value="" disabled selected>Seleccione un área</option>
+                                    <option value="Ciencias de Materiales">Ciencias de Materiales</option>
+                                    <option value="Cerámica">Cerámica</option>
+                                    <option value="Mecatrónica">Mecatrónica</option>
+                                    <option value="Proyectos de la industria">Proyectos de la industria</option>
+                                    <option value="Proyectos concursales">Proyectos concursales</option>
+                                </select>
+                            </div>
+
+
                         </div>
 
                         <!-- Columna Derecha -->
@@ -290,6 +308,19 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
+
+
+                            <!-- Área del Proyecto -->
+                            <div>
+                                <label for="idAreaProyecto" class="block text-gray-700">Área del Proyecto</label>
+                                <select id="idAreaProyecto" name="idAreaProyecto" class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                    <option value="" disabled selected>Seleccione un área</option>
+                                    @foreach ($areas as $area)
+                                        <option value="{{ $area->id }}">{{ $area->nombreArea }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                         </div>
 
                         <!-- Columna Derecha -->
