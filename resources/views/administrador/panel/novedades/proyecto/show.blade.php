@@ -30,11 +30,8 @@
                         <th class="px-4 py-3 w-60">Descripción</th>
                         <th class="px-4 py-3">Autor</th>
                         <th class="px-4 py-3">Fecha</th>
-                        <th class="px-4 py-3">Área del Proyecto</th>
                         <th class="px-4 py-3">Imagen</th>
-                        
                         <th class="px-4 py-3">Acciones</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -52,6 +49,7 @@
                             <td class="px-4 py-3">{{ $proyecto->autor }}</td>
                             <td class="px-4 py-3">{{ $proyecto->fecha_publicacion }}</td>
                             <td class="px-4 py-3">{{ optional($proyecto->areaProyecto)->nombreArea }}</td>
+
                             <td class="px-4 py-3">
                                 @if ($proyecto->imagen)
                                     <div class="px-8 py-0.1 text-center">
@@ -156,6 +154,7 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
+
                             
                             <!-- Área del Proyecto -->
                             <div>
@@ -169,6 +168,7 @@
                                     <option value="Proyectos concursales">Proyectos concursales</option>
                                 </select>
                             </div>
+
 
                         </div>
 
@@ -309,6 +309,7 @@
                                     required>
                             </div>
 
+
                             <!-- Área del Proyecto -->
                             <div>
                                 <label for="idAreaProyecto" class="block text-gray-700">Área del Proyecto</label>
@@ -321,6 +322,7 @@
                             </div>
 
                         </div>
+
                         <!-- Columna Derecha -->
                         <div class="space-y-4">
                             <!-- Descripción con TinyMCE (si se usa en el editar, se inicializará igual) -->

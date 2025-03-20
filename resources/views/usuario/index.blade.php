@@ -163,11 +163,13 @@
             <div class="hidden lg:block">
                 @php
                     // Se asume que $areaProyectos es una colección con N registros
+
                     $chunks = $areaProyectos->chunk(5);
                 @endphp
 
                 @foreach ($chunks as $chunk)
                     @if ($chunk->count() === 5)
+
                         <!-- Fila completa de 3 proyectos -->
                         <div class="grid grid-cols-3 gap-6 w-full mt-10">
                             @foreach ($chunk as $area)
@@ -178,6 +180,7 @@
                                     {{-- Ícono según $area->nombreArea --}}
                                     @switch($area->nombreArea)
                                         @case('Ciencias de Materiales')
+
                                         <a href="{{route('proyectos.area', $area->id)}}">
 
                                             <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-500 rounded-full opacity-30">
@@ -192,6 +195,7 @@
 
                                         @case('Cerámica')
                                         <a href="{{route('proyectos.area', $area->id)}}">
+
                                             <div class="absolute -top-4 -left-4 w-16 h-16 bg-purple-500 rounded-full opacity-30">
                                             </div>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -199,11 +203,13 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M21 9l-9-4-9 4m18 0l-9 4-9-4m18 0v6.75l-9 4.5m-9-4.5V9m9 4.5v6.75m0-6.75l-9-4.5" />
                                             </svg>
+
                                         </a>
                                         @break
 
                                         @case('Mecatrónica')
                                         <a href="{{route('proyectos.area', $area->id)}}">
+
                                             <div class="absolute top-0 right-0 w-16 h-16 bg-pink-500 rounded-bl-full opacity-30">
                                             </div>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -211,12 +217,13 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M9 3v2.25M15 3v2.25M9 18.75V21M15 18.75V21M3 9h2.25M3 15h2.25M18.75 9H21M18.75 15H21M8.25 8.25h7.5v7.5h-7.5z" />
                                             </svg>
+
                                         </a>
                                         @break
 
                                         @case('Proyecto de la Industria')
                                         <a href="{{route('proyectos.area', $area->id)}}">
-                                            <div
+                       <div
                                                 class="absolute -bottom-4 -left-4 w-16 h-16 bg-yellow-500 rounded-full opacity-30">
                                             </div>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -224,11 +231,13 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M3.75 21h16.5M4.5 3.75h15a.75.75 0 01.75.75v16.5h-3.75v-15H4.5V4.5a.75.75 0 01.75-.75z" />
                                             </svg>
+
                                         </a>
                                         @break
 
                                         @case('Proyectos Concursables')
                                         <a href="{{route('proyectos.area', $area->id)}}">
+
                                             <div class="absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-br-full opacity-30">
                                             </div>
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -237,7 +246,9 @@
                                                     d="M11.48 3.499a.75.75 0 011.04 0l2.197 2.232 3.089.45c.8.116 1.117 1.129.539 1.71l-2.236 2.227.528 3.076c.137.797-.705 1.405-1.42.993L12 12.347l-2.777 1.44c-.715.412-1.557-.196-1.42-.993l.528-3.076-2.236-2.227c-.579-.58-.261-1.593.539-1.71l3.089-.45 2.197-2.232z" />
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5" />
                                             </svg>
+
                                         </a>
+
                                         @break
 
                                         @default

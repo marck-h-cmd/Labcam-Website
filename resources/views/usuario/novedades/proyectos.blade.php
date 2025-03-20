@@ -3,9 +3,7 @@
 @section('contenido')
     <section class="py-12">
         <div class="flex flex-col items-center gap-3 mb-12">
-        <h2 class="text-blue-800 font-semibold text-4xl mb-1">
-            Proyectos {{ $area->nombreArea ?? '' }}
-        </h2>
+            <h2 class="text-blue-800 font-semibold text-4xl mb-1">Proyectos</h2>
             <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
         </div>
 
