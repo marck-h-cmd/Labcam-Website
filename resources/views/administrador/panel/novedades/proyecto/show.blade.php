@@ -51,10 +51,7 @@
                             <td class="px-4 py-3 w-full whitespace-normal break-all">{!! $htmlSnippet !!}</td>
                             <td class="px-4 py-3">{{ $proyecto->autor }}</td>
                             <td class="px-4 py-3">{{ $proyecto->fecha_publicacion }}</td>
-<<<<<<< HEAD
-=======
                             <td class="px-4 py-3">{{ optional($proyecto->areaProyecto)->nombreArea }}</td>
->>>>>>> f54af44 (add)
                             <td class="px-4 py-3">
                                 @if ($proyecto->imagen)
                                     <div class="px-8 py-0.1 text-center">
@@ -159,8 +156,6 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
-<<<<<<< HEAD
-=======
                             
                             <!-- Área del Proyecto -->
                             <div>
@@ -175,7 +170,6 @@
                                 </select>
                             </div>
 
->>>>>>> f54af44 (add)
                         </div>
 
                         <!-- Columna Derecha -->
@@ -314,10 +308,6 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
-<<<<<<< HEAD
-                        </div>
-
-=======
 
                             <!-- Área del Proyecto -->
                             <div>
@@ -331,7 +321,6 @@
                             </div>
 
                         </div>
->>>>>>> f54af44 (add)
                         <!-- Columna Derecha -->
                         <div class="space-y-4">
                             <!-- Descripción con TinyMCE (si se usa en el editar, se inicializará igual) -->

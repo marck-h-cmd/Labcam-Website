@@ -40,7 +40,7 @@
             @endforeach
         </div>
 
-        <!-- Paginación -->
+        <!-- Paginación xd -->
         <div class="flex justify-center mt-8">
             {{ $proyectos->links() }}
         </div>
