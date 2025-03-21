@@ -157,25 +157,173 @@
                 </h2>
             </div>
 
-            @php
-                // Mostrar solo 5 áreas
-                $areasToShow = $areaProyectos->take(5);
-            @endphp
+            <!-- Layout para pantallas grandes (lg en adelante) -->
+            <div class="hidden lg:block">
+                @php
+                    // Se asume que $areaProyectos es una colección con N registros
+                    $chunks = $areaProyectos->chunk(3);
+                @endphp
 
-            <!-- Grid: 1 col en mobile, 2 en tablet, 3 en desktop -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-11">
-                @foreach ($areasToShow as $area)
-                    <div
-                        class="relative rounded-lg overflow-hidden bg-white/20 backdrop-blur-md hover:shadow-xl cursor-pointer aspect-[4/3] transform hover:scale-105 transition-transform duration-300">
-                        <!-- Imagen (rellena el contenedor conservando 4:3) -->
-                        <img src="{{ $area->imagen }}" alt="{{ $area->nombreArea }}" class="w-full h-full object-cover" />
-                        <!-- Nombre del área en una franja semi-transparente, si deseas -->
-                        <div class="absolute bottom-0 left-0 right-0 bg-black/40 p-3">
-                            <h3 class="text-center text-lg sm:text-xl font-semibold">
-                                {{ $area->nombreArea }}
-                            </h3>
+                @foreach ($chunks as $chunk)
+                    @if ($chunk->count() === 3)
+                        <!-- Fila completa de 3 proyectos -->
+                        <div class="grid grid-cols-3 gap-6 w-full mt-10">
+                            @foreach ($chunk as $area)
+                                <div
+                                    class="relative bg-white/10 hover:bg-white/20 rounded-lg p-6 
+                                       flex flex-col items-center justify-center transition-colors cursor-pointer 
+                                       overflow-hidden aspect-[4/3]">
+                                    {{-- Ícono según $area->nombreArea --}}
+                                    @switch($area->nombreArea)
+                                        @case('Ciencias de Materiales')
+                                            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-500 rounded-full opacity-30">
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9.75 3h4.5M9.75 3v4.036c0 .75-.3 1.47-.835 2.005l-4.621 4.621A1.5 1.5 0 006 16.129v3.621A1.5 1.5 0 007.5 21h9a1.5 1.5 0 001.5-1.5v-3.621a1.5 1.5 0 00-.44-1.06l-4.621-4.621A2.828 2.828 0 0114.25 7.036V3" />
+                                            </svg>
+                                        @break
+
+                                        @case('Cerámica')
+                                            <div class="absolute -top-4 -left-4 w-16 h-16 bg-purple-500 rounded-full opacity-30">
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M21 9l-9-4-9 4m18 0l-9 4-9-4m18 0v6.75l-9 4.5m-9-4.5V9m9 4.5v6.75m0-6.75l-9-4.5" />
+                                            </svg>
+                                        @break
+
+                                        @case('Mecatrónica')
+                                            <div class="absolute top-0 right-0 w-16 h-16 bg-pink-500 rounded-bl-full opacity-30">
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M9 3v2.25M15 3v2.25M9 18.75V21M15 18.75V21M3 9h2.25M3 15h2.25M18.75 9H21M18.75 15H21M8.25 8.25h7.5v7.5h-7.5z" />
+                                            </svg>
+                                        @break
+
+                                        @case('Proyecto de la Industria')
+                                            <div
+                                                class="absolute -bottom-4 -left-4 w-16 h-16 bg-yellow-500 rounded-full opacity-30">
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M3.75 21h16.5M4.5 3.75h15a.75.75 0 01.75.75v16.5h-3.75v-15H4.5V4.5a.75.75 0 01.75-.75z" />
+                                            </svg>
+                                        @break
+
+                                        @case('Proyectos Concursables')
+                                            <div class="absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-br-full opacity-30">
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                    d="M11.48 3.499a.75.75 0 011.04 0l2.197 2.232 3.089.45c.8.116 1.117 1.129.539 1.71l-2.236 2.227.528 3.076c.137.797-.705 1.405-1.42.993L12 12.347l-2.777 1.44c-.715.412-1.557-.196-1.42-.993l.528-3.076-2.236-2.227c-.579-.58-.261-1.593.539-1.71l3.089-.45 2.197-2.232z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5" />
+                                            </svg>
+                                        @break
+
+                                        @default
+                                            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-gray-500 rounded-full opacity-30">
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                            </svg>
+                                    @endswitch
+                                    <span class="text-xl lg:text-2xl font-semibold text-center">
+                                        {{ $area->nombreArea }}
+                                    </span>
+                                </div>
+                            @endforeach
                         </div>
-                    </div>
+                    @else
+                        <!-- Si el chunk NO tiene 3 (o sea, 1 o 2 proyectos), los centramos en la misma fila -->
+                        <div class="grid grid-cols-3 gap-6 w-full mt-10">
+                            <div class="col-span-3 flex justify-center gap-6">
+                                @foreach ($chunk as $area)
+                                    <!-- IMPORTANTE: w-1/3 para que no se extienda y queden centrados -->
+                                    <div
+                                        class="relative bg-white/10 hover:bg-white/20 rounded-lg p-6 
+                                           flex flex-col items-center justify-center transition-colors cursor-pointer 
+                                           overflow-hidden aspect-[4/3] w-1/3">
+                                        @switch($area->nombreArea)
+                                            @case('Proyecto de la Industria')
+                                                <div
+                                                    class="absolute -bottom-4 -left-4 w-16 h-16 bg-yellow-500 rounded-full opacity-30">
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M3.75 21h16.5M4.5 3.75h15a.75.75 0 01.75.75v16.5h-3.75v-15H4.5V4.5a.75.75 0 01.75-.75z" />
+                                                </svg>
+                                            @break
+
+                                            @case('Proyectos Concursables')
+                                                <div class="absolute top-0 left-0 w-16 h-16 bg-red-500 rounded-br-full opacity-30">
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M11.48 3.499a.75.75 0 011.04 0l2.197 2.232 3.089.45c.8.116 1.117 1.129.539 1.71l-2.236 2.227.528 3.076c.137.797-.705 1.405-1.42.993L12 12.347l-2.777 1.44c-.715.412-1.557-.196-1.42-.993l.528-3.076-2.236-2.227c-.579-.58-.261-1.593.539-1.71l3.089-.45 2.197-2.232z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5" />
+                                                </svg>
+                                            @break
+
+                                            @case('Ciencias de Materiales')
+                                                <div
+                                                    class="absolute -bottom-4 -right-4 w-16 h-16 bg-green-500 rounded-full opacity-30">
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9.75 3h4.5M9.75 3v4.036c0 .75-.3 1.47-.835 2.005l-4.621 4.621A1.5 1.5 0 006 16.129v3.621A1.5 1.5 0 007.5 21h9a1.5 1.5 0 001.5-1.5v-3.621a1.5 1.5 0 00-.44-1.06l-4.621-4.621A2.828 2.828 0 0114.25 7.036V3" />
+                                                </svg>
+                                            @break
+
+                                            @case('Cerámica')
+                                                <div
+                                                    class="absolute -top-4 -left-4 w-16 h-16 bg-purple-500 rounded-full opacity-30">
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M21 9l-9-4-9 4m18 0l-9 4-9-4m18 0v6.75l-9 4.5m-9-4.5V9m9 4.5v6.75m0-6.75l-9-4.5" />
+                                                </svg>
+                                            @break
+
+                                            @case('Mecatrónica')
+                                                <div
+                                                    class="absolute top-0 right-0 w-16 h-16 bg-pink-500 rounded-bl-full opacity-30">
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M9 3v2.25M15 3v2.25M9 18.75V21M15 18.75V21M3 9h2.25M3 15h2.25M18.75 9H21M18.75 15H21M8.25 8.25h7.5v7.5h-7.5z" />
+                                                </svg>
+                                            @break
+
+                                            @default
+                                                <div
+                                                    class="absolute -bottom-4 -right-4 w-16 h-16 bg-gray-500 rounded-full opacity-30">
+                                                </div>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-12 h-12 text-white mb-3">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                                                </svg>
+                                        @endswitch
+                                        <span class="text-xl lg:text-2xl font-semibold text-center">
+                                            {{ $area->nombreArea }}
+                                        </span>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
                 @endforeach
             </div>
 

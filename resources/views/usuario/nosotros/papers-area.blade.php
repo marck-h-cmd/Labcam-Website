@@ -6,7 +6,8 @@
         <div class="header-mask bg-[rgba(3,91,136,0.8)]">
             <div class="container mx-auto px-4">
                 <div class="jumbo text-center py-40">
-                    <h1 class="text-6xl text-left">Area:<span class=" text-5xl  text-blue-400"> {{ $area ? $area->nombre : 'No existe' }}</span></h1>
+                    <h1 class="text-6xl text-left">Area:<span class=" text-5xl  text-gray-200">
+                            {{ $area ? $area->nombre : 'No existe' }}</span></h1>
                 </div>
             </div>
 
@@ -32,7 +33,7 @@
                                             <ul class="space-y-4">
                                                 @foreach ($chunk as $area)
                                                     <li>
-                                                        <a  href="{{ route('biblioteca.papers.area', $area->id )}}" 
+                                                        <a href="{{ route('biblioteca.papers.area', $area->id) }}"
                                                             class="area-btn text-gray-500 hover:text-blue-600 p-2 rounded-lg ">
                                                             {{ $area->nombre }}
                                                         </a>
@@ -71,29 +72,29 @@
                     <!-- Imagen -->
                     <img src="{{ Storage::url('uploads/paper_img/' . $paper->img_filename) }}" alt="{{ $paper->titulo }}"
                         class="w-full h-[200px] object-cover rounded-t-xl" />
+                    <!-- Mostrar HTML de la descripción -->
+                    @php
+                        // Instancia la clase TruncateService usando el namespace completo
+                        $truncateService = new \Urodoz\Truncate\TruncateService();
+                        // Trunca la descripción a 120 caracteres y agrega '...'
+                        $htmlSnippet = $truncateService->truncate($paper->descripcion, 200, '...');
+                        $titleSnippet = $truncateService->truncate($paper->titulo, 70, '...');
+                    @endphp
 
                     <!-- Texto -->
                     <div class="px-4 py-6 w-full min-h-[150px]">
                         <span class="text-gray-600 mr-3 uppercase text-sm">
-                        Año Publicación:  <span>  {{ $paper->fecha_publicacion }}</span>
+                            Año Publicación: <span> {{ $paper->fecha_publicacion }}</span>
                         </span>
-                        <p class="text-lg font-bold text-blue-500 truncate block capitalize mt-3 select-none">
-                            {{ $paper->titulo }}
+                        <p class="text-lg font-bold text-blue-500  block capitalize mt-3 select-none">
+                            {!! $titleSnippet !!}
                         </p>
-                        <!-- Mostrar HTML de la descripción -->
-                        @php
-                            // Instancia la clase TruncateService usando el namespace completo
-                            $truncateService = new \Urodoz\Truncate\TruncateService();
-                            // Trunca la descripción a 120 caracteres y agrega '...'
-                            $htmlSnippet = $truncateService->truncate($paper->descripcion, 200, '...');
-                        @endphp
-
                         <div class="text-base font-normal text-black cursor-auto my-3 break-words select-none">
                             {!! $htmlSnippet !!}
                         </div>
-                        <span class="text-gray-600 mr-3 uppercase text-sm">
-                            Autores: <span>   {{ $paper->formatted_autores }} </span>
-                            </span>
+                        <span class="text-gray-600 mr-3 text-sm">
+                            <span> {{ $paper->formatted_autores }} </span>
+                        </span>
                     </div>
 
                     <!-- Overlay con enlace “Leer más” -->
@@ -106,7 +107,7 @@
                                   hover:bg-[#a6d073] px-3 py-2 rounded-lg cursor-pointer">
                             Ver Contenido
                         </a>
-                    </div>         
+                    </div>
                 </div>
             @endforeach
         </div>
