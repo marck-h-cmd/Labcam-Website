@@ -9,8 +9,17 @@ class AreaProyecto extends Model
 {
     use HasFactory;
 
-    protected $table = 'areas_proyectos';
+    protected $table = 'areas_proyectos'; // Ajusta si tu tabla tiene otro nombre
     protected $primaryKey = 'id';
     public $timestamps = false;
-    protected $fillable = ['nombreArea'];
+
+    protected $fillable = ['nombreArea', 'imagen'];
+
+    /**
+     * Relación: Un área tiene muchos proyectos
+     */
+    public function proyectos()
+    {
+        return $this->hasMany(Proyecto::class, 'area_id');
+    }
 }

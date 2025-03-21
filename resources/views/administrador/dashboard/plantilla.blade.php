@@ -158,6 +158,32 @@
             </li>
 
             <li
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['areas_proyectos_admin', 'proyect', 'topic-panel', 'topics.edit']) ? 'active' : '' }}">
+                <a
+                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
+                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    <span class="text-sm">Proyectos</span>
+                    <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+                </a>
+                <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                    <li class="mb-4">
+                        <a href="{{ route('areas_proyectos_admin') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs(['areas_proyectos_admin']) ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>Áreas
+                            de Proyectos</a>
+                    </li>
+                    <li class="mb-4">
+                        <a href="{{ route('proyect') }}"
+                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
+                            <span
+                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('proyect') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
+                            Lista de Proyectos</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li
                 class="mb-1 group cursor-pointer {{ request()->routeIs(['capital_index', 'direccion_index']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
@@ -185,7 +211,7 @@
                 </ul>
             </li>
             <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['notici', 'proyect', 'event']) ? 'active' : '' }}">
+                class="mb-1 group cursor-pointer {{ request()->routeIs(['notici', 'event']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -199,13 +225,6 @@
                             <span
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('notici') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Noticias</a>
-                    </li>
-                    <li class="mb-4">
-                        <a href="{{ route('proyect') }}"
-                            class="text-sm flex items-center py-2 px-4 rounded-md text-white">
-                            <span
-                                class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('proyect') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
-                            Proyectos</a>
                     </li>
                     <li class="mb-4">
                         <a href="{{ route('event') }}"

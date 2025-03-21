@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\AreaProyecto;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
@@ -23,11 +24,11 @@ class ProyectoController extends Controller
 
         $proyect = Proyecto::when($query, function ($queryBuilder) use ($query) {
             $queryBuilder->where('titulo', 'like', '%' . $query . '%')
-                         ->orWhere('autor', 'like', '%' . $query . '%');
-        })->paginate(10);
+                ->orWhere('autor', 'like', '%' . $query . '%');
+        })->paginate(6);
         $areas = AreaProyecto::all();
 
-        return view('administrador.panel.novedades.proyecto.show', compact('proyect','areas'));
+        return view('administrador.panel.novedades.proyecto.show', compact('proyect', 'areas'));
     }
 
     public function show($id)
@@ -36,15 +37,13 @@ class ProyectoController extends Controller
         $proyecto = Proyecto::findOrFail($id);
 
         return view('usuario.novedades.detalle-proyectos', compact('proyecto'));
-
-
     }
-    
+
     public function showProyectosByArea($idArea)
     {
         $proyectos = Proyecto::where('idAreaProyecto', $idArea)->paginate(10);
         $area = AreaProyecto::findOrFail($idArea);
-        return view('usuario.novedades.proyectos', compact('proyectos','area'));
+        return view('usuario.novedades.proyectos', compact('proyectos', 'area'));
     }
 
 
@@ -68,6 +67,10 @@ class ProyectoController extends Controller
                 'imagen.image' => 'El archivo debe ser una imagen.',
                 'imagen.max' => 'La imagen no debe exceder los 4MB.',
                 'imagen.mimes' => 'La imagen debe ser de tipo JPG, PNG o JPEG.',
+
+                // Mensajes para área
+                'area.required' => 'El campo área es obligatorio.',
+                'area.exists' => 'El área seleccionada no existe.',
             ];
 
             $request->validate([
@@ -77,14 +80,17 @@ class ProyectoController extends Controller
                 'autor' => 'required|string|max:255',
                 'fecha_publicacion' => 'required|date',
                 'imagen' => 'nullable|image|max:4096|mimes:jpg,png,jpeg',
+                'area' => 'required|exists:areas_proyectos,id', // Validar que el área exista
             ], $messages);
 
+            // Procesar la imagen si se envía
             $rutaImagen = null;
             if ($request->hasFile('imagen')) {
                 $imagen = $request->file('imagen');
                 $rutaImagen = $imagen->store('proyectos', 'public'); // Guardar imagen en storage/app/public/proyectos
             }
 
+            // Crear el proyecto con el ID del área seleccionado
             Proyecto::create([
                 'titulo' => $request->titulo,
                 'subtitulo' => $request->subtitulo,
@@ -92,6 +98,7 @@ class ProyectoController extends Controller
                 'autor' => $request->autor,
                 'fecha_publicacion' => $request->fecha_publicacion,
                 'imagen' => $rutaImagen,
+                'area_id' => $request->area, // Asignar el área
             ]);
 
             return redirect()->route('proyect')->with('success', 'Proyecto creado con éxito');
@@ -106,48 +113,38 @@ class ProyectoController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit($id)
-    {
-
-        $proyect = Proyecto::findOrFail($id);
-        return view('administrador.panel.novedades.proyecto.edit', compact('proyect'));
-    }
-
-
-    /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,$id)
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'titulo' => 'required|string|max:255',
-            'subtitulo' => 'required|string|max:1000',
-            'descripcion' => 'required',
-            'autor' => 'required|string|max:255',
-            'fecha_publicacion' => 'required|date',
-            'imagen' => 'nullable|image|mimes:jpg,png',
+            'edit_titulo' => 'required|string|max:255',
+            'edit_subtitulo' => 'required|string|max:1000',
+            'edit_descripcion' => 'required',
+            'edit_autor' => 'required|string|max:255',
+            'edit_fecha_publicacion' => 'required|date',
+            'edit_imagen' => 'nullable|image|mimes:jpg,png,jpeg',
+            'area_edit' => 'required|exists:areas_proyectos,id', // Validar que el área exista
         ]);
 
         $proyecto = Proyecto::findOrFail($id);
 
         // Actualizar la imagen si se sube una nueva
-        if ($request->hasFile('imagen')) {
-            $imagenPath = $request->file('imagen')->store('proyectos', 'public');
+        if ($request->hasFile('edit_imagen')) {
+            $imagenPath = $request->file('edit_imagen')->store('proyectos', 'public');
             $proyecto->imagen = $imagenPath;
         }
 
         $proyecto->update([
-            'titulo' => $request->titulo,
-            'subtitulo' => $request->subtitulo,
-            'descripcion' => $request->descripcion,
-            'autor' => $request->autor,
-            'fecha_publicacion' => $request->fecha_publicacion,
+            'titulo' => $request->edit_titulo,
+            'subtitulo' => $request->edit_subtitulo,
+            'descripcion' => $request->edit_descripcion,
+            'autor' => $request->edit_autor,
+            'fecha_publicacion' => $request->edit_fecha_publicacion,
+            'area_id' => $request->area_edit, // Asignar el área seleccionada desde el campo "area_edit"
         ]);
 
-        return redirect()->route('proyect')->with('success', 'Proyecto actualizada con éxito');
-
+        return redirect()->route('proyect')->with('success', 'Proyecto actualizado con éxito');
     }
 
     /**
@@ -160,7 +157,4 @@ class ProyectoController extends Controller
 
         return redirect()->route('proyect')->with('success', 'Proyecto eliminada con éxito');
     }
-
-
-
 }

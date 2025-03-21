@@ -16,6 +16,7 @@ use App\Http\Controllers\ProyectoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\AreaProyectoController;
 
 Route::middleware([UpdateEventosMiddleware::class])->group(function () {
 
@@ -62,7 +63,7 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
     Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 
     Route::get('/proyectos/area/{idArea}', [ProyectoController::class, 'showProyectosByArea'])->name('proyectos.area');
-  
+
 
     //RUTA EVENTO
 
@@ -142,7 +143,11 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
             Route::get('/buscar', [PaperController::class, 'adminIndex'])->name('search');
         });
 
-
+        // ------------------------- CRUD SECCION PROYECTOS ---------------------------------------------
+        Route::get('/admin/areas_proyectos', [AreaProyectoController::class, 'index'])->name('areas_proyectos_admin');
+        Route::post('/admin/areas_proyectos_store', [AreaProyectoController::class, 'store'])->name('areas_proyectos_store');
+        Route::put('/admin/areas_proyectos/{area}', [AreaProyectoController::class, 'update'])->name('areas_proyectos_update');
+        Route::delete('/admin/areas_proyectos/{area}', [AreaProyectoController::class, 'destroy'])->name('areas_proyectos_destroy');
 
         // ------------------------- CRUD SLIDERS HISTORIA ---------------------------------------------
         Route::get('/admin/historia-sliders', HistoriaSliderController::class . '@index')->name('h-sliders-panel');

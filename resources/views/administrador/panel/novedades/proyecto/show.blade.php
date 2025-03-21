@@ -22,16 +22,18 @@
         </div>
 
         <div class="overflow-x-auto bg-white rounded-lg shadow">
-            <table class="min-w-full text-sm text-left text-gray-600 table-fixed">
-                <thead class="bg-gray-200 text-gray-700 uppercase">
-                    <tr>
-                        <th class="px-4 py-3">Título</th>
-                        <th class="px-4 py-3">Subtítulo</th>
-                        <th class="px-4 py-3 w-60">Descripción</th>
-                        <th class="px-4 py-3">Autor</th>
-                        <th class="px-4 py-3">Fecha</th>
-                        <th class="px-4 py-3">Imagen</th>
-                        <th class="px-4 py-3">Acciones</th>
+            <table class="min-w-full text-sm text-gray-600 table-fixed border-collapse">
+                <thead>
+                    <tr class="bg-gray-200 text-gray-700 uppercase text-center">
+                        <!-- Ajusta los valores de w-XX según necesites -->
+                        <th class="px-2 py-3 w-24">TÍTULO</th>
+                        <th class="px-2 py-3 w-24">SUBTÍTULO</th>
+                        <th class="px-2 py-3 w-48">DESCRIPCIÓN</th>
+                        <th class="px-2 py-3 w-24">AUTOR</th>
+                        <th class="px-2 py-3 w-20">FECHA</th>
+                        <th class="px-2 py-3 w-28">ÁREA</th>
+                        <th class="px-2 py-3 w-12">IMAGEN</th>
+                        <th class="px-2 py-3 w-16">ACCIONES</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,46 +45,56 @@
                             $htmlSnippet = $truncateService->truncate($proyecto->descripcion, 100, '...');
                         @endphp
                         <tr class="border-b hover:bg-gray-50">
-                            <td class="px-4 py-3">{{ $proyecto->titulo }}</td>
-                            <td class="px-4 py-3">{{ $proyecto->subtitulo }}</td>
-                            <td class="px-4 py-3 w-full whitespace-normal break-all">{!! $htmlSnippet !!}</td>
-                            <td class="px-4 py-3">{{ $proyecto->autor }}</td>
-                            <td class="px-4 py-3">{{ $proyecto->fecha_publicacion }}</td>
-                            <td class="px-4 py-3">{{ optional($proyecto->areaProyecto)->nombreArea }}</td>
-
-                            <td class="px-4 py-3">
+                            <td class="px-2 py-3 text-center">
+                                {{ $proyecto->titulo }}
+                            </td>
+                            <td class="px-2 py-3 text-center">
+                                {{ $proyecto->subtitulo }}
+                            </td>
+                            <td class="px-2 py-3 text-center whitespace-normal break-all">
+                                {!! $htmlSnippet !!}
+                            </td>
+                            <td class="px-2 py-3 text-center">
+                                {{ $proyecto->autor }}
+                            </td>
+                            <td class="px-2 py-3 text-center">
+                                {{ $proyecto->fecha_publicacion }}
+                            </td>
+                            <td class="px-2 py-3 text-center">
+                                {{ optional($proyecto->areaProyecto)->nombreArea }}
+                            </td>
+                            <td class="px-2 py-3 text-center">
                                 @if ($proyecto->imagen)
-                                    <div class="px-8 py-0.1 text-center">
-                                        <button
-                                            class="w-8 h-8 flex items-center justify-start rounded shadow cursor-pointer"
-                                            onclick="openModal('{{ Storage::url($proyecto->imagen) }}', 'image')">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                                                class="w-6 h-6" viewBox="0 0 24 24">
-                                                <path d="M18 22H4a2 2 0 0 1-2-2V6" />
-                                                <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18" />
-                                                <circle cx="12" cy="8" r="2" />
-                                                <rect width="16" height="16" x="6" y="2" rx="2" />
-                                            </svg>
-                                        </button>
-                                    </div>
+                                    <button
+                                        class="w-8 h-8 flex items-center justify-center rounded shadow cursor-pointer mx-auto"
+                                        onclick="openModal('{{ Storage::url($proyecto->imagen) }}', 'image')">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"
+                                            viewBox="0 0 24 24">
+                                            <path d="M18 22H4a2 2 0 0 1-2-2V6" />
+                                            <path d="m22 13-1.296-1.296a2.41 2.41 0 0 0-3.408 0L11 18" />
+                                            <circle cx="12" cy="8" r="2" />
+                                            <rect width="16" height="16" x="6" y="2" rx="2" />
+                                        </svg>
+                                    </button>
                                 @else
                                     <span>No hay imagen</span>
                                 @endif
                             </td>
-                            <td class="px-4 py-3 flex items-center justify-center space-x-4">
+                            <td class="px-2 py-3 text-center">
                                 <!-- Editar -->
                                 <button type="button" onclick="openEditModal(this)"
                                     data-proyecto='@json($proyecto)'
-                                    class="text-blue-600 font-bold hover:text-blue-900">
+                                    class="text-blue-600 font-bold hover:text-blue-900 inline-flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M11 3l3 3-8 8H3v-3l8-8z" />
                                     </svg>
                                 </button>
-                                <!-- Botón de Eliminar -->
+
+                                <!-- Eliminar -->
                                 <button onclick="openDeleteModal({{ $proyecto->id }}, '{{ $proyecto->titulo }}')"
-                                    class="text-red-500 hover:text-red-700 flex items-center justify-center">
+                                    class="text-red-500 hover:text-red-700 inline-flex items-center ml-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -106,7 +118,7 @@
     <!-- Modal Crear -->
     <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 w-full h-full">
         <div class="flex items-center justify-center w-full h-full">
-            <!-- Se aumentó el ancho máximo a max-w-5xl para que el modal sea más ancho -->
+            <!-- Se aumentó el ancho máximo a max-w-6xl para que el modal sea más ancho -->
             <div class="bg-white px-8 py-6 rounded-lg shadow-xl max-w-6xl w-full relative max-h-screen overflow-y-auto">
                 <!-- Título centrado -->
                 <div class="text-center mb-8">
@@ -155,21 +167,18 @@
                                     required>
                             </div>
 
-                            
                             <!-- Área del Proyecto -->
                             <div>
                                 <label for="area" class="block text-gray-700">Área del Proyecto</label>
-                                <select id="area" name="area" class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <select id="area" name="area"
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                                     <option value="" disabled selected>Seleccione un área</option>
-                                    <option value="Ciencias de Materiales">Ciencias de Materiales</option>
-                                    <option value="Cerámica">Cerámica</option>
-                                    <option value="Mecatrónica">Mecatrónica</option>
-                                    <option value="Proyectos de la industria">Proyectos de la industria</option>
-                                    <option value="Proyectos concursales">Proyectos concursales</option>
+                                    @foreach ($areas as $area)
+                                        <option value="{{ $area->id }}">{{ $area->nombreArea }}</option>
+                                    @endforeach
                                 </select>
                             </div>
-
-
                         </div>
 
                         <!-- Columna Derecha -->
@@ -179,7 +188,7 @@
                                 <label for="descripcion" class="block text-gray-700">Descripción</label>
                                 <textarea id="descripcion" name="descripcion" rows="7"
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            </textarea>
+                </textarea>
                             </div>
 
                             <!-- Imagen (Drag & Drop) -->
@@ -287,12 +296,14 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
+
                             <!-- Subtítulo -->
                             <div>
                                 <label for="edit_subtitulo" class="block text-gray-700">Subtítulo</label>
                                 <input type="text" id="edit_subtitulo" name="edit_subtitulo"
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                             </div>
+
                             <!-- Autor -->
                             <div>
                                 <label for="edit_autor" class="block text-gray-700">Autor</label>
@@ -300,6 +311,7 @@
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                                     required>
                             </div>
+
                             <!-- Fecha -->
                             <div>
                                 <label for="edit_fecha_publicacion" class="block text-gray-700">Fecha</label>
@@ -309,18 +321,18 @@
                                     required>
                             </div>
 
-
                             <!-- Área del Proyecto -->
                             <div>
-                                <label for="idAreaProyecto" class="block text-gray-700">Área del Proyecto</label>
-                                <select id="idAreaProyecto" name="idAreaProyecto" class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                                <label for="area_edit" class="block text-gray-700">Área del Proyecto</label>
+                                <select id="area_edit" name="area_edit"
+                                    class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    required>
                                     <option value="" disabled selected>Seleccione un área</option>
                                     @foreach ($areas as $area)
                                         <option value="{{ $area->id }}">{{ $area->nombreArea }}</option>
                                     @endforeach
                                 </select>
                             </div>
-
                         </div>
 
                         <!-- Columna Derecha -->
@@ -331,6 +343,7 @@
                                 <textarea id="edit_descripcion" name="edit_descripcion" rows="7"
                                     class="mt-1 w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
                             </div>
+
                             <!-- Imagen (Drag & Drop y selector) -->
                             <div>
                                 <label class="block text-gray-700 mb-1">Imagen</label>
@@ -568,7 +581,6 @@
             }
         }
 
-
         // Abre el modal de editar y precarga los datos
         function openEditModal(button) {
             // Se espera que el botón tenga data-proyecto con el JSON del proyecto
@@ -583,6 +595,9 @@
             // Precargar la descripción en TinyMCE
             tinymce.get('edit_descripcion').setContent(proyecto.descripcion || ''); // Evita valores nulos
 
+            // Preseleccionar el área usando el select "area_edit"
+            document.getElementById('area_edit').value = proyecto.area_id; // <--- LÍNEA MODIFICADA
+
             // Configura la acción del formulario
             document.getElementById('editForm').action = `/admin/proyectos/${proyecto.id}`;
 
@@ -590,6 +605,7 @@
             const previewImage = document.getElementById('edit_previewImage');
             const imagePlaceholder = document.getElementById('edit-image-placeholder');
             const removeBtn = document.getElementById('edit_remove_image');
+
             if (proyecto.imagen) {
                 previewImage.src = `{{ url('storage') }}/${proyecto.imagen}`;
                 previewImage.classList.remove('hidden');
@@ -605,9 +621,6 @@
             // Muestra el modal
             document.getElementById('editModal').classList.remove('hidden');
         }
-
-
-
 
         // Cierra el modal de editar y limpia el formulario
         function closeEditModal() {
