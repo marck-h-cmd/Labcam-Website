@@ -165,26 +165,28 @@
             <!-- Grid: 1 columna en mobile, 2 en tablet, 3 en desktop -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-11">
                 @foreach ($areasToShow as $area)
-                    <div
-                        class="relative rounded-lg overflow-hidden bg-white/20 backdrop-blur-md hover:shadow-xl cursor-pointer aspect-[4/3] transform hover:scale-105 transition-transform duration-300 flex items-center justify-center">
-                        <!-- Imagen que ocupa todo el contenedor -->
-                        <img src="/user/template/images/{{ $area->imagen }}" alt="{{ $area->nombreArea }}"
-                            class="w-full h-full object-cover" />
-
-                        <!-- Overlay con el nombre, ubicado en la parte inferior -->
-                        <div class="absolute bottom-0 left-0 right-0 bg-[#539d28]/95 p-3">
-                            <h3 class="text-center text-lg sm:text-xl font-semibold">
-                                {{ $area->nombreArea }}
-                            </h3>
+                    <a href="{{ route('areas.proyectos', strtolower(str_replace(' ', '_', $area->nombreArea))) }}"
+                        class="block">
+                        <div
+                            class="relative rounded-lg overflow-hidden bg-white/20 backdrop-blur-md hover:shadow-xl cursor-pointer aspect-[4/3] transform hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                            <!-- Imagen que ocupa todo el contenedor -->
+                            <img src="/user/template/images/{{ $area->imagen }}" alt="{{ $area->nombreArea }}"
+                                class="w-full h-full object-cover" />
+                            <!-- Overlay con el nombre, ubicado en la parte inferior -->
+                            <div class="absolute bottom-0 left-0 right-0 bg-[#98C560]/95 p-3">
+                                <h3 class="text-center text-lg sm:text-xl font-semibold">
+                                    {{ $area->nombreArea }}
+                                </h3>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
 
                 @if ($areaProyectos->count() > 5)
                     <!-- Card del botón "Ver más proyectos" con fondo transparente -->
                     <div
                         class="relative rounded-lg overflow-hidden bg-transparent backdrop-blur-md hover:shadow-xl cursor-pointer aspect-[4/3] transform hover:scale-105 transition-transform duration-300 flex flex-col items-center justify-center border border-white/30">
-                        <a href="{{ route('proyectos') }}"
+                        <a href="{{ route('areas_proyectos_user') }}"
                             class="flex flex-col items-center justify-center w-full h-full">
                             <!-- Icono en forma de cuadrícula -->
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -201,7 +203,6 @@
             </div>
         </div>
     </section>
-
 
     {{-- Sección eventos --}}
     <section class="py-12">

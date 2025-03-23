@@ -51,22 +51,10 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
 
 
     //RUTA NOTICIA
-
-
     Route::get('/noticias', [NoticiaController::class, 'index'])->name('noticias');
     Route::get('/noticias/{id}', [NoticiaController::class, 'show'])->name('noticias.show');
 
-    //RUTA PROYECTO
-
-
-    Route::get('/proyectos', [ProyectoController::class, 'index'])->name('proyectos');
-    Route::get('/proyectos/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
-
-    Route::get('/proyectos/area/{idArea}', [ProyectoController::class, 'showProyectosByArea'])->name('proyectos.area');
-
-
     //RUTA EVENTO
-
     Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
     Route::get('/eventos/{id}', [EventoController::class, 'show'])->name('eventos.show');
 
@@ -81,6 +69,11 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
     });
 
 
+    // ------------------------- SECCION AREAS PROYECTOS ---------------------------------------------
+    Route::get('/areas_proyectos', [AreaProyectoController::class, 'vista_user_areas'])->name('areas_proyectos_user');
+    Route::get('/areas_proyectos/{areaFormatted}', [AreaProyectoController::class, 'mostrarProyectosPorArea'])
+        ->name('areas.proyectos');
+    Route::get('/areas_proyectos/{areaFormatted}/{id}', [ProyectoController::class, 'show'])->name('proyectos.show');
 
     // -------------------------RUTA LOGIN ---------------------------------------------
 

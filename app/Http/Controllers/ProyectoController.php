@@ -31,22 +31,13 @@ class ProyectoController extends Controller
         return view('administrador.panel.novedades.proyecto.show', compact('proyect', 'areas'));
     }
 
-    public function show($id)
+    public function show($areaFormatted, $id)
     {
 
         $proyecto = Proyecto::findOrFail($id);
 
-        return view('usuario.novedades.detalle-proyectos', compact('proyecto'));
+        return view('usuario.biblioteca_proyectos.detalle-proyectos', compact('proyecto', 'areaFormatted'));
     }
-
-    public function showProyectosByArea($idArea)
-    {
-        $proyectos = Proyecto::where('idAreaProyecto', $idArea)->paginate(10);
-        $area = AreaProyecto::findOrFail($idArea);
-        return view('usuario.novedades.proyectos', compact('proyectos', 'area'));
-    }
-
-
 
     public function store(Request $request)
     {

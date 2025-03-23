@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\AreaInvestigacion;
 use App\Models\AreaProyecto;
-use Illuminate\Support\Facades\Log;
+use App\Models\Proyecto;
 use Illuminate\Support\Str;
 use Exception;
 
@@ -27,7 +26,7 @@ class AreaProyectoController extends Controller
         // Validar los campos requeridos
         $request->validate([
             'nombreArea' => 'required|string|max:255',
-            'imagen'     => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'imagen'     => 'required|image',
         ]);
 
         // Ruta donde se guardarán las imágenes (puedes ajustarla a tu estructura)
@@ -88,6 +87,7 @@ class AreaProyectoController extends Controller
             ->route('areas_proyectos_admin') // Ajusta esta ruta según corresponda
             ->with('create_success', 'Área de proyecto actualizada correctamente.');
     }
+    // Asegúrate de importar el modelo Proyecto
 
     public function destroy($id)
     {
@@ -95,7 +95,10 @@ class AreaProyectoController extends Controller
             // Buscar el área o fallar si no existe
             $area = AreaProyecto::findOrFail($id);
 
-            // Eliminar el registro
+            // Actualizar los proyectos relacionados, poniendo area_id a null
+            Proyecto::where('area_id', $id)->update(['area_id' => null]);
+
+            // Eliminar el registro del área
             $area->delete();
 
             // Redirigir con mensaje de éxito
@@ -108,16 +111,23 @@ class AreaProyectoController extends Controller
         }
     }
 
-    public function edit($id, Request $request)
+    public function vista_user_areas()
     {
-        $area = AreaInvestigacion::find($id);
+        $areasProyecto = AreaProyecto::all();
+        return view('usuario.biblioteca_proyectos.lista_areas', compact('areasProyecto'));
+    }
 
-        if (!$area) {
-            return redirect()->route('areas-panel')
-                ->with('error', 'No encontrado');
-        }
-        $areas = AreaInvestigacion::where('id', '!=', $id)->paginate(10);
+    public function mostrarProyectosPorArea($areaFormatted)
+    {
+        // Reconvertir el formato: de minúsculas y guiones bajos a nombre normal (espacios)
+        $areaNombre = str_replace('_', ' ', $areaFormatted);
 
-        return view('administrador.panel.categoria-investigacion.area-update', compact('area', 'areas'))->with('i', ($request->input('page', 1) - 1) * $areas->perPage());
+        // Buscar el área por su nombre (ajusta el campo si es necesario)
+        $area = AreaProyecto::where('nombreArea', $areaNombre)->firstOrFail();
+
+        // Suponiendo que en el modelo AreaProyecto tienes definida la relación "proyectos"
+        $proyectos = $area->proyectos()->paginate(10);
+
+        return view('usuario.biblioteca_proyectos.proyectos_por_area', compact('proyectos', 'areaFormatted', 'area'));
     }
 }

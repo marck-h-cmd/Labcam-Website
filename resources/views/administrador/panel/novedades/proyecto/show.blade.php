@@ -61,7 +61,11 @@
                                 {{ $proyecto->fecha_publicacion }}
                             </td>
                             <td class="px-2 py-3 text-center">
-                                {{ optional($proyecto->areaProyecto)->nombreArea }}
+                                @if ($proyecto->areaProyecto)
+                                    {{ optional($proyecto->areaProyecto)->nombreArea }}
+                                @else
+                                    <span class="text-red-800"> Sin área</span>
+                                @endif
                             </td>
                             <td class="px-2 py-3 text-center">
                                 @if ($proyecto->imagen)
@@ -596,7 +600,11 @@
             tinymce.get('edit_descripcion').setContent(proyecto.descripcion || ''); // Evita valores nulos
 
             // Preseleccionar el área usando el select "area_edit"
-            document.getElementById('area_edit').value = proyecto.area_id; // <--- LÍNEA MODIFICADA
+            if(proyecto.area_id === null) {
+                document.getElementById('area_edit').value = "";
+            }else{
+                document.getElementById('area_edit').value = proyecto.area_id;
+            }
 
             // Configura la acción del formulario
             document.getElementById('editForm').action = `/admin/proyectos/${proyecto.id}`;

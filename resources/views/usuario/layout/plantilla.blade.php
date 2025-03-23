@@ -117,7 +117,7 @@
                     <!-- Dropdown Biblioteca -->
                     <li class="relative">
                         <button id="dropdownNavbarLink3"
-                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['biblioteca.papers.*', 'proyectos', 'proyectos.show']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
+                            class="flex items-center justify-between w-full py-2 px-3 text-white hover:bg-[#98C560] rounded-md md:hover:bg-transparent md:border-0 md:hover:text-[#98C560] md:p-0 md:w-auto {{ request()->routeIs(['biblioteca.papers.*', 'areas_proyectos_user', 'areas.proyectos','proyectos.show']) ? 'text-white bg-[#98C560] md:bg-transparent md:text-[#98C560]' : 'text-white bg-transparent' }}"
                             @click="openDropdown = openDropdown === 'dropdownNavbar3' ? null : 'dropdownNavbar3'">
                             Biblioteca
                             <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -139,8 +139,8 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{ route('proyectos') }}"
-                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('proyectos', 'proyectos.show') ? 'text-[#98C560]' : 'text-black' }}">
+                                    <a href="{{ route('areas_proyectos_user') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('areas_proyectos_user', 'areas.proyectos','proyectos.show') ? 'text-[#98C560]' : 'text-black' }}">
                                         Proyectos
                                     </a>
                                 </li>
