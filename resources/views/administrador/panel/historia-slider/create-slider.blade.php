@@ -51,7 +51,7 @@
                         </button>
                         <!-- Input de archivo oculto -->
                         <input type="file" id="historia_img" name="historia_img" class="hidden"
-                            accept="image/png,image/jpeg,image/jpg,image/gif" onchange="mostrarVistaPrevia(event)">
+                            accept="image/png,image/jpeg,image/jpg" onchange="mostrarVistaPrevia(event)">
                     </div>
                     <!-- Contenedor extra para información -->
                     <div id="info-container" class="mt-2"></div>
