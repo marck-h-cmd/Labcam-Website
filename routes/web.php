@@ -17,6 +17,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\AreaProyectoController;
+use App\Http\Controllers\TutorialesController;
 
 Route::middleware([UpdateEventosMiddleware::class])->group(function () {
 
@@ -238,5 +239,16 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
         Route::get('/admin/direccion', [DireccionController::class, 'index'])->name('direccion_index');
         Route::post('/admin/direccion', [DireccionController::class, 'store'])->name('direcciones.store');
         Route::put('/admin/direccion/{id}', [DireccionController::class, 'update'])->name('direcciones.update');
+
+         //-------Tutoriales-------//
+        Route::prefix('admin/tutoriales')->name('tutorials.')->group(function () {
+            Route::get('/', [TutorialesController::class, 'index'])->name('index');
+            Route::get('/create', [TutorialesController::class, 'create'])->name('create');
+            Route::post('/', [TutorialesController::class, 'store'])->name('store');
+            Route::get('/{tutorial}/edit', [TutorialesController::class, 'edit'])->name('edit');
+            Route::put('/{tutorial}', [TutorialesController::class, 'update'])->name('update');
+            Route::delete('/{tutorial}', [TutorialesController::class, 'destroy'])->name('destroy');
+            Route::get('/tutorial/{id}', [TutorialesController::class, 'show'])->name('show');    
+        });
     });
 });
