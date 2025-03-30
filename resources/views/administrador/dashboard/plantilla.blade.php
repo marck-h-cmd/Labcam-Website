@@ -29,7 +29,7 @@
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('admin-principal') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Principal</span>
-                </a>
+                </a>            
             </li>
 
             <li class="mb-1 group cursor-pointer {{ request()->routeIs(['person', 'users']) ? 'active' : '' }}">
@@ -55,7 +55,7 @@
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('users') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Registrar Usuario
                         </a>
-                    </li>
+                    </li>                
                 </ul>
             </li>
 
@@ -210,8 +210,7 @@
                     </li>
                 </ul>
             </li>
-            <li
-                class="mb-1 group cursor-pointer {{ request()->routeIs(['notici', 'event']) ? 'active' : '' }}">
+            <li class="mb-1 group cursor-pointer {{ request()->routeIs(['notici', 'event']) ? 'active' : '' }}">
                 <a
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md group-[.active]:bg-[#98C560] group-[.active]:text-white sidebar-dropdown-toggle">
                     <i class="ri-instance-line mr-3 text-lg"></i>
@@ -241,6 +240,13 @@
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Contacto</span>
                 </a>
+            </li>
+            <li class="mb-1 group cursor-pointer">
+                <a href="{{ route('tutorials.index') }}"
+                class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('tutorials.index') ? 'bg-[#98C560]' : 'bg-transparent' }}">
+                <i class="ri-instance-line mr-3 text-lg"></i>
+                <span class="text-sm">Tutoriales</span>
+            </a>
             </li>
 
 
