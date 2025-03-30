@@ -20,10 +20,12 @@ class TutorialesController extends Controller
     public function store(Request $request)
     {
         try {
+           
+            $this->handleFileSize();
             $request->validate([
                 'titulo' => 'required|string|max:255',
                 'files' => 'required|array|max:5',
-                'files.*' => 'file|mimes:pdf,mp4,rar,zip',
+                'files.*' => 'file|mimes:pdf,mp4,rar,zip|max:102400',
             ]);
 
             $title = $request->input('titulo');
@@ -57,9 +59,16 @@ class TutorialesController extends Controller
 
     }
 
+    public function handleFileSize(){
+        ini_set('post_max_size', '100M');
+        ini_set('upload_max_filesize', '100M');
+        ini_set('max_execution_time', '300');
+    }
     public function update(Request $request, $id)
     {
         try {
+            $this->handleFileSize();
+
             $tutorial = Tutorial::findOrFail($id);
 
             // Convertir file_paths a un array en caso no sea
@@ -68,7 +77,7 @@ class TutorialesController extends Controller
             $request->validate([
                 'edit_titulo' => 'required|string|max:255',
                 'edit_files' => 'sometimes|array|max:5',
-                'edit_files.*' => 'file|mimes:pdf,mp4,rar,zip,wav',
+                'edit_files.*' => 'file|mimes:pdf,mp4,rar,zip|max:102400',
                 'files_to_delete' => 'sometimes|array'
             ]);
 
