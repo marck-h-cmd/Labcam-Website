@@ -113,7 +113,7 @@
                                     </span>
                                     <input type="file" name="files[]" id="files" class="hidden"
                                         accept="application/pdf, video/mp4, application/zip, application/x-rar-compressed"
-                                        multiple required onchange="handleFileSelect(event)">
+                                        multiple  onchange="handleFileSelect(event)">
                                 </div>
                             </div>
                             <!-- FILES CONTAINER -->
@@ -398,17 +398,14 @@
             const submitBtn = document.querySelector('#form button[type="submit"]');
 
             if (isMaxReached) {
-                fileInput.disabled = true;
                 dropZone.classList.add('border-red-500', 'cursor-not-allowed');
                 dropZone.classList.remove('border-blue-500', 'cursor-pointer');
             } else {
-                fileInput.disabled = false;
+
                 dropZone.classList.remove('border-red-500', 'cursor-not-allowed');
                 dropZone.classList.add('border-blue-500', 'cursor-pointer');
             }
 
-            // Habilita/desabilita boton submit basado en la cantidad de arhivos 0
-            submitBtn.disabled = createFiles.length === 0;
         }
 
         function updateCreateFileInput() {
@@ -479,12 +476,7 @@
             updateCreateFileInput();
         }
 
-        function updateCreateFileInput() {
-            const filesInput = document.getElementById('files');
-            const dataTransfer = new DataTransfer();
-            createFiles.forEach(file => dataTransfer.items.add(file));
-            filesInput.files = dataTransfer.files;
-        }
+
 
         function handleCreateDrop(event) {
             event.preventDefault();
@@ -565,7 +557,7 @@
 
             if (editFiles.length === 0) {
                 if (noFilesMsg) noFilesMsg.style.display = 'flex';
-                if (previewContainer) previewContainer.appendChild(noFilesMsg);
+                if (previewContainer && noFilesMsg) previewContainer.appendChild(noFilesMsg);
                 return;
             }
 
@@ -695,18 +687,16 @@
         // ==================== FORM SUBMISSION ====================
 
         document.getElementById('form').addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitBtn = this.querySelector('#form button[type="submit"]');
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Subiendo...';
 
-            // Desabilitar archivos input al subir
-            document.getElementById('files').disabled = false;
+            updateCreateFileInput();
 
  
             if (createFiles.length === 0) {
                 e.preventDefault();
-                alert('Please select at least one file.');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Guardar';
                 document.getElementById('files').disabled = false;
@@ -716,7 +706,7 @@
         });
 
         document.getElementById('editForm').addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitBtn = this.querySelector('#editForm button[type="submit"]');
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Actualizando...';
@@ -782,6 +772,7 @@
             document.getElementById('editForm').reset();
             editFiles = [];
             existingFiles = [];
+            setEditMaxFilesUI(false);
             renderEditPreviews();
 
             // Resetear boton submit 
