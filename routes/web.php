@@ -86,7 +86,7 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
     // -------------------------RUTA LOGIN ---------------------------------------------
 
 
-    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::get('/login', [AuthController::class, 'index'])->name('login.index');
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
@@ -243,6 +243,7 @@ Route::middleware([UpdateEventosMiddleware::class])->group(function () {
          //-------Tutoriales-------//
         Route::prefix('admin/tutoriales')->name('tutorials.')->group(function () {
             Route::get('/', [TutorialesController::class, 'index'])->name('index');
+            Route::get('/visualizar', [TutorialesController::class, 'mainIndex'])->name('main');
             Route::get('/create', [TutorialesController::class, 'create'])->name('create');
             Route::post('/', [TutorialesController::class, 'store'])->name('store');
             Route::get('/{tutorial}/edit', [TutorialesController::class, 'edit'])->name('edit');
