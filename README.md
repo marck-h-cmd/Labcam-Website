@@ -161,7 +161,7 @@ php artisan route:cache   # Cachea rutas
 php artisan view:cache    # Cachea vistas  
 ```
 
-## Revertir cache (para desarrollo o actualizaciones)
+### Revertir cache (para desarrollo o actualizaciones)
 ```bash
 php artisan config:clear 
 php artisan route:clear  
