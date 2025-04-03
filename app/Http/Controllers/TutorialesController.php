@@ -17,6 +17,12 @@ class TutorialesController extends Controller
         $tutorials = Tutorial::paginate(10);
         return view('administrador.tutoriales.panel', compact('tutorials'));
     }
+    public function mainIndex(Request $request)
+    {
+        $tutorials = Tutorial::paginate(10);
+        return view('administrador.tutoriales.tutorial-index', compact('tutorials'));
+    }
+    
     public function store(Request $request)
     {
         try {

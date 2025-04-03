@@ -152,6 +152,23 @@ Para crear un enlace simbólico desde el directorio `public/storage` al director
 ```bash
 php artisan storage:link
 ```
+## Comandos para Cache en Laravel (Producción)
+
+### Cachear para producción
+```bash
+php artisan config:cache  # Cachea configuración  
+php artisan route:cache   # Cachea rutas  
+php artisan view:cache    # Cachea vistas  
+```
+
+## Revertir cache (para desarrollo o actualizaciones)
+```bash
+php artisan config:clear 
+php artisan route:clear  
+php artisan view:clear
+```
+
+**Nota:** Ejecuta los comandos de cache solo en producción. Para desarrollo o después de hacer cambios, usa los comandos clear para asegurar que los cambios se reflejen inmediatamente, y luego correr comandos para cache producción denuevo.
 
 ## Ejecutar la Aplicación
 

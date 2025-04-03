@@ -1,6 +1,6 @@
 @extends('administrador.dashboard.plantilla')
 
-@section('title', 'Tutoriales')
+@section('title', 'Tutoriales Panel')
 
 @section('contenido')
     <div class="max-w-screen-2xl mx-auto my-8 px-4">
@@ -30,14 +30,23 @@
                     @foreach ($tutorials as $tutorial)
                         <tr class="border-b hover:bg-gray-50">
                             <td class="px-4 py-3">{{ $tutorial->titulo }}</td>
-                            <td class="px-2 py-3 ">
+                            <td class="px-2 py-3 text-center">
                                 <a href="{{ route('tutorials.show', $tutorial->id) }}"
-                                    class="text-gray-600 font-bold  hover:text-gray-900 mr-3"><svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6C8.76722 6 5.95965 8.31059 4.2048 11.7955C4.17609 11.8526 4.15483 11.8948 4.1369 11.9316C4.12109 11.964 4.11128 11.9853 4.10486 12C4.11128 12.0147 4.12109 12.036 4.1369 12.0684C4.15483 12.1052 4.17609 12.1474 4.2048 12.2045C5.95965 15.6894 8.76722 18 12 18C15.2328 18 18.0404 15.6894 19.7952 12.2045C19.8239 12.1474 19.8452 12.1052 19.8631 12.0684C19.8789 12.036 19.8888 12.0147 19.8952 12C19.8888 11.9853 19.8789 11.964 19.8631 11.9316C19.8452 11.8948 19.8239 11.8526 19.7952 11.7955C18.0404 8.31059 15.2328 6 12 6ZM2.41849 10.896C4.35818 7.04403 7.7198 4 12 4C16.2802 4 19.6419 7.04403 21.5815 10.896C21.5886 10.91 21.5958 10.9242 21.6032 10.9389C21.6945 11.119 21.8124 11.3515 21.8652 11.6381C21.9071 11.8661 21.9071 12.1339 21.8652 12.3619C21.8124 12.6485 21.6945 12.8811 21.6032 13.0611C21.5958 13.0758 21.5886 13.09 21.5815 13.104C19.6419 16.956 16.2802 20 12 20C7.7198 20 4.35818 16.956 2.41849 13.104C2.41148 13.09 2.40424 13.0758 2.39682 13.0611C2.3055 12.881 2.18759 12.6485 2.13485 12.3619C2.09291 12.1339 2.09291 11.8661 2.13485 11.6381C2.18759 11.3515 2.3055 11.119 2.39682 10.9389C2.40424 10.9242 2.41148 10.91 2.41849 10.896ZM12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10ZM8.00002 12C8.00002 9.79086 9.79088 8 12 8C14.2092 8 16 9.79086 16 12C16 14.2091 14.2092 16 12 16C9.79088 16 8.00002 14.2091 8.00002 12Z" fill="#0F1729"></path> </g></svg></a>
+                                    class="inline-flex items-center justify-center w-full h-full text-gray-600 hover:text-gray-900">
+                                    <svg class="h-6 w-6 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                                d="M12 6C8.76722 6 5.95965 8.31059 4.2048 11.7955C4.17609 11.8526 4.15483 11.8948 4.1369 11.9316C4.12109 11.964 4.11128 11.9853 4.10486 12C4.11128 12.0147 4.12109 12.036 4.1369 12.0684C4.15483 12.1052 4.17609 12.1474 4.2048 12.2045C5.95965 15.6894 8.76722 18 12 18C15.2328 18 18.0404 15.6894 19.7952 12.2045C19.8239 12.1474 19.8452 12.1052 19.8631 12.0684C19.8789 12.036 19.8888 12.0147 19.8952 12C19.8888 11.9853 19.8789 11.964 19.8631 11.9316C19.8452 11.8948 19.8239 11.8526 19.7952 11.7955C18.0404 8.31059 15.2328 6 12 6ZM2.41849 10.896C4.35818 7.04403 7.7198 4 12 4C16.2802 4 19.6419 7.04403 21.5815 10.896C21.5886 10.91 21.5958 10.9242 21.6032 10.9389C21.6945 11.119 21.8124 11.3515 21.8652 11.6381C21.9071 11.8661 21.9071 12.1339 21.8652 12.3619C21.8124 12.6485 21.6945 12.8811 21.6032 13.0611C21.5958 13.0758 21.5886 13.09 21.5815 13.104C19.6419 16.956 16.2802 20 12 20C7.7198 20 4.35818 16.956 2.41849 13.104C2.41148 13.09 2.40424 13.0758 2.39682 13.0611C2.3055 12.881 2.18759 12.6485 2.13485 12.3619C2.09291 12.1339 2.09291 11.8661 2.13485 11.6381C2.18759 11.3515 2.3055 11.119 2.39682 10.9389C2.40424 10.9242 2.41148 10.91 2.41849 10.896ZM12 10C10.8954 10 10 10.8954 10 12C10 13.1046 10.8954 14 12 14C13.1046 14 14 13.1046 14 12C14 10.8954 13.1046 10 12 10ZM8.00002 12C8.00002 9.79086 9.79088 8 12 8C14.2092 8 16 9.79086 16 12C16 14.2091 14.2092 16 12 16C9.79088 16 8.00002 14.2091 8.00002 12Z"
+                                                fill="#0F1729"></path>
+                                        </g>
+                                    </svg>
+                                </a>
                             </td>
                             <td class="px-4 py-3 flex items-center justify-center space-x-4">
                                 <!-- Editar -->
-                                <button type="button" onclick="openEditModal(this)"
-                                    data='@json($tutorial)'
+                                <button type="button" onclick="openEditModal(this)" data='@json($tutorial)'
                                     class="text-blue-600 font-bold hover:text-blue-900">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -113,7 +122,7 @@
                                     </span>
                                     <input type="file" name="files[]" id="files" class="hidden"
                                         accept="application/pdf, video/mp4, application/zip, application/x-rar-compressed"
-                                        multiple required onchange="handleFileSelect(event)">
+                                        multiple onchange="handleFileSelect(event)">
                                 </div>
                             </div>
                             <!-- FILES CONTAINER -->
@@ -316,7 +325,7 @@
     <script>
         // ====================  FUNCTIONES COMPARTIDAS  ====================
 
-        
+
         function getFileIcon(fileType) {
             if (fileType.startsWith('image/')) {
                 return `<svg class="w-16 h-16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 11C3 7.22876 3 5.34315 4.17157 4.17157C5.34315 3 7.22876 3 11 3H13C16.7712 3 18.6569 3 19.8284 4.17157C21 5.34315 21 7.22876 21 11V13C21 16.7712 21 18.6569 19.8284 19.8284C18.6569 21 16.7712 21 13 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V11Z" stroke="#222222"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M18.9976 14.2904L18.6544 13.9471L18.6385 13.9313C18.238 13.5307 17.9149 13.2077 17.6314 12.9687C17.3394 12.7226 17.055 12.5353 16.7221 12.4349C16.2512 12.2928 15.7488 12.2928 15.2779 12.4349C14.945 12.5353 14.6606 12.7226 14.3686 12.9687C14.0851 13.2077 13.762 13.5307 13.3615 13.9313L13.3456 13.9471C13.0459 14.2469 12.8458 14.4462 12.6832 14.5807C12.5218 14.7142 12.452 14.7359 12.4237 14.7408C12.3029 14.762 12.1785 14.7381 12.0742 14.6735C12.0498 14.6584 11.993 14.6123 11.8928 14.4285C11.7917 14.2432 11.68 13.9838 11.513 13.5942L11.4596 13.4696L11.4475 13.4414L11.4475 13.4414C11.0829 12.5907 10.7931 11.9144 10.5107 11.4126C10.2237 10.9026 9.90522 10.4984 9.44575 10.268C9.03426 10.0618 8.57382 9.97308 8.11515 10.0118C7.603 10.055 7.15716 10.3121 6.70134 10.6789C6.25273 11.04 5.73245 11.5603 5.07799 12.2148L5.07798 12.2148L5.05634 12.2364L5 12.2928V12.9999C5 13.2462 5.00007 13.4816 5.00044 13.7065L5.76344 12.9435C6.44443 12.2626 6.92686 11.7811 7.32835 11.458C7.72756 11.1366 7.98255 11.0265 8.19924 11.0082C8.47444 10.985 8.75071 10.0382 8.9976 11.162C9.192 11.2594 9.38786 11.4564 9.63918 11.903C9.89194 12.3521 10.1611 12.9783 10.5404 13.8635L10.5938 13.9881L10.6034 14.0105L10.6034 14.0105C10.7583 14.3719 10.8884 14.6754 11.0149 14.9073C11.1448 15.1455 11.3038 15.3727 11.5479 15.5238C11.8608 15.7175 12.2341 15.7894 12.5966 15.7258C12.8794 15.6761 13.1114 15.5242 13.3204 15.3513C13.524 15.183 13.7575 14.9495 14.0355 14.6714L14.0527 14.6542C14.4728 14.2341 14.766 13.9416 15.013 13.7334C15.2553 13.5292 15.4185 13.437 15.5667 13.3922C15.8493 13.307 16.1507 13.307 16.4333 13.3922C16.5815 13.437 16.7447 13.5292 16.987 13.7334C17.234 13.9416 17.5272 14.2341 17.9473 14.6542L18.9755 15.6825C18.9887 15.2721 18.9948 14.812 18.9976 14.2904Z" fill="#222222"></path><circle cx="16.5" cy="7.5" r="1.5" fill="#222222"></circle></svg>`;
@@ -333,7 +342,7 @@
             }
         }
 
-        
+
         function handleDragOver(event) {
             event.preventDefault();
             event.stopPropagation();
@@ -359,9 +368,9 @@
 
             const remainingSlots = 5 - createFiles.length;
 
-            
+
             if (remainingSlots <= 0) {
-                updateFileInputUI(true); 
+                updateFileInputUI(true);
                 event.target.value = '';
                 return;
             }
@@ -372,6 +381,10 @@
             newFiles.forEach(newFile => {
                 if (filesAdded >= remainingSlots) return;
 
+                if (newFile.type === 'application/pdf' &&
+                    createFiles.filter(f => f.type === 'application/pdf').length >= 3) {
+                    return;
+                }
                 const exists = createFiles.some(file =>
                     file.name === newFile.name &&
                     file.size === newFile.size &&
@@ -398,17 +411,14 @@
             const submitBtn = document.querySelector('#form button[type="submit"]');
 
             if (isMaxReached) {
-                fileInput.disabled = true;
                 dropZone.classList.add('border-red-500', 'cursor-not-allowed');
                 dropZone.classList.remove('border-blue-500', 'cursor-pointer');
             } else {
-                fileInput.disabled = false;
+
                 dropZone.classList.remove('border-red-500', 'cursor-not-allowed');
                 dropZone.classList.add('border-blue-500', 'cursor-pointer');
             }
 
-            // Habilita/desabilita boton submit basado en la cantidad de arhivos 0
-            submitBtn.disabled = createFiles.length === 0;
         }
 
         function updateCreateFileInput() {
@@ -479,12 +489,7 @@
             updateCreateFileInput();
         }
 
-        function updateCreateFileInput() {
-            const filesInput = document.getElementById('files');
-            const dataTransfer = new DataTransfer();
-            createFiles.forEach(file => dataTransfer.items.add(file));
-            filesInput.files = dataTransfer.files;
-        }
+
 
         function handleCreateDrop(event) {
             event.preventDefault();
@@ -508,7 +513,7 @@
         function openEditModal(button) {
             const tutorial = JSON.parse(button.getAttribute('data'));
 
-          // Cargar valores
+            // Cargar valores
             document.getElementById('edit_titulo').value = tutorial.titulo;
             document.getElementById('editForm').action = `/admin/tutoriales/${tutorial.id}`;
 
@@ -565,7 +570,7 @@
 
             if (editFiles.length === 0) {
                 if (noFilesMsg) noFilesMsg.style.display = 'flex';
-                if (previewContainer) previewContainer.appendChild(noFilesMsg);
+                if (previewContainer && noFilesMsg) previewContainer.appendChild(noFilesMsg);
                 return;
             }
 
@@ -636,6 +641,11 @@
             newFiles.forEach(newFile => {
                 if (filesAdded >= remainingSlots) return;
 
+                if (newFile.type === 'application/pdf' &&
+                    editFiles.filter(f => f.type === 'application/pdf').length >= 3) {
+                    return;
+                }
+
                 if (!editFiles.some(f =>
                         f.name === newFile.name &&
                         f.size === newFile.size &&
@@ -695,18 +705,16 @@
         // ==================== FORM SUBMISSION ====================
 
         document.getElementById('form').addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitBtn = this.querySelector('#form button[type="submit"]');
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Subiendo...';
 
-            // Desabilitar archivos input al subir
-            document.getElementById('files').disabled = false;
+            updateCreateFileInput();
 
- 
+
             if (createFiles.length === 0) {
                 e.preventDefault();
-                alert('Please select at least one file.');
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Guardar';
                 document.getElementById('files').disabled = false;
@@ -716,12 +724,12 @@
         });
 
         document.getElementById('editForm').addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const submitBtn = this.querySelector('#editForm button[type="submit"]');
 
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Actualizando...';
 
-           
+
             updateEditFileInput();
 
             // Archivos a eliminar
@@ -782,6 +790,7 @@
             document.getElementById('editForm').reset();
             editFiles = [];
             existingFiles = [];
+            setEditMaxFilesUI(false);
             renderEditPreviews();
 
             // Resetear boton submit 
