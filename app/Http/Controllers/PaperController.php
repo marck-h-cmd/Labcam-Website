@@ -147,11 +147,17 @@ class PaperController extends Controller
     }
   }
 
+  public function handleFileSize(){
+    ini_set('post_max_size', '10M');
+    ini_set('upload_max_filesize', '10M');
+    ini_set('max_execution_time', '300');
+}
 
   public function storePaper(Request $request)
   {
 
     try {
+      $this->handleFileSize();
       // mensajes de error
       $messages = [
         'titulo.required' => 'El titulo es requerido.',
@@ -232,6 +238,7 @@ class PaperController extends Controller
   public function update(Request $request, $id)
   {
     try {
+      $this->handleFileSize();
       // Mensajes de error personalizados
       $messages = [
         'titulo.required' => 'El titulo es requerido.',
