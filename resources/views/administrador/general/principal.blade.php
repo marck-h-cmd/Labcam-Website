@@ -23,6 +23,7 @@
                 <span class="font-medium text-amber-950">Novedades</span>.
                 Estas áreas contienen información clave sobre el funcionamiento y los proyectos de LABCAM.
             </p>
+            <a href="{{ route('tutorials.main') }}" class=" bg-blue-500 hover:bg-blue-600 transition-all ease-out p-4 text-center rounded-md my-3 text-lg text-white cursor-pointer">Ver Tutoriales</a>
         </div>
         <div class="w-full h-full">
             <img class="w-full h-full rounded-lg" src="/images/labcam_dash_01.png" alt="logo_dashboard">
