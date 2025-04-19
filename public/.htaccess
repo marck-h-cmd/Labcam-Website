@@ -5,7 +5,12 @@
     ExpiresByType image/jpg "access plus 1 year"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+
+     # PDFs: 1 mes 
+    ExpiresByType application/pdf "access plus 1 month"
 
     # CSS y JavaScript: 1 mes
     ExpiresByType text/css "access plus 1 month"
@@ -19,15 +24,20 @@
 <IfModule mod_deflate.c>
     # Habilitar compresión Gzip para reducir el tamaño de los archivos
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json application/x-javascript
+    AddOutputFilterByType DEFLATE image/svg+xml
 </IfModule>
 
 <IfModule mod_headers.c>
     # Establecer cabeceras Cache-Control para imágenes (1 año)
-    <FilesMatch "\.(ico|jpg|jpeg|png|gif|swf)$">
+    <FilesMatch "\.(ico|jpg|jpeg|png|gif|webp|svg|swf)$">
         Header set Cache-Control "public, max-age=31536000"
     </FilesMatch>
     # Establecer cabeceras Cache-Control para CSS y JavaScript (1 mes)
     <FilesMatch "\.(css|js)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+     # Establecer cabeceras para pdfs (1 mes)
+    <FilesMatch "\.(pdf)$">
         Header set Cache-Control "public, max-age=2592000"
     </FilesMatch>
 </IfModule>
