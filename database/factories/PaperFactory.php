@@ -20,6 +20,7 @@ class PaperFactory extends Factory
         return [
             'titulo' => fake()->sentence(),
             'autores' => Str::random(10),
+            'area_id'=>'7',
             'publisher' => Str::random(8),
             'descripcion' =>  fake()->paragraph(),
             'doi' => Str::random(15),
