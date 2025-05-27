@@ -171,7 +171,7 @@ Route::middleware([CacheControl::class])->group(function () {
 
             Route::put('/admin/areas/{area}', AreaInvestigacionController::class . '@update')->name('areas.update');
 
-            Route::delete('/admin/areas/{area}', AreaInvestigacionController::class . '@destroy')->name('areas.destroy');
+            Route::delete('/admin/areas/{area}/destroy', AreaInvestigacionController::class . '@destroy')->name('areas.destroy');
 
             // ---- Topicos ---- //
             Route::get('/admin/topicos', TopicoController::class . '@index')->name('topic-panel');
@@ -182,7 +182,7 @@ Route::middleware([CacheControl::class])->group(function () {
 
             Route::put('/admin/topicos/{topico}', TopicoController::class . '@update')->name('topics.update');
 
-            Route::delete('/admin/topicos/{topico}', TopicoController::class . '@destroy')->name('topics.destroy');
+            Route::delete('/admin/topicos/{topico}/destroy', TopicoController::class . '@destroy')->name('topics.destroy');
 
             // ------------------------- CRUD CONTACTO ---------------------------------------------
 
