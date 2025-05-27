@@ -29,7 +29,7 @@
                     class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('admin-principal') ? 'bg-[#98C560]' : 'bg-transparent' }}">
                     <i class="ri-instance-line mr-3 text-lg"></i>
                     <span class="text-sm">Principal</span>
-                </a>            
+                </a>
             </li>
 
             <li class="mb-1 group cursor-pointer {{ request()->routeIs(['person', 'users']) ? 'active' : '' }}">
@@ -55,7 +55,7 @@
                                 class="w-1.5 h-1.5 rounded-full mr-3 {{ request()->routeIs('users') ? 'bg-[#98C560]' : 'bg-gray-300' }}"></span>
                             Registrar Usuario
                         </a>
-                    </li>                
+                    </li>
                 </ul>
             </li>
 
@@ -243,10 +243,10 @@
             </li>
             <li class="mb-1 group cursor-pointer">
                 <a href="{{ route('tutorials.index') }}"
-                class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('tutorials.index') ? 'bg-[#98C560]' : 'bg-transparent' }}">
-                <i class="ri-instance-line mr-3 text-lg"></i>
-                <span class="text-sm">Tutoriales</span>
-            </a>
+                    class="flex items-center py-2 px-4 text-white hover:bg-[#98C560] rounded-md {{ request()->routeIs('tutorials.index') ? 'bg-[#98C560]' : 'bg-transparent' }}">
+                    <i class="ri-instance-line mr-3 text-lg"></i>
+                    <span class="text-sm">Tutoriales</span>
+                </a>
             </li>
 
 
@@ -315,8 +315,10 @@
                 text: "Se cerrará tu sesión",
                 icon: "warning",
                 showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
+                customClass: {
+                    confirmButton: 'swal2-confirm-green',
+                    cancelButton: 'swal2-cancel-red'
+                },
                 confirmButtonText: "Sí, salir",
                 cancelButtonText: "Cancelar"
             }).then((result) => {
@@ -333,24 +335,23 @@
 
 </html>
 <style>
-.swal2-confirm-green {
-    background-color: #28a745 !important; /* Green */
-    color: white !important;
-    border: none;
-    padding: 0.625em 1.25em;
-    font-weight: bold;
-    border-radius: 0.25em;
-}
+    .swal2-confirm-green {
+        background-color: #28a745 !important;
+        /* Green */
+        color: white !important;
+        border: none;
+        padding: 0.625em 1.25em;
+        font-weight: bold;
+        border-radius: 0.25em;
+    }
 
-.swal2-cancel-red {
-    background-color: #dc3545 !important; /* Red */
-    color: white !important;
-    border: none;
-    padding: 0.625em 1.25em;
-    font-weight: bold;
-    border-radius: 0.25em;
-}
-
-
-
-    </style>
+    .swal2-cancel-red {
+        background-color: #dc3545 !important;
+        /* Red */
+        color: white !important;
+        border: none;
+        padding: 0.625em 1.25em;
+        font-weight: bold;
+        border-radius: 0.25em;
+    }
+</style>
