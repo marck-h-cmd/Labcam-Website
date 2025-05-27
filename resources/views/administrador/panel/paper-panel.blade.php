@@ -181,8 +181,10 @@
                                                                          text: 'No será posible revertir los cambios!',
                                                                          icon: 'warning',
                                                                          showCancelButton: true,
-                                                                         confirmButtonColor: '#3085d6',
-                                                                         cancelButtonColor: '#d33',
+                                                                         customClass: {
+                                                                                confirmButton: 'swal2-confirm-green',
+                                                                                cancelButton: 'swal2-cancel-red'
+                                                                            },
                                                                          confirmButtonText: 'Sí, eliminar'
                                                                      }).then((result) => {
                                                                          if (result.isConfirmed) {

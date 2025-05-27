@@ -47,7 +47,7 @@
                                                 Area de Investigación</label>
                                             <input type="text" name="nombre" id="nombre"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                                placeholder="Nombre del topico" required />
+                                                placeholder="Nombre del area" required />
                                         </div>
                                     </div>
                                     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none space-y-4">
@@ -112,8 +112,10 @@
                                                                              text: 'No será posible revertir los cambios!',
                                                                              icon: 'warning',
                                                                              showCancelButton: true,
-                                                                             confirmButtonColor: '#3085d6',
-                                                                             cancelButtonColor: '#d33',
+                                                                             customClass: {
+                                                                                confirmButton: 'swal2-confirm-green',
+                                                                                cancelButton: 'swal2-cancel-red'
+                                                                            },
                                                                              confirmButtonText: 'Sí, eliminar'
                                                                          }).then((result) => {
                                                                              if (result.isConfirmed) {

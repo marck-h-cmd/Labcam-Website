@@ -114,9 +114,12 @@
                                                                              text: 'No será posible revertir los cambios!',
                                                                              icon: 'warning',
                                                                              showCancelButton: true,
-                                                                             confirmButtonColor: '#3085d6',
-                                                                             cancelButtonColor: '#d33',
-                                                                             confirmButtonText: 'Sí, eliminar'
+                                                                             confirmButtonText: 'Sí, eliminar',
+                                                                                cancelButtonText: 'Cancelar',
+                                                                            customClass: {
+                                                                                confirmButton: 'swal2-confirm-green',
+                                                                                cancelButton: 'swal2-cancel-red'
+                                                                            },
                                                                          }).then((result) => {
                                                                              if (result.isConfirmed) {
                                                                                  this.closest('form').submit();
@@ -184,19 +187,19 @@
                 }
             });
         </script>
-     @elseif (session('error'))
-     <script>
-         Swal.fire({
-             icon: 'error',
-             title: '¡Hubo un error!',
-             html: "{!! session('error') !!}",
-             showConfirmButton: true,
-             confirmButtonText: 'Aceptar',
-             customClass: {
-                 confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
-             }
-         });
-    </script>
+    @elseif (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '¡Hubo un error!',
+                html: "{!! session('error') !!}",
+                showConfirmButton: true,
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    confirmButton: 'bg-red-500 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-300 rounded-lg py-2 px-4'
+                }
+            });
+        </script>
     @endif
 
 @endsection
