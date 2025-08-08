@@ -33,18 +33,18 @@
             <form action="{{ route('contacto.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 <div class="grid grid-cols-3 gap-4">
-                    <input type="text" name="nombres" placeholder="Nombres *" value="{{ old('nombres') }}" required class="w-full p-2 border border-gray-300 rounded">
-                    <input type="text" name="apellidos" placeholder="Apellidos *" value="{{ old('apellidos') }}" required class="w-full p-2 border border-gray-300 rounded">
-                    <input type="email" name="correo" placeholder="Correo electrónico *" value="{{ old('correo') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="nombres" placeholder="Nombres *" value="{{ old('nombres') }}" required maxlength="255" class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="apellidos" placeholder="Apellidos *" value="{{ old('apellidos') }}" required maxlength="255"  class="w-full p-2 border border-gray-300 rounded">
+                    <input type="email" name="correo" placeholder="Correo electrónico *" value="{{ old('correo') }}" required maxlength="255" class="w-full p-2 border border-gray-300 rounded">
                 </div>
                 <div class="grid grid-cols-3 gap-4">
                     <div>
-                        <input type="tel" name="telefono" placeholder="Teléfono *" value="{{ old('telefono') }}" required class="w-full p-2 border border-gray-300 rounded">
+                        <input type="tel" name="telefono" placeholder="Teléfono *" value="{{ old('telefono') }}" required maxlength="9" class="w-full p-2 border border-gray-300 rounded">
                         @error('telefono')
                              <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    <input type="text" name="pais" placeholder="País *" value="{{ old('pais') }}" required class="w-full p-2 border border-gray-300 rounded">
+                    <input type="text" name="pais" placeholder="País *" value="{{ old('pais') }}" required maxlength="100" class="w-full p-2 border border-gray-300 rounded">
                     <input type="text" name="departamento" placeholder="Departamento *" value="{{ old('departamento') }}" required class="w-full p-2 border border-gray-300 rounded">
                 </div>
                 <input type="text" name="asunto" placeholder="Asunto *" value="{{ old('asunto') }}" required class="w-full p-2 border border-gray-300 rounded">
@@ -63,7 +63,7 @@
 
         <!-- Imagen -->
         <div class="flex flex-col items-center ">
-            <iframe class="max-md:w-[400px]" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3286.410276127892!2d-79.04060262589138!3d-8.115327781204812!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91ad3d9fb3467261%3A0x752547ad9a204df6!2sUniversidad%20Nacional%20de%20Trujillo%20(UNT)!5e1!3m2!1ses-419!2spe!4v1734127574943!5m2!1ses-419!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d653.1724164036409!2d-79.03918716711107!3d-8.11367475175087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zOMKwMDYnNDkuOSJTIDc5wrAwMicyMi4xIlc!5e1!3m2!1sen!2spe!4v1754609094557!5m2!1sen!2spe" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             <p class="text-gray-500 mt-2">Descripción: lorem lorem</p>
         </div>
     </div>
