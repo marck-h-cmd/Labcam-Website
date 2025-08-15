@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('patentes', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo',100);
+            $table->string('titulo',200);
             $table->json('autores');
             $table->text('descripcion');
+            $table->foreignId('area_id')->constrained('areas_investigacion')->onDelete('cascade');
             $table->string('doi',100);
             $table->date('fecha_publicacion');
             $table->string('pdf_filename')->nullable();
