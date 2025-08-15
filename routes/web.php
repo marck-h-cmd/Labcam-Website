@@ -18,6 +18,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\AreaProyectoController;
 use App\Http\Controllers\TutorialesController;
+use App\Http\Controllers\PatenteController;
 use App\Http\Middleware\CacheControl;
 
 
@@ -198,6 +199,12 @@ Route::middleware([CacheControl::class])->group(function () {
 
             Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('notici.destroy');
             Route::get('/admin/noticias/buscar', [NoticiaController::class, 'showNoticia'])->name('notici.buscar');
+
+            Route::get('/admin/patentes/index', [PatenteController::class, 'showPatente'])->name('patentes.index');
+            Route::post('/admin/patentes', PatenteController::class . '@store')->name('patentes.store');
+            Route::put('/admin/patentes/{id}', [PatenteController::class, 'update'])->name('patentes.update');
+            Route::get('/admin/patentes/{area}/edit', PatenteController::class . '@edit')->name('patentes.edit');
+            Route::delete('/admin/patentes/{id}', [PatenteController::class, 'destroy'])->name('patentes.destroy');
 
             // ---- PROYECTO ---- //
             Route::get('/admin/proyectos', [ProyectoController::class, 'showProyecto'])->name('proyect');
