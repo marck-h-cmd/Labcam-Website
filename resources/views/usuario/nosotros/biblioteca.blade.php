@@ -11,24 +11,21 @@
             style="background-image: url('https://fondosmil.co/fondo/110721.jpg');">
             <div class="header-mask bg-[rgba(3,91,136,0.8)]">
                 <div class="container mx-auto px-4">
-                    <div class="jumbo text-center py-40">
-                        <h1 class="text-6xl text-left">Publicaciones</h1>
+                    <div class="jumbo text-center py-20 md:py-40">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl text-left">Publicaciones</h1>
                     </div>
                 </div>
-                    <!-- NAV DE Biblioteca -->
+
+                <!-- NAV DE Biblioteca responsive -->
                 <div class="nav">
                     <div class="container mx-auto px-4 flex items-center justify-between">
-
-
                         <nav role="navigation mt-4">
-                            <ul class="hor--nav flex space-x-12">
+                            <ul class="hor--nav flex flex-wrap gap-4 md:gap-12 justify-center md:justify-start">
                                 <li><a href="{{ route('biblioteca.papers.index') }}"
-                                        class="text-gray-300 hover:text-white">Publicaciones</a></li>               
+                                        class="text-gray-300 hover:text-white text-sm md:text-base">Publicaciones</a></li>
+                                <!-- Agrega más elementos del menú aquí -->
                             </ul>
-
                         </nav>
-
-
                     </div>
                 </div>
             </div>
@@ -41,7 +38,7 @@
                 <h2 class="text-blue-800 font-semibold text-4xl mb-1">Publicaciones-Papers</h2>
                 <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
             </div>
-                  <!-- SIDEBAR PARA APLICAR FILTROS-->
+            <!-- SIDEBAR PARA APLICAR FILTROS-->
             <div class="grid  grid-cols-10 gap-x-16 max-[1150px]:grid-cols-1 justify-center">
 
                 <aside
@@ -127,7 +124,7 @@
                                 </li>
                                 <hr>
                                 <li>
-                                      <!-- FILTRO AREAS DE INVESTIGACION -->
+                                    <!-- FILTRO AREAS DE INVESTIGACION -->
                                     <button type="button"
                                         class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 bg-gray-50 "
                                         aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
@@ -194,7 +191,7 @@
                 <div class="pt-6 pb-12  col-span-7 ">
                     <div class=" w-auto mx-2 overflow-y-auto">
                         <div id="card" class="">
-                             <!-- BARRA PARA MOSTRAR PAGINA -->
+                            <!-- BARRA PARA MOSTRAR PAGINA -->
                             <div class=" px-24 max-lg:px-2 ">
                                 <div
                                     class="p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
@@ -241,7 +238,7 @@
                             </div>
                         </div>
                     </div>
-                        <!-- BOTON DE VER MÁS PUBLICACIONES -->
+                    <!-- BOTON DE VER MÁS PUBLICACIONES -->
                     <div class="flex justify-center mt-5 p-6 ">
                         <button id="load-more"
                             class="bg-[#98c560]  text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
