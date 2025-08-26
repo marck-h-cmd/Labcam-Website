@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Traits\ToStringFormat;
 use Illuminate\Http\Request;
 use App\Models\Paper;
 use Illuminate\View\View;
@@ -32,114 +33,58 @@ class PaperController extends Controller
     $topicos = Topico::has('papers')->get();
     $areas = AreaInvestigacion::has('papers')->get();
 
-
-    if ($request->ajax()) {
-      return response()->json([
-        'papers' => $papers,
-        'total' => $papers->count(),
-        'html' => view('usuario.nosotros.partials.papers', compact('papers'))->render(),
-        'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
-        'last_page' => $papers->lastPage(),
-      ]);
-    }
     return view('usuario.nosotros.biblioteca', compact('papers', 'topicos', 'areas'));
   }
 
-  public function fetchByArea($area_id)
+  public function getAll()
   {
-    $area = AreaInvestigacion::find($area_id);
-    if ($area) {
-      $papers = Paper::where('area_id', $area_id)->paginate(6);
-        // Format autores 
-      $papers->each(function ($paper) {
-          $paper->formatted_autores = $this->formatAutores($paper->autores);
+    try {
+
+      $papers = Paper::with([
+        'topicos:id,nombre',
+        'area:id,nombre' // Cambié areaInvestigacion por area para coincidir con tu modelo
+      ])
+        ->select([
+          'id',
+          'titulo',
+          'descripcion',
+          'fecha_publicacion',
+          'autores',
+          'publisher',
+          'area_id',
+          'doi',
+          'created_at'
+        ])
+        ->get()
+        ->map(function ($paper) {
+          return [
+            'id' => $paper->id,
+            'titulo' => $paper->titulo,
+            'descripcion' => $paper->descripcion,
+            'fecha_publicacion' => $paper->fecha_publicacion,
+            'publisher' => $paper->publisher,
+            'area_id' => $paper->area_id,
+            'area_nombre' => $paper->area?->nombre,
+            'doi' => $paper->doi,
+            'formatted_autores' => $this->formatAutores($paper->autores),
+            'topicos' => $paper->topicos->map(function ($topico) {
+              return [
+                'id' => $topico->id,
+                'nombre' => $topico->nombre
+              ];
+            })
+          ];
         });
+
       $topicos = Topico::has('papers')->get();
       $areas = AreaInvestigacion::has('papers')->get();
-    }
-
-
-
-    return view('usuario.nosotros.papers-area', compact('papers', 'topicos', 'areas','area'));
-  }
-
-
-  public function fetchMorePapers(Request $request)
-  {
-    try {
-
-      $page = $request->input('page', 1);
-      $perPage = $request->input('per_page', 5); // Papers por pagina
-
-      // Fecth papers
-      $papers = Paper::query()
-        ->orderBy('created_at', 'desc')
-        ->paginate($perPage, ['*'], 'page', $page);
-
-      // Format autores 
-      $papers->each(function ($paper) {
-        $paper->formatted_autores = $this->formatAutores($paper->autores);
-      });
 
       return response()->json([
-        'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
-        'links' => $papers->links('vendor.pagination.simple-without-buttons')->toHtml(),
-        'next_page_url' => $papers->nextPageUrl(),
-        'total' => $papers->count(),
-        'current_count' => $papers->count(),
+        'success' => true,
         'papers' => $papers,
-        'current_page' => $papers->currentPage(),
-        'last_page' => $papers->lastPage(),
-      ]);
-    } catch (Exception $e) {
-      Log::error("Fetch More Error: " . $e->getMessage());
-      return response()->json([
-        'error' => 'An error occurred while loading more papers'
-      ], 500);
-    }
-  }
-
-  public function search(Request $request)
-  {
-    try {
-      // recibir el query y topicos desde la vista
-      $query = $request->input('query');
-      $topics = $request->input('topics') ? explode(',', $request->input('topics')) : [];
-      $area = $request->input('area');
-      $page = $request->input('page', 1);
-      $perPage = 5;
-
-      $papers = Paper::query();
-      // buscar por titulo
-      if ($query) {
-        $papers->where('titulo', 'like', "%$query%");
-      }
-      // buscar por topicos seleccionados
-      if (!empty($topics)) {
-        $papers->whereHas('topicos', function ($q) use ($topics) {
-          $q->whereIn('topicos.id', $topics);
-        });
-      }
-
-      if ($area && is_numeric($area)) {
-        $papers->where('area_id', $area);
-      }
-
-      $papers = $papers->paginate($perPage, ['*'], 'page', $page);
-      // formato a los autores
-      $papers->each(function ($paper) {
-        $paper->formatted_autores = $this->formatAutores($paper->autores);
-      });
-
-      return response()->json([
-        'papers' => $papers,
-        'total' => $papers->count(),
-        'html' => view('usuario.nosotros.partials.papers', ['papers' => $papers])->render(),
-        'links' => $papers->withQueryString()->links('vendor.pagination.simple-without-buttons')->toHtml(),
-        'show_load_more' => $papers->isEmpty(),
-        'next_page_url' => $papers->nextPageUrl(),
-        'last_page' => $papers->lastPage(),
-        'current_page' => $papers->currentPage(),
+        'topicos' => $topicos,
+        'areas' => $areas,
+        'total_papers' => $papers->count()
       ]);
     } catch (Exception $e) {
       Log::error("Error: " . $e->getMessage());
@@ -147,11 +92,13 @@ class PaperController extends Controller
     }
   }
 
-  public function handleFileSize(){
+
+  public function handleFileSize()
+  {
     ini_set('post_max_size', '10M');
     ini_set('upload_max_filesize', '10M');
     ini_set('max_execution_time', '300');
-}
+  }
 
   public function storePaper(Request $request)
   {

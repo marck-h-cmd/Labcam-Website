@@ -34,9 +34,9 @@
 
         <div class="Nosotros max-w-screen-2xl max w-full px-5 mx-auto mt-36">
 
-            <div class="flex flex-col items-center gap-3 mb-12">
-                <h2 class="text-blue-800 font-semibold text-4xl mb-1">Publicaciones-Papers</h2>
-                <div class="blue-line w-1/3 h-0.5 bg-[#64d423]"></div>
+            <div class="flex flex-col items-center gap-2 md:gap-3 mb-8 md:mb-12">
+                <h2 class="text-blue-800 font-semibold text-2xl sm:text-3xl md:text-4xl mb-1">Publicaciones-Papers</h2>
+                <div class="blue-line w-2/3 sm:w-1/2 md:w-1/3 h-0.5 bg-[#64d423]"></div>
             </div>
             <!-- SIDEBAR PARA APLICAR FILTROS-->
             <div class="grid  grid-cols-10 gap-x-16 max-[1150px]:grid-cols-1 justify-center">
@@ -46,13 +46,21 @@
                     id="drawer-navigation">
                     <div class="px-3 py-4 overflow-y-auto rounded  ">
                         <ul class="space-y-2">
-                            <li>
-                                <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase ">
-                                    Menu</h5>
-                                <button type="button" data-drawer-hide="drawer-navigation"
-                                    aria-controls="drawer-navigation"
-                                    class="max-[1150px]:block hidden text-black text-2xl">X</button>
-
+                            <li class="flex justify-between items-center">
+                                <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase">
+                                    Menu
+                                </h5>
+                                <div class="flex items-center space-x-2">
+                                    <!-- Botón para limpiar filtros (inicialmente oculto) -->
+                                    <button id="clear-filters-btn" onclick="papersSystem.clearAllFilters()"
+                                        class="clear-btn hover:bg-gray-100 px-3 py-1.5 rounded-md text-sm hidden flex items-center "
+                                        title="Limpiar todos los filtros">
+                                        <i class="fas fa-times-circle mr-1.5"></i> Limpiar
+                                    </button>
+                                    <button type="button" data-drawer-hide="drawer-navigation"
+                                        aria-controls="drawer-navigation"
+                                        class="max-[1150px]:block hidden text-black text-2xl">X</button>
+                                </div>
                             </li>
                             <div class=" space-y-2 max-md:overflow-y-visible">
                                 <li>
@@ -194,11 +202,11 @@
                             <!-- BARRA PARA MOSTRAR PAGINA -->
                             <div class=" px-24 max-lg:px-2 ">
                                 <div
-                                    class="p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
+                                    class="p-2 md:p-4 w-full bg-[#98c560] rounded-l-3xl rounded-r-3xl flex justify-between items-center">
                                     <button id="menuBtn" data-drawer-target="drawer-navigation"
                                         data-drawer-show="drawer-navigation" aria-controls="drawer-navigation"
-                                        class="max-[1150px]:block hidden bg-[#28ddc5] text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg">
-                                        <svg class="ml-3 w-6 h-6 text-gray-50 transition duration-75 group-hover:text-gray-900 "
+                                        class="max-[1150px]:block hidden bg-[#28ddc5] text-white w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center shadow-lg">
+                                        <svg class="ml-3 w-5 h-5 md:w-6 md:h-6 text-gray-50 transition duration-75 group-hover:text-gray-900"
                                             viewBox="0 0 32 32" id="i-options" xmlns="http://www.w3.org/2000/svg"
                                             fill="none" stroke="currentcolor" stroke-linecap="round"
                                             stroke-linejoin="round" stroke-width="2">
@@ -212,13 +220,12 @@
                                             </g>
                                         </svg>
                                     </button>
-                                    <p class="text-gray-50 ">Mostrando <span class="text-gray-100"
-                                            id="paper-count">{{ count($papers) }}</span> resultados <span
-                                            class=" ml-2 text-sm"> Pag. <span class=" text-white"
-                                                id="current-page">{{ $papers->currentPage() }}</span>-<span
-                                                class="text-white" id="pages">{{ $papers->lastPage() }}</span></span>
+                                    <p class="text-gray-50 text-sm md:text-base">Cargando <span class="text-gray-100"
+                                            id="paper-count">#</span> resultados <span
+                                            class="ml-1 md:ml-2 text-xs md:text-sm" id="page-container"> Pag. <span
+                                                class="text-white" id="current-page">#</span>-<span class="text-white"
+                                                id="pages">#</span></span>
                                     </p>
-
                                 </div>
                             </div>
                             <!-- container para papers -->
@@ -226,27 +233,13 @@
                                 class="container w-100 lg:w-4/5  mx-auto flex flex-col overflow-y-visible">
                                 <!-- paper -->
 
-                                @if ($papers->isEmpty())
-                                    <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center">
-                                        <p class="text-gray-500 text-3xl font-semibold">No se encontraron papers.</p>
-                                        <small class="text-blue-400 ">Busca por más información</small>
 
-                                    </div>
-                                @else
-                                    @include('usuario.nosotros.partials.papers', ['papers' => $papers])
-                                @endif
                             </div>
                         </div>
                     </div>
-                    <!-- BOTON DE VER MÁS PUBLICACIONES -->
-                    <div class="flex justify-center mt-5 p-6 ">
-                        <button id="load-more"
-                            class="bg-[#98c560]  text-white text-lg font-bold py-3 px-6 rounded-lg hover:bg-[#66b308] transition-all duration-300">
-                            VER MÁS PUBLICACIONES
-                        </button>
-                    </div>
+
                     <div class="mt-4 px-4" id="pagination-links">
-                        {!! $papers->withQueryString()->links('vendor.pagination.simple-without-buttons') !!}
+
                     </div>
 
 
@@ -321,249 +314,513 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('search-dropdown');
-            const checkboxes = document.querySelectorAll('.checkbox-topico');
-            const areaBtns = document.querySelectorAll('.area-btn')
-            const container = document.getElementById('papers-container');
-            const paginationLinks = document.getElementById('pagination-links');
-            const paperCount = document.getElementById('paper-count')
-            const papersContainer = document.getElementById('papers-container');
-            const loadMoreButton = document.getElementById('load-more');
-            const pageInfo = document.getElementById('current-page');
-            const pagesInfo = document.getElementById('pages');
-            let currentSearchParams = new URLSearchParams();
-            let generalPapersCount = 0;
-            let isSearchActive = false;
-            let selectedAreaId = null;
-            const API_BASE = '/api/biblioteca/papers';
-            const UI_BASE = '/biblioteca/papers';
+        class PapersFilterSystem {
+            constructor() {
+                this.allPapers = [];
+                this.filteredPapers = [];
+                this.topicos = [];
+                this.areas = [];
 
-            const urlParams = new URLSearchParams(window.location.search);
+                // Configuración de paginación
+                this.itemsPerPage = 8;
+                this.currentPage = 1;
 
-            // Initializar los parametros url
-            if (urlParams.has('query') && searchInput) {
-                searchInput.value = urlParams.get('query');
+                // Estado de filtros
+                this.filters = {
+                    query: '',
+                    topics: new Set(),
+                    areaId: null
+                };
+
+                // Elementos del DOM
+                this.searchInput = document.getElementById('search-dropdown');
+                this.checkboxes = document.querySelectorAll('.checkbox-topico');
+                this.areaBtns = document.querySelectorAll('.area-btn');
+                this.papersContainer = document.getElementById('papers-container');
+                this.paperCount = document.getElementById('paper-count');
+                this.pageInfo = document.getElementById('current-page');
+                this.pagesInfo = document.getElementById('pages');
+                this.paginationContainer = document.getElementById('pagination-links');
+                this.pageContainer = document.getElementById('page-container');
+                this.clearFiltersBtn = document.getElementById('clear-filters-btn');
+
+                this.init();
             }
 
-
-            if (urlParams.has('topics')) {
-                const selectedTopics = urlParams.get('topics').split(',');
-                checkboxes.forEach(checkbox => {
-                    if (selectedTopics.includes(checkbox.value)) {
-                        checkbox.checked = true;
-                    }
-                });
-            }
-
-            // Initialize area buttons
-            if (urlParams.has('area')) {
-                selectedAreaId = urlParams.get('area');
-                areaBtns.forEach(btn => {
-                    if (btn.value === selectedAreaId) {
-                        btn.classList.add('bg-gray-100', 'text-gray-700');
-                    }
-                });
-            }
-
-            // Fetch papers basado en los URL
-            if (urlParams.toString()) {
-                loadPage(urlParams);
-            }
-            // links de paginación
-            if (paginationLinks) {
-                paginationLinks.addEventListener('click', function(e) {
-                    if (e.target.tagName === 'A') {
-                        e.preventDefault();
-                        const url = new URL(e.target.href);
-                        currentSearchParams = url.searchParams;
-                        loadPage(url.searchParams);
-                    }
-                });
-            }
-
-            if (loadMoreButton) {
-                loadMoreButton.addEventListener('click', function() {
-                    const page = currentSearchParams.get('page') ?
-                        parseInt(currentSearchParams.get('page')) :
-                        1;
-                    console.log("page", page)
-                    currentSearchParams.delete('query');
-                    currentSearchParams.delete('topics');
-                    currentSearchParams.delete('area');
-                    currentSearchParams.set('page', page);
-                    checkboxes.forEach(checkbox => (checkbox.checked = false));
-                    areaBtns.forEach(btn => btn.classList.remove('bg-gray-100', 'text-gray-700'));
-
-                    console.log(`${API_BASE}/fetch-more?${currentSearchParams}`)
-                    fetch(`${API_BASE}/fetch-more?${currentSearchParams}`)
-                        .then(handleResponse)
-                        .then(data => {
-                            // Agregar más papers
-                            papersContainer.innerHTML = ' '
-                            searchInput.value = ' '
-                            papersContainer.innerHTML += data.html;
-
-                            // ACTUALIZAR CONTEO
-                            generalPapersCount += data.total;
-                            updatePaperCount(generalPapersCount);
-
-
-                            // ACTUALIZAR STADO DE LA INTERFAZ DE USUARIO
-                            updateHistory(currentSearchParams);
-                            toggleLoadMoreButton(data);
-                        });
-                });
-            }
-
-            function showNoResultsMessage() {
-                papersContainer.innerHTML = ` <div class=" bg-slate-100 p-4 mt-6 rounded-md  max-w-6xl text-center flex justify-center flex-col items-center gap-y-4">
-                                        <p class="text-gray-500 max-md:text-xl text-3xl font-semibold">No se encontraron papers.</p>
-                                        <svg class="w-36 h-36 max-md:w-24 max-md:h-24"  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="113.732" y="333.561" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -200.477 216.8856)" style="fill:#DCDCDC;" width="95.668" height="33.757"></rect> <path style="fill:#42C8C6;" d="M455.969,326.571c-74.706,74.706-195.831,74.706-270.538,0l116.283-154.254L455.968,56.034 C530.676,130.74,530.676,251.863,455.969,326.571z"></path> <path style="fill:#81E3E2;" d="M455.969,56.033L185.432,326.571c-74.706-74.706-74.706-195.831,0-270.538 S381.262-18.674,455.969,56.033z"></path> <path style="fill:#D5F6F5;" d="M322.235,39.4v303.795c41.33-0.405,78.734-17.329,105.886-44.481 c27.49-27.49,44.492-65.467,44.492-107.416C472.613,107.917,405.425,40.222,322.235,39.4z"></path> <path style="fill:#FFFFFF;" d="M322.235,39.4c64.544,1.058,116.621,68.651,116.621,151.898s-52.077,150.84-116.621,151.897 c-0.506,0.011-1.024,0.011-1.53,0.011c-83.899,0-151.909-68.01-151.909-151.909c0-41.949,17.003-79.927,44.492-107.416 s65.467-44.492,107.416-44.492C321.211,39.389,321.729,39.389,322.235,39.4z"></path> <polygon style="fill:#737373;" points="166.494,393.243 142.624,417.113 94.883,401.2 150.58,377.33 "></polygon> <path style="fill:#FE834D;" d="M126.71,401.2L6.564,489.519l15.913,15.913c8.752,8.752,23.074,8.752,31.827,0l88.32-88.32 L126.71,401.2z"></path> <polygon style="fill:#969696;" points="150.58,377.33 126.71,401.2 94.883,401.2 94.883,369.373 118.754,345.502 "></polygon> <path style="fill:#FEA680;" d="M126.71,401.2l-88.32,88.32c-8.752,8.752-23.074,8.752-31.827,0c-8.752-8.752-8.752-23.074,0-31.827 l88.32-88.32L126.71,401.2z"></path> </g></svg>
-                                        <small class="text-blue-400 max-md:text-sm ">Busca por más información</small>
-
-                                    </div>`;
-            }
-
-            // Para mostrar más botones de carga
-            function toggleLoadMoreButton(data) {
-                if (loadMoreButton) {
-                    const showButton = data.total === 0;
-                    loadMoreButton.style.display = showButton ? 'block' : 'none';
-
-                    if (paginationLinks) {
-                        paginationLinks.style.display = showButton ? 'none' : 'block';
-                    }
-                }
-            }
-            // Handle search
-            function performSearch() {
-                isSearchActive = true;
-                generalPapersCount = 0;
-                const params = new URLSearchParams();
-                const query = searchInput.value.trim();
-                const topics = Array.from(checkboxes)
-                    .filter(checkbox => checkbox.checked)
-                    .map(checkbox => checkbox.value);
-                console.log("area", selectedAreaId)
-
-                if (query.length > 2) params.append('query', query);
-                if (topics.length > 0) params.append('topics', topics.join(','));
-                if (selectedAreaId) params.append('area', selectedAreaId);
-
-                loadPage(params);
-            }
-
-
-            // Page Loader para la api
-            async function loadPage(params) {
+            async init() {
                 try {
-                    const response = await fetch(`${API_BASE}/search?${params}`, {
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
-                    });
+                    // Cargar todos los datos una sola vez
+                    await this.loadAllData();
 
-                    const data = await response.json();
+                    // Configurar event listeners
+                    this.setupEventListeners();
 
-                    console.log(data.total)
-                    if (data.total === 0) {
-                        paperCount.textContent = 0
-                        showNoResultsMessage();
-                    } else {
-                        // Update UI
-                        papersContainer.innerHTML = data.html;
+                    // Aplicar filtros iniciales desde URL
+                    this.applyUrlParams();
+
+                    // Renderizar papers iniciales
+                    this.applyFiltersAndRender();
+
+                    // Mostrar contenido principal
+                    if (window.showMainContent) {
+                        window.showMainContent();
                     }
-                    updatePaperCount(data.total);
-                    updateHistory(params);
-                    togglePaginationElements(data);
-                    updatePageInfo(data)
 
                 } catch (error) {
-                    console.error('Error:', error);
-                    papersContainer.innerHTML =
-                        `<div class="error">Error loading content: ${error.message}</div>`;
-                }
-            }
-
-            // Update UI elements
-            function togglePaginationElements(data) {
-                if (paginationLinks) {
-                    paginationLinks.innerHTML = data.links;
-                    paginationLinks.style.display = data.total > 0 ? 'block' : 'none';
-                }
-
-                if (loadMoreButton) {
-                    const showLoadMore = data.total === 0;
-                    loadMoreButton.style.display = showLoadMore ? 'block' : 'none';
-                    updatePaperCount(data.total);
-                    updatePageInfo(data)
-                }
-            }
-
-            function updatePaperCount(count) {
-                if (paperCount)
-                    paperCount.textContent = count
-            }
-
-            function updatePageInfo(data) {
-                pageInfo.textContent = data.current_page
-                pagesInfo.textContent = data.last_page;
-            }
-
-            function updateHistory(params) {
-                const cleanURL = `${UI_BASE}?${params.toString()}`;
-                window.history.pushState(null, '', cleanURL);
-            }
-
-            function handleResponse(response) {
-                if (!response.ok) throw new Error(response.statusText);
-                return response.json();
-            }
-
-            // Event listeners
-            searchInput?.addEventListener('input', debounce(performSearch, 300));
-            checkboxes.forEach(checkbox => checkbox.addEventListener('change', performSearch));
-            areaBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    // Activar estado de selección
-                    if (btn.classList.contains('bg-gray-100')) {
-                        // Deseleccionar si ya estaba
-                        btn.classList.remove('bg-gray-100', 'text-gray-700');
-                        selectedAreaId = null;
+                    console.error('Error initializing papers system:', error);
+                    if (window.showLoadingError) {
+                        window.showLoadingError('Error cargando las publicaciones. Por favor, recarga la página.');
                     } else {
-                        // Quitar selección previa
-                        areaBtns.forEach(b => b.classList.remove('bg-gray-100', 'text-gray-700'));
-                        // Poner nueva selección
-                        btn.classList.add('bg-gray-100', 'text-gray-700');
-                        selectedAreaId = btn.value;
+                        this.showError('Error cargando las publicaciones');
                     }
-                    performSearch();
-                });
-            });
-
-            // Ocultar boton al principio
-            if (loadMoreButton) {
-                loadMoreButton.style.display = 'none';
+                }
             }
 
-            // Debounce helper
-            function debounce(func, timeout = 100) {
+            async loadAllData() {
+                const response = await fetch('/api/biblioteca/papers/all', {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Error cargando datos');
+                }
+
+                const data = await response.json();
+
+                this.allPapers = data.papers;
+                this.topicos = data.topicos;
+                this.areas = data.areas;
+                this.filteredPapers = [...this.allPapers];
+            }
+
+            setupEventListeners() {
+                // Búsqueda con debounce
+                if (this.searchInput) {
+                    this.searchInput.addEventListener('input', this.debounce(() => {
+                        this.updateFilter('query', this.searchInput.value.trim());
+                    }, 300));
+                }
+
+                // Checkboxes de tópicos
+                this.checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const topicId = parseInt(checkbox.value);
+                        if (checkbox.checked) {
+                            this.filters.topics.add(topicId);
+                        } else {
+                            this.filters.topics.delete(topicId);
+                        }
+                        this.updateFilter('topics', this.filters.topics);
+                    });
+                });
+
+                // Botones de áreas
+                this.areaBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const areaId = parseInt(btn.value);
+
+                        // Toggle selección
+                        if (this.filters.areaId === areaId) {
+                            this.filters.areaId = null;
+                            btn.classList.remove('bg-gray-100', 'text-gray-700');
+                        } else {
+                            // Remover selección anterior
+                            this.areaBtns.forEach(b => b.classList.remove('bg-gray-100',
+                                'text-gray-700'));
+
+                            // Aplicar nueva selección
+                            this.filters.areaId = areaId;
+                            btn.classList.add('bg-gray-100', 'text-gray-700');
+                        }
+
+                        this.updateFilter('areaId', this.filters.areaId);
+                    });
+                });
+            }
+
+            updateFilter(filterType, value) {
+                this.filters[filterType] = value;
+                this.currentPage = 1; // Reset a la primera página
+                this.applyFiltersAndRender();
+                this.updateUrl();
+            }
+
+            applyFiltersAndRender() {
+                // Aplicar todos los filtros
+                this.filteredPapers = this.allPapers.filter(paper => {
+                    return this.matchesSearch(paper) &&
+                        this.matchesTopics(paper) &&
+                        this.matchesArea(paper);
+                });
+
+                // Renderizar resultados
+                this.renderPapers();
+                this.renderPagination();
+                this.updateCounts();
+                this.updateClearFiltersButton();
+            }
+
+            matchesSearch(paper) {
+                if (!this.filters.query || this.filters.query.length < 3) return true;
+
+                const searchTerm = this.filters.query.toLowerCase();
+                const searchIn = [
+                    paper.titulo
+                ].join(' ').toLowerCase();
+
+                return searchIn.includes(searchTerm);
+            }
+
+            matchesTopics(paper) {
+                if (this.filters.topics.size === 0) return true;
+
+                return paper.topicos.some(topico =>
+                    this.filters.topics.has(topico.id)
+                );
+            }
+
+            matchesArea(paper) {
+                if (!this.filters.areaId) return true;
+
+                return paper.area_id === this.filters.areaId;
+            }
+
+            renderPapers() {
+                const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+                const endIndex = startIndex + this.itemsPerPage;
+                const currentPagePapers = this.filteredPapers.slice(startIndex, endIndex);
+
+                if (currentPagePapers.length === 0) {
+                    this.showNoResults();
+                    return;
+                }
+                this.pageContainer.classList.remove('hidden');
+                this.papersContainer.innerHTML = currentPagePapers.map(paper =>
+                    this.renderPaperCard(paper)
+                ).join('');
+            }
+
+            renderPaperCard(paper) {
+
+
+                // Truncar título y descripción
+                const truncatedTitle = this.truncateText(paper.titulo, 50);
+                const truncatedDescription = this.truncateText(paper.descripcion , 500);
+
+                return `
+            <div class="flex flex-col md:flex-row overflow-hidden relative rounded-lg shadow-xl mt-4 mx-2 bg-[#f4f4f4] max-w-6xl py-2 h-auto">
+                <p class="absolute right-6 px-2 md:top-2 font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm">
+                    ${paper.area_nombre || 'N.A'}
+                </p>
+                
+                <!-- información del paper -->
+                <div class="max-h-96 max-w-[400px] md:w-1/2 p-4">
+                    <a href="/biblioteca/papers/paper/${paper.id}"
+                        class="cursor-pointer hover:underline max-md:text-center relative group">
+                        <h3 class="font-semibold text-lg mt-4 text-blue-400 text-justify">
+                            ${truncatedTitle}${paper.titulo.length > 50 ? '...' : ''}
+                        </h3>
+                        <!-- Titulo flotante completo -->
+                        <div class="absolute z-30 left-0 mb-3 w-max max-w-xs bg-white text-black text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
+                            ${paper.titulo}
+                        </div>
+                    </a>
+                    
+                    <div class="mt-5">
+                        <p class="text-gray-600">Autores:</p>
+                        <p class="autores italic text-base mb-3">
+                            ${paper.formatted_autores}
+                        </p>
+                    </div>
+                    
+                    <p class="doi mt-3">
+                        <span class="text-gray-600">Publisher: </span>
+                        <span class="doi-link text-gray-500 text-base">${paper.publisher || 'N/A'}</span>
+                    </p>
+                    
+                    <p class="text-base mt-3">
+                        <span class="text-gray-600">Publicado: </span>
+                        <strong class="text-gray-700 uppercase font-semibold text-sm">
+                            ${paper.fecha_publicacion }
+                        </strong>
+                    </p>
+                    
+                    <a href="/biblioteca/papers/paper/${paper.id}"
+                        class="mt-2 flex gap-2 cursor-pointer font-bold">
+                        <svg width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path fill="#98c560" fill-rule="evenodd"
+                                    d="M8 3.517a1 1 0 011.62-.784l5.348 4.233a1 1 0 010 1.568l-5.347 4.233A1 1 0 018 11.983v-1.545c-.76-.043-1.484.003-2.254.218-.994.279-2.118.857-3.506 1.99a.993.993 0 01-1.129.096.962.962 0 01-.445-1.099c.415-1.5 1.425-3.141 2.808-4.412C4.69 6.114 6.244 5.241 8 5.042V3.517zm1.5 1.034v1.2a.75.75 0 01-.75.75c-1.586 0-3.066.738-4.261 1.835a8.996 8.996 0 00-1.635 2.014c.878-.552 1.695-.916 2.488-1.138 1.247-.35 2.377-.33 3.49-.207a.75.75 0 01.668.745v1.2l4.042-3.2L9.5 4.55z"
+                                    clip-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                        <p class="text-[#98c560] text-base">Redirigir</p>
+                    </a>
+                </div>
+                
+                <div class="w-full p-6 max-md:py-2 text-gray-800 flex flex-col justify-between">
+                    <p class="mt-4 text-justify text-gray-500 text-sm">
+                        ${truncatedDescription}${(paper.descripcion  || '').length > 500 ? '...' : ''}
+                    </p>
+                </div>
+            </div>
+        `;
+            }
+
+            // Función para truncar texto (similar a TruncateService de PHP)
+            truncateText(text, maxLength) {
+                if (!text) return '';
+                if (text.length <= maxLength) return text;
+
+                // Truncar por palabras completas
+                const truncated = text.substr(0, maxLength);
+                const lastSpace = truncated.lastIndexOf(' ');
+
+                if (lastSpace > 0) {
+                    return truncated.substr(0, lastSpace);
+                }
+
+                return truncated;
+            }
+
+            renderPagination() {
+                const totalPages = Math.ceil(this.filteredPapers.length / this.itemsPerPage);
+
+                if (totalPages <= 1) {
+                    this.paginationContainer.innerHTML = '';
+                    return;
+                }
+
+                let paginationHTML = '<div class="flex justify-center items-center space-x-2">';
+
+                // Botón anterior
+                if (this.currentPage > 1) {
+                    paginationHTML += `
+                <button onclick="papersSystem.goToPage(${this.currentPage - 1})" 
+                    class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                    Anterior
+                </button>
+            `;
+                }
+
+                // Números de página
+                const maxVisible = 5;
+                let startPage = Math.max(1, this.currentPage - Math.floor(maxVisible / 2));
+                let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+                if (endPage - startPage + 1 < maxVisible) {
+                    startPage = Math.max(1, endPage - maxVisible + 1);
+                }
+
+                for (let i = startPage; i <= endPage; i++) {
+                    const isActive = i === this.currentPage;
+                    paginationHTML += `
+                <button onclick="papersSystem.goToPage(${i})" 
+                    class="px-3 py-2 text-sm font-medium ${
+                        isActive 
+                            ? 'text-white bg-blue-600 border-blue-600' 
+                            : 'text-gray-500 bg-white border-gray-300 hover:bg-gray-50'
+                    } border rounded-md">
+                    ${i}
+                </button>
+            `;
+                }
+
+                // Botón siguiente
+                if (this.currentPage < totalPages) {
+                    paginationHTML += `
+                <button onclick="papersSystem.goToPage(${this.currentPage + 1})" 
+                    class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                    Siguiente
+                </button>
+            `;
+                }
+
+                paginationHTML += '</div>';
+                this.paginationContainer.innerHTML = paginationHTML;
+            }
+
+            goToPage(page) {
+                this.currentPage = page;
+                this.renderPapers();
+                this.renderPagination();
+                this.updateCounts();
+                this.updateUrl();
+                this.updateClearFiltersButton();
+
+                // Scroll al inicio de los papers
+                this.papersContainer.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+
+            updateCounts() {
+                if (this.paperCount) {
+                    this.paperCount.textContent = this.filteredPapers.length;
+                }
+
+                if (this.pageInfo) {
+                    this.pageInfo.textContent = this.currentPage;
+                }
+
+                if (this.pagesInfo) {
+                    const totalPages = Math.ceil(this.filteredPapers.length / this.itemsPerPage);
+                    this.pagesInfo.textContent = totalPages;
+                }
+            }
+
+            showNoResults() {
+                this.papersContainer.innerHTML = `
+            <div class="bg-slate-100 p-8 mt-6 rounded-md text-center">
+                <div class="flex justify-center mb-4">
+                   <svg class="w-36 h-36 max-md:w-24 max-md:h-24"  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="113.732" y="333.561" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -200.477 216.8856)" style="fill:#DCDCDC;" width="95.668" height="33.757"></rect> <path style="fill:#42C8C6;" d="M455.969,326.571c-74.706,74.706-195.831,74.706-270.538,0l116.283-154.254L455.968,56.034 C530.676,130.74,530.676,251.863,455.969,326.571z"></path> <path style="fill:#81E3E2;" d="M455.969,56.033L185.432,326.571c-74.706-74.706-74.706-195.831,0-270.538 S381.262-18.674,455.969,56.033z"></path> <path style="fill:#D5F6F5;" d="M322.235,39.4v303.795c41.33-0.405,78.734-17.329,105.886-44.481 c27.49-27.49,44.492-65.467,44.492-107.416C472.613,107.917,405.425,40.222,322.235,39.4z"></path> <path style="fill:#FFFFFF;" d="M322.235,39.4c64.544,1.058,116.621,68.651,116.621,151.898s-52.077,150.84-116.621,151.897 c-0.506,0.011-1.024,0.011-1.53,0.011c-83.899,0-151.909-68.01-151.909-151.909c0-41.949,17.003-79.927,44.492-107.416 s65.467-44.492,107.416-44.492C321.211,39.389,321.729,39.389,322.235,39.4z"></path> <polygon style="fill:#737373;" points="166.494,393.243 142.624,417.113 94.883,401.2 150.58,377.33 "></polygon> <path style="fill:#FE834D;" d="M126.71,401.2L6.564,489.519l15.913,15.913c8.752,8.752,23.074,8.752,31.827,0l88.32-88.32 L126.71,401.2z"></path> <polygon style="fill:#969696;" points="150.58,377.33 126.71,401.2 94.883,401.2 94.883,369.373 118.754,345.502 "></polygon> <path style="fill:#FEA680;" d="M126.71,401.2l-88.32,88.32c-8.752,8.752-23.074,8.752-31.827,0c-8.752-8.752-8.752-23.074,0-31.827 l88.32-88.32L126.71,401.2z"></path> </g></svg>
+                </div>
+                <p class="text-gray-500 text-2xl font-semibold mb-2">No se encontraron papers</p>
+                <p class="text-blue-400">Intenta ajustar tus filtros de búsqueda</p>
+                <button onclick="papersSystem.clearAllFilters()" 
+                    class="mt-4 px-4 py-2 bg-[#98c560]  text-white rounded-md hover:bg-[#98c260]">
+                    Limpiar filtros
+                </button>
+            </div>
+        `;
+
+                this.pageContainer.classList.add('hidden');
+            }
+
+            showError(message) {
+                this.papersContainer.innerHTML = `
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                ${message}
+            </div>
+        `;
+            }
+
+            applyUrlParams() {
+                const urlParams = new URLSearchParams(window.location.search);
+
+                // Query de búsqueda
+                if (urlParams.has('query') && this.searchInput) {
+                    const query = urlParams.get('query');
+                    this.searchInput.value = query;
+                    this.filters.query = query;
+                }
+
+                // Tópicos seleccionados
+                if (urlParams.has('topics')) {
+                    const selectedTopics = urlParams.get('topics').split(',').map(id => parseInt(id));
+                    selectedTopics.forEach(topicId => {
+                        this.filters.topics.add(topicId);
+                        const checkbox = document.querySelector(`input[value="${topicId}"]`);
+                        if (checkbox) checkbox.checked = true;
+                    });
+                }
+
+                // Área seleccionada
+                if (urlParams.has('area')) {
+                    const areaId = parseInt(urlParams.get('area'));
+                    this.filters.areaId = areaId;
+                    const areaBtn = document.querySelector(`button[value="${areaId}"]`);
+                    if (areaBtn) {
+                        areaBtn.classList.add('bg-gray-100', 'text-gray-700');
+                    }
+                }
+
+                // Página actual
+                if (urlParams.has('page')) {
+                    this.currentPage = parseInt(urlParams.get('page')) || 1;
+                }
+                this.updateClearFiltersButton();
+            }
+
+            updateUrl() {
+                const params = new URLSearchParams();
+
+                if (this.filters.query && this.filters.query.length >= 3) {
+                    params.set('query', this.filters.query);
+                }
+
+                if (this.filters.topics.size > 0) {
+                    params.set('topics', Array.from(this.filters.topics).join(','));
+                }
+
+                if (this.filters.areaId) {
+                    params.set('area', this.filters.areaId);
+                }
+
+                if (this.currentPage > 1) {
+                    params.set('page', this.currentPage);
+                }
+
+                const newUrl = `${window.location.pathname}?${params.toString()}`;
+                window.history.pushState(null, '', newUrl);
+            }
+
+            clearAllFilters() {
+                // Limpiar estado de filtros
+                this.filters.query = '';
+                this.filters.topics.clear();
+                this.filters.areaId = null;
+                this.currentPage = 1;
+
+                // Limpiar UI
+                if (this.searchInput) this.searchInput.value = '';
+
+                this.checkboxes.forEach(checkbox => checkbox.checked = false);
+                this.areaBtns.forEach(btn => btn.classList.remove('bg-gray-100', 'text-gray-700'));
+
+                // Re-renderizar
+                this.applyFiltersAndRender();
+                this.updateUrl();
+                this.updateClearFiltersButton();
+            }
+
+            updateClearFiltersButton() {
+                // Mostrar el botón solo si hay filtros activos
+                const hasActiveFilters =
+                    this.filters.query.length >= 3 ||
+                    this.filters.topics.size > 0 ||
+                    this.filters.areaId !== null;
+                console.log('hasActiveFilters', this.filters.query.length,
+                    this.filters.topics.size,
+                    this.filters.areaId)
+                if (hasActiveFilters) {
+                    this.clearFiltersBtn.classList.remove('hidden');
+                } else {
+                    this.clearFiltersBtn.classList.add('hidden');
+                }
+            }
+
+
+            debounce(func, timeout = 300) {
                 let timer;
                 return (...args) => {
                     clearTimeout(timer);
-                    timer = setTimeout(() => {
-                        func.apply(this, args);
-                    }, timeout);
+                    timer = setTimeout(() => func.apply(this, args), timeout);
                 };
             }
+        }
 
-            // Navegación del browser
+        // Funciones globales para uso en templates
+        function viewPaperDetails(paperId) {
+            // Implementar modal o redirección a detalles del paper
+            window.location.href = `/biblioteca/papers/paper/${paperId}`;
+        }
+
+        // Inicializar el sistema cuando el DOM esté listo
+        let papersSystem;
+        document.addEventListener('DOMContentLoaded', function() {
+            papersSystem = new PapersFilterSystem();
+
+            // Manejar navegación del browser
             window.addEventListener('popstate', function() {
-                const params = new URLSearchParams(window.location.search);
-                loadPage(params);
+                papersSystem.applyUrlParams();
+                papersSystem.applyFiltersAndRender();
             });
-
         });
     </script>
 

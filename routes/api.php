@@ -6,7 +6,5 @@ use App\Http\Controllers\PaperController;
 
 
 Route::prefix('biblioteca/papers')->group(function () {
-    Route::get('/search', [PaperController::class, 'search']);
-
-    Route::get('/fetch-more', [PaperController::class, 'fetchMorePapers']);
+    Route::get('/all', [PaperController::class, 'getAll']);
 });
