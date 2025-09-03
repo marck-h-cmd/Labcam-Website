@@ -73,6 +73,12 @@ Route::middleware([CacheControl::class])->group(function () {
             Route::get('/paper/download-pdf/{pdf_fileName}', [PaperController::class, 'downloadPdf'])->name('download.pdf');
         });
 
+         Route::prefix('biblioteca/patentes')->name('biblioteca.patentes.')->group(function () {
+            Route::get('/', [PatenteController::class, 'index'])->name('index');
+            Route::get('/patente/{paper}', [PatenteController::class, 'show'])->name('show');
+            Route::get('/patente/download-pdf/{pdf_fileName}', [PatenteController::class, 'downloadPdf'])->name('download.pdf');
+        });
+
 
         // ------------------------- SECCION AREAS PROYECTOS ---------------------------------------------
         Route::get('/areas_proyectos', [AreaProyectoController::class, 'vista_user_areas'])->name('areas_proyectos_user');
@@ -200,7 +206,7 @@ Route::middleware([CacheControl::class])->group(function () {
             Route::delete('/admin/noticias/{id}', [NoticiaController::class, 'destroy'])->name('notici.destroy');
             Route::get('/admin/noticias/buscar', [NoticiaController::class, 'showNoticia'])->name('notici.buscar');
 
-            Route::get('/admin/patentes/index', [PatenteController::class, 'showPatente'])->name('patentes.index');
+            Route::get('/admin/patentes/index', [PatenteController::class, 'showPatenteAdmin'])->name('patentes.index');
             Route::post('/admin/patentes', PatenteController::class . '@store')->name('patentes.store');
             Route::put('/admin/patentes/{id}', [PatenteController::class, 'update'])->name('patentes.update');
             Route::get('/admin/patentes/{area}/edit', PatenteController::class . '@edit')->name('patentes.edit');

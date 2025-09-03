@@ -158,7 +158,7 @@
                                                         <!-- Image Preview -->
                                                         @if ($patente->img_filename)
                                                             <button type="button"
-                                                                onclick="openModal('{{ Storage::url('uploads/paper_img/' . $patente->img_filename) }}', 'image')"
+                                                                onclick="openModal('{{ Storage::url('uploads/Patente_img/' . $patente->img_filename) }}', 'image')"
                                                                 class="inline-flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-green-700 bg-green-50 border border-green-200 rounded-lg hover:bg-green-100 transition-colors duration-150">
                                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor"
                                                                     viewBox="0 0 24 24">
@@ -286,7 +286,7 @@
                                 <input type="text" name="titulo" id="titulo"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                                    focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    placeholder="Titulo del paper" required />
+                                    placeholder="Titulo del Patente" required />
                             </div>
 
                             <!-- AUTORES -->
@@ -391,10 +391,10 @@
                                 </select>
                             </div>
 
-                            <!-- IMAGEN PAPER -->
+                            <!-- IMAGEN Patente -->
                             <div>
                                 <label for="img_filename" class="block mb-2 text-sm font-medium text-gray-900">
-                                    Imagen Paper
+                                    Imagen Patente
                                 </label>
                                 <div id="image-upload"
                                     class="border-2 border-dashed border-gray-300 bg-white w-full h-[233px] flex flex-col

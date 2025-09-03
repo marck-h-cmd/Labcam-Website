@@ -272,7 +272,7 @@
                     confirmButton: 'bg-green-500 text-white hover:bg-green-600 focus:ring-2 focus:ring-green-300 rounded-lg py-2 px-4'
                 }
             });
-        </script>
+        </script>   
     @endif
 
     <script>
@@ -291,7 +291,7 @@
                 descriptionElement.classList.add('line-clamp-none');
                 button.textContent = 'Ver menos';
                 button.classList.remove('text-indigo-600');
-                button.classList.add('text-indigo-800');
+                button.classList.add('text-indigo-800');                                            
             }
         }
 

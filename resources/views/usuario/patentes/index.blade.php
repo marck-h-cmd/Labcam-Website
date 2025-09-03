@@ -1,6 +1,6 @@
 @extends('usuario.layout.plantilla')
 
-@section('title', 'paper')
+@section('title', 'patente')
 
 
 @section('contenido')
@@ -8,24 +8,24 @@
     <section>
 
         <header class="home bg-cover mb-4 bg-center text-white"
-            style="background-image: url('https://fondosmil.co/fondo/110721.jpg');">
+            style="background-image: url('https://psicologosprincesa.com/wp-content/uploads/2025/03/Frame-15838-1.png');">
             <div class="header-mask bg-[rgba(3,91,136,0.8)]">
                 <div class="container mx-auto px-4">
                     <div class="jumbo text-center py-20 md:py-40">
-                        <h1 class="text-4xl md:text-5xl lg:text-6xl text-left">Publicaciones</h1>
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl text-left">Patentes</h1>
                     </div>
                 </div>
 
                 <!-- NAV DE Biblioteca responsive -->
                 <div class="nav">
-                    <div class="container mx-auto px-4 flex items-center justify-between">
+                    <di|v class="container mx-auto px-4 flex items-center justify-between">
                         <nav role="navigation mt-4">
                             <ul class="hor--nav flex flex-wrap gap-4 md:gap-12 justify-center md:justify-start">
-                                <li><a href="{{ route('biblioteca.papers.index') }}"
-                                        class="text-blue-300 hover:text-blue-500 text-sm md:text-base">Publicaciones</a></li>
                                 <li><a href="{{ route('biblioteca.patentes.index') }}"
-                                        class="text-gray-300 hover:text-white text-sm md:text-base">Patentes</a></li>
-                                     
+                                        class="text-blue-300 hover:text-blue-500 text-sm md:text-base">Patentes</a></li>
+                                <li><a href="{{ route('biblioteca.papers.index') }}"
+                                        class="text-gray-300 hover:text-white text-sm md:text-base">Publicaciones</a></li>
+                              
                             </ul>
                         </nav>
                     </div>
@@ -37,7 +37,7 @@
         <div class="Nosotros max-w-screen-2xl max w-full px-5 mx-auto mt-36">
 
             <div class="flex flex-col items-center gap-2 md:gap-3 mb-8 md:mb-12">
-                <h2 class="text-blue-800 font-semibold text-2xl sm:text-3xl md:text-4xl mb-1">Publicaciones</h2>
+                <h2 class="text-blue-800 font-semibold text-2xl sm:text-3xl md:text-4xl mb-1">Patentes</h2>
                 <div class="blue-line w-2/3 sm:w-1/2 md:w-1/3 h-0.5 bg-[#64d423]"></div>
             </div>
             <!-- SIDEBAR PARA APLICAR FILTROS-->
@@ -54,7 +54,7 @@
                                 </h5>
                                 <div class="flex items-center space-x-2">
                                     <!-- Botón para limpiar filtros (inicialmente oculto) -->
-                                    <button id="clear-filters-btn" onclick="papersSystem.clearAllFilters()"
+                                    <button id="clear-filters-btn" onclick="patentesSystem.clearAllFilters()"
                                         class="clear-btn hover:bg-gray-100 px-3 py-1.5 rounded-md text-sm hidden flex items-center "
                                         title="Limpiar todos los filtros">
                                         <i class="fas fa-times-circle mr-1.5"></i> Limpiar
@@ -80,57 +80,9 @@
 
                                             <input
                                                 class="peer h-full w-full outline-none text-sm text-gray-700 pr-2 border-0"
-                                                type="text" id="search-dropdown" placeholder="Buscar Titulo Paper..." />
+                                                type="text" id="search-dropdown" placeholder="Buscar Titulo patente..." />
                                         </div>
                                     </div>
-                                </li>
-                                <hr>
-                                <li>
-                                    <button type="button"
-                                        class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 bg-gray-50 "
-                                        aria-controls="dropdown-example-2" data-collapse-toggle="dropdown-example-2">
-                                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
-                                            width="64px" height="64px" viewBox="0 0 32 32" id="i-options"
-                                            xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentcolor"
-                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round">
-                                            </g>
-                                            <g id="SVGRepo_iconCarrier">
-                                                <path
-                                                    d="M28 6 L4 6 M28 16 L4 16 M28 26 L4 26 M24 3 L24 9 M8 13 L8 19 M20 23 L20 29">
-                                                </path>
-                                            </g>
-                                        </svg>
-                                        <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                                            sidebar-toggle-item>Topicos</span>
-                                        <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"></path>
-                                        </svg>
-                                    </button>
-                                    <ul id="dropdown-example-2" class=" hidden py-2 space-y-2 overflow-y-auto max-h-52">
-                                        @forelse($topicos as $topico)
-                                            <li>
-
-                                                <span
-                                                    class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">
-                                                    <input class="mr-2 checkbox-topico" type="checkbox" name="topics"
-                                                        value="{{ $topico->id }}">
-                                                    {{ $topico->nombre }} <span
-                                                        class="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full">{{ count($topico->papers) }}</span></span>
-                                            </li>
-                                        @empty
-                                            <li>
-                                                <a href="#"
-                                                    class="flex items-center w-full p-2 text-base font-normal text-gray-600 transition duration-75 rounded-lg group hover:bg-gray-100  ">No
-                                                    hay más topicos</a>
-                                            </li>
-                                        @endforelse
-
-                                    </ul>
                                 </li>
                                 <hr>
                                 <li>
@@ -223,17 +175,17 @@
                                         </svg>
                                     </button>
                                     <p class="text-gray-50 text-sm md:text-base">Cargando <span class="text-gray-100"
-                                            id="paper-count">#</span> resultados <span
+                                            id="patente-count">#</span> resultados <span
                                             class="ml-1 md:ml-2 text-xs md:text-sm" id="page-container"> Pag. <span
                                                 class="text-white" id="current-page">#</span>-<span class="text-white"
                                                 id="pages">#</span></span>
                                     </p>
                                 </div>
                             </div>
-                            <!-- container para papers -->
-                            <div id="papers-container"
+                            <!-- container para patentes -->
+                            <div id="patentes-container"
                                 class="container w-100 lg:w-4/5  mx-auto flex flex-col overflow-y-visible">
-                                <!-- paper -->
+                                <!-- patente -->
 
 
                             </div>
@@ -316,11 +268,10 @@
     </script>
 
     <script>
-        class PapersFilterSystem {
+        class PatentesFilterSystem {
             constructor() {
-                this.allPapers = [];
-                this.filteredPapers = [];
-                this.topicos = [];
+                this.allpatentes = [];
+                this.filteredpatentes = [];
                 this.areas = [];
 
                 // Configuración de paginación
@@ -330,16 +281,14 @@
                 // Estado de filtros
                 this.filters = {
                     query: '',
-                    topics: new Set(),
                     areaId: null
                 };
 
                 // Elementos del DOM
                 this.searchInput = document.getElementById('search-dropdown');
-                this.checkboxes = document.querySelectorAll('.checkbox-topico');
                 this.areaBtns = document.querySelectorAll('.area-btn');
-                this.papersContainer = document.getElementById('papers-container');
-                this.paperCount = document.getElementById('paper-count');
+                this.patentesContainer = document.getElementById('patentes-container');
+                this.patenteCount = document.getElementById('patente-count');
                 this.pageInfo = document.getElementById('current-page');
                 this.pagesInfo = document.getElementById('pages');
                 this.paginationContainer = document.getElementById('pagination-links');
@@ -360,7 +309,7 @@
                     // Aplicar filtros iniciales desde URL
                     this.applyUrlParams();
 
-                    // Renderizar papers iniciales
+                    // Renderizar patentes iniciales
                     this.applyFiltersAndRender();
 
                     // Mostrar contenido principal
@@ -369,17 +318,17 @@
                     }
 
                 } catch (error) {
-                    console.error('Error initializing papers system:', error);
+                    console.error('Error initializing patentes system:', error);
                     if (window.showLoadingError) {
-                        window.showLoadingError('Error cargando las publicaciones. Por favor, recarga la página.');
+                        window.showLoadingError('Error cargando las Patentes. Por favor, recarga la página.');
                     } else {
-                        this.showError('Error cargando las publicaciones');
+                        this.showError('Error cargando las Patentes');
                     }
                 }
             }
 
             async loadAllData() {
-                const response = await fetch('/api/biblioteca/papers/all', {
+                const response = await fetch('/api/biblioteca/patentes/all', {
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest'
                     }
@@ -391,10 +340,9 @@
 
                 const data = await response.json();
 
-                this.allPapers = data.papers;
-                this.topicos = data.topicos;
+                this.allpatentes = data.patentes;
                 this.areas = data.areas;
-                this.filteredPapers = [...this.allPapers];
+                this.filteredpatentes = [...this.allpatentes];
             }
 
             setupEventListeners() {
@@ -405,18 +353,6 @@
                     }, 300));
                 }
 
-                // Checkboxes de tópicos
-                this.checkboxes.forEach(checkbox => {
-                    checkbox.addEventListener('change', () => {
-                        const topicId = parseInt(checkbox.value);
-                        if (checkbox.checked) {
-                            this.filters.topics.add(topicId);
-                        } else {
-                            this.filters.topics.delete(topicId);
-                        }
-                        this.updateFilter('topics', this.filters.topics);
-                    });
-                });
 
                 // Botones de áreas
                 this.areaBtns.forEach(btn => {
@@ -451,105 +387,93 @@
 
             applyFiltersAndRender() {
                 // Aplicar todos los filtros
-                this.filteredPapers = this.allPapers.filter(paper => {
-                    return this.matchesSearch(paper) &&
-                        this.matchesTopics(paper) &&
-                        this.matchesArea(paper);
+                this.filteredpatentes = this.allpatentes.filter(patente => {
+                    return (this.matchesSearch(patente) &&
+                        this.matchesArea(patente));
                 });
 
                 // Renderizar resultados
-                this.renderPapers();
+                this.renderpatentes();
                 this.renderPagination();
                 this.updateCounts();
                 this.updateClearFiltersButton();
             }
 
-            matchesSearch(paper) {
+            matchesSearch(patente) {
                 if (!this.filters.query || this.filters.query.length < 3) return true;
 
                 const searchTerm = this.filters.query.toLowerCase();
                 const searchIn = [
-                    paper.titulo
+                    patente.titulo
                 ].join(' ').toLowerCase();
 
                 return searchIn.includes(searchTerm);
             }
 
-            matchesTopics(paper) {
-                if (this.filters.topics.size === 0) return true;
-
-                return paper.topicos.some(topico =>
-                    this.filters.topics.has(topico.id)
-                );
-            }
-
-            matchesArea(paper) {
+        
+            matchesArea(patente) {
                 if (!this.filters.areaId) return true;
 
-                return paper.area_id === this.filters.areaId;
+                return patente.area_id === this.filters.areaId;
             }
 
-            renderPapers() {
+            renderpatentes() {
                 const startIndex = (this.currentPage - 1) * this.itemsPerPage;
                 const endIndex = startIndex + this.itemsPerPage;
-                const currentPagePapers = this.filteredPapers.slice(startIndex, endIndex);
+                const currentPagepatentes = this.filteredpatentes.slice(startIndex, endIndex);
 
-                if (currentPagePapers.length === 0) {
+                if (currentPagepatentes.length === 0) {
                     this.showNoResults();
                     return;
                 }
                 this.pageContainer.classList.remove('hidden');
-                this.papersContainer.innerHTML = currentPagePapers.map(paper =>
-                    this.renderPaperCard(paper)
+                this.patentesContainer.innerHTML = currentPagepatentes.map(patente =>
+                    this.renderpatenteCard(patente)
                 ).join('');
             }
 
-            renderPaperCard(paper) {
+            renderpatenteCard(patente) {
 
 
                 // Truncar título y descripción
-                const truncatedTitle = this.truncateText(paper.titulo, 50);
-                const truncatedDescription = this.truncateText(paper.descripcion , 500);
+                const truncatedTitle = this.truncateText(patente.titulo, 50);
+                const truncatedDescription = this.truncateText(patente.descripcion , 500);
 
                 return `
             <div class="flex flex-col md:flex-row overflow-hidden relative rounded-lg shadow-xl mt-4 mx-2 bg-[#f4f4f4] max-w-6xl py-2 h-auto">
                 <p class="absolute right-6 px-2 md:top-2 font-semibold bg-gray-200 p-1 text-gray-600 rounded-lg text-sm">
-                    ${paper.area_nombre || 'N.A'}
+                    ${patente.area_nombre || 'N.A'}
                 </p>
                 
-                <!-- información del paper -->
+                <!-- información del patente -->
                 <div class="max-h-96 max-w-[400px] md:w-1/2 p-4">
-                    <a href="/biblioteca/papers/paper/${paper.id}"
+                    <a href="/biblioteca/patentes/patente/${patente.id}"
                         class="cursor-pointer hover:underline max-md:text-center relative group">
                         <h3 class="font-semibold text-lg mt-4 text-blue-400 text-justify">
-                            ${truncatedTitle}${paper.titulo.length > 50 ? '...' : ''}
+                            ${truncatedTitle}${patente.titulo.length > 50 ? '...' : ''}
                         </h3>
                         <!-- Titulo flotante completo -->
                         <div class="absolute z-30 left-0 mb-3 w-max max-w-xs bg-white text-black text-xs rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                            ${paper.titulo}
+                            ${patente.titulo}
                         </div>
                     </a>
                     
                     <div class="mt-5">
                         <p class="text-gray-600">Autores:</p>
                         <p class="autores italic text-base mb-3">
-                            ${paper.formatted_autores}
+                            ${patente.formatted_autores}
                         </p>
                     </div>
                     
-                    <p class="doi mt-3">
-                        <span class="text-gray-600">Publisher: </span>
-                        <span class="doi-link text-gray-500 text-base">${paper.publisher || 'N/A'}</span>
-                    </p>
-                    
+
                     <p class="text-base mt-3">
                         <span class="text-gray-600">Publicado: </span>
                         <strong class="text-gray-700 uppercase font-semibold text-sm">
-                            ${paper.fecha_publicacion }
+                            ${patente.fecha_publicacion }
                         </strong>
                     </p>
                     
-                    <a href="/biblioteca/papers/paper/${paper.id}"
+                    <a href="/biblioteca/patentes/patente/${patente.id}"
                         class="mt-2 flex gap-2 cursor-pointer font-bold">
                         <svg width="24px" height="24px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -566,7 +490,7 @@
                 
                 <div class="w-full p-6 max-md:py-2 text-gray-800 flex flex-col justify-between">
                     <p class="mt-4 text-justify text-gray-500 text-sm">
-                        ${truncatedDescription}${(paper.descripcion  || '').length > 500 ? '...' : ''}
+                        ${truncatedDescription}${(patente.descripcion  || '').length > 500 ? '...' : ''}
                     </p>
                 </div>
             </div>
@@ -590,7 +514,7 @@
             }
 
             renderPagination() {
-                const totalPages = Math.ceil(this.filteredPapers.length / this.itemsPerPage);
+                const totalPages = Math.ceil(this.filteredpatentes.length / this.itemsPerPage);
 
                 if (totalPages <= 1) {
                     this.paginationContainer.innerHTML = '';
@@ -602,7 +526,7 @@
                 // Botón anterior
                 if (this.currentPage > 1) {
                     paginationHTML += `
-                <button onclick="papersSystem.goToPage(${this.currentPage - 1})" 
+                <button onclick="patentesSystem.goToPage(${this.currentPage - 1})" 
                     class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
                     Anterior
                 </button>
@@ -621,7 +545,7 @@
                 for (let i = startPage; i <= endPage; i++) {
                     const isActive = i === this.currentPage;
                     paginationHTML += `
-                <button onclick="papersSystem.goToPage(${i})" 
+                <button onclick="patentesSystem.goToPage(${i})" 
                     class="px-3 py-2 text-sm font-medium ${
                         isActive 
                             ? 'text-white bg-blue-600 border-blue-600' 
@@ -635,7 +559,7 @@
                 // Botón siguiente
                 if (this.currentPage < totalPages) {
                     paginationHTML += `
-                <button onclick="papersSystem.goToPage(${this.currentPage + 1})" 
+                <button onclick="patentesSystem.goToPage(${this.currentPage + 1})" 
                     class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
                     Siguiente
                 </button>
@@ -648,22 +572,22 @@
 
             goToPage(page) {
                 this.currentPage = page;
-                this.renderPapers();
+                this.renderpatentes();
                 this.renderPagination();
                 this.updateCounts();
                 this.updateUrl();
                 this.updateClearFiltersButton();
 
-                // Scroll al inicio de los papers
-                this.papersContainer.scrollIntoView({
+                // Scroll al inicio de los patentes
+                this.patentesContainer.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
             }
 
             updateCounts() {
-                if (this.paperCount) {
-                    this.paperCount.textContent = this.filteredPapers.length;
+                if (this.patenteCount) {
+                    this.patenteCount.textContent = this.filteredpatentes.length;
                 }
 
                 if (this.pageInfo) {
@@ -671,20 +595,20 @@
                 }
 
                 if (this.pagesInfo) {
-                    const totalPages = Math.ceil(this.filteredPapers.length / this.itemsPerPage);
+                    const totalPages = Math.ceil(this.filteredpatentes.length / this.itemsPerPage);
                     this.pagesInfo.textContent = totalPages;
                 }
             }
 
             showNoResults() {
-                this.papersContainer.innerHTML = `
+                this.patentesContainer.innerHTML = `
             <div class="bg-slate-100 p-8 mt-6 rounded-md text-center">
                 <div class="flex justify-center mb-4">
                    <svg class="w-36 h-36 max-md:w-24 max-md:h-24"  version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 511.999 511.999" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <rect x="113.732" y="333.561" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -200.477 216.8856)" style="fill:#DCDCDC;" width="95.668" height="33.757"></rect> <path style="fill:#42C8C6;" d="M455.969,326.571c-74.706,74.706-195.831,74.706-270.538,0l116.283-154.254L455.968,56.034 C530.676,130.74,530.676,251.863,455.969,326.571z"></path> <path style="fill:#81E3E2;" d="M455.969,56.033L185.432,326.571c-74.706-74.706-74.706-195.831,0-270.538 S381.262-18.674,455.969,56.033z"></path> <path style="fill:#D5F6F5;" d="M322.235,39.4v303.795c41.33-0.405,78.734-17.329,105.886-44.481 c27.49-27.49,44.492-65.467,44.492-107.416C472.613,107.917,405.425,40.222,322.235,39.4z"></path> <path style="fill:#FFFFFF;" d="M322.235,39.4c64.544,1.058,116.621,68.651,116.621,151.898s-52.077,150.84-116.621,151.897 c-0.506,0.011-1.024,0.011-1.53,0.011c-83.899,0-151.909-68.01-151.909-151.909c0-41.949,17.003-79.927,44.492-107.416 s65.467-44.492,107.416-44.492C321.211,39.389,321.729,39.389,322.235,39.4z"></path> <polygon style="fill:#737373;" points="166.494,393.243 142.624,417.113 94.883,401.2 150.58,377.33 "></polygon> <path style="fill:#FE834D;" d="M126.71,401.2L6.564,489.519l15.913,15.913c8.752,8.752,23.074,8.752,31.827,0l88.32-88.32 L126.71,401.2z"></path> <polygon style="fill:#969696;" points="150.58,377.33 126.71,401.2 94.883,401.2 94.883,369.373 118.754,345.502 "></polygon> <path style="fill:#FEA680;" d="M126.71,401.2l-88.32,88.32c-8.752,8.752-23.074,8.752-31.827,0c-8.752-8.752-8.752-23.074,0-31.827 l88.32-88.32L126.71,401.2z"></path> </g></svg>
                 </div>
-                <p class="text-gray-500 text-2xl font-semibold mb-2">No se encontraron papers</p>
+                <p class="text-gray-500 text-2xl font-semibold mb-2">No se encontraron patentes</p>
                 <p class="text-blue-400">Intenta ajustar tus filtros de búsqueda</p>
-                <button onclick="papersSystem.clearAllFilters()" 
+                <button onclick="patentesSystem.clearAllFilters()" 
                     class="mt-4 px-4 py-2 bg-[#98c560]  text-white rounded-md hover:bg-[#98c260]">
                     Limpiar filtros
                 </button>
@@ -695,7 +619,7 @@
             }
 
             showError(message) {
-                this.papersContainer.innerHTML = `
+                this.patentesContainer.innerHTML = `
             <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
                 ${message}
             </div>
@@ -712,16 +636,7 @@
                     this.filters.query = query;
                 }
 
-                // Tópicos seleccionados
-                if (urlParams.has('topics')) {
-                    const selectedTopics = urlParams.get('topics').split(',').map(id => parseInt(id));
-                    selectedTopics.forEach(topicId => {
-                        this.filters.topics.add(topicId);
-                        const checkbox = document.querySelector(`input[value="${topicId}"]`);
-                        if (checkbox) checkbox.checked = true;
-                    });
-                }
-
+            
                 // Área seleccionada
                 if (urlParams.has('area')) {
                     const areaId = parseInt(urlParams.get('area'));
@@ -746,9 +661,6 @@
                     params.set('query', this.filters.query);
                 }
 
-                if (this.filters.topics.size > 0) {
-                    params.set('topics', Array.from(this.filters.topics).join(','));
-                }
 
                 if (this.filters.areaId) {
                     params.set('area', this.filters.areaId);
@@ -765,14 +677,12 @@
             clearAllFilters() {
                 // Limpiar estado de filtros
                 this.filters.query = '';
-                this.filters.topics.clear();
                 this.filters.areaId = null;
                 this.currentPage = 1;
 
                 // Limpiar UI
                 if (this.searchInput) this.searchInput.value = '';
 
-                this.checkboxes.forEach(checkbox => checkbox.checked = false);
                 this.areaBtns.forEach(btn => btn.classList.remove('bg-gray-100', 'text-gray-700'));
 
                 // Re-renderizar
@@ -785,10 +695,8 @@
                 // Mostrar el botón solo si hay filtros activos
                 const hasActiveFilters =
                     this.filters.query.length >= 3 ||
-                    this.filters.topics.size > 0 ||
                     this.filters.areaId !== null;
                 console.log('hasActiveFilters', this.filters.query.length,
-                    this.filters.topics.size,
                     this.filters.areaId)
                 if (hasActiveFilters) {
                     this.clearFiltersBtn.classList.remove('hidden');
@@ -808,20 +716,20 @@
         }
 
         // Funciones globales para uso en templates
-        function viewPaperDetails(paperId) {
-            // Implementar modal o redirección a detalles del paper
-            window.location.href = `/biblioteca/papers/paper/${paperId}`;
+        function viewpatenteDetails(patenteId) {
+            // Implementar modal o redirección a detalles del patente
+            window.location.href = `/biblioteca/patentes/patente/${patenteId}`;
         }
 
         // Inicializar el sistema cuando el DOM esté listo
-        let papersSystem;
+        let patentesSystem;
         document.addEventListener('DOMContentLoaded', function() {
-            papersSystem = new PapersFilterSystem();
+            patentesSystem = new PatentesFilterSystem();
 
             // Manejar navegación del browser
             window.addEventListener('popstate', function() {
-                papersSystem.applyUrlParams();
-                papersSystem.applyFiltersAndRender();
+                patentesSystem.applyUrlParams();
+                patentesSystem.applyFiltersAndRender();
             });
         });
     </script>

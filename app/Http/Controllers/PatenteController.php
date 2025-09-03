@@ -13,6 +13,7 @@ use Exception;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
 use Nette\Schema\Message;
+use Illuminate\Support\Facades\Response;
 class PatenteController extends Controller
 {
     /**
@@ -21,10 +22,63 @@ class PatenteController extends Controller
     public function index()
     {
         $patentes = Patente::orderBy('fecha_publicacion', 'desc')->paginate(6);
-        return view('usuario.patente.patentes', compact('patentes'));
+        $patentes->each(function ($paper) {
+            $paper->formatted_autores = $this->formatAutores($paper->autores);
+        });
+
+        // Obtener áreas de investigación y topicos relacionadas con al menos un paper
+        $areas = AreaInvestigacion::has('patentes')->get();
+
+        return view('usuario.patentes.index', compact('patentes', 'areas'));
     }
 
-    public function showPatente(Request $request)
+    public function getAll()
+    {
+        try {
+
+            $patentes = Patente::with([
+                'area:id,nombre'
+            ])
+                ->select([
+                    'id',
+                    'titulo',
+                    'descripcion',
+                    'fecha_publicacion',
+                    'autores',
+                    'area_id',
+                    'doi',
+                    'created_at'
+                ])
+                ->get()
+                ->map(function ($patente) {
+                    return [
+                        'id' => $patente->id,
+                        'titulo' => $patente->titulo,
+                        'descripcion' => $patente->descripcion,
+                        'fecha_publicacion' => $patente->fecha_publicacion,
+                        'area_id' => $patente->area_id,
+                        'area_nombre' => $patente->area?->nombre,
+                        'doi' => $patente->doi,
+                        'formatted_autores' => $this->formatAutores($patente->autores),
+                    ];
+                });
+
+            $areas = AreaInvestigacion::has('patentes')->get();
+
+            return response()->json([
+                'success' => true,
+                'patentes' => $patentes,
+                'areas' => $areas,
+                'total_patentes' => $patentes->count()
+            ]);
+        } catch (Exception $e) {
+            Log::error("Error: " . $e->getMessage());
+            return response()->json(['error' => 'An error occurred during the search process.'], 500);
+        }
+    }
+
+
+    public function showPatenteAdmin(Request $request)
     {
         $query = $request->input('search');
 
@@ -42,7 +96,7 @@ class PatenteController extends Controller
         $areas = AreaInvestigacion::all();
 
 
-        return view('administrador.panel.patentes.show', compact('patentes', 'areas'));
+        return view('administrador.panel.patentes.index', compact('patentes', 'areas'));
     }
 
     public function handleFileSize()
@@ -151,10 +205,13 @@ class PatenteController extends Controller
      */
     public function show($id)
     {
-        $patente = Patente::findOrFail($id);
-        // Convertir JSON de autores a array para la vista
-        $patente->autores = json_decode($patente->autores, true);
-        return view('usuario.investigacion.detalle-patente', compact('patente'));
+        $patente = Patente::find($id);
+        //FORMATO DE AUTORES
+        $patente->formatted_autores = $this->formatAutores($patente->autores);
+        // PAPERS ANTERIOR Y SIGUIENTE
+        $previousPatente = Patente::where('id', '<', $patente->id)->orderBy('id', 'desc')->first();
+        $nextPatente = Patente::where('id', '>', $patente->id)->orderBy('id', 'asc')->first();
+        return view('usuario.patentes.show', compact('patente', 'previousPatente', 'nextPatente'));
     }
 
     /**
@@ -191,8 +248,9 @@ class PatenteController extends Controller
 
             $patente = Patente::findOrFail($id);
 
-            // Procesar autores (convertir array a JSON)
-            //  $autoresJson = json_encode($request->edit_autores);
+            $pdf_fileName = $patente->pdf_filename;
+            $img_fileName = $patente->img_filename;
+
 
             // Actualizar el PDF si se sube uno nuevo
             if ($request->hasFile('pdf_filename')) {
@@ -295,6 +353,22 @@ class PatenteController extends Controller
         }
 
         return '';
+    }
+
+    public function downloadPdf($pdf_fileName)
+    {
+
+        $path = storage_path('app/public/uploads/pdf/' . $pdf_fileName);
+
+        if (!file_exists($path)) {
+            abort(404);
+        }
+
+        $defaultName = 'download.pdf';
+
+        return Response::download($path, $defaultName, [
+            'Content-Type' => 'application/pdf',
+        ]);
     }
 
 

@@ -138,6 +138,12 @@
                                         Publicaciones
                                     </a>
                                 </li>
+                                 <li>
+                                    <a href="{{ route('biblioteca.patentes.index') }}"
+                                        class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('patentes.index.*') ? 'text-[#98C560]' : 'text-black' }}">
+                                       Patentes
+                                    </a>
+                                </li>
                                 <li>
                                     <a href="{{ route('areas_proyectos_user') }}"
                                         class="block px-4 py-2 hover:text-[#98C560] {{ request()->routeIs('areas_proyectos_user', 'areas.proyectos','proyectos.show') ? 'text-[#98C560]' : 'text-black' }}">

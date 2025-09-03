@@ -17,6 +17,11 @@ class AreaInvestigacion extends Model
         return $this->hasMany(Paper::class, 'area_id');
     }
     
+        public function patentes()
+    {
+        return $this->hasMany(Patente::class, 'area_id');
+    }
+
     /**
      * Relación con el modelo Capital.
      * Un área de investigación tiene muchos capitales.
